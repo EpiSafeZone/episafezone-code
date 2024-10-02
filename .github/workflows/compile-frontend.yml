@@ -1,8 +1,7 @@
 name: Compile Kotlin Frontend
 
 on:
-  pull_request:
-    # Trigger when there are changes in the frontend folder
+  push:
     paths:
       - 'frontend/**'
 

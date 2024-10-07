@@ -1,7 +1,7 @@
 name: Compile Kotlin Frontend
 
 on:
-  push:
+  pull_request:
     paths:
       - 'frontend/**'
 

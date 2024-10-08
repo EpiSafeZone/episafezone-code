@@ -23,5 +23,5 @@ jobs:
         run: chmod +x frontend/EpiSafeZone/gradlew
 
       - name: Build Kotlin project
-        working-directory: frontend
+        working-directory: frontend/EpiSafeZone
         run: ./gradlew build

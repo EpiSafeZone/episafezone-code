@@ -19,6 +19,9 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
+      - name: Grant execute permission to gradlew
+        run: chmod +x backend/gradlew
+
       - name: Build Spring Boot project with Gradle
         working-directory: backend
         run: ./gradlew build

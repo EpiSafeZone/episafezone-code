@@ -20,7 +20,7 @@ jobs:
           java-version: '17'
 
       - name: Grant execute permission to gradlew
-        run: chmod +x backend/gradlew
+        run: chmod +x backend/EpiSafeZone/gradlew
 
       - name: Build Spring Boot project with Gradle
         working-directory: backend

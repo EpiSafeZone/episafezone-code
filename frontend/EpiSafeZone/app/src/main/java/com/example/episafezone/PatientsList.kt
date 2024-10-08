@@ -7,7 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.episafezone.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class PatientsList : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 

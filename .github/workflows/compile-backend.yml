@@ -23,5 +23,5 @@ jobs:
         run: chmod +x backend/EpiSafeZone/gradlew
 
       - name: Build Spring Boot project with Gradle
-        working-directory: backend
+        working-directory: backend/EpiSafeZone
         run: ./gradlew build

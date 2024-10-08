@@ -20,7 +20,7 @@ jobs:
           java-version: '17'
 
       - name: Grant execute permission to gradlew
-        run: chmod +x frontend/gradlew
+        run: chmod +x frontend/EpiSafeZone/gradlew
 
       - name: Build Kotlin project
         working-directory: frontend

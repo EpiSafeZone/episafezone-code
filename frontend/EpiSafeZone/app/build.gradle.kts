@@ -1,7 +1,19 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
+
+val customProperties = Properties()
+val customPropertiesFile = rootProject.file("custom.properties")
+if (customPropertiesFile.exists()) {
+    customPropertiesFile.inputStream().use { stream ->
+        customProperties.load(stream)
+    }
+}
+
+val API_LINK = customProperties["API_LINK"] ?: ""
 
 android {
     namespace = "com.example.episafezone"
@@ -13,7 +25,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+        buildConfigField("String", "API_LINK", "\"${API_LINK}\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -35,6 +47,7 @@ android {
     }
     buildFeatures{
         viewBinding=true
+        buildConfig = true
     }
 }
 

@@ -15,9 +15,6 @@ class MedicationLogic {
             Reminder(times!!.toInt(), nextAlarm!!);
         }
         Medication(name,dosis.toInt(),unit,alarm);
-
-
-
         return true;
     }
 }

@@ -6,5 +6,3 @@ class Medication(
     var unit : String,
     var alarm : Boolean
 )
-{
-}

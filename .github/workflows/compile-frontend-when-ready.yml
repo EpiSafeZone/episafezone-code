@@ -1,4 +1,4 @@
-name: Compile Kotlin Frontend
+name: Compile Kotlin Frontend  When Ready
 
 on:
   pull_request:

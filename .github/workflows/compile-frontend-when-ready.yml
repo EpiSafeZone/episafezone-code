@@ -1,0 +1,29 @@
+name: Compile Kotlin Frontend
+
+on:
+  pull_request:
+    types:
+      - ready_for_review
+    paths:
+      - 'frontend/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Grant execute permission to gradlew
+        run: chmod +x frontend/EpiSafeZone/gradlew
+
+      - name: Build Kotlin project
+        working-directory: frontend/EpiSafeZone
+        run: ./gradlew build

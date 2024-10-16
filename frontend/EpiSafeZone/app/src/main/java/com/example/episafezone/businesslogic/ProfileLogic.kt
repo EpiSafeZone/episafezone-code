@@ -23,6 +23,4 @@ class ProfileLogic {
         list.add("Yow");
         return list;
     }
-
-
 }

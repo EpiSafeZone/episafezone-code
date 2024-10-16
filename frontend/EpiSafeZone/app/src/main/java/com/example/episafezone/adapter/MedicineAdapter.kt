@@ -30,6 +30,3 @@ class MedicineAdapter(var list : List<String>,var context: Context) : RecyclerVi
 
     }
 }
-
-
-

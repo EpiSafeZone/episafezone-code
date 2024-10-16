@@ -30,6 +30,4 @@ class ManifestAdapter(var context : Context, var list : List<String>) : Recycler
         val text : TextView = itemView.findViewById(R.id.manifestName);
         val but : Button = itemView.findViewById(R.id.addManifButt);
     }
-
-
 }

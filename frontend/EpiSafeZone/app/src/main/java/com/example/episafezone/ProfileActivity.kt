@@ -31,6 +31,5 @@ class ProfileActivity : AppCompatActivity() {
         val listManifest : List<String> = profileLogic.getManifestInfo();
         binding.manifestRecycler.adapter = ManifestAdapter(this,listManifest);
         binding.manifestRecycler.layoutManager = LinearLayoutManager(this);
-
     }
 }

@@ -1,4 +1,4 @@
-name: Compile Backend
+name: Compile Backend When Ready
 
 on:
   pull_request:

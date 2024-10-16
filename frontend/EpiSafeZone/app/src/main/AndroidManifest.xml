@@ -16,10 +16,10 @@
             android:name=".ActivityAddMedication"
             android:exported="false" />
         <activity
-            android:name=".ActivityPatientsList"
+            android:name=".ProfileActivity"
             android:exported="true"/>
         <activity
-            android:name=".ProfileActivity"
+            android:name=".ActivityPatientsList"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

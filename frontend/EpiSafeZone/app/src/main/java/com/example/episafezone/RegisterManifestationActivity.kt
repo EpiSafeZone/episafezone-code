@@ -18,5 +18,10 @@ class RegisterManifestationActivity : AppCompatActivity() {
         binding = ActivityRegisterManifestationBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
+
+        binding.nameTextBox.textView.setText("Nombre")
+        binding.descriptionTextBox.textView.setText("Descripción")
+        binding.procedureTextBox.textView.setText("Procedimiento")
+
     }
 }

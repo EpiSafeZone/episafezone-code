@@ -17,6 +17,9 @@
             android:exported="true" >
         </activity>
         <activity
+            android:name=".RegisterManifestationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ActivityPatientsList"
             android:exported="true">
             <intent-filter>

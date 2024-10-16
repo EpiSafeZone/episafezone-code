@@ -1,28 +1,36 @@
 package com.example.episafezone
 
+import android.R
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.episafezone.databinding.ActivityMainBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.episafezone.adapter.ManifestAdapter
+import com.example.episafezone.adapter.MedicineAdapter
+import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.databinding.ActivityProfileBinding
+
 
 class ProfileActivity : AppCompatActivity() {
     
     lateinit var binding : ActivityProfileBinding
-    
+    val profileLogic = ProfileLogic();
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityProfileBinding.inflate(layoutInflater);
         setContentView(binding.root)
 
-        setContentView(R.layout.activity_profile)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        val profile = profileLogic.getProfileInfo();
+
+        val listMedicine : List<String> = profileLogic.getMedicineInfo();
+        binding.medicamentsRecycler.adapter =  MedicineAdapter(listMedicine,this);
+        binding.medicamentsRecycler.layoutManager = LinearLayoutManager(this)
+
+        val listManifest : List<String> = profileLogic.getManifestInfo();
+        binding.manifestRecycler.adapter = ManifestAdapter(this,listManifest);
+        binding.manifestRecycler.layoutManager = LinearLayoutManager(this);
+
     }
 }

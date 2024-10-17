@@ -23,3 +23,7 @@ public class TutorService implements TutorServiceInterface{
         return tutorRepo.findById(id);
     }
 }
+
+/**
+ismaster
+findAllbyPatient**/

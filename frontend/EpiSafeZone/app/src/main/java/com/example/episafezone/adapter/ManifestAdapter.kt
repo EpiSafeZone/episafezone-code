@@ -23,11 +23,9 @@ class ManifestAdapter(var context : Context, var list : List<String>) : Recycler
 
     override fun onBindViewHolder(holder: ManifestAdapter.ManifestViewHolder, position: Int) {
         holder.text.text=list[position];
-        holder.but
     }
 
     class ManifestViewHolder(itemView : View):RecyclerView.ViewHolder(itemView){
         val text : TextView = itemView.findViewById(R.id.manifestName);
-        val but : Button = itemView.findViewById(R.id.addManifButt);
     }
 }

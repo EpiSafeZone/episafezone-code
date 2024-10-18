@@ -43,7 +43,7 @@
                 app:layout_constraintTop_toTopOf="@+id/medicineName" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/medicationDesc"
                 android:layout_width="265dp"
                 android:layout_height="68dp"
                 android:layout_marginStart="20dp"

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/grey"
+    tools:context=".ActivityAddMedication">
+
+  <TextView
+      android:id="@+id/textView12"
+      android:layout_width="307dp"
+      android:layout_height="122dp"
+      android:layout_marginStart="28dp"
+      android:layout_marginTop="28dp"
+      android:text="Editar Medicamento"
+      android:textSize="50sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <EditText
+      android:id="@+id/medicationNameInput"
+      android:layout_width="275dp"
+      android:layout_height="55dp"
+      android:layout_marginStart="45dp"
+      android:layout_marginTop="30dp"
+      android:ems="10"
+      android:hint="Nombre"
+      android:inputType="text"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+  <EditText
+      android:id="@+id/medicationAmountInput"
+      android:layout_width="275dp"
+      android:layout_height="55dp"
+      android:layout_marginTop="20dp"
+      android:ems="10"
+      android:hint="Cantidad"
+      android:inputType="text"
+      app:layout_constraintStart_toStartOf="@+id/medicationNameInput"
+      app:layout_constraintTop_toBottomOf="@+id/medicationNameInput" />
+
+  <EditText
+      android:id="@+id/medicationUnitInput"
+      android:layout_width="275dp"
+      android:layout_height="55dp"
+      android:layout_marginTop="20dp"
+      android:ems="10"
+      android:hint="Unidad"
+      android:inputType="text"
+      app:layout_constraintStart_toStartOf="@+id/medicationAmountInput"
+      app:layout_constraintTop_toBottomOf="@+id/medicationAmountInput" />
+
+  <TextView
+      android:id="@+id/textView13"
+      android:layout_width="80dp"
+      android:layout_height="28dp"
+      android:layout_marginLeft="10dp"
+      android:layout_marginTop="30dp"
+      android:text="Alarma"
+      android:textSize="20sp"
+      app:layout_constraintStart_toStartOf="@+id/textView12"
+      app:layout_constraintTop_toBottomOf="@+id/medicationUnitInput" />
+
+  <CheckBox
+      android:id="@+id/alarmCheckBox"
+      android:layout_width="29dp"
+      android:layout_height="28dp"
+      app:layout_constraintBottom_toBottomOf="@+id/textView13"
+      app:layout_constraintStart_toEndOf="@+id/textView13"
+      app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+  <EditText
+      android:id="@+id/alarmHoursInput"
+      android:layout_width="275dp"
+      android:layout_height="55dp"
+      android:layout_marginTop="30dp"
+      android:ems="10"
+      android:hint="Horas"
+      android:inputType="text"
+      app:layout_constraintStart_toStartOf="@+id/medicationUnitInput"
+      app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+  <EditText
+      android:id="@+id/alarmsTakesInput"
+      android:layout_width="275dp"
+      android:layout_height="55dp"
+      android:layout_marginTop="15dp"
+      android:ems="10"
+      android:hint="Tomas por día"
+      android:inputType="text"
+      app:layout_constraintStart_toStartOf="@+id/alarmHoursInput"
+      app:layout_constraintTop_toBottomOf="@+id/alarmHoursInput" />
+
+  <Button
+      android:id="@+id/acceptEditMedicationButt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="50dp"
+      android:backgroundTint="@color/grey"
+      android:text="Aceptar"
+      android:textColor="#000000"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/alarmsTakesInput" />
+
+  <Button
+      android:id="@+id/cancelEditMedicationButt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="70dp"
+      android:backgroundTint="@color/grey"
+      android:text="Cancelar"
+      android:textColor="#000000"
+      android:textColorHighlight="#000000"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/alarmsTakesInput" />
+
+  <TextView
+      android:id="@+id/errorText"
+      android:layout_width="292dp"
+      android:layout_height="31dp"
+      android:gravity="center"
+      android:text=""
+      android:textColor="#F44336"
+      app:layout_constraintBottom_toTopOf="@+id/acceptMedicationButt"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/alarmsTakesInput" />
+</androidx.constraintlayout.widget.ConstraintLayout>

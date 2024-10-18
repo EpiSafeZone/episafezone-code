@@ -1,9 +1,8 @@
 package com.example.episafezone.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity(name="manifestation")
 public class Manifestation {
@@ -13,6 +12,9 @@ public class Manifestation {
     private Integer id;
     private String name;
     private String description;
+
+    @OneToMany(mappedBy = "manifestation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Crisis> crisis;
 
     public Manifestation(String name, String description) {
         this.name = name;

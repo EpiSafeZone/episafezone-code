@@ -1,11 +1,9 @@
 package com.example.episafezone.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity (name = "patient")
 public class Patient {
@@ -20,6 +18,9 @@ public class Patient {
     private Date birthdate;
     private Integer age;
     private String color;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Crisis> crisis;
 
     public Patient(String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color) {
         this.name = name;
@@ -93,11 +94,10 @@ public class Patient {
     public String getColor() {
         return color;
     }
-
     public void setColor(String color) {
         this.color = color;
     }
-
+    public List<Crisis> getCrisis() {return this.crisis;}
 
 
 

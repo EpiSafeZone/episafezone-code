@@ -24,7 +24,7 @@ class ProfileActivity : AppCompatActivity() {
 
         val profile = profileLogic.getProfileInfo();
 
-        val listMedicine : List<Medication> = profileLogic.getMedicamentInfo();
+        val listMedicine : List<Medication> = profileLogic.getMedicationInfo();
         binding.medicamentsRecycler.adapter =  MedicationAdapter(listMedicine,this);
         binding.medicamentsRecycler.layoutManager = LinearLayoutManager(this)
 

@@ -8,7 +8,7 @@ class ProfileLogic {
         return 1;
     }
 
-    fun getMedicamentInfo() : List<Medication>{
+    fun getMedicationInfo() : List<Medication>{
         val list = ArrayList<Medication>();
         list.add(Medication("Dalsi",12,"ml",false));
         list.add(Medication("Paracetamol",1,"gr",false));

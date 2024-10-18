@@ -5,9 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.adapter.ManifestAdapter
-import com.example.episafezone.adapter.MedicineAdapter
+import com.example.episafezone.adapter.MedicationAdapter
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.databinding.ActivityProfileBinding
+import com.example.episafezone.models.Medication
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -23,8 +24,8 @@ class ProfileActivity : AppCompatActivity() {
 
         val profile = profileLogic.getProfileInfo();
 
-        val listMedicine : List<String> = profileLogic.getMedicineInfo();
-        binding.medicamentsRecycler.adapter =  MedicineAdapter(listMedicine,this);
+        val listMedicine : List<Medication> = profileLogic.getMedicamentInfo();
+        binding.medicamentsRecycler.adapter =  MedicationAdapter(listMedicine,this);
         binding.medicamentsRecycler.layoutManager = LinearLayoutManager(this)
 
         val listManifest : List<String> = profileLogic.getManifestInfo();

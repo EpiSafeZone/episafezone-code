@@ -1,10 +1,9 @@
 package com.example.episafezone
 
-import android.R
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.episafezone.adapter.ManifestAdapter
 import com.example.episafezone.adapter.MedicineAdapter
 import com.example.episafezone.businesslogic.ProfileLogic
@@ -31,5 +30,10 @@ class ProfileActivity : AppCompatActivity() {
         val listManifest : List<String> = profileLogic.getManifestInfo();
         binding.manifestRecycler.adapter = ManifestAdapter(this,listManifest);
         binding.manifestRecycler.layoutManager = LinearLayoutManager(this);
+
+        binding.addMedButt.setOnClickListener(){
+            val intent = Intent(this,ActivityAddMedication::class.java)
+            startActivity(intent)
+        }
     }
 }

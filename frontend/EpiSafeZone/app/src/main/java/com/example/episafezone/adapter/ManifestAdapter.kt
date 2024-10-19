@@ -8,8 +8,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.episafezone.R
+import com.example.episafezone.models.Manifestation
 
-class ManifestAdapter(var context : Context, var list : List<String>) : RecyclerView.Adapter<ManifestAdapter.ManifestViewHolder>(){
+class ManifestAdapter(var context : Context, var list : List<Manifestation>) : RecyclerView.Adapter<ManifestAdapter.ManifestViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ManifestViewHolder {
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.container_manifest, parent, false)
@@ -22,10 +23,12 @@ class ManifestAdapter(var context : Context, var list : List<String>) : Recycler
     }
 
     override fun onBindViewHolder(holder: ManifestAdapter.ManifestViewHolder, position: Int) {
-        holder.text.text=list[position];
+        holder.name.text=list[position].name;
+        holder.description.text=list[position].description;
     }
 
     class ManifestViewHolder(itemView : View):RecyclerView.ViewHolder(itemView){
-        val text : TextView = itemView.findViewById(R.id.manifestName);
+        val name : TextView = itemView.findViewById(R.id.manifestName);
+        val description: TextView = itemView.findViewById(R.id.manifestDescription);
     }
 }

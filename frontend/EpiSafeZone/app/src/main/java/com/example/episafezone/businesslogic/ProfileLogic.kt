@@ -1,5 +1,7 @@
 package com.example.episafezone.businesslogic
 
+import com.example.episafezone.models.Manifestation
+
 class ProfileLogic {
 
     fun getProfileInfo() : Int{
@@ -15,12 +17,12 @@ class ProfileLogic {
         return list;
     }
 
-    fun getManifestInfo() : List<String>{
-        val list = ArrayList<String>();
-        list.add("Yow");
-        list.add("Yow");
-        list.add("Yow");
-        list.add("Yow");
+    fun getManifestInfo() : List<Manifestation>{
+        val list = ArrayList<Manifestation>();
+        list.add(Manifestation("Yow","Yow","Yow"));
+        list.add(Manifestation("Yow","Yow","Yow"));
+        list.add(Manifestation("Yow","Yow","Yow"));
+        list.add(Manifestation("Yow","Yow","Yow"));
         return list;
     }
 }

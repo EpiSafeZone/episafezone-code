@@ -1,6 +1,7 @@
 package com.example.episafezone.controllers;
 
 
+import com.example.episafezone.DTO.PatientDTO;
 import com.example.episafezone.models.Patient;
 import com.example.episafezone.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,10 @@ public class PatientController {
     public @ResponseBody Optional<Patient> getAll(@PathVariable int id){
         return patientService.findById(id);
     }
+
+    @GetMapping(path="/info/{id}")
+    public @ResponseBody PatientDTO getPatientInfo(@PathVariable Integer id) {
+        return patientService.getPatientProfileInfo(id);
+    }
+
 }

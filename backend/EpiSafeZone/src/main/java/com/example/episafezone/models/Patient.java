@@ -13,8 +13,6 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-
     private String name;
     private String surname;
     private Integer height;

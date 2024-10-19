@@ -1,5 +1,6 @@
 package com.example.episafezone
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +11,7 @@ import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.databinding.ActivityProfileBinding
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Manifestation
-
+import com.example.episafezone.network.ProfilePetitions
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -20,11 +21,9 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityProfileBinding.inflate(layoutInflater);
         setContentView(binding.root)
-
-        val profile = profileLogic.getProfileInfo();
+        contextObj=this;
 
         val listMedicine : List<Medication> = profileLogic.getMedicationInfo();
         binding.medicamentsRecycler.adapter =  MedicationAdapter(listMedicine,this);
@@ -42,6 +41,16 @@ class ProfileActivity : AppCompatActivity() {
         binding.addManifButt.setOnClickListener{
             val intent = Intent(this,ActivityRegisterManifestation::class.java)
             startActivity(intent)
+        }
+
+        ProfilePetitions.initializeQueue()
+    }
+
+    companion object{
+        private lateinit var contextObj: Context
+
+        fun getContext() : Context{
+            return contextObj
         }
     }
 }

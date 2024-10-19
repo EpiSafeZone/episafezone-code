@@ -9,6 +9,8 @@ import com.example.episafezone.adapter.MedicationAdapter
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.databinding.ActivityProfileBinding
 import com.example.episafezone.models.Medication
+import com.example.episafezone.models.Manifestation
+
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -28,12 +30,17 @@ class ProfileActivity : AppCompatActivity() {
         binding.medicamentsRecycler.adapter =  MedicationAdapter(listMedicine,this);
         binding.medicamentsRecycler.layoutManager = LinearLayoutManager(this)
 
-        val listManifest : List<String> = profileLogic.getManifestInfo();
+        val listManifest : List<Manifestation> = profileLogic.getManifestInfo();
         binding.manifestRecycler.adapter = ManifestAdapter(this,listManifest);
         binding.manifestRecycler.layoutManager = LinearLayoutManager(this);
 
         binding.addMedButt.setOnClickListener(){
             val intent = Intent(this,ActivityAddMedication::class.java)
+            startActivity(intent)
+        }
+
+        binding.addManifButt.setOnClickListener{
+            val intent = Intent(this,ActivityRegisterManifestation::class.java)
             startActivity(intent)
         }
     }

@@ -1,12 +1,16 @@
 package com.example.episafezone
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.Gravity
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.episafezone.businesslogic.ManifestationLogic
 import com.example.episafezone.databinding.ActivityRegisterManifestationBinding
+import com.example.episafezone.models.Manifestation
 
 class ActivityRegisterManifestation : AppCompatActivity() {
 
@@ -32,6 +36,20 @@ class ActivityRegisterManifestation : AppCompatActivity() {
             minLines = 3
             maxLines = 10
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+        }
+
+        binding.cancelButton.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.registerButton.setOnClickListener {
+            if(ManifestationLogic.checkFields(binding)){
+                val manifestation = ManifestationLogic.createManifestation(binding)
+                ManifestationLogic.registerManifestation(this, manifestation)
+            } else {
+                Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }

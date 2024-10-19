@@ -8,26 +8,29 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.episafezone.adapter.ManifestAdapter
 import com.example.episafezone.businesslogic.ManifestationLogic
-import com.example.episafezone.databinding.ActivityRegisterManifestationBinding
+import com.example.episafezone.databinding.ActivityEditManifestationBinding
 
-class ActivityRegisterManifestation : AppCompatActivity() {
+class ActivityEditManifestation : AppCompatActivity() {
 
-    private lateinit var binding: ActivityRegisterManifestationBinding
+    private lateinit var binding: ActivityEditManifestationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityRegisterManifestationBinding.inflate(layoutInflater)
+        binding = ActivityEditManifestationBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        binding.nameTextBox.textView.setHint("Nombre")
+        val currentManifestation = ManifestAdapter.getCurrentManifestation()
 
-        binding.descriptionTextBox.textView.setHint("Descripción")
+        binding.nameTextBox.textView.setText(currentManifestation.name)
+
+        binding.descriptionTextBox.textView.setText(currentManifestation.description)
 
         binding.procedureTextBox.textView.apply {
-            hint = "Procedimiento"
+            setText(currentManifestation.procedure)
             setLines(3)
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
             gravity = Gravity.TOP
@@ -42,10 +45,10 @@ class ActivityRegisterManifestation : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.registerButton.setOnClickListener {
-            if(ManifestationLogic.checkRegisterFields(binding)){
-                val manifestation = ManifestationLogic.createRegisterManifestation(binding)
-                ManifestationLogic.registerManifestation(this, manifestation)
+        binding.acceptButton.setOnClickListener {
+            if(ManifestationLogic.checkEditFields(binding)){
+                val manifestationModified = ManifestationLogic.createEditManifestation(binding)
+                ManifestationLogic.editManifestation(this, currentManifestation, manifestationModified)
             } else {
                 Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_LONG).show()
             }

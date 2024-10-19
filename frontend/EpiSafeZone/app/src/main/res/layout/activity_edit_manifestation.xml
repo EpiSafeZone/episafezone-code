@@ -5,13 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityRegisterManifestation">
+    tools:context=".ActivityEditManifestation">
 
     <TextView
         android:id="@+id/registrarManifestacion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Registrar \nManifestación"
+        android:text="Editar \nManifestación"
         android:textSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,11 +70,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/register_button"
+        android:id="@+id/accept_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
-        android:text="Registrar"
+        android:text="Aceptar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/procedureConstrainstLayout" />

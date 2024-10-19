@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.episafezone.R
+import com.example.episafezone.businesslogic.ManifestationLogic
 import com.example.episafezone.models.Manifestation
 
 class ManifestAdapter(var context : Context, var list : List<Manifestation>) : RecyclerView.Adapter<ManifestAdapter.ManifestViewHolder>(){
@@ -25,10 +26,23 @@ class ManifestAdapter(var context : Context, var list : List<Manifestation>) : R
     override fun onBindViewHolder(holder: ManifestAdapter.ManifestViewHolder, position: Int) {
         holder.name.text=list[position].name;
         holder.description.text=list[position].description;
+        holder.editManifestationButton.setOnClickListener{
+            currentManifestation = list[position]
+            ManifestationLogic.loadEditManifestation(context, list[position])
+        }
     }
 
     class ManifestViewHolder(itemView : View):RecyclerView.ViewHolder(itemView){
         val name : TextView = itemView.findViewById(R.id.manifestName);
         val description: TextView = itemView.findViewById(R.id.manifestDescription);
+        val editManifestationButton: Button = itemView.findViewById(R.id.editManifestButt);
+    }
+
+    companion object {
+        private lateinit var currentManifestation: Manifestation
+
+        fun getCurrentManifestation(): Manifestation {
+            return currentManifestation
+        }
     }
 }

@@ -19,10 +19,7 @@
             android:name=".ProfileActivity"
             android:exported="true"/>
         <activity
-            android:name=".RegisterManifestationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RegisterManifestationActivity"
+            android:name=".ActivityRegisterManifestation"
             android:exported="false" />
         <activity
             android:name=".ActivityPatientsList"

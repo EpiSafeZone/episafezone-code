@@ -35,5 +35,10 @@ class ProfileActivity : AppCompatActivity() {
             val intent = Intent(this,ActivityAddMedication::class.java)
             startActivity(intent)
         }
+
+        binding.addManifButt.setOnClickListener{
+            val intent = Intent(this,ActivityRegisterManifestation::class.java)
+            startActivity(intent)
+        }
     }
 }

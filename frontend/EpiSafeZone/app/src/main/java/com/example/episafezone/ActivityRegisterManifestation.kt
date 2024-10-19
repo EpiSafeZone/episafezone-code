@@ -1,13 +1,13 @@
 package com.example.episafezone
 
 import android.os.Bundle
+import android.text.InputType
+import android.view.Gravity
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.episafezone.databinding.ActivityRegisterManifestationBinding
 
-class RegisterManifestationActivity : AppCompatActivity() {
+class ActivityRegisterManifestation : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterManifestationBinding
 
@@ -19,8 +19,13 @@ class RegisterManifestationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.nameTextBox.textView.setText("Nombre")
-        binding.descriptionTextBox.textView.setText("Descripción")
-        binding.procedureTextBox.textView.setText("Procedimiento")
 
+        binding.descriptionTextBox.textView.setText("Descripción")
+
+        binding.procedureTextBox.textView.setText("Procedimiento")
+        binding.procedureTextBox.textView.setLines(3);
+        binding.procedureTextBox.textView.inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE
+        binding.procedureTextBox.textView.gravity = Gravity.TOP
+        binding.procedureTextBox.textView.isVerticalScrollBarEnabled = true
     }
 }

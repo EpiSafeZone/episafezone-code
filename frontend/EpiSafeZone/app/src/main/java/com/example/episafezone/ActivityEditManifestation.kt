@@ -23,12 +23,14 @@ class ActivityEditManifestation : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        binding.nameTextBox.textView.setText("Nombre")
+        val currentManifestation = ManifestAdapter.getCurrentManifestation()
 
-        binding.descriptionTextBox.textView.setText("Descripción")
+        binding.nameTextBox.textView.setText(currentManifestation.name)
+
+        binding.descriptionTextBox.textView.setText(currentManifestation.description)
 
         binding.procedureTextBox.textView.apply {
-            hint = "Procedimiento"
+            setText(currentManifestation.procedure)
             setLines(3)
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
             gravity = Gravity.TOP
@@ -46,7 +48,7 @@ class ActivityEditManifestation : AppCompatActivity() {
         binding.acceptButton.setOnClickListener {
             if(ManifestationLogic.checkEditFields(binding)){
                 val manifestationModified = ManifestationLogic.createEditManifestation(binding)
-                ManifestationLogic.editManifestation(this, ManifestAdapter.getCurrentManifestation(), manifestationModified)
+                ManifestationLogic.editManifestation(this, currentManifestation, manifestationModified)
             } else {
                 Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_LONG).show()
             }

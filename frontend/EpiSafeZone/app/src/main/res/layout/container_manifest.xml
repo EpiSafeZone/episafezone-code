@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="@+id/manifestName" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/manifestDescription"
                 android:layout_width="277dp"
                 android:layout_height="65dp"
                 android:layout_marginStart="20dp"

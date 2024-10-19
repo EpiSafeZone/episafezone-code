@@ -8,6 +8,7 @@ import com.example.episafezone.adapter.ManifestAdapter
 import com.example.episafezone.adapter.MedicineAdapter
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.databinding.ActivityProfileBinding
+import com.example.episafezone.models.Manifestation
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -27,7 +28,7 @@ class ProfileActivity : AppCompatActivity() {
         binding.medicamentsRecycler.adapter =  MedicineAdapter(listMedicine,this);
         binding.medicamentsRecycler.layoutManager = LinearLayoutManager(this)
 
-        val listManifest : List<String> = profileLogic.getManifestInfo();
+        val listManifest : List<Manifestation> = profileLogic.getManifestInfo();
         binding.manifestRecycler.adapter = ManifestAdapter(this,listManifest);
         binding.manifestRecycler.layoutManager = LinearLayoutManager(this);
 

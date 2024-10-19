@@ -23,10 +23,12 @@ class ManifestAdapter(var context : Context, var list : List<Manifestation>) : R
     }
 
     override fun onBindViewHolder(holder: ManifestAdapter.ManifestViewHolder, position: Int) {
-        holder.text.text=list[position].name;
+        holder.name.text=list[position].name;
+        holder.description.text=list[position].description;
     }
 
     class ManifestViewHolder(itemView : View):RecyclerView.ViewHolder(itemView){
-        val text : TextView = itemView.findViewById(R.id.manifestName);
+        val name : TextView = itemView.findViewById(R.id.manifestName);
+        val description: TextView = itemView.findViewById(R.id.manifestDescription);
     }
 }

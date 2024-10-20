@@ -21,6 +21,7 @@ class ActivityProfile : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityProfileBinding.inflate(layoutInflater);
         setContentView(binding.root)
         contextObj=this;

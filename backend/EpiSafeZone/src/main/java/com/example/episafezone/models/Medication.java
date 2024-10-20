@@ -1,10 +1,9 @@
 package com.example.episafezone.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity(name = "medication")
 public class Medication {
@@ -16,6 +15,10 @@ public class Medication {
     private String unit;
     private Boolean alarm;
     private Integer patientMedicated;
+
+    @OneToMany(mappedBy = "remainder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Remainder> remainderList;
+
 
     public Medication(Integer id, String name, Integer dosis, String unit, Boolean alarm, Integer patientMedicated) {
         this.id = id;

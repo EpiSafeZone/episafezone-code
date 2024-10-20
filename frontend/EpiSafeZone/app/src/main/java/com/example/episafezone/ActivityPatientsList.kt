@@ -7,23 +7,28 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.databinding.ActivityPatientsListBinding
+import com.example.episafezone.network.PatientsListPetitions
+import com.example.episafezone.network.ProfilePetitions
 
 class ActivityPatientsList : AppCompatActivity() {
 
     private lateinit var binding: ActivityPatientsListBinding
-    private var profileLogic = ProfileLogic();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        contextObj = this
         binding = ActivityPatientsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        contextObj=this;
+
+        PatientsListPetitions.initializeQueue();
 
 
         binding.button.setOnClickListener(){
-            profileLogic.sendPetition()
+            PatientsListLogic.sendPetition()
         }
     }
 
@@ -34,7 +39,7 @@ class ActivityPatientsList : AppCompatActivity() {
             return contextObj
         }
 
-        fun startProfile(){
+        fun startProfile(returns : String){
             val intent = Intent(contextObj,ActivityProfile::class.java)
             contextObj.startActivity(intent)
         }

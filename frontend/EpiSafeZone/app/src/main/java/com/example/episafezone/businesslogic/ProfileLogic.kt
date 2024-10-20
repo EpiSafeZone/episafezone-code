@@ -4,19 +4,11 @@ import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.ProfilePetitions
+import java.time.LocalDate
+import java.util.Date
 
-    fun sendPetition(){
-        ProfilePetitions.getProfileInfo(patient);
-    }
 
 class ProfileLogic {
-
-    private var patient = Patient("Cesar","Pardo");
-
-    fun getProfileInfo() : Int{
-        return 1;
-    }
-
 
     fun getMedicationInfo() : List<Medication>{
         val list = ArrayList<Medication>();

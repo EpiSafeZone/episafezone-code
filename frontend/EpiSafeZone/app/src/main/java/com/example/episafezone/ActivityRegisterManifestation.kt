@@ -1,5 +1,6 @@
 package com.example.episafezone
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
@@ -21,6 +22,8 @@ class ActivityRegisterManifestation : AppCompatActivity() {
         binding = ActivityRegisterManifestationBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
+
+        contextObj = this
 
         binding.nameTextBox.textView.setHint("Nombre")
 
@@ -45,10 +48,18 @@ class ActivityRegisterManifestation : AppCompatActivity() {
         binding.registerButton.setOnClickListener {
             if(ManifestationLogic.checkRegisterFields(binding)){
                 val manifestation = ManifestationLogic.createRegisterManifestation(binding)
-                ManifestationLogic.registerManifestation(this, manifestation)
+                ManifestationLogic.registerManifestation(manifestation)
             } else {
                 Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    companion object{
+        private lateinit var contextObj: Context
+
+        fun getContext(): Context {
+            return contextObj
         }
     }
 }

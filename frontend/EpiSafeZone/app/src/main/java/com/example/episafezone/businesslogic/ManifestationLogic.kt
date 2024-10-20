@@ -5,12 +5,14 @@ import android.content.Intent
 import android.widget.Toast
 import com.example.episafezone.ActivityEditManifestation
 import com.example.episafezone.ActivityProfile
+import com.example.episafezone.ActivityRegisterManifestation
 import com.example.episafezone.databinding.ActivityEditManifestationBinding
 import com.example.episafezone.databinding.ActivityRegisterManifestationBinding
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.network.ManifestationPetitions
 
 object ManifestationLogic {
+
     fun checkRegisterFields(binding: ActivityRegisterManifestationBinding): Boolean {
         return binding.nameTextBox.textView.text.isNotEmpty() &&
                 binding.descriptionTextBox.textView.text.isNotEmpty() &&
@@ -23,8 +25,13 @@ object ManifestationLogic {
                 binding.procedureTextBox.textView.text.isNotEmpty()
     }
 
-    fun registerManifestation(context: Context, manifestation: Manifestation) {
-        if(ManifestationPetitions.addManifestation(manifestation)){
+    fun registerManifestation(manifestation: Manifestation) {
+        ManifestationPetitions.addManifestation(manifestation)
+    }
+
+    fun responseRegisterManifestation(success: Boolean){
+        val context = ActivityRegisterManifestation.getContext()
+        if(success){
             Toast.makeText(context, "Manifestación registrada correctamente!", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, ActivityProfile::class.java)
             context.startActivity(intent)
@@ -54,10 +61,14 @@ object ManifestationLogic {
         context.startActivity(intent)
     }
 
-    fun editManifestation(context: Context,
-                          manifestationToModify: Manifestation,
+    fun editManifestation(manifestationToModify: Manifestation,
                           modifiedManifestation: Manifestation) {
-        if(ManifestationPetitions.editManifestation(manifestationToModify, modifiedManifestation)){
+        ManifestationPetitions.editManifestation(manifestationToModify, modifiedManifestation)
+    }
+
+    fun responseEditManifestation(success: Boolean) {
+        val context = ActivityEditManifestation.getContext()
+        if(success){
             Toast.makeText(context, "Manifestación editada correctamente!", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, ActivityProfile::class.java)
             context.startActivity(intent)

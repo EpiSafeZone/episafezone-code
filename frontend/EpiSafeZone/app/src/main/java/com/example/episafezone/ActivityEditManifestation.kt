@@ -1,5 +1,6 @@
 package com.example.episafezone
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
@@ -22,6 +23,8 @@ class ActivityEditManifestation : AppCompatActivity() {
         binding = ActivityEditManifestationBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
+
+        contextObj = this
 
         val currentManifestation = ManifestAdapter.getCurrentManifestation()
 
@@ -48,10 +51,18 @@ class ActivityEditManifestation : AppCompatActivity() {
         binding.acceptButton.setOnClickListener {
             if(ManifestationLogic.checkEditFields(binding)){
                 val manifestationModified = ManifestationLogic.createEditManifestation(binding)
-                ManifestationLogic.editManifestation(this, currentManifestation, manifestationModified)
+                ManifestationLogic.editManifestation(currentManifestation, manifestationModified)
             } else {
                 Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    companion object{
+        private lateinit var contextObj: Context
+
+        fun getContext(): Context {
+            return contextObj
         }
     }
 }

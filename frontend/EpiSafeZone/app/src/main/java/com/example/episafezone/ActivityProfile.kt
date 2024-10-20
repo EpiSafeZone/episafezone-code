@@ -11,13 +11,11 @@ import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.databinding.ActivityProfileBinding
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Manifestation
+import com.example.episafezone.network.ManifestationPetitions
 import com.example.episafezone.network.ProfilePetitions
 
 
 class ActivityProfile : AppCompatActivity() {
-    
-    lateinit var binding : ActivityProfileBinding
-    val profileLogic = ProfileLogic();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,13 +24,11 @@ class ActivityProfile : AppCompatActivity() {
         setContentView(binding.root)
         contextObj=this;
 
-        val listMedicine : List<Medication> = profileLogic.getMedicationInfo();
+        val listMedicine : List<Medication> = ProfileLogic.getMedicationInfo();
         binding.medicamentsRecycler.adapter =  MedicationAdapter(listMedicine,this);
         binding.medicamentsRecycler.layoutManager = LinearLayoutManager(this)
 
-        val listManifest : List<Manifestation> = profileLogic.getManifestInfo();
-        binding.manifestRecycler.adapter = ManifestAdapter(this,listManifest);
-        binding.manifestRecycler.layoutManager = LinearLayoutManager(this);
+        ProfileLogic.getManifestInfo();
 
         binding.addMedButt.setOnClickListener(){
             val intent = Intent(this,ActivityAddMedication::class.java)
@@ -45,13 +41,21 @@ class ActivityProfile : AppCompatActivity() {
         }
 
         ProfilePetitions.initializeQueue()
+        ManifestationPetitions.initializeQueue()
     }
 
     companion object{
+
         private lateinit var contextObj: Context
+        private lateinit var binding: ActivityProfileBinding
 
         fun getContext() : Context{
             return contextObj
+        }
+
+        fun updateListOfManifestations(list: List<Manifestation>){
+            binding.manifestRecycler.adapter = ManifestAdapter(contextObj,list);
+            binding.manifestRecycler.layoutManager = LinearLayoutManager(contextObj);
         }
     }
 }

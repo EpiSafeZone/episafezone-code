@@ -1,8 +1,9 @@
 package com.example.episafezone.controllers;
 
 
-import com.example.episafezone.DTO.PatientDTO;
+import com.example.episafezone.models.Medication;
 import com.example.episafezone.models.Patient;
+import com.example.episafezone.services.MedicationService;
 import com.example.episafezone.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,24 +16,24 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path="/patient")
-public class PatientController {
+@RequestMapping(path="/medication")
+public class MedicationController {
     @Autowired
-    PatientService patientService;
+    MedicationService medicationService;
 
     @GetMapping(path="/all")
-    public @ResponseBody List<Patient> getAll(){
-        return patientService.findAll();
+    public @ResponseBody List<Medication> getAll(){
+        return medicationService.findAll();
     }
 
     @GetMapping(path="/{id}")
-    public @ResponseBody Optional<Patient> getAll(@PathVariable int id){
-        return patientService.findById(id);
+    public @ResponseBody Optional<Medication> getAll(@PathVariable int id){return medicationService.findById(id);
     }
 
-    @GetMapping(path="/info/{id}")
-    public @ResponseBody PatientDTO getPatientInfo(@PathVariable Integer id) {
-        return patientService.getPatientProfileInfo(id);
+    @GetMapping(path="/patient/{patientId}")
+    public @ResponseBody List<Medication> getMedicationsByPatient(@PathVariable Integer patientId) {
+        return medicationService.findMedicationsByPatient(patientId);
     }
+
 
 }

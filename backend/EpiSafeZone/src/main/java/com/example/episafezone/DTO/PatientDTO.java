@@ -1,17 +1,10 @@
-package com.example.episafezone.models;
+package com.example.episafezone.DTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-@Entity (name = "patient")
-public class Patient {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class PatientDTO implements Serializable {
     private Integer id;
     private String name;
     private String surname;
@@ -21,7 +14,10 @@ public class Patient {
     private Integer age;
     private String color;
 
-    public Patient(String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color) {
+    private List<MedicationDTO> medications;
+
+    public PatientDTO(Integer id, String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color, List<MedicationDTO> medications) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.height = height;
@@ -29,10 +25,8 @@ public class Patient {
         this.birthdate = birthdate;
         this.age = age;
         this.color = color;
+        this.medications = medications;
     }
-
-    public Patient (){}
-
 
     public Integer getId() {
         return id;
@@ -98,11 +92,11 @@ public class Patient {
         this.color = color;
     }
 
+    public List<MedicationDTO> getMedications() {
+        return medications;
+    }
 
-
-
-
-
-
-
+    public void setMedications(List<MedicationDTO> medications) {
+        this.medications = medications;
+    }
 }

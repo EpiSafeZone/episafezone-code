@@ -14,7 +14,7 @@ import com.example.episafezone.models.Manifestation
 import com.example.episafezone.network.ProfilePetitions
 
 
-class ProfileActivity : AppCompatActivity() {
+class ActivityProfile : AppCompatActivity() {
     
     lateinit var binding : ActivityProfileBinding
     val profileLogic = ProfileLogic();

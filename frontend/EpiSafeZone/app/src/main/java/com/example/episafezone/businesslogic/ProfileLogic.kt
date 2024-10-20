@@ -2,9 +2,16 @@ package com.example.episafezone.businesslogic
 
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Manifestation
+import com.example.episafezone.models.Patient
+import com.example.episafezone.network.ProfilePetitions
 
+    fun sendPetition(){
+        ProfilePetitions.getProfileInfo(patient);
+    }
 
 class ProfileLogic {
+
+    private var patient = Patient("Cesar","Pardo");
 
     fun getProfileInfo() : Int{
         return 1;

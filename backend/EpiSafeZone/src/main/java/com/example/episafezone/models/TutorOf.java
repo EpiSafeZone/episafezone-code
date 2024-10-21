@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 @Entity(name = "tutor_of")
 public class TutorOf {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer tutor;
     private Integer patient;

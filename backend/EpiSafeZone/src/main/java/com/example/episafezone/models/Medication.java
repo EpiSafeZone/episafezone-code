@@ -1,21 +1,21 @@
 package com.example.episafezone.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity(name = "medication")
 public class Medication {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private Integer dosis;
     private String unit;
     private Boolean alarm;
     private Integer patientMedicated;
+
 
     public Medication(Integer id, String name, Integer dosis, String unit, Boolean alarm, Integer patientMedicated) {
         this.id = id;

@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 @Entity(name = "shared_with")
 public class SharedWith {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer tutorSharing;
     private Integer tutorReceiving;

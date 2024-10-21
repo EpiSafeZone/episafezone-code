@@ -19,9 +19,6 @@ public class Patient {
     private Integer age;
     private String color;
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Crisis> crisis;
-
     public Patient(String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color) {
         this.name = name;
         this.surname = surname;
@@ -97,8 +94,6 @@ public class Patient {
     public void setColor(String color) {
         this.color = color;
     }
-    public List<Crisis> getCrisis() {return this.crisis;}
-
 
 
 

@@ -15,12 +15,8 @@ public class Crisis {
     private String hour;
     private String context;
     private Boolean emergency;
-    @ManyToOne
-    @JoinColumn(name="manifestation", referencedColumnName = "id", nullable = false)
-    private Manifestation manifestation;
-    @ManyToOne
-    @JoinColumn(name="patient", referencedColumnName = "id", nullable = false)
-    private Patient patient;
+    private Integer manifestation;
+    private Integer patient;
 
 
     public Crisis(Integer duration, Date date, String hour, String context, Boolean emergency, Manifestation manifestation, Patient patient) {
@@ -29,8 +25,8 @@ public class Crisis {
         this.hour = hour;
         this.context = context;
         this.emergency = emergency;
-        this.manifestation = manifestation;
-        this.patient = patient;
+        this.manifestation = manifestation.getId();
+        this.patient = patient.getId();
     }
 
     public Crisis() {
@@ -84,20 +80,20 @@ public class Crisis {
         this.emergency = emergency;
     }
 
-    public Manifestation getManifestation() {
+    public Integer getManifestation() {
         return manifestation;
     }
 
     public void setManifestation(Manifestation manifestation) {
-        this.manifestation = manifestation;
+        this.manifestation = manifestation.getId();
     }
 
-    public Patient getPatient() {
+    public Integer getPatient() {
         return patient;
     }
 
     public void setPatient(Patient patient) {
-        this.patient = patient;
+        this.patient = patient.getId();
     }
 
     public String toString(){

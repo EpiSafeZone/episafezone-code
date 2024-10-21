@@ -16,9 +16,6 @@ public class Medication {
     private Boolean alarm;
     private Integer patientMedicated;
 
-    @OneToMany(mappedBy = "remainder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Remainder> remainderList;
-
 
     public Medication(Integer id, String name, Integer dosis, String unit, Boolean alarm, Integer patientMedicated) {
         this.id = id;

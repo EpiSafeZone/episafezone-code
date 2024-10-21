@@ -13,9 +13,6 @@ public class Manifestation {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "manifestation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Crisis> crisis;
-
     public Manifestation(String name, String description) {
         this.name = name;
         this.description = description;

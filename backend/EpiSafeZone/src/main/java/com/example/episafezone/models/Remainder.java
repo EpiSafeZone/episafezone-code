@@ -15,14 +15,12 @@ public class Remainder {
     @Column(name="next_alarm")
     private Integer nextAlarm;
 
-    @ManyToOne
-    @JoinColumn(name="medication", referencedColumnName = "id", nullable = false)
-    private Medication medication;
+    private Integer medication;
 
     public Remainder(Integer timeOfRemainder, Integer nextAlarm, Medication medication) {
         this.timeOfRemainder = timeOfRemainder;
         this.nextAlarm = nextAlarm;
-        this.medication = medication;
+        this.medication = medication.getId();
     }
 
     public Remainder() {}
@@ -51,11 +49,11 @@ public class Remainder {
         this.nextAlarm = nextAlarm;
     }
 
-    public Medication getMedication() {
+    public Integer getMedication() {
         return medication;
     }
 
     public void setMedication(Medication medication) {
-        this.medication = medication;
+        this.medication = medication.getId();
     }
 }

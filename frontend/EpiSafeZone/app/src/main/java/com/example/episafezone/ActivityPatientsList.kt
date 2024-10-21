@@ -8,6 +8,8 @@ import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.databinding.ActivityPatientsListBinding
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.PatientsListPetitions
+import com.example.episafezone.network.ProfilePetitions
+import org.json.JSONObject
 import java.util.Date
 
 class ActivityPatientsList : AppCompatActivity() {

@@ -14,7 +14,7 @@ class MedicationLogic {
             if(times == ""){throw Exception("Debes rellenar la cantidad de tomas")}
             Reminder(times!!.toInt(), nextAlarm!!);
         }
-        Medication(name,dosis.toInt(),unit,alarm);
+        Medication(0,name,dosis.toInt(),unit,alarm);
         return true;
     }
 
@@ -27,7 +27,7 @@ class MedicationLogic {
             if(times == ""){throw Exception("Debes rellenar la cantidad de tomas")}
             Reminder(times!!.toInt(), nextAlarm!!);
         }
-        Medication(name,dosis.toInt(),unit,alarm);
+        Medication(0,name,dosis.toInt(),unit,alarm);
         return true;
     }
 }

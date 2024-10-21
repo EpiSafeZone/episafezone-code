@@ -12,6 +12,7 @@ import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.databinding.ActivityPatientsListBinding
 import com.example.episafezone.network.PatientsListPetitions
 import com.example.episafezone.network.ProfilePetitions
+import org.json.JSONObject
 
 class ActivityPatientsList : AppCompatActivity() {
 
@@ -41,6 +42,7 @@ class ActivityPatientsList : AppCompatActivity() {
 
         fun startProfile(returns : String){
             val intent = Intent(contextObj,ActivityProfile::class.java)
+            intent.putExtra("json", returns)
             contextObj.startActivity(intent)
         }
     }

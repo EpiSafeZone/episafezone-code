@@ -19,14 +19,13 @@ class ActivityProfile : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityProfileBinding.inflate(layoutInflater);
         setContentView(binding.root)
         contextObj=this;
 
-        val listMedicine : List<Medication> = ProfileLogic.getMedicationInfo();
-        binding.medicamentsRecycler.adapter =  MedicationAdapter(listMedicine,this);
-        binding.medicamentsRecycler.layoutManager = LinearLayoutManager(this)
+        val json = intent.getSerializableExtra("json") as String
+        ProfileLogic.setUpInfo(json,binding,this)
+
 
         ProfileLogic.getManifestInfo();
 

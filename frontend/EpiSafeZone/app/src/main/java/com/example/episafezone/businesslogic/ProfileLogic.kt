@@ -1,10 +1,18 @@
 package com.example.episafezone.businesslogic
 
-import android.widget.Toast
+import android.content.Context
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityProfile
+import com.example.episafezone.ActivityProfile.Companion
+import com.example.episafezone.adapter.MedicationAdapter
+import com.example.episafezone.databinding.ActivityProfileBinding
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import org.json.JSONArray
+import org.json.JSONObject
 import com.example.episafezone.network.ManifestationPetitions
 import com.example.episafezone.network.ProfilePetitions
 import java.time.LocalDate
@@ -13,13 +21,24 @@ import java.util.Date
 
 object ProfileLogic {
 
-    fun getMedicationInfo() : List<Medication>{
-        val list = ArrayList<Medication>();
-        list.add(Medication("Dalsi",12,"ml",false));
-        list.add(Medication("Paracetamol",1,"gr",false));
-        list.add(Medication("Ibuprofreno",12,"ml",false));
-        list.add(Medication("Antibiótico",12,"ml",false));
-        return list;
+    private val gson = Gson();
+
+    fun setUpInfo(json : String, binding: ActivityProfileBinding, context: Context){
+        val user = gson.fromJson(json,Patient::class.java)
+        binding.patientAgeText.text=user.age.toString()
+        binding.patientNameText.text = "${user.name} ${user.surname}"
+        binding.patientWeightText.text = user.weight.toString() + " kg"
+        binding.patientHeigthText.text = user.height + " m"
+        val jsonObjet = JSONObject(json)
+        val medications = jsonObjet.get("medications") as JSONArray
+        setUpMedicationAdapter(medications,binding,context)
+    }
+
+    private fun setUpMedicationAdapter(json: JSONArray, binding: ActivityProfileBinding,context: Context){
+        val listType = object : TypeToken<List<Medication>>() {}.type
+        val medicines : List<Medication> = gson.fromJson(json.toString(),listType)
+        binding.medicamentsRecycler.adapter =  MedicationAdapter(medicines,context)
+        binding.medicamentsRecycler.layoutManager = LinearLayoutManager(context)
     }
 
     fun getManifestInfo() {

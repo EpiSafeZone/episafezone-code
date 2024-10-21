@@ -3,10 +3,6 @@ package com.example.episafezone.businesslogic
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityProfile
-import com.example.episafezone.ActivityProfile.Companion
-import com.example.episafezone.adapter.ManifestAdapter
-import com.example.episafezone.adapter.MedicationAdapter
-import com.example.episafezone.databinding.ActivityProfileBinding
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient

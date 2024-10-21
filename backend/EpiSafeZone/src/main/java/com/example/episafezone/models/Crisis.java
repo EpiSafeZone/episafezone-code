@@ -7,7 +7,7 @@ import java.util.Date;
 public class Crisis {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer duration;
     @Temporal(TemporalType.DATE)

@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 @Controller
 @RequestMapping(path="/crisis")
 public class CrisisController {
-    public final CrisisService crisisService;
-
+    private final CrisisService crisisService;
     public CrisisController(CrisisService crisisService) {
         this.crisisService = crisisService;
     }

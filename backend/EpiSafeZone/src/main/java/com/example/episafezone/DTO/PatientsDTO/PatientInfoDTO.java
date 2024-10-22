@@ -1,10 +1,12 @@
-package com.example.episafezone.DTO;
+package com.example.episafezone.DTO.PatientsDTO;
+
+import com.example.episafezone.DTO.MedicationDTO;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class PatientDTO implements Serializable {
+public class PatientInfoDTO implements Serializable {
     private Integer id;
     private String name;
     private String surname;
@@ -16,7 +18,7 @@ public class PatientDTO implements Serializable {
 
     private List<MedicationDTO> medications;
 
-    public PatientDTO(Integer id, String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color, List<MedicationDTO> medications) {
+    public PatientInfoDTO(Integer id, String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color, List<MedicationDTO> medications) {
         this.id = id;
         this.name = name;
         this.surname = surname;

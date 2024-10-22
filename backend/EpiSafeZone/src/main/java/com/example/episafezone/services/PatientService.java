@@ -1,7 +1,7 @@
 package com.example.episafezone.services;
 
 import com.example.episafezone.DTO.MedicationDTO;
-import com.example.episafezone.DTO.PatientDTO;
+import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.models.HasManifestation;
 import com.example.episafezone.models.Medication;
 import com.example.episafezone.models.Patient;
@@ -38,7 +38,7 @@ public class PatientService implements PatientServiceInteface{
     }
 
     @Override
-    public PatientDTO getPatientProfileInfo(Integer patientId) {
+    public PatientInfoDTO getPatientProfileInfo(Integer patientId) {
         Optional<Patient> patientOpt = patientRepo.findById(patientId);
         if (patientOpt.isPresent()) {
             Patient patient = patientOpt.get();
@@ -53,7 +53,7 @@ public class PatientService implements PatientServiceInteface{
                             medication.getAlarm()))
                     .collect(Collectors.toList());
 
-            return new PatientDTO(
+            return new PatientInfoDTO(
                     patient.getId(),
                     patient.getName(),
                     patient.getSurname(),

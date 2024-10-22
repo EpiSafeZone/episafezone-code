@@ -33,7 +33,7 @@ class ManifestAdapter(var context : Context, var list : List<Manifestation>) : R
         }
         holder.deleteManifestation.setOnClickListener {
             currentManifestation = list[position]
-            ManifestationLogic.showCustomDialogBox(context)
+            ManifestationLogic.showCustomDialogBox(context, currentManifestation)
         }
     }
 

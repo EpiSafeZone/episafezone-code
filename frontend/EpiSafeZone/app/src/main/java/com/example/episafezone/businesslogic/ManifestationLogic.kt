@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.example.episafezone.ActivityEditManifestation
 import com.example.episafezone.ActivityProfile
 import com.example.episafezone.ActivityRegisterManifestation
+import com.example.episafezone.R
 import com.example.episafezone.databinding.ActivityEditManifestationBinding
 import com.example.episafezone.databinding.ActivityRegisterManifestationBinding
 import com.example.episafezone.models.Manifestation
@@ -83,7 +84,7 @@ object ManifestationLogic {
         }
     }
 
-    fun deleteManifestation(manifestation: Manifestation) {
+    private fun deleteManifestation(manifestation: Manifestation) {
         ManifestationPetitions.deleteManifestation(manifestation)
     }
 
@@ -101,12 +102,12 @@ object ManifestationLogic {
         }
     }
 
-    fun showCustomDialogBox(context: Context){
+    fun showCustomDialogBox(context: Context, manifestation: Manifestation){
         val dialog = Dialog(context)
         var message = "Esta seguro que quiere eliminar esta manifestación?"
         dialog.setTitle("CONFIRMATION")
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.pop_up_warning)
+        dialog.setContentView(R.layout.pop_up_confirmation)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val messageBox = dialog.findViewById<TextView>(R.id.textViewErrorText)
@@ -114,7 +115,7 @@ object ManifestationLogic {
         val btnCancel = dialog.findViewById<Button>(R.id.buttonCancelPopUp)
 
         btnOk.setOnClickListener{
-            ManifestationLogic.deleteManifestation(list[position])
+            deleteManifestation(manifestation)
             dialog.dismiss()
         }
 
@@ -125,6 +126,5 @@ object ManifestationLogic {
         messageBox.text = message
 
         dialog.show()
-
     }
 }

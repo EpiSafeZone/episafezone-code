@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityProfile
 import com.example.episafezone.ActivityProfile.Companion
+import com.example.episafezone.adapter.ManifestAdapter
 import com.example.episafezone.adapter.MedicationAdapter
 import com.example.episafezone.databinding.ActivityProfileBinding
 import com.example.episafezone.models.Medication
@@ -19,24 +20,30 @@ object ProfileLogic {
 
     private val gson = Gson();
 
-    fun setUpInfo(json : String, binding: ActivityProfileBinding, context: Context){
+    fun setUpInfo(json : String){
         val user = gson.fromJson(json,Patient::class.java)
-        binding.patientAgeText.text=user.age.toString()
-        binding.patientNameText.text = "${user.name} ${user.surname}"
-        binding.patientWeightText.text = user.weight.toString() + " kg"
-        binding.patientHeigthText.text = user.height + " m"
-        val jsonObjet = JSONObject(json)
-        val medications = jsonObjet.get("medications") as JSONArray
-        setUpMedicationAdapter(medications,binding,context)
+        ActivityProfile.updatePatienInf(user)
+        val jsonObject = JSONObject(json)
+        val medications = jsonObject.get("medications") as JSONArray
+        val manifests = jsonObject.get("manifestations") as JSONArray
+        setUpMedicationAdapter(medications)
+        setUpManifestationAdapter(manifests)
     }
 
-    private fun setUpMedicationAdapter(json: JSONArray, binding: ActivityProfileBinding,context: Context){
-        val listType = object : TypeToken<List<Medication>>() {}.type
-        val medicines : List<Medication> = gson.fromJson(json.toString(),listType)
-        binding.medicamentsRecycler.adapter =  MedicationAdapter(medicines,context)
-        binding.medicamentsRecycler.layoutManager = LinearLayoutManager(context)
+    private fun setUpMedicationAdapter(json: JSONArray){
+        val listType = object : TypeToken<MutableList<Medication>>() {}.type
+        val medicines : MutableList<Medication> = gson.fromJson(json.toString(),listType)
+        ActivityProfile.updateListOfMedications(medicines)
     }
 
+    private fun setUpManifestationAdapter(json: JSONArray){
+        val listType = object : TypeToken<List<Manifestation>>() {}.type
+        val manifests : List<Manifestation> = gson.fromJson(json.toString(),listType)
+       ActivityProfile.updateListOfManifestations(manifests)
+    }
+
+
+    /*
     fun getManifestInfo() {
         // TODO: Cuando este listo descomentar el codigo siguiente y quitar el resto:
         // ProfilePetitions.getManifestations(patient)
@@ -58,5 +65,7 @@ object ProfileLogic {
         listTemp.add(Manifestation("Yow","Yow","Yow"));
         listTemp.add(Manifestation("Yow","Yow","Yow"));
         ActivityProfile.updateListOfManifestations(listTemp)
-    }
+    }*/
+
+
 }

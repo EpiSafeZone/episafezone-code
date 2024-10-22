@@ -1,5 +1,6 @@
 package com.example.episafezone.models
 
+import java.io.Serializable
 import java.util.Date
 
 class Patient(
@@ -11,4 +12,4 @@ class Patient(
     val birthdate: Date?,
     val age: Int?,
     val color: String?,
-)
+) : Serializable

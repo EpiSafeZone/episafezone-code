@@ -6,10 +6,9 @@ import java.util.Date
 
 object PatientsListLogic {
 
-    private var patient = Patient(1,"Cesar","Pardo","",1, Date(1678886400000L),1,"" );
 
 
-    fun sendPetition(){
+    fun getProfileInfo(patient : Patient){
         PatientsListPetitions.getProfileInfo(patient);
     }
 }

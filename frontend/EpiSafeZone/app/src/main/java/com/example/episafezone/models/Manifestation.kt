@@ -1,8 +1,10 @@
 package com.example.episafezone.models
 
+import java.io.Serializable
+
 class Manifestation (var name: String,
                      var description: String,
-                     var procedure: String){
+                     var procedure: String) {
 
     private var id: Int = -1
 

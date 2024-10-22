@@ -28,4 +28,9 @@ public class SharedWithController {
     public @ResponseBody List<SharedWith> getAllByTutorReceiving(@PathVariable Integer tutorId) {
         return sharedWithService.findByTutorReceiving(tutorId);
     }
+
+    @GetMapping(path="/patientsShared/{tutorId}")
+    public @ResponseBody List<Integer> getPatientsByTutorReceiving(@PathVariable Integer tutorId) {
+        return sharedWithService.findPByTReceiving(tutorId);
+    }
 }

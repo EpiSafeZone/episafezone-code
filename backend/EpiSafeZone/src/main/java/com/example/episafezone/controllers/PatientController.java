@@ -2,6 +2,7 @@ package com.example.episafezone.controllers;
 
 
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
+import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
 import com.example.episafezone.models.HasManifestation;
 import com.example.episafezone.models.Patient;
 import com.example.episafezone.services.PatientService;
@@ -39,5 +40,4 @@ public class PatientController {
     public @ResponseBody List<HasManifestation> getManifestations(@PathVariable Integer id) {
         return patientService.getPatientManifestations(id);
     }
-
 }

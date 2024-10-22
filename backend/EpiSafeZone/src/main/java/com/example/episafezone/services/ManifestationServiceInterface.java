@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface ManifestationServiceInterface {
     List<Manifestation> getDefaultManifestation();
     Manifestation getManifestationById(Integer id);
-    List<Manifestation> getManifestationFromPatient(Patient patient);
+    List<Manifestation> getManifestationFromPatient(Integer patientId);
 }
 

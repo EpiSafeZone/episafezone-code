@@ -5,6 +5,7 @@ import com.example.episafezone.ActivityProfile
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient
+import com.example.episafezone.network.ManifestationPetitions
 import com.example.episafezone.network.ProfilePetitions
 import java.time.LocalDate
 import java.util.Date
@@ -23,7 +24,7 @@ object ProfileLogic {
 
     fun getManifestInfo() {
         // TODO: Cuando este listo descomentar el codigo siguiente y quitar el resto:
-        // ProfilePetitions.getManifestations(patient)
+        //ManifestationPetitions.getManifestations(patient)
         responseGetManifesInfo(true, emptyList<Manifestation>())
     }
 

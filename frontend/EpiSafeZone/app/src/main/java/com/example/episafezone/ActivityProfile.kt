@@ -48,12 +48,18 @@ class ActivityProfile : AppCompatActivity() {
 
         private lateinit var contextObj: Context
         private lateinit var binding: ActivityProfileBinding
+        private lateinit var listManifestations: MutableList<Manifestation>
 
         fun getContext() : Context{
             return contextObj
         }
 
-        fun updateListOfManifestations(list: List<Manifestation>){
+        fun getListManifestations() : MutableList<Manifestation>{
+            return listManifestations
+        }
+
+        fun updateListOfManifestations(list: MutableList<Manifestation>){
+            listManifestations = list;
             binding.manifestRecycler.adapter = ManifestAdapter(contextObj,list);
             binding.manifestRecycler.layoutManager = LinearLayoutManager(contextObj);
         }

@@ -28,7 +28,7 @@ public class PatientController {
     }
 
     @GetMapping(path="/{id}")
-    public @ResponseBody Optional<Patient> getAll(@PathVariable int id){
+    public @ResponseBody Patient getById(@PathVariable int id){
         return patientService.findById(id);
     }
 

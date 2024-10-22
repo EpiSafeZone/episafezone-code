@@ -4,6 +4,8 @@ import com.example.episafezone.DTO.ManifestationDTO;
 import com.example.episafezone.DTO.MedicationDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
+import com.example.episafezone.DTO.PatientDTO;
+import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.HasManifestation;
 import com.example.episafezone.models.Manifestation;
 import com.example.episafezone.models.Medication;
@@ -45,8 +47,12 @@ public class PatientService implements PatientServiceInteface {
     }
 
     @Override
-    public Optional<Patient> findById(int id) {
-        return patientRepo.findById(id);
+    public Patient findById(int id) {
+        if(patientRepo.findById(id).isPresent()){
+            return  patientRepo.findById(id).get();
+        }else{
+            throw new ResourceNotFoudException("No se ha encontrado el patient con el id: " + id);
+        }
     }
 
     @Override

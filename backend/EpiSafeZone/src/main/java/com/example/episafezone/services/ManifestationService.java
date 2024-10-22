@@ -9,6 +9,7 @@ import com.example.episafezone.repositories.ManifestationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,7 +20,10 @@ public class ManifestationService implements ManifestationServiceInterface{
     ManifestationRepository manifestationRepo;
 
     @Autowired
-    HasManifestationRepository hasManifestationRepo;
+    PatientService patientService;
+
+    @Autowired
+    HasManifestationsService hasManifestationsService;
 
     @Override
     public List<Manifestation> getDefaultManifestation() {
@@ -32,22 +36,31 @@ public class ManifestationService implements ManifestationServiceInterface{
         if(manifestation.isPresent()){
             return manifestation.get();
         }else{
-            throw new ResourceNotFoudException("No se ha encontrado el manifestation con el id: " + id);
+            throw new ResourceNotFoudException("No se ha encontrado la manifestation con el id: " + id);
         }
     }
 
     @Override
-    public List<Manifestation> getManifestationFromPatient(Integer patientId) {
-        List<HasManifestation> hasManif = hasManifestationRepo.findByPatient(patientId);
+    public List<Manifestation> getManifestationFromPatient(Integer id) {
+        Patient patient = patientService.findById(id);
+        List<HasManifestation> hasManifestationList = hasManifestationsService.thisPatientHas(patient.getId());
+        List<Manifestation> manifestationList = new ArrayList<>();
+        for (HasManifestation hasManifestation : hasManifestationList) {
+            manifestationList.add(getManifestationById(hasManifestation.getManifestation()));
+        }
+        return manifestationList;
+    }
 
-        List<Integer> manifestationIds = hasManif.stream()
-                .map(HasManifestation::getManifestation)
-                .collect(Collectors.toList());
+    @Override
+    public Manifestation create(Manifestation manifestation) {
+        return manifestationRepo.save(manifestation);
+    }
 
-        List<Manifestation> manifestations = manifestationIds.stream()
-                .map(this::getManifestationById)
-                .collect(Collectors.toList());
-
-        return manifestations;
+    @Override
+    public Manifestation update(Integer id, Manifestation manifestation) {
+        Manifestation toUpdate = getManifestationById(id);
+        toUpdate.setName(manifestation.getName());
+        toUpdate.setDescription(manifestation.getDescription());
+        return manifestationRepo.save(toUpdate);
     }
 }

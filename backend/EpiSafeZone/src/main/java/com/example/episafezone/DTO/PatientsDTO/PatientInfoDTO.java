@@ -1,10 +1,13 @@
-package com.example.episafezone.DTO;
+package com.example.episafezone.DTO.PatientsDTO;
+
+import com.example.episafezone.DTO.ManifestationDTO;
+import com.example.episafezone.DTO.MedicationDTO;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class PatientDTO implements Serializable {
+public class PatientInfoDTO implements Serializable {
     private Integer id;
     private String name;
     private String surname;
@@ -15,8 +18,10 @@ public class PatientDTO implements Serializable {
     private String color;
 
     private List<MedicationDTO> medications;
+    private List<ManifestationDTO> manifestations;
 
-    public PatientDTO(Integer id, String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color, List<MedicationDTO> medications) {
+
+    public PatientInfoDTO(Integer id, String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color, List<MedicationDTO> medications, List<ManifestationDTO> manifestations) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -26,6 +31,7 @@ public class PatientDTO implements Serializable {
         this.age = age;
         this.color = color;
         this.medications = medications;
+        this.manifestations = manifestations;
     }
 
     public Integer getId() {
@@ -98,5 +104,13 @@ public class PatientDTO implements Serializable {
 
     public void setMedications(List<MedicationDTO> medications) {
         this.medications = medications;
+    }
+
+    public List<ManifestationDTO> getManifestations() {
+        return manifestations;
+    }
+
+    public void setManifestations(List<ManifestationDTO> manifestations) {
+        this.manifestations = manifestations;
     }
 }

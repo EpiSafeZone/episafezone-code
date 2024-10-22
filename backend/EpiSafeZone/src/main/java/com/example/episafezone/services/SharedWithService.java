@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SharedWithService implements SharedWithServiceInterface {
@@ -21,5 +22,11 @@ public class SharedWithService implements SharedWithServiceInterface {
     public List<SharedWith> findByTutorReceiving(Integer tutorId) {
         return sharedWithRepo.findByTutorReceiving(tutorId);
     }
-
+    @Override
+    public List<Integer> findPByTReceiving(Integer tutorId){
+        List<SharedWith> tutorOfList = sharedWithRepo.findByTutorReceiving(tutorId);
+        return tutorOfList.stream()
+                .map(SharedWith::getPatient)
+                .collect(Collectors.toList());
+    }
 }

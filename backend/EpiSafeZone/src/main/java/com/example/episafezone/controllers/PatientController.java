@@ -1,9 +1,9 @@
 package com.example.episafezone.controllers;
 
 
-import com.example.episafezone.DTO.PatientDTO;
+import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
+import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
 import com.example.episafezone.models.HasManifestation;
-import com.example.episafezone.models.Manifestation;
 import com.example.episafezone.models.Patient;
 import com.example.episafezone.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +33,11 @@ public class PatientController {
     }
 
     @GetMapping(path="/info/{id}")
-    public @ResponseBody PatientDTO getPatientInfo(@PathVariable Integer id) {
+    public @ResponseBody PatientInfoDTO getPatientInfo(@PathVariable Integer id) {
         return patientService.getPatientProfileInfo(id);
     }
     @GetMapping(path="/info/manifestations/{id}")
     public @ResponseBody List<HasManifestation> getManifestations(@PathVariable Integer id) {
         return patientService.getPatientManifestations(id);
     }
-
 }

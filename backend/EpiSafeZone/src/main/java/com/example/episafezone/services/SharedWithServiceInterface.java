@@ -8,4 +8,6 @@ public interface SharedWithServiceInterface {
     List<SharedWith> findAll();
 
     List<SharedWith> findByTutorReceiving(Integer tutorId);
+
+    List<Integer> findPByTReceiving(Integer tutorId);
 }

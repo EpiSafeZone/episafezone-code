@@ -1,19 +1,25 @@
 package com.example.episafezone.services;
 
 import com.example.episafezone.exceptions.ResourceNotFoudException;
+import com.example.episafezone.models.HasManifestation;
 import com.example.episafezone.models.Manifestation;
 import com.example.episafezone.models.Patient;
+import com.example.episafezone.repositories.HasManifestationRepository;
 import com.example.episafezone.repositories.ManifestationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ManifestationService implements ManifestationServiceInterface{
     @Autowired
     ManifestationRepository manifestationRepo;
+
+    @Autowired
+    HasManifestationRepository hasManifestationRepo;
 
     @Override
     public List<Manifestation> getDefaultManifestation() {
@@ -31,7 +37,17 @@ public class ManifestationService implements ManifestationServiceInterface{
     }
 
     @Override
-    public List<Manifestation> getManifestationFromPatient(Patient patient) {
-        return List.of();
+    public List<Manifestation> getManifestationFromPatient(Integer patientId) {
+        List<HasManifestation> hasManif = hasManifestationRepo.findByPatient(patientId);
+
+        List<Integer> manifestationIds = hasManif.stream()
+                .map(HasManifestation::getManifestation)
+                .collect(Collectors.toList());
+
+        List<Manifestation> manifestations = manifestationIds.stream()
+                .map(this::getManifestationById)
+                .collect(Collectors.toList());
+
+        return manifestations;
     }
 }

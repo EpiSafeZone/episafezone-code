@@ -26,7 +26,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@android:mipmap/sym_def_app_icon"
+            tools:srcCompat="@android:mipmap/sym_def_app_icon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -103,8 +104,9 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/medicamentsRecycler"
-                    android:layout_width="315dp"
+                    android:layout_width="0dp"
                     android:layout_height="400dp"
+                    android:layout_marginHorizontal="30dp"
                     android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -134,7 +136,8 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/manifestRecycler"
-                    android:layout_width="315dp"
+                    android:layout_width="0dp"
+                    android:layout_marginHorizontal="30dp"
                     android:layout_height="400dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="100dp"

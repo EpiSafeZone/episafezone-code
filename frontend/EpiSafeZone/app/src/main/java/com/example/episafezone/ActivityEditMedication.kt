@@ -8,6 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.episafezone.businesslogic.MedicationLogic
 import com.example.episafezone.databinding.ActivityEditMedicationBinding
 import com.example.episafezone.models.Medication
+import com.example.episafezone.models.Patient
 
 class ActivityEditMedication : AppCompatActivity() {
 
@@ -20,6 +21,7 @@ class ActivityEditMedication : AppCompatActivity() {
         setContentView(binding.root)
 
         val medication = intent.getSerializableExtra("medication") as? Medication
+        val patient = intent.getSerializableExtra("patient") as Patient
 
         binding.medicationNameInput.setText(medication!!.name)
         binding.medicationAmountInput.setText(medication.dosis.toString())
@@ -51,7 +53,7 @@ class ActivityEditMedication : AppCompatActivity() {
             }
 
             try{
-                medicationLogic.createMedication(name,dosis,unit,alarm,times,nextAlarm);
+                medicationLogic.createMedication(name,dosis,unit,alarm,times,nextAlarm,patient);
             }catch(e : Exception){
                 binding.errorText.text=e.message.toString();
             }

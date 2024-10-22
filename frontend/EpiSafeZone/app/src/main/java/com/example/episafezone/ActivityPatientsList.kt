@@ -26,10 +26,6 @@ class ActivityPatientsList : AppCompatActivity() {
 
         PatientsListPetitions.initializeQueue();
 
-
-        binding.button.setOnClickListener(){
-            PatientsListLogic.sendPetition()
-        }
     }
 
     companion object{

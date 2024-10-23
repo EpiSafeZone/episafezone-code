@@ -1,16 +1,14 @@
 package com.example.episafezone.controllers;
 
 
+import com.example.episafezone.DTO.MedicationDTO;
 import com.example.episafezone.models.Medication;
 import com.example.episafezone.models.Patient;
 import com.example.episafezone.services.MedicationService;
 import com.example.episafezone.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +25,7 @@ public class MedicationController {
     }
 
     @GetMapping(path="/{id}")
-    public @ResponseBody Optional<Medication> getAll(@PathVariable int id){return medicationService.findById(id);
+    public @ResponseBody Medication getAll(@PathVariable int id){return medicationService.findById(id);
     }
 
     @GetMapping(path="/patient/{patientId}")
@@ -35,5 +33,15 @@ public class MedicationController {
         return medicationService.findMedicationsByPatient(patientId);
     }
 
+    @PostMapping(path="/create")
+    public @ResponseBody Medication createMedication(@RequestBody Medication medication){
+        return medicationService.create(medication);
+    }
+
+    @PutMapping(path="/update/{id}")
+    public @ResponseBody Medication updateMedication(@PathVariable Integer id,
+                                                     @RequestBody Medication medication){
+        return medicationService.update(id, medication);
+    }
 
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface MedicationServiceInterface {
     List<Medication> findAll();
-    Optional<Medication> findById(int id);
+    Medication findById(int id);
     List<Medication> findMedicationsByPatient(Integer patientId);
-
+    Medication create(Medication medication);
 }

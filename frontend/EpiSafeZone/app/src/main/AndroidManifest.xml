@@ -24,13 +24,13 @@
             android:name=".ActivityAddMedication"
             android:exported="false"/>
         <activity
-            android:name=".ActivityPatientsList"
+            android:name=".ActivityProfile"
             android:exported="true" />
         <activity
             android:name=".ActivityRegisterManifestation"
             android:exported="false" />
         <activity
-            android:name=".ActivityProfile"
+            android:name=".ActivityPatientsList"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

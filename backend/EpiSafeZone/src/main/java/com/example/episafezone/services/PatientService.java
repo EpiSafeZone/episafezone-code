@@ -30,7 +30,7 @@ public class PatientService implements PatientServiceInteface {
     ManifestationService manifestationService;
 
     @Autowired
-    HasManifestationRepository hasManifestationRepository;
+    HasManifestationService hasManifestationService;
 
     @Autowired
     TutorOfService tutorOfService;
@@ -80,7 +80,7 @@ public class PatientService implements PatientServiceInteface {
         Optional<Patient> patientOpt = patientRepo.findById(id);
         if (patientOpt.isPresent()) {
             Patient patient = patientOpt.get();
-            List<HasManifestation> listManifestation = hasManifestationRepository.findAll();
+            List<HasManifestation> listManifestation = hasManifestationService.findAll();
             listManifestation = listManifestation.stream().filter(hasManifestation ->
                     hasManifestation.getPatient().equals(patient.getId())
             ).collect(Collectors.toList());

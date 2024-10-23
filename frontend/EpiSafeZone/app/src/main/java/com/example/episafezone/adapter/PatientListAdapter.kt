@@ -34,7 +34,7 @@ class PatientListAdapter(var context : Context, private var list : List<Patient>
         //holder.patientProfilePicture.setImageIcon( list[position].profilePicture )
 
         holder.patientName.setOnClickListener {
-            PatientsListLogic.sendPetition(list[position])
+            PatientsListLogic.getProfileInfo(list[position])
         }
     }
     fun setOnClickListener(listener: OnClickListener?) {

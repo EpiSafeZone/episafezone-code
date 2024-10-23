@@ -14,7 +14,7 @@ import java.util.Date
 
 class ActivityPatientsList : AppCompatActivity() {
 
-    private var patientGot = Patient(1,"Cesar","Pardo","",1, Date(1678886400000L),1,"" );
+    private var patientGot = Patient(1,"Cesar","Pardo",180,1, Date(1678886400000L),1,"" );
     private lateinit var binding: ActivityPatientsListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,10 +28,6 @@ class ActivityPatientsList : AppCompatActivity() {
         binding.PatientRecyclerView.adapter = PatientListAdapter(this, listPatient)
         binding.PatientRecyclerView.layoutManager = LinearLayoutManager(this)
 
-
-        binding.button.setOnClickListener(){
-            PatientsListLogic.getProfileInfo(patient)
-        }
         PatientsListPetitions.initializeQueue();
     }
 

@@ -6,6 +6,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.episafezone.ActivityPatientsList
 import com.example.episafezone.BuildConfig
+import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.models.Patient
 import org.json.JSONObject
 
@@ -28,7 +29,7 @@ object PatientsListPetitions {
             Request.Method.GET, "$url/patient/info/$name", json,
             {response->
                 println(response.toString())
-                ActivityPatientsList.startProfile(response.toString());
+                PatientsListLogic.startActivityProfile(response.toString(),patient)
             },
             {error->
                 println(error.message)

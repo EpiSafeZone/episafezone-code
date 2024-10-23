@@ -13,7 +13,7 @@ import com.example.episafezone.models.Patient
 class PatientListAdapter(var context : Context, private var list : List<Patient>) : RecyclerView.Adapter<PatientListAdapter.PatientListViewHolder>() {
     class PatientListViewHolder(view:View) : RecyclerView.ViewHolder(view) {
         val patientName : TextView = view.findViewById(R.id.patientName)
-        val patientProfilePicture : ImageView = view.findViewById(R.id.patientImage)
+        //val patientProfilePicture : ImageView = view.findViewById(R.id.patientImage)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatientListViewHolder {

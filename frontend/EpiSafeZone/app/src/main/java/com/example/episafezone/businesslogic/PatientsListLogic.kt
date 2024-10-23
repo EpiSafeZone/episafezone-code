@@ -6,10 +6,14 @@ import java.util.Date
 
 object PatientsListLogic {
 
-    private var patient = Patient(1,"Cesar","Pardo","",1, Date(1678886400000L),1,"" );
-
+    fun getPatientListInfo() : List<Patient> {
+        val list = ArrayList<Patient>()
+        list.add(Patient(1, "Onofre", "Bustos", 180, 70, Date(), 21, "blue"))
+        list.add(Patient(2, "Cesar", "Gimeno", 130, 60, Date(), 21, "red"))
+        return list;
+    }
 
     fun sendPetition(){
-        PatientsListPetitions.getProfileInfo(patient);
+        PatientsListPetitions.getProfileInfo( getPatientListInfo()[1] );
     }
 }

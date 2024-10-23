@@ -15,19 +15,22 @@ import com.example.episafezone.models.Patient
 import com.example.episafezone.network.ManifestationPetitions
 import com.example.episafezone.network.MedicationPetitions
 import com.example.episafezone.network.ProfilePetitions
+import com.google.gson.Gson
 
 
 class ActivityProfile : AppCompatActivity() {
+
+    private val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater);
         setContentView(binding.root)
-        patient = intent.getSerializableExtra("patient") as Patient
         contextObj=this;
 
         val json = intent.getSerializableExtra("json") as String
         ProfileLogic.setUpInfo(json)
+        patient = gson.fromJson(json,Patient::class.java)
 
         binding.addMedButt.setOnClickListener(){
             val intent = Intent(this,ActivityAddMedication::class.java)

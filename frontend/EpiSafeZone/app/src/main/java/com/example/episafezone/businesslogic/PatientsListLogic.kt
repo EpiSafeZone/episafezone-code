@@ -13,7 +13,7 @@ object PatientsListLogic {
         return list;
     }
 
-    fun sendPetition(){
-        PatientsListPetitions.getProfileInfo( getPatientListInfo()[1] );
+    fun sendPetition(patient : Patient){
+        PatientsListPetitions.getProfileInfo( patient );
     }
 }

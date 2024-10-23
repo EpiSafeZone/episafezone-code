@@ -21,6 +21,7 @@ object MedicationPetitions {
     fun initializeQueue(){
         orderVolleyQueue = Volley.newRequestQueue(ActivityProfile.getContext())
     }
+
     ////TODO("Terminar endpoint")
     fun addMedication(medication : Medication,patient: Patient) {
         val json = JSONObject()
@@ -29,7 +30,26 @@ object MedicationPetitions {
         json.put("unit",medication.unit)
         json.put("alarm",medication.alarm)
         val jsonRequest = JsonObjectRequest(
-            Request.Method.POST, "${url}/medication", json,
+            Request.Method.POST, "${url}/medication/add", json,
+            { response ->
+                PatientsListLogic.getProfileInfo(patient)
+            },
+            { error ->
+                println("Error in addMedication: "+error.message)
+            })
+        orderVolleyQueue.add(jsonRequest)
+    }
+
+    //TODO("Terminar endpoint")
+    fun editMedication(medication : Medication,patient: Patient) {
+        val id = medication.id
+        val json = JSONObject()
+        json.put("name", medication.name)
+        json.put("dosis",medication.dosis)
+        json.put("unit",medication.unit)
+        json.put("alarm",medication.alarm)
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.POST, "${url}/medication/edit/${id}", json,
             { response ->
                 PatientsListLogic.getProfileInfo(patient)
             },

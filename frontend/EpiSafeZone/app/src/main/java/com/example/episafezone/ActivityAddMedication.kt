@@ -14,7 +14,6 @@ import com.example.episafezone.network.PatientsListPetitions
 class ActivityAddMedication : AppCompatActivity() {
 
     lateinit var binding : ActivityAddMedicationBinding
-    val medicationLogic = MedicationLogic();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +47,7 @@ class ActivityAddMedication : AppCompatActivity() {
             }
 
             try{
-                medicationLogic.createMedication(name,dosis,unit,alarm,times,nextAlarm,patient);
+                MedicationLogic.createMedication(name,dosis,unit,alarm,times,nextAlarm,patient);
             }catch(e : Exception){
                 binding.errorText.text=e.message.toString();
             }

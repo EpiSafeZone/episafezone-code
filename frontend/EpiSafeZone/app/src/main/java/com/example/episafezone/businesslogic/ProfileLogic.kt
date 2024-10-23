@@ -1,30 +1,52 @@
 package com.example.episafezone.businesslogic
 
-import android.widget.Toast
+import android.content.Context
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityProfile
+import com.example.episafezone.ActivityProfile.Companion
+import com.example.episafezone.adapter.ManifestAdapter
+import com.example.episafezone.adapter.MedicationAdapter
+import com.example.episafezone.databinding.ActivityProfileBinding
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient
-import com.example.episafezone.network.ManifestationPetitions
-import com.example.episafezone.network.ProfilePetitions
-import java.time.LocalDate
-import java.util.Date
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 object ProfileLogic {
 
-    fun getMedicationInfo() : List<Medication>{
-        val list = ArrayList<Medication>();
-        list.add(Medication("Dalsi",12,"ml",false));
-        list.add(Medication("Paracetamol",1,"gr",false));
-        list.add(Medication("Ibuprofreno",12,"ml",false));
-        list.add(Medication("Antibiótico",12,"ml",false));
-        return list;
+    private val gson = Gson();
+
+    fun setUpInfo(json : String){
+        val user = gson.fromJson(json,Patient::class.java)
+        ActivityProfile.updatePatienInf(user)
+        val jsonObject = JSONObject(json)
+        val medications = jsonObject.get("medications") as JSONArray
+        val manifests = jsonObject.get("manifestations") as JSONArray
+        setUpMedicationAdapter(medications)
+        setUpManifestationAdapter(manifests)
     }
 
+    private fun setUpMedicationAdapter(json: JSONArray){
+        val listType = object : TypeToken<MutableList<Medication>>() {}.type
+        val medicines : MutableList<Medication> = gson.fromJson(json.toString(),listType)
+        ActivityProfile.updateListOfMedications(medicines)
+    }
+
+    private fun setUpManifestationAdapter(json: JSONArray){
+        val listType = object : TypeToken<MutableList<Manifestation>>() {}.type
+        val manifests : MutableList<Manifestation> = gson.fromJson(json.toString(),listType)
+       ActivityProfile.updateListOfManifestations(manifests)
+    }
+
+
+    /*
     fun getManifestInfo() {
         // TODO: Cuando este listo descomentar el codigo siguiente y quitar el resto:
-        //ManifestationPetitions.getManifestations(patient)
+        // ProfilePetitions.getManifestations(patient)
         responseGetManifesInfo(true, emptyList<Manifestation>())
     }
 
@@ -43,5 +65,7 @@ object ProfileLogic {
         listTemp.add(Manifestation("Yow","Yow","Yow"));
         listTemp.add(Manifestation("Yow","Yow","Yow"));
         ActivityProfile.updateListOfManifestations(listTemp)
-    }
+    }*/
+
+
 }

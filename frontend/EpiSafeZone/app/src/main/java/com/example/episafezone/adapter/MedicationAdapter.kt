@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.episafezone.ActivityEditMedication
 import com.example.episafezone.R
 import com.example.episafezone.models.Medication
+import com.example.episafezone.models.Patient
 
-class MedicationAdapter(var list : List<Medication>, var context: Context) : RecyclerView.Adapter<MedicationAdapter.MedicineViewHolder>()   {
+class MedicationAdapter(var list : List<Medication>, var context: Context,var patient: Patient) : RecyclerView.Adapter<MedicationAdapter.MedicineViewHolder>()   {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):MedicineViewHolder {
         val inflater = LayoutInflater.from(context)
@@ -28,6 +29,7 @@ class MedicationAdapter(var list : List<Medication>, var context: Context) : Rec
         holder.button.setOnClickListener(){
             val intent = Intent(context,ActivityEditMedication::class.java)
             intent.putExtra("medication",list[position])
+            intent.putExtra("patient", patient)
             context.startActivity(intent);
         }
     }

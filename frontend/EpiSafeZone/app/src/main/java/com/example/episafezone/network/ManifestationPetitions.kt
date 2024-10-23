@@ -26,6 +26,7 @@ object ManifestationPetitions {
         orderVolleyQueue = Volley.newRequestQueue(ActivityProfile.getContext())
     }
 
+    /*
     //TODO: Add as a parameter of this method a reference to the patient
     fun getManifestations(patient : Patient) {
         var id = patient.id
@@ -41,7 +42,7 @@ object ManifestationPetitions {
                 ProfileLogic.responseGetManifesInfo(false, emptyList<Manifestation>())
             }
         )
-    }
+    }*/
 
     fun addManifestation(manifestation: Manifestation) {
         val json = JSONObject()

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.episafezone.R
@@ -30,12 +31,17 @@ class ManifestAdapter(var context : Context, var list : List<Manifestation>) : R
             currentManifestation = list[position]
             ManifestationLogic.loadEditManifestation(context, list[position])
         }
+        holder.deleteManifestation.setOnClickListener {
+            currentManifestation = list[position]
+            ManifestationLogic.showCustomDialogBox(context, currentManifestation)
+        }
     }
 
     class ManifestViewHolder(itemView : View):RecyclerView.ViewHolder(itemView){
         val name : TextView = itemView.findViewById(R.id.manifestName);
         val description: TextView = itemView.findViewById(R.id.manifestDescription);
         val editManifestationButton: Button = itemView.findViewById(R.id.editManifestButt);
+        val deleteManifestation: ImageView = itemView.findViewById(R.id.deleteButton);
     }
 
     companion object {

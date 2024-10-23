@@ -72,4 +72,18 @@ object ManifestationPetitions {
                 ManifestationLogic.responseEditManifestation(false)
             })
     }
+
+    fun deleteManifestation(manifestation: Manifestation){
+        val json = JSONObject()
+        json.put("name", manifestation.name)
+        //TODO: Terminar el JSON y ajustar endpoint
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.POST, "$url/manifestation", json,
+            { response ->
+                ManifestationLogic.responseDeleteManifestation(true, manifestation)
+            },
+            { error ->
+                ManifestationLogic.responseDeleteManifestation(false, manifestation)
+            })
+    }
 }

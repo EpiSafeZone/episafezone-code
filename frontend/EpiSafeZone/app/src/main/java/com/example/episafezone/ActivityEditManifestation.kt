@@ -44,8 +44,7 @@ class ActivityEditManifestation : AppCompatActivity() {
         }
 
         binding.cancelButton.setOnClickListener {
-            val intent = Intent(this, ActivityProfile::class.java)
-            startActivity(intent)
+            finish()
         }
 
         binding.acceptButton.setOnClickListener {

@@ -30,12 +30,6 @@ class ActivityPatientsList : AppCompatActivity() {
         binding.PatientRecyclerView.layoutManager = LinearLayoutManager(this)
 
         PatientsListPetitions.initializeQueue();
-
-        binding.button2.setOnClickListener(){
-            val intent = Intent(this, ActivityStartCrisis::class.java)
-            intent.putExtra("patient", patient)
-            startActivity(intent)
-        }
     }
 
     companion object{
@@ -50,9 +44,9 @@ class ActivityPatientsList : AppCompatActivity() {
             contextObj.startActivity(intent)
         }
 
-        fun loadStartCrisis(result : String){
+        fun loadStartCrisis(patient : Patient){
             val intent = Intent(contextObj,ActivityStartCrisis::class.java)
-            intent.putExtra("json", result)
+            intent.putExtra("patient", patient)
             contextObj.startActivity(intent)
         }
     }

@@ -50,7 +50,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/patientName" />
 
             <Button
-                android:id="@+id/registerCrisis"
+                android:id="@+id/registerCrisisButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="@+id/patientImage" />
 
             <Button
-                android:id="@+id/startCrisis"
+                android:id="@+id/startCrisisButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

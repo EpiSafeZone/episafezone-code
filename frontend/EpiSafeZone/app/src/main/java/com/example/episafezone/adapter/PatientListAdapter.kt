@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,8 @@ class PatientListAdapter(var context : Context, private var list : List<Patient>
     private var onClickListener: OnClickListener? = null
     class PatientListViewHolder(view:View) : RecyclerView.ViewHolder(view) {
         val patientName : TextView = view.findViewById(R.id.patientName)
+        val registerCrisisButton : Button = itemView.findViewById(R.id.registerCrisisButton)
+        val startCrisisButton : Button = itemView.findViewById(R.id.startCrisisButton)
         //val patientProfilePicture : ImageView = view.findViewById(R.id.patientImage)
     }
 
@@ -31,6 +34,12 @@ class PatientListAdapter(var context : Context, private var list : List<Patient>
 
     override fun onBindViewHolder(holder: PatientListViewHolder, position: Int) {
         holder.patientName.text = list[position].name
+        holder.registerCrisisButton.setOnClickListener {
+
+        }
+        holder.startCrisisButton.setOnClickListener {
+
+        }
         //holder.patientProfilePicture.setImageIcon( list[position].profilePicture )
 
         holder.patientName.setOnClickListener {

@@ -19,7 +19,7 @@ public class ManifestationService implements ManifestationServiceInterface{
     ManifestationRepository manifestationRepo;
 
     @Autowired
-    HasManifestationRepository hasManifestationRepo;
+    HasManifestationService hasManifestationService;
 
     @Override
     public List<Manifestation> getDefaultManifestation() {
@@ -38,7 +38,7 @@ public class ManifestationService implements ManifestationServiceInterface{
 
     @Override
     public List<Manifestation> getManifestationFromPatient(Integer patientId) {
-        List<HasManifestation> hasManif = hasManifestationRepo.findByPatient(patientId);
+        List<HasManifestation> hasManif = hasManifestationService.patientHasManifestations(patientId);
 
         List<Integer> manifestationIds = hasManif.stream()
                 .map(HasManifestation::getManifestation)
@@ -49,5 +49,21 @@ public class ManifestationService implements ManifestationServiceInterface{
                 .collect(Collectors.toList());
 
         return manifestations;
+    }
+
+    public Manifestation create(Manifestation manifestation) {
+        return manifestationRepo.save(manifestation);
+    }
+
+    public Manifestation update(Integer id, Manifestation manifestation) {
+        Manifestation toUpdate = getManifestationById(id);
+        toUpdate.setName(manifestation.getName());
+        toUpdate.setDescription(manifestation.getDescription());
+        return toUpdate;
+    }
+
+    public void delete(Integer id) {
+        getManifestationById(id);
+        manifestationRepo.deleteById(id);
     }
 }

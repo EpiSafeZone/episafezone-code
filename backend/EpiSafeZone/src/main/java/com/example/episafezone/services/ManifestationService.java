@@ -59,7 +59,7 @@ public class ManifestationService implements ManifestationServiceInterface{
         Manifestation toUpdate = getManifestationById(id);
         toUpdate.setName(manifestation.getName());
         toUpdate.setDescription(manifestation.getDescription());
-        return toUpdate;
+        return manifestationRepo.save(toUpdate);
     }
 
     public void delete(Integer id) {

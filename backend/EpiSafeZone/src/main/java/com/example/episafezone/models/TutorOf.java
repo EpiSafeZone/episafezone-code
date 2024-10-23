@@ -15,8 +15,7 @@ public class TutorOf {
     private Integer patient;
     private Boolean master;
 
-    public TutorOf(Integer id, Integer tutor, Integer patient, Boolean master) {
-        this.id = id;
+    public TutorOf(Integer tutor, Integer patient, Boolean master) {
         this.tutor = tutor;
         this.patient = patient;
         this.master = master;

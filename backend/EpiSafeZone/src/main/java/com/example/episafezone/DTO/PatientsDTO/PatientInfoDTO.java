@@ -2,6 +2,7 @@ package com.example.episafezone.DTO.PatientsDTO;
 
 import com.example.episafezone.DTO.ManifestationDTO;
 import com.example.episafezone.DTO.MedicationDTO;
+import com.example.episafezone.models.Patient;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,15 +22,15 @@ public class PatientInfoDTO implements Serializable {
     private List<ManifestationDTO> manifestations;
 
 
-    public PatientInfoDTO(Integer id, String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color, List<MedicationDTO> medications, List<ManifestationDTO> manifestations) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.height = height;
-        this.weight = weight;
-        this.birthdate = birthdate;
-        this.age = age;
-        this.color = color;
+    public PatientInfoDTO(Patient patient, List<MedicationDTO> medications, List<ManifestationDTO> manifestations) {
+        this.id = patient.getId();
+        this.name = patient.getName();
+        this.surname = patient.getSurname();
+        this.height = patient.getHeight();
+        this.weight = patient.getWeight();
+        this.birthdate = patient.getBirthdate();
+        this.age = patient.getAge();
+        this.color = patient.getColor();
         this.medications = medications;
         this.manifestations = manifestations;
     }

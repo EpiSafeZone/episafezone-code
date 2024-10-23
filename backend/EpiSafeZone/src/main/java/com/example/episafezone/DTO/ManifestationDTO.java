@@ -1,5 +1,7 @@
 package com.example.episafezone.DTO;
 
+import com.example.episafezone.models.Manifestation;
+
 import java.io.Serializable;
 
 public class ManifestationDTO implements Serializable {
@@ -7,9 +9,10 @@ public class ManifestationDTO implements Serializable {
     private String name;
     private String description;
 
-    public ManifestationDTO(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public ManifestationDTO(Manifestation manifestation) {
+        this.id = manifestation.getId();
+        this.name = manifestation.getName();
+        this.description = manifestation.getDescription();
     }
 
     public ManifestationDTO(){}

@@ -17,8 +17,7 @@ public class Medication {
     private Integer patientMedicated;
 
 
-    public Medication(Integer id, String name, Integer dosis, String unit, Boolean alarm, Integer patientMedicated) {
-        this.id = id;
+    public Medication(String name, Integer dosis, String unit, Boolean alarm, Integer patientMedicated) {
         this.name = name;
         this.dosis = dosis;
         this.unit = unit;

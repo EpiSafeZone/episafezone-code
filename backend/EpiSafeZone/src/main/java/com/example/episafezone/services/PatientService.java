@@ -58,29 +58,15 @@ public class PatientService implements PatientServiceInteface {
             List<Manifestation> manifestations = manifestationService.getManifestationFromPatient(patientId);
 
             List<MedicationDTO> medicationDTOList = medications.stream()
-                    .map(medication -> new MedicationDTO(
-                            medication.getId(),
-                            medication.getName(),
-                            medication.getDosis(),
-                            medication.getUnit(),
-                            medication.getAlarm()))
+                    .map(MedicationDTO::new)
                     .collect(Collectors.toList());
 
             List<ManifestationDTO> manifestationDTOList = manifestations.stream()
-                    .map(manifestation -> new ManifestationDTO(
-                            manifestation.getName(),
-                            manifestation.getDescription()))
+                    .map(ManifestationDTO::new)
                     .collect(Collectors.toList());
 
             return new PatientInfoDTO(
-                    patient.getId(),
-                    patient.getName(),
-                    patient.getSurname(),
-                    patient.getHeight(),
-                    patient.getWeight(),
-                    patient.getBirthdate(),
-                    patient.getAge(),
-                    patient.getColor(),
+                    patient,
                     medicationDTOList,
                     manifestationDTOList
 
@@ -117,12 +103,7 @@ public class PatientService implements PatientServiceInteface {
                     Optional<Patient> patientOpt = patientRepo.findById(patientId);
                     if (patientOpt.isPresent()) {
                         Patient patient = patientOpt.get();
-                        return new PatientListDTO(
-                                patient.getId(),
-                                patient.getName(),
-                                patient.getSurname(),
-                                patient.getColor()
-                        );
+                        return new PatientListDTO(patient);
                     } else {
                         throw new RuntimeException("Patient not found with ID: " + patientId);
                     }

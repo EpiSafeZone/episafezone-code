@@ -1,5 +1,7 @@
 package com.example.episafezone.DTO.PatientsDTO;
 
+import com.example.episafezone.models.Patient;
+
 import java.io.Serializable;
 
 public class PatientListDTO implements Serializable {
@@ -8,11 +10,11 @@ public class PatientListDTO implements Serializable {
     private String surname;
     private String color;
 
-    public PatientListDTO(Integer id, String name, String surname, String color) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.color = color;
+    public PatientListDTO(Patient patient) {
+        this.id = patient.getId();
+        this.name = patient.getName();
+        this.surname = patient.getSurname();
+        this.color = patient.getColor();
     }
 
     public PatientListDTO(){}

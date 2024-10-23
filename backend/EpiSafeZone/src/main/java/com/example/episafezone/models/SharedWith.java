@@ -14,8 +14,7 @@ public class SharedWith {
     private Integer tutorReceiving;
     private Integer patient;
 
-    public SharedWith(Integer id, Integer tutorSharing, Integer tutorReceiving, Integer patient) {
-        this.id = id;
+    public SharedWith(Integer tutorSharing, Integer tutorReceiving, Integer patient) {
         this.tutorSharing = tutorSharing;
         this.tutorReceiving = tutorReceiving;
         this.patient = patient;

@@ -32,7 +32,7 @@ object StartCrisisPetitions {
             Request.Method.GET, "${url}/patient/info/$name", json,
             {response->
                 println(response.toString())
-                StartCrisisLogic.loadStartCrisis(response.toString());
+                StartCrisisLogic.setUpInfo(response.toString(), ActivityStartCrisis.getBinding())
             },
             {error->
                 println(error.message)

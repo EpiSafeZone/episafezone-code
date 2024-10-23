@@ -13,7 +13,6 @@ import com.example.episafezone.models.Patient
 class ActivityEditMedication : AppCompatActivity() {
 
     lateinit var binding : ActivityEditMedicationBinding
-    var medicationLogic = MedicationLogic();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +52,7 @@ class ActivityEditMedication : AppCompatActivity() {
             }
 
             try{
-                medicationLogic.createMedication(name,dosis,unit,alarm,times,nextAlarm,patient);
+                MedicationLogic.editMedication(medication.id,name,dosis,unit,alarm,times,nextAlarm,patient);
             }catch(e : Exception){
                 binding.errorText.text=e.message.toString();
             }

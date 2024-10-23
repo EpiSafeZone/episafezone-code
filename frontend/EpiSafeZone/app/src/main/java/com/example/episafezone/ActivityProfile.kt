@@ -13,6 +13,7 @@ import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.ManifestationPetitions
+import com.example.episafezone.network.MedicationPetitions
 import com.example.episafezone.network.ProfilePetitions
 
 
@@ -40,6 +41,7 @@ class ActivityProfile : AppCompatActivity() {
         }
 
         ProfilePetitions.initializeQueue()
+        MedicationPetitions.initializeQueue()
         ManifestationPetitions.initializeQueue()
     }
 

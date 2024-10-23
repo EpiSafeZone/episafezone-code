@@ -6,8 +6,6 @@ import java.util.Date
 
 object PatientsListLogic {
 
-
-
     fun getProfileInfo(patient : Patient) {
         PatientsListPetitions.getProfileInfo(patient);
     }

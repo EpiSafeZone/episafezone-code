@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.episafezone.ActivityPatientsList
 import com.example.episafezone.R
 import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.models.Patient
@@ -38,7 +39,7 @@ class PatientListAdapter(var context : Context, private var list : List<Patient>
 
         }
         holder.startCrisisButton.setOnClickListener {
-
+            ActivityPatientsList.loadStartCrisis(list[position])
         }
         //holder.patientProfilePicture.setImageIcon( list[position].profilePicture )
 

@@ -16,4 +16,8 @@ object PatientsListLogic {
         list.add(Patient(2, "Cesar", "Gimeno", 130, 60, Date(), 21, "red"))
         return list;
     }
+
+    fun sendPetition(patient : Patient){
+        PatientsListPetitions.getProfileInfo( patient );
+    }
 }

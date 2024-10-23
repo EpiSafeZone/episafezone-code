@@ -8,9 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.episafezone.R
+import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.models.Patient
 
 class PatientListAdapter(var context : Context, private var list : List<Patient>) : RecyclerView.Adapter<PatientListAdapter.PatientListViewHolder>() {
+    private var onClickListener: OnClickListener? = null
     class PatientListViewHolder(view:View) : RecyclerView.ViewHolder(view) {
         val patientName : TextView = view.findViewById(R.id.patientName)
         //val patientProfilePicture : ImageView = view.findViewById(R.id.patientImage)
@@ -30,5 +32,17 @@ class PatientListAdapter(var context : Context, private var list : List<Patient>
     override fun onBindViewHolder(holder: PatientListViewHolder, position: Int) {
         holder.patientName.text = list[position].name
         //holder.patientProfilePicture.setImageIcon( list[position].profilePicture )
+
+        holder.patientName.setOnClickListener {
+            PatientsListLogic.sendPetition(list[position])
+        }
     }
+    fun setOnClickListener(listener: OnClickListener?) {
+        this.onClickListener = listener
+    }
+
+    interface OnClickListener {
+        fun onClick(position: Int, model: Patient)
+    }
+
 }

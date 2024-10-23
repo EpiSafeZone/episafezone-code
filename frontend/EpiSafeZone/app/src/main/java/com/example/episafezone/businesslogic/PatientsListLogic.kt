@@ -17,7 +17,7 @@ object PatientsListLogic {
         return list;
     }
 
-    fun startProfile(json : String){
-        ActivityPatientsList.startProfile(json)
+    fun startProfile(json : String,patient:Patient){
+        ActivityPatientsList.startProfile(json,patient)
     }
 }

@@ -29,7 +29,7 @@ object PatientsListPetitions {
             Request.Method.GET, "$url/patient/info/$name", json,
             {response->
                 println(response.toString())
-                PatientsListLogic.startProfile(response.toString());
+                PatientsListLogic.startProfile(response.toString(),patient);
             },
             {error->
                 println(error.message)

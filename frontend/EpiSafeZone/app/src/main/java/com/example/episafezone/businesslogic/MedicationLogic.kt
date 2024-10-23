@@ -16,7 +16,7 @@ object MedicationLogic {
             if(times == ""){throw Exception("Debes rellenar la cantidad de tomas")}
             Reminder(times!!.toInt(), nextAlarm!!);
         }
-        var medication = Medication(0,name,dosis.toInt(),unit,alarm)
+        var medication = Medication(0,name,dosis.toInt(),unit,alarm,patient.id)
         MedicationPetitions.addMedication(medication,patient)
         return true;
     }
@@ -31,7 +31,7 @@ object MedicationLogic {
             if(times == ""){throw Exception("Debes rellenar la cantidad de tomas")}
             Reminder(times!!.toInt(), nextAlarm!!);
         }
-        val medication = Medication(id,name,dosis.toInt(),unit,alarm)
+        val medication = Medication(id,name,dosis.toInt(),unit,alarm,patient.id)
         MedicationPetitions.editMedication(medication,patient)
         return true;
     }

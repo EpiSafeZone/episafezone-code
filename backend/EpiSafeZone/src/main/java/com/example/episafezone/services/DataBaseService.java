@@ -14,6 +14,7 @@ public class DataBaseService {
 
     public void resetDatabase() {
         jdbcTemplate.execute("SET FOREIGN_KEY_CHECKS=0;");
+        
         jdbcTemplate.execute("TRUNCATE TABLE crisis;");
         jdbcTemplate.execute("TRUNCATE TABLE has_manifestation;");
         jdbcTemplate.execute("TRUNCATE TABLE manifestation;");
@@ -37,6 +38,5 @@ public class DataBaseService {
         jdbcTemplate.update("INSERT INTO `medication` VALUES (1,'ibuprofeno',400,'mg',_binary '\\0',1),(2,'paracetamol',500,'mg',_binary '\\0',1);");
         jdbcTemplate.update("INSERT INTO `shared_with` VALUES (1,3,1,2),(2,1,2,1);");
         jdbcTemplate.update("INSERT INTO `tutor_of` VALUES (1,1,1,_binary '\u0001'),(2,2,1,_binary '\\0'),(3,3,2,_binary '\u0001');");
-
     }
 }

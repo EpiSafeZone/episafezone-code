@@ -16,13 +16,10 @@ public class HasManifestationService implements HasManifestationServiceInterface
 
     @Override
     public List<HasManifestation> patientHasManifestations(Integer patientId) {
-        List<HasManifestation> res = new ArrayList<>();
-        List<HasManifestation> hasManifestationList = hasManifestationRepo.findAll();
-        for (HasManifestation hasManifestation : hasManifestationList) {
-            if(hasManifestation.getPatient().equals(patientId)){
-                res.add(hasManifestation);
-            }
-        }
-        return res;
+        return hasManifestationRepo.findByPatient(patientId);
+    }
+
+    public List<HasManifestation> findAll(){
+        return hasManifestationRepo.findAll();
     }
 }

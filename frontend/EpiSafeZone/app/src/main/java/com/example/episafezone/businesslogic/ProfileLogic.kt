@@ -3,10 +3,6 @@ package com.example.episafezone.businesslogic
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityProfile
-import com.example.episafezone.ActivityProfile.Companion
-import com.example.episafezone.adapter.ManifestAdapter
-import com.example.episafezone.adapter.MedicationAdapter
-import com.example.episafezone.databinding.ActivityProfileBinding
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient
@@ -14,6 +10,10 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
 import org.json.JSONObject
+import com.example.episafezone.network.ManifestationPetitions
+import com.example.episafezone.network.ProfilePetitions
+import java.time.LocalDate
+import java.util.Date
 
 
 object ProfileLogic {
@@ -46,7 +46,7 @@ object ProfileLogic {
     /*
     fun getManifestInfo() {
         // TODO: Cuando este listo descomentar el codigo siguiente y quitar el resto:
-        // ProfilePetitions.getManifestations(patient)
+        //ManifestationPetitions.getManifestations(patient)
         responseGetManifesInfo(true, emptyList<Manifestation>())
     }
 

@@ -7,7 +7,7 @@ class Patient(
     var id : Int,
     var name : String,
     var surname : String,
-    var height : Int,
+    var height : String,
     var weight: Int,
     val birthdate: Date?,
     val age: Int?,

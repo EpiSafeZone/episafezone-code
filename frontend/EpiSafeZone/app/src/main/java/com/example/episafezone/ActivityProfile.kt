@@ -76,7 +76,7 @@ class ActivityProfile : AppCompatActivity() {
             binding.patientAgeText.text=patient.age.toString()
             binding.patientNameText.text = "${patient.name} ${patient.surname}"
             binding.patientWeightText.text = patient.weight.toString() + " kg"
-            binding.patientHeigthText.text = patient.height.toString() + " m"
+            binding.patientHeigthText.text = patient.height + " m"
         }
     }
 }

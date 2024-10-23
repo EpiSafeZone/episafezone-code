@@ -1,5 +1,8 @@
 package com.example.episafezone.businesslogic
 
+import android.content.Intent
+import com.example.episafezone.ActivityPatientsList
+import com.example.episafezone.ActivityProfile
 import com.example.episafezone.models.Patient
 import com.example.episafezone.ActivityPatientsList
 
@@ -20,7 +23,11 @@ object PatientsListLogic {
         return list;
     }
 
-    fun startProfile(json : String,patient:Patient){
-        ActivityPatientsList.startProfileActivity(patient)
+    fun startActivityProfile(json : String, patient: Patient){
+        val context = ActivityPatientsList.getContext()
+        val intent = Intent(context, ActivityProfile::class.java)
+        intent.putExtra("json", json)
+        intent.putExtra("patient", patient)
+        context.startActivity(intent)
     }
 }

@@ -36,7 +36,7 @@ CREATE TABLE `crisis` (
   KEY `of_type_idx` (`manifestation`),
   CONSTRAINT `occurred_to` FOREIGN KEY (`patient`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `of_type` FOREIGN KEY (`manifestation`) REFERENCES `manifestation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,6 @@ CREATE TABLE `crisis` (
 
 LOCK TABLES `crisis` WRITE;
 /*!40000 ALTER TABLE `crisis` DISABLE KEYS */;
-INSERT INTO `crisis` VALUES (1,3,'2024-10-28',NULL,NULL,NULL,1,1),(2,3,'2024-10-23',NULL,NULL,NULL,2,1),(3,4,'2024-09-17',NULL,NULL,NULL,2,1),(4,4,'2024-09-05',NULL,NULL,NULL,1,1),(5,2,'2024-09-07',NULL,NULL,NULL,1,1),(6,2,'2024-09-21',NULL,NULL,NULL,1,2),(7,2,'2024-09-03',NULL,NULL,NULL,2,2),(8,5,'2024-10-26',NULL,NULL,NULL,1,2),(9,5,'2024-10-09',NULL,NULL,NULL,2,2);
 /*!40000 ALTER TABLE `crisis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +128,7 @@ CREATE TABLE `medication` (
 
 LOCK TABLES `medication` WRITE;
 /*!40000 ALTER TABLE `medication` DISABLE KEYS */;
-INSERT INTO `medication` VALUES (1,'ibuprofeno',400,'mg',_binary '\0',1),(2,'paracetamol',500,'mg',_binary '\0',1),(3,'eferalgan',500,'mg',_binary '\0',1),(4,'dalsy',50,'ml',_binary '\0',1);
+INSERT INTO `medication` VALUES (1,'ibuprofeno',400,'mg',_binary '\0',1),(2,'paracetamol',500,'mg',_binary '\0',1);
 /*!40000 ALTER TABLE `medication` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,4 +291,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-12 19:39:23
+-- Dump completed on 2024-10-23 10:24:04

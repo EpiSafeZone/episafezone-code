@@ -37,8 +37,8 @@ object ProfileLogic {
     }
 
     private fun setUpManifestationAdapter(json: JSONArray){
-        val listType = object : TypeToken<List<Manifestation>>() {}.type
-        val manifests : List<Manifestation> = gson.fromJson(json.toString(),listType)
+        val listType = object : TypeToken<MutableList<Manifestation>>() {}.type
+        val manifests : MutableList<Manifestation> = gson.fromJson(json.toString(),listType)
        ActivityProfile.updateListOfManifestations(manifests)
     }
 

@@ -28,10 +28,8 @@ class ActivityStartCrisis : AppCompatActivity() {
         contextObj = this
 
         val json = intent.getSerializableExtra("json") as String
-        setUpInfo(json)
+        StartCrisisLogic.setUpInfo(json,binding)
         patient = gson.fromJson(json,Patient::class.java)
-        
-
 
         StartCrisisPetitions.initializeQueue();
 

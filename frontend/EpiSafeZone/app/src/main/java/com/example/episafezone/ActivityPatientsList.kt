@@ -7,9 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.episafezone.ActivityProfile.Companion
+import com.example.episafezone.adapter.MedicationAdapter
+import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.databinding.ActivityPatientsListBinding
+import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.PatientsListPetitions
 import java.util.Date
@@ -26,12 +31,15 @@ class ActivityPatientsList : AppCompatActivity() {
         binding = ActivityPatientsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        PatientsListPetitions.initializeQueue();
+        val listPatient : List<Patient> = PatientsListLogic.getPatientListInfo();
+        binding.PatientRecyclerView.adapter = PatientListAdapter(this, listPatient)
+        binding.PatientRecyclerView.layoutManager = LinearLayoutManager(this)
 
 
         binding.button.setOnClickListener(){
             PatientsListLogic.getProfileInfo(patient)
         }
+        PatientsListPetitions.initializeQueue();
     }
 
     companion object{

@@ -29,8 +29,9 @@ object MedicationPetitions {
         json.put("dosis",medication.dosis)
         json.put("unit",medication.unit)
         json.put("alarm",medication.alarm)
+        json.put("patientMedicated",medication.patientMedicated)
         val jsonRequest = JsonObjectRequest(
-            Request.Method.POST, "${url}/medication/add", json,
+            Request.Method.POST, "${url}/medication/create", json,
             { response ->
                 PatientsListLogic.getProfileInfo(patient)
             },
@@ -48,6 +49,7 @@ object MedicationPetitions {
         json.put("dosis",medication.dosis)
         json.put("unit",medication.unit)
         json.put("alarm",medication.alarm)
+        json.put("patientMedicated",medication.patientMedicated)
         val jsonRequest = JsonObjectRequest(
             Request.Method.POST, "${url}/medication/edit/${id}", json,
             { response ->

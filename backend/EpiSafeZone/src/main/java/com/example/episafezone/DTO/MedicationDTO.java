@@ -1,5 +1,7 @@
 package com.example.episafezone.DTO;
 
+import com.example.episafezone.models.Medication;
+
 import java.io.Serializable;
 
 public class MedicationDTO implements Serializable {
@@ -9,12 +11,12 @@ public class MedicationDTO implements Serializable {
     private String unit;
     private Boolean alarm;
 
-    public MedicationDTO(Integer id, String name, Integer dosis, String unit, Boolean alarm) {
-        this.id = id;
-        this.name = name;
-        this.dosis = dosis;
-        this.unit = unit;
-        this.alarm = alarm;
+    public MedicationDTO(Medication medication) {
+        this.id = medication.getId();
+        this.name = medication.getName();
+        this.dosis = medication.getDosis();
+        this.unit = medication.getUnit();
+        this.alarm = medication.getAlarm();
     }
 
     public Integer getId() {

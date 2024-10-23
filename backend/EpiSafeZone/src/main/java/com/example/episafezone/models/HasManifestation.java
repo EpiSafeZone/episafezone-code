@@ -12,8 +12,7 @@ public class HasManifestation {
 
     public Integer patient;
 
-    public HasManifestation(Integer id, Manifestation manifestation, Patient patient) {
-        this.id = id;
+    public HasManifestation(Manifestation manifestation, Patient patient) {
         this.manifestation = manifestation.getId();
         this.patient = patient.getId();
     }

@@ -37,13 +37,6 @@ class ActivityPatientsList : AppCompatActivity() {
         fun getContext() : Context {
             return contextObj
         }
-
-        fun startProfile(returns : String){
-            val intent = Intent(contextObj,ActivityProfile::class.java)
-            intent.putExtra("json", returns)
-            intent.putExtra("patient", patient)
-            contextObj.startActivity(intent)
-        }
     }
 
 }

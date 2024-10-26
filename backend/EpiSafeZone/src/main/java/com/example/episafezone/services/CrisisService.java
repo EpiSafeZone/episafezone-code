@@ -3,17 +3,15 @@ package com.example.episafezone.services;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.Crisis;
 import com.example.episafezone.repositories.CrisisRespository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class CrisisService {
-    private final CrisisRespository repo;
-
-    public CrisisService(CrisisRespository repo) {
-        this.repo = repo;
-    }
+    @Autowired
+    private CrisisRespository repo;
 
     public List<Crisis> getAll(){
         return repo.findAll();

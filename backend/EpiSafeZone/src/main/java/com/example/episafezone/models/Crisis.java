@@ -1,5 +1,4 @@
 package com.example.episafezone.models;
-
 import jakarta.persistence.*;
 import java.util.Date;
 

@@ -7,8 +7,6 @@ import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
 import com.example.episafezone.models.*;
 import com.example.episafezone.repositories.*;
-import com.example.episafezone.services.SharedWithService;
-import com.example.episafezone.services.TutorOfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class PatientService implements PatientServiceInteface {
+public class PatientService {
     @Autowired
     PatientRepository patientRepo;
 
@@ -41,17 +39,14 @@ public class PatientService implements PatientServiceInteface {
     CrisisService CrisisService;
 
 
-    @Override
     public List<Patient> findAll() {
         return patientRepo.findAll();
     }
 
-    @Override
     public Optional<Patient> findById(int id) {
         return patientRepo.findById(id);
     }
 
-    @Override
     public PatientInfoDTO getPatientProfileInfo(Integer patientId) {
         Optional<Patient> patientOpt = patientRepo.findById(patientId);
         if (patientOpt.isPresent()) {

@@ -9,21 +9,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TutorOfService implements TutorOfServiceInterface{
+public class TutorOfService {
     @Autowired
     TutorOfRepository tutorOfRepo;
 
-    @Override
     public List<TutorOf> findAll() {
         return tutorOfRepo.findAll();
     }
 
-    @Override
     public List<TutorOf> findByTutor(Integer tutorId){
         return tutorOfRepo.findByTutor(tutorId);
     }
 
-    @Override
     public List<Integer> findPatientsByTutor(Integer tutorId){
         List<TutorOf> tutorOfList = tutorOfRepo.findByTutor(tutorId);
         return tutorOfList.stream()

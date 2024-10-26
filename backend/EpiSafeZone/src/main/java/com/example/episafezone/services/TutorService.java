@@ -9,16 +9,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TutorService implements TutorServiceInterface{
+public class TutorService{
     @Autowired
     TutorRepository tutorRepo;
 
-    @Override
     public List<Tutor> findAll() {
         return tutorRepo.findAll();
     }
 
-    @Override
     public Optional<Tutor> findById(int id) {
         return tutorRepo.findById(id);
     }

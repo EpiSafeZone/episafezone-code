@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class CrisisService implements CrisisServiceInterface {
+public class CrisisService {
     private final CrisisRespository repo;
 
     public CrisisService(CrisisRespository repo) {

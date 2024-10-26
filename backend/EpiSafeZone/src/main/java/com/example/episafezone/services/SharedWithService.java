@@ -9,20 +9,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class SharedWithService implements SharedWithServiceInterface {
+public class SharedWithService {
     @Autowired
     SharedWithRepository sharedWithRepo;
 
-    @Override
     public List<SharedWith> findAll() {
         return sharedWithRepo.findAll();
     }
 
-    @Override
     public List<SharedWith> findByTutorReceiving(Integer tutorId) {
         return sharedWithRepo.findByTutorReceiving(tutorId);
     }
-    @Override
+
     public List<Integer> findPByTReceiving(Integer tutorId){
         List<SharedWith> tutorOfList = sharedWithRepo.findByTutorReceiving(tutorId);
         return tutorOfList.stream()

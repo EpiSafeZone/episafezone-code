@@ -48,4 +48,22 @@ public class CrisisService {
         filteredList.sort(Comparator.comparing(Crisis::getDate));
         return filteredList;
     }
+
+    public Crisis update(Integer id, Crisis crisis) {
+        Crisis toUpdate = getById(id);
+        toUpdate.setDuration(crisis.getDuration());
+        toUpdate.setDate(crisis.getDate());
+        toUpdate.setHour(crisis.getHour());
+        toUpdate.setContext(crisis.getContext());
+        toUpdate.setContext(crisis.getContext());
+        toUpdate.setManifestation(crisis.getManifestation());
+        toUpdate.setPatient(crisis.getPatient());
+        return repo.save(toUpdate);
+
+    }
+
+    public void delete (Integer id) {
+        Crisis toDelete = getById(id);
+        repo.delete(toDelete);
+    }
 }

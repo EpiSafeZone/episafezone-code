@@ -83,16 +83,16 @@ public class Crisis {
         return manifestation;
     }
 
-    public void setManifestation(Manifestation manifestation) {
-        this.manifestation = manifestation.getId();
+    public void setManifestation(Integer manifestation) {
+        this.manifestation = manifestation;
     }
 
     public Integer getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient.getId();
+    public void setPatient(Integer patient) {
+        this.patient = patient;
     }
 
     public String toString(){

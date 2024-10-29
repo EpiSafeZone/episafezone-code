@@ -1,19 +1,18 @@
 package com.example.episafezone.services;
 
+import com.example.episafezone.DTO.CrisisDTO;
 import com.example.episafezone.DTO.ManifestationDTO;
 import com.example.episafezone.DTO.MedicationDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
-import com.example.episafezone.models.HasManifestation;
-import com.example.episafezone.models.Manifestation;
-import com.example.episafezone.models.Medication;
-import com.example.episafezone.models.Patient;
+import com.example.episafezone.models.*;
 import com.example.episafezone.repositories.*;
 import com.example.episafezone.services.SharedWithService;
 import com.example.episafezone.services.TutorOfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,6 +36,9 @@ public class PatientService implements PatientServiceInteface {
 
     @Autowired
     SharedWithService sharedWithService;
+
+    @Autowired
+    CrisisService CrisisService;
 
 
     @Override
@@ -112,4 +114,28 @@ public class PatientService implements PatientServiceInteface {
 
         return patientListDTOs;
     }
+
+    public List<CrisisDTO> getListOfCrisis(Integer id, Integer month, Integer year){
+        List<Crisis> unfilteredList = CrisisService.getByPatient(id);
+        List<Crisis> filteredList = CrisisService.getByMonth(unfilteredList, year, month);
+
+        List<CrisisDTO> crisisDTOs = new ArrayList<>();
+        for (Crisis crisis : filteredList) {
+            CrisisDTO dto = new CrisisDTO(
+                    crisis.getId(),
+                    crisis.getDuration(),
+                    crisis.getDate(),
+                    crisis.getHour(),
+                    crisis.getContext(),
+                    crisis.getEmergency(),
+                    crisis.getManifestation(),
+                    crisis.getPatient()
+            );
+            crisisDTOs.add(dto);
+        }
+
+        return crisisDTOs;
+    }
+
+
 }

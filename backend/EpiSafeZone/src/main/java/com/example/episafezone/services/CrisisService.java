@@ -5,8 +5,7 @@ import com.example.episafezone.models.Crisis;
 import com.example.episafezone.repositories.CrisisRespository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CrisisService implements CrisisServiceInterface {
@@ -27,5 +26,28 @@ public class CrisisService implements CrisisServiceInterface {
         }else{
             throw new ResourceNotFoudException("No se ha encontrado la crisis asociada a este id" + id);
         }
+    }
+
+    public List<Crisis> getByPatient(Integer id){
+        return repo.findByPatient(id);
+    }
+
+    public List<Crisis> getByMonth(List<Crisis> crisisList, int year, int month) {
+        List<Crisis> filteredList = new ArrayList<>();
+
+        for (Crisis crisis : crisisList) {
+            Date date = crisis.getDate();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            int crisisYear = calendar.get(Calendar.YEAR);
+            int crisisMonth = calendar.get(Calendar.MONTH) + 1;
+
+            if (crisisYear == year && crisisMonth == month) {
+                filteredList.add(crisis);
+            }
+        }
+        filteredList.sort(Comparator.comparing(Crisis::getDate));
+        return filteredList;
     }
 }

@@ -6,8 +6,11 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
+import android.widget.Chronometer
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,7 +18,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentHostCallback
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.businesslogic.StartCrisisLogic
-import com.example.episafezone.businesslogic.utils.TimerService
 import com.example.episafezone.databinding.ActivityStartCrisisBinding
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.StartCrisisPetitions
@@ -29,13 +31,6 @@ class ActivityStartCrisis : AppCompatActivity() {
 
     private val gson = Gson()
 
-    private val updateTime: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            time = intent.getDoubleExtra(TimerService.TIMER_EXTRA, 0.0)
-            binding.chronoTextView.text = StartCrisisLogic.getTimeStringFromDouble(time)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,15 +38,14 @@ class ActivityStartCrisis : AppCompatActivity() {
         setContentView(binding.root)
         contextObj = this
 
-        serviceIntent = Intent(this, TimerService::class.java)
-        registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
+        //val json = intent.getSerializableExtra("patient") as String
+        //patient = gson.fromJson(json,Patient::class.java)
 
-        val json = intent.getSerializableExtra("patient") as String
-        patient = gson.fromJson(json,Patient::class.java)
+        chronometer = binding.chrono
 
         StartCrisisPetitions.initializeQueue();
 
-        StartCrisisLogic.getProfileLogic(patient)
+        //StartCrisisLogic.getProfileLogic(patient)
 
         binding.button.setOnClickListener {
             StartCrisisLogic.startStopTimer(binding)
@@ -61,7 +55,8 @@ class ActivityStartCrisis : AppCompatActivity() {
     companion object{
         private lateinit var contextObj: Context
         private lateinit var binding: ActivityStartCrisisBinding
-        lateinit var serviceIntent: Intent
+
+        lateinit var chronometer: Chronometer
 
         var time = 0.0
 

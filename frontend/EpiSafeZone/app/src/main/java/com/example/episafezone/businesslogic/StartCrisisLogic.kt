@@ -1,6 +1,7 @@
 package com.example.episafezone.businesslogic
 
 import android.content.Intent
+import android.os.SystemClock
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
@@ -8,7 +9,6 @@ import com.example.episafezone.ActivityPatientsList
 import com.example.episafezone.ActivityProfile
 import com.example.episafezone.ActivityStartCrisis
 import com.example.episafezone.R
-import com.example.episafezone.businesslogic.utils.TimerService
 import com.example.episafezone.databinding.ActivityStartCrisisBinding
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.StartCrisisPetitions
@@ -49,24 +49,24 @@ object StartCrisisLogic {
     }
 
     private fun startTimer(binding: ActivityStartCrisisBinding) {
-        ActivityStartCrisis.serviceIntent.putExtra(TimerService.TIMER_EXTRA, ActivityStartCrisis.time)
-        ActivityStartCrisis.getContext().startService(ActivityStartCrisis.serviceIntent)
         binding.button.text = "Detener"
         binding.button.setBackgroundColor(getColor(ActivityStartCrisis.getContext(), R.color.red))
         timerStarted = true
+        ActivityStartCrisis.chronometer.base = SystemClock.elapsedRealtime()
+        ActivityStartCrisis.chronometer.start()
     }
 
     private fun stopTimer(binding: ActivityStartCrisisBinding) {
+        ActivityStartCrisis.chronometer.stop()
+        timerStarted = false
+        val elapsedTime = getElapsedTime(binding)
         // TODO: Implementar logica registrar manifestación
         Toast.makeText(ActivityStartCrisis.getContext(), "Parar timer", Toast.LENGTH_SHORT).show()
     }
 
-    fun getTimeStringFromDouble(time: Double): String {
-        val resultInt = time.roundToInt()
-        val minutes = resultInt % 86400 % 3600 / 60
-        val seconds = resultInt % 86400 % 3600 % 60
-
-        return makeTimeString(minutes, seconds)
+    private fun getElapsedTime(binding: ActivityStartCrisisBinding): Long {
+        val elapsedMillis = SystemClock.elapsedRealtime() - binding.chrono.base
+        return elapsedMillis / 1000
     }
 
     fun makeTimeString(min: Int, sec: Int): String {

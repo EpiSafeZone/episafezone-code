@@ -10,9 +10,11 @@ import com.example.episafezone.ActivityProfile
 import com.example.episafezone.ActivityStartCrisis
 import com.example.episafezone.R
 import com.example.episafezone.databinding.ActivityStartCrisisBinding
+import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.StartCrisisPetitions
 import com.google.gson.Gson
+import com.google.gson.JsonArray
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Timer
@@ -27,18 +29,27 @@ object StartCrisisLogic {
     private var timerStarted = false
 
     fun getProfileLogic(patient: Patient) {
-        StartCrisisPetitions.getProfileInfo(patient)
+        StartCrisisPetitions.getPatientManifestations(patient)
     }
 
     fun setUpInfo(json: String, binding : ActivityStartCrisisBinding) {
-        //TODO: Poner la información desde el json, ejemplo:
-        val user = gson.fromJson(json,Patient::class.java)
         val jsonObject = JSONObject(json)
-        val medications = jsonObject.get("medications") as JSONArray
-        val manifests = jsonObject.get("manifestations") as JSONArray
-        //ActivityProfile.updatePatienInf(user)
-        //ProfileLogic.setUpMedicationAdapter(medications)
-        //ProfileLogic.setUpManifestationAdapter(manifests)
+        val jsonArray = jsonObject.get("manifestations") as JSONArray
+        val manifestations = getManifestationList(jsonArray)
+        ActivityStartCrisis.updatePosibleManifestations(manifestations)
+    }
+
+    fun getManifestationList(jsonArray:JSONArray): MutableList<Manifestation> {
+        val list = mutableListOf<Manifestation>()
+        for (i in 0 until jsonArray.length()) {
+            val item = jsonArray.getJSONObject(i)
+            val id = item.getString("id").toInt()
+            val name = item.getString("name")
+            val description = item.getString("description")
+            val procedure = item.getString("procedure")
+            list.add(Manifestation(id,name, description,procedure))
+        }
+        return list
     }
 
     fun startStopTimer(binding: ActivityStartCrisisBinding) {

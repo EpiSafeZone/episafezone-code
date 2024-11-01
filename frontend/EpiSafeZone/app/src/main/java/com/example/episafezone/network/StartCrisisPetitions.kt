@@ -23,7 +23,8 @@ object StartCrisisPetitions {
         orderVolleyQueue = Volley.newRequestQueue(ActivityStartCrisis.getContext())
     }
 
-    fun getProfileInfo(patient: Patient) {
+    fun getPatientManifestations(patient: Patient) {
+        //TODO Arreglar este método
         val name = patient.id
         println("${url}/patient/info/$name")
         val json = JSONObject()

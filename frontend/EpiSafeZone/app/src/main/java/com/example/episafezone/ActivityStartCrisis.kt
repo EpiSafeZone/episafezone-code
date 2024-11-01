@@ -16,9 +16,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentHostCallback
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.episafezone.adapter.DisplayPossibleManifestations
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.businesslogic.StartCrisisLogic
 import com.example.episafezone.databinding.ActivityStartCrisisBinding
+import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.StartCrisisPetitions
 import com.google.gson.Gson
@@ -38,14 +41,14 @@ class ActivityStartCrisis : AppCompatActivity() {
         setContentView(binding.root)
         contextObj = this
 
-        //val json = intent.getSerializableExtra("patient") as String
-        //patient = gson.fromJson(json,Patient::class.java)
+        val json = intent.getSerializableExtra("patient") as String
+        patient = gson.fromJson(json,Patient::class.java)
 
         chronometer = binding.chrono
 
         StartCrisisPetitions.initializeQueue();
 
-        //StartCrisisLogic.getProfileLogic(patient)
+        StartCrisisLogic.getProfileLogic(patient)
 
         binding.button.setOnClickListener {
             StartCrisisLogic.startStopTimer(binding)
@@ -55,6 +58,7 @@ class ActivityStartCrisis : AppCompatActivity() {
     companion object{
         private lateinit var contextObj: Context
         private lateinit var binding: ActivityStartCrisisBinding
+        private lateinit var manifestations: MutableList<Manifestation>
 
         lateinit var chronometer: Chronometer
 
@@ -66,6 +70,12 @@ class ActivityStartCrisis : AppCompatActivity() {
 
         fun getBinding() : ActivityStartCrisisBinding {
             return binding
+        }
+
+        fun updatePosibleManifestations(list: MutableList<Manifestation>) {
+            manifestations = list
+            binding.informationScrollView.adapter = DisplayPossibleManifestations(contextObj, list)
+            binding.informationScrollView.layoutManager = LinearLayoutManager(contextObj)
         }
     }
 }

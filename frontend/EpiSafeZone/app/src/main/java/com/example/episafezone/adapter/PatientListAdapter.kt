@@ -20,7 +20,6 @@ class PatientListAdapter(var context : Context, private var list : List<Patient>
         val patientImage: ImageView = view.findViewById(R.id.patientImage)
         val registerCrisisButton: Button = itemView.findViewById(R.id.registerCrisisButton)
         val startCrisisButton: Button = itemView.findViewById(R.id.startCrisisButton)
-        //val patientImage : ImageView = view.findViewById(R.id.patientImage)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatientListViewHolder {

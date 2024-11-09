@@ -115,7 +115,7 @@ public class PatientService implements PatientServiceInteface {
         return patientListDTOs;
     }
 
-    public List<CrisisDTO> getListOfCrisis(Integer id, Integer month, Integer year){
+    public List<CrisisDTO> getListOfCrisis(Integer id, Integer year, Integer month){
         List<Crisis> unfilteredList = CrisisService.getByPatient(id);
         List<Crisis> filteredList = CrisisService.getByMonth(unfilteredList, year, month);
 

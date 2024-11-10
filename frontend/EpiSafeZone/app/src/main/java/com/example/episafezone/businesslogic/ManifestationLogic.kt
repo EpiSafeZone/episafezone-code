@@ -42,6 +42,7 @@ object ManifestationLogic {
             Toast.makeText(context, "Manifestación registrada correctamente!", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, ActivityProfile::class.java)
             context.startActivity(intent)
+            //TODO: Revisar que el intent necesita los datos, no hace llamada a la API.
         } else {
             Toast.makeText(context, "Error registrando la manifestación.", Toast.LENGTH_SHORT).show()
         }
@@ -68,9 +69,8 @@ object ManifestationLogic {
         context.startActivity(intent)
     }
 
-    fun editManifestation(manifestationToModify: Manifestation,
-                          modifiedManifestation: Manifestation) {
-        ManifestationPetitions.editManifestation(manifestationToModify, modifiedManifestation)
+    fun editManifestation(modifiedManifestation: Manifestation) {
+        ManifestationPetitions.editManifestation(modifiedManifestation)
     }
 
     fun responseEditManifestation(success: Boolean) {
@@ -79,6 +79,7 @@ object ManifestationLogic {
             Toast.makeText(context, "Manifestación editada correctamente!", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, ActivityProfile::class.java)
             context.startActivity(intent)
+            //TODO: Revisar que el intent necesita los datos, no hace llamada a la API.
         } else {
             Toast.makeText(context, "Error editando la manifestación.", Toast.LENGTH_SHORT).show()
         }
@@ -86,19 +87,22 @@ object ManifestationLogic {
 
     private fun deleteManifestation(manifestation: Manifestation) {
         ManifestationPetitions.deleteManifestation(manifestation)
+        var oldList = ActivityProfile.getListManifestations()
+        oldList.remove(manifestation)
+        var newList = oldList
+        ActivityProfile.updateListOfManifestations(newList)
     }
 
     fun responseDeleteManifestation(success: Boolean, manifestation: Manifestation) {
         val context = ActivityEditManifestation.getContext()
         if(success){
             Toast.makeText(context, "Manifestación eliminada correctamente!", Toast.LENGTH_SHORT).show()
-            //TODO: LLamar al metodo que actualice la lista de manifestaciones.
-            var oldList = ActivityProfile.getListManifestations()
-            oldList.remove(manifestation)
-            var newList = oldList
-            ActivityProfile.updateListOfManifestations(newList)
         } else {
             Toast.makeText(context, "Error eliminando la manifestación.", Toast.LENGTH_SHORT).show()
+            var oldList = ActivityProfile.getListManifestations()
+            oldList.add(manifestation)
+            var newList = oldList
+            ActivityProfile.updateListOfManifestations(newList)
         }
     }
 

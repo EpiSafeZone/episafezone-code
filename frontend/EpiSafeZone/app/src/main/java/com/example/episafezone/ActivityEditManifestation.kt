@@ -50,7 +50,7 @@ class ActivityEditManifestation : AppCompatActivity() {
         binding.acceptButton.setOnClickListener {
             if(ManifestationLogic.checkEditFields(binding)){
                 val manifestationModified = ManifestationLogic.createEditManifestation(binding)
-                ManifestationLogic.editManifestation(currentManifestation, manifestationModified)
+                ManifestationLogic.editManifestation(manifestationModified)
             } else {
                 Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_LONG).show()
             }

@@ -32,7 +32,7 @@ object StartCrisisLogic {
         StartCrisisPetitions.getPatientManifestations(patient)
     }
 
-    fun setUpInfo(json: String, binding : ActivityStartCrisisBinding) {
+    fun setUpInfo(json: String) {
         val jsonObject = JSONObject(json)
         val jsonArray = jsonObject.get("manifestations") as JSONArray
         val manifestations = getManifestationList(jsonArray)

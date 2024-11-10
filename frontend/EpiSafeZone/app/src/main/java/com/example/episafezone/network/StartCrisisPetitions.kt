@@ -24,7 +24,7 @@ object StartCrisisPetitions {
     }
 
     fun getPatientManifestations(patient: Patient) {
-        //TODO Arreglar este método
+        //TODO Arreglar esta parte de crear la peticion, no las respuestas.
         val name = patient.id
         println("${url}/patient/info/$name")
         val json = JSONObject()
@@ -32,8 +32,9 @@ object StartCrisisPetitions {
         val jsonRequest = JsonObjectRequest(
             Request.Method.GET, "${url}/patient/info/$name", json,
             {response->
+                //TODO: Comprobar que lo que me llega se llama "manifestations"
                 println(response.toString())
-                StartCrisisLogic.setUpInfo(response.toString(), ActivityStartCrisis.getBinding())
+                StartCrisisLogic.setUpInfo(response.toString())
             },
             {error->
                 println(error.message)

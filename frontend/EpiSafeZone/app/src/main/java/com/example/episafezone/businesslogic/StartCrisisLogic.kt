@@ -60,8 +60,6 @@ object StartCrisisLogic {
     }
 
     private fun startTimer(binding: ActivityStartCrisisBinding) {
-        binding.button.text = "Detener"
-        binding.button.setBackgroundColor(getColor(ActivityStartCrisis.getContext(), R.color.red))
         timerStarted = true
         ActivityStartCrisis.chronometer.base = SystemClock.elapsedRealtime()
         ActivityStartCrisis.chronometer.start()

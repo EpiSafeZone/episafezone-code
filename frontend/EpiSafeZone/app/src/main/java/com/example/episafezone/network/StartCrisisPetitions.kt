@@ -1,8 +1,10 @@
 package com.example.episafezone.network
 
+import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.episafezone.ActivityPatientsList
 import com.example.episafezone.ActivityProfile
@@ -24,21 +26,15 @@ object StartCrisisPetitions {
     }
 
     fun getPatientManifestations(patient: Patient) {
-        //TODO Arreglar esta parte de crear la peticion, no las respuestas.
-        val name = patient.id
-        println("${url}/patient/info/$name")
-        val json = JSONObject()
-        json.put("id", name)
-        val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, "${url}/patient/info/$name", json,
+        val id = patient.id
+        val stringRequest = StringRequest(
+            Request.Method.GET, "${url}/patient/info/$id",
             {response->
-                //TODO: Comprobar que lo que me llega se llama "manifestations"
-                println(response.toString())
                 StartCrisisLogic.setUpInfo(response.toString())
             },
             {error->
-                println(error.message)
+                Log.d("GetPatientManifestations",error.message.toString())
             })
-        orderVolleyQueue.add(jsonRequest)
+        orderVolleyQueue.add(stringRequest)
     }
 }

@@ -33,8 +33,7 @@ object StartCrisisLogic {
     }
 
     fun setUpInfo(json: String) {
-        val jsonObject = JSONObject(json)
-        val jsonArray = jsonObject.get("manifestations") as JSONArray
+        val jsonArray= JSONArray(json)
         val manifestations = getManifestationList(jsonArray)
         ActivityStartCrisis.updatePosibleManifestations(manifestations)
     }

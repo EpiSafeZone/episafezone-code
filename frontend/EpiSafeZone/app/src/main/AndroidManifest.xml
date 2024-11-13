@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ActivityPatientsList"
+            android:name=".ActivityStartCrisis"
             android:exported="false" />
         <activity
             android:name=".ActivityEditMedication"
@@ -34,7 +34,7 @@
             android:name=".ActivityRegisterManifestation"
             android:exported="false" />
         <activity
-            android:name=".ActivityStartCrisis"
+            android:name=".ActivityPatientsList"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

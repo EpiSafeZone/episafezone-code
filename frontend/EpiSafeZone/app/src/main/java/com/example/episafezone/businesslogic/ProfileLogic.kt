@@ -41,31 +41,4 @@ object ProfileLogic {
         val manifests : MutableList<Manifestation> = gson.fromJson(json.toString(),listType)
        ActivityProfile.updateListOfManifestations(manifests)
     }
-
-
-    /*
-    fun getManifestInfo() {
-        // TODO: Cuando este listo descomentar el codigo siguiente y quitar el resto:
-        // ProfilePetitions.getManifestations(patient)
-        responseGetManifesInfo(true, emptyList<Manifestation>())
-    }
-
-    fun responseGetManifesInfo(success: Boolean,  list: List<Manifestation>){
-        // TODO: Cuando este listo descomentar el codigo siguiente y quitar el resto:
-        //if(success){
-        //    Toast.makeText(ActivityProfile.getContext(), "Información de manifestaciones obtenida correctamente!", Toast.LENGTH_SHORT).show()
-        //    return list
-        //} else {
-        //    Toast.makeText(ActivityProfile.getContext(), "Error al obtener las manifestaciones del paciente. ", Toast.LENGTH_SHORT).show()
-        //    ActivityProfile.updateListOfManifestations(emptyList<Manifestation>())
-        //}
-        val listTemp = ArrayList<Manifestation>();
-        listTemp.add(Manifestation("Yow","Yow","Yow"));
-        listTemp.add(Manifestation("Yow","Yow","Yow"));
-        listTemp.add(Manifestation("Yow","Yow","Yow"));
-        listTemp.add(Manifestation("Yow","Yow","Yow"));
-        ActivityProfile.updateListOfManifestations(listTemp)
-    }*/
-
-
 }

@@ -26,30 +26,13 @@ object ManifestationPetitions {
         orderVolleyQueue = Volley.newRequestQueue(ActivityProfile.getContext())
     }
 
-    /*
-    //TODO: Add as a parameter of this method a reference to the patient
-    fun getManifestations(patient : Patient) {
-        var id = patient.id
-        //TODO: Ajustar el endpoint
-        val stringRequest = StringRequest (
-            Request.Method.GET, "$url/patient/info/$id/manifestations",
-            { response ->
-                val res = emptyList<Manifestation>()
-                //TODO: Añadir los valores a res.
-                ProfileLogic.responseGetManifesInfo(true, res)
-            },
-            { error ->
-                ProfileLogic.responseGetManifesInfo(false, emptyList<Manifestation>())
-            }
-        )
-    }*/
-
     fun addManifestation(manifestation: Manifestation) {
         val json = JSONObject()
         json.put("name", manifestation.name)
-        //TODO: Terminar el JSON y ajustar el endpoint
+        json.put("description", manifestation.description)
+        //TODO: Terminar el JSON con pasos a seguir cuando se implemente.
         val jsonRequest = JsonObjectRequest(
-            Request.Method.POST, "$url/manifestation", json,
+            Request.Method.POST, "$url/manifestation/create", json,
             { response ->
                 ManifestationLogic.responseRegisterManifestation(true)
             },
@@ -59,13 +42,13 @@ object ManifestationPetitions {
         orderVolleyQueue.add(jsonRequest)
     }
 
-    fun editManifestation(manifestationToModify: Manifestation,
-                          modifiedManifestation: Manifestation) {
+    fun editManifestation(modifiedManifestation: Manifestation) {
         val json = JSONObject()
         json.put("name", modifiedManifestation.name)
-        //TODO: Terminal el JSON y ajustar el endpoint
+        json.put("description", modifiedManifestation.description)
+        //TODO: Terminal el JSON con pasos a seguir cuando se implemente.
         val jsonRequest = JsonObjectRequest(
-            Request.Method.POST, "$url/manifestation", json,
+            Request.Method.PUT, "$url/update/${modifiedManifestation.id}", json,
             { response ->
                 ManifestationLogic.responseEditManifestation(true)
             },
@@ -75,11 +58,8 @@ object ManifestationPetitions {
     }
 
     fun deleteManifestation(manifestation: Manifestation){
-        val json = JSONObject()
-        json.put("name", manifestation.name)
-        //TODO: Terminar el JSON y ajustar endpoint
-        val jsonRequest = JsonObjectRequest(
-            Request.Method.POST, "$url/manifestation", json,
+        val jsonRequest = StringRequest(
+            Request.Method.DELETE, "$url/delete/${manifestation.id}",
             { response ->
                 ManifestationLogic.responseDeleteManifestation(true, manifestation)
             },

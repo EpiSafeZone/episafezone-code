@@ -60,6 +60,7 @@ class ActivityProfile : AppCompatActivity() {
 
         private lateinit var contextObj: Context
         private lateinit var binding : ActivityProfileBinding
+        private lateinit var patient :Patient
         private lateinit var listManifestations: MutableList<Manifestation>
 
         lateinit var patient :Patient

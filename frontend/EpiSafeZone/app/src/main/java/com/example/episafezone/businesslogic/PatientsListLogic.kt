@@ -7,7 +7,7 @@ import java.util.Date
 object PatientsListLogic {
 
     fun getProfileInfo(patient : Patient) {
-        PatientsListPetitions.getProfileInfo(patient);
+
     }
     fun getPatientListInfo() : List<Patient> {
         val list = ArrayList<Patient>()

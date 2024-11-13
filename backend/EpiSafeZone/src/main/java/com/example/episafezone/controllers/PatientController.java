@@ -1,6 +1,7 @@
 package com.example.episafezone.controllers;
 
 
+import com.example.episafezone.DTO.CrisisDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
 import com.example.episafezone.models.HasManifestation;
@@ -36,8 +37,13 @@ public class PatientController {
     public @ResponseBody PatientInfoDTO getPatientInfo(@PathVariable Integer id) {
         return patientService.getPatientProfileInfo(id);
     }
-    @GetMapping(path="/info/manifestations/{id}")
+        @GetMapping(path="/info/manifestations/{id}")
     public @ResponseBody List<HasManifestation> getManifestations(@PathVariable Integer id) {
         return patientService.getPatientManifestations(id);
+    }
+
+    @GetMapping(path="/crisis/{id}/{year}/{month}")
+    public @ResponseBody List<CrisisDTO> getCrisisFromPatient(@PathVariable Integer id, @PathVariable Integer year, @PathVariable Integer month){
+        return patientService.getListOfCrisis(id, year, month);
     }
 }

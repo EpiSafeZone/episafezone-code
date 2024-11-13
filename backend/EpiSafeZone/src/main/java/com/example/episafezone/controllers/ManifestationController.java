@@ -1,11 +1,14 @@
 package com.example.episafezone.controllers;
 
+import com.example.episafezone.DTO.ManifestationDTO;
 import com.example.episafezone.models.Manifestation;
 import com.example.episafezone.services.ManifestationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(path = "manifestation")
@@ -16,6 +19,11 @@ public class ManifestationController {
     @GetMapping(path = "/{id}")
     public @ResponseBody Manifestation getManifestation(@PathVariable Integer id) {
         return manifestationService.getManifestationById(id);
+    }
+
+    @GetMapping(path = "/patient/{patientId}")
+    public @ResponseBody List<Manifestation> getManifestationByPatient(@PathVariable Integer patientId){
+        return manifestationService.getManifestationFromPatient(patientId);
     }
 
     @PostMapping(path="/create")

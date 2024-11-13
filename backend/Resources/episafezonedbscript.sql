@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: episafezone
 -- ------------------------------------------------------
--- Server version	8.0.39
+-- Server version	9.0.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,8 +36,18 @@ CREATE TABLE `crisis` (
   KEY `of_type_idx` (`manifestation`),
   CONSTRAINT `occurred_to` FOREIGN KEY (`patient`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `of_type` FOREIGN KEY (`manifestation`) REFERENCES `manifestation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `crisis`
+--
+
+LOCK TABLES `crisis` WRITE;
+/*!40000 ALTER TABLE `crisis` DISABLE KEYS */;
+INSERT INTO `crisis` VALUES (1,3,'2024-10-28',NULL,NULL,NULL,1,1),(2,3,'2024-10-23',NULL,NULL,NULL,2,1),(3,4,'2024-09-17',NULL,NULL,NULL,2,1),(4,4,'2024-09-05',NULL,NULL,NULL,1,1),(5,2,'2024-09-07',NULL,NULL,NULL,1,1),(6,2,'2024-09-21',NULL,NULL,NULL,1,2),(7,2,'2024-09-03',NULL,NULL,NULL,2,2),(8,5,'2024-10-26',NULL,NULL,NULL,1,2),(9,5,'2024-10-09',NULL,NULL,NULL,2,2);
+/*!40000 ALTER TABLE `crisis` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `has_manifestation`
@@ -59,6 +69,16 @@ CREATE TABLE `has_manifestation` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `has_manifestation`
+--
+
+LOCK TABLES `has_manifestation` WRITE;
+/*!40000 ALTER TABLE `has_manifestation` DISABLE KEYS */;
+INSERT INTO `has_manifestation` VALUES (1,1,1),(2,1,2),(3,2,1),(4,2,2);
+/*!40000 ALTER TABLE `has_manifestation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `manifestation`
 --
 
@@ -70,8 +90,18 @@ CREATE TABLE `manifestation` (
   `name` varchar(255) DEFAULT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `manifestation`
+--
+
+LOCK TABLES `manifestation` WRITE;
+/*!40000 ALTER TABLE `manifestation` DISABLE KEYS */;
+INSERT INTO `manifestation` VALUES (1,'tonico-clonica','Convulsiones'),(2,'ausencias','El paciente se que en blanco mirando un punto fijo y no responde'),(3,'nueva manifestacion','esto es una descripción'),(4,'nueva','nueva manifestacion');
+/*!40000 ALTER TABLE `manifestation` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `medication`
@@ -90,8 +120,18 @@ CREATE TABLE `medication` (
   PRIMARY KEY (`id`),
   KEY `medication_of_idx` (`patient_medicated`),
   CONSTRAINT `medication_of` FOREIGN KEY (`patient_medicated`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `medication`
+--
+
+LOCK TABLES `medication` WRITE;
+/*!40000 ALTER TABLE `medication` DISABLE KEYS */;
+INSERT INTO `medication` VALUES (1,'ibuprofeno',400,'mg',_binary '\0',1),(2,'paracetamol',500,'mg',_binary '\0',1),(3,'eferalgan',500,'mg',_binary '\0',1),(4,'dalsy',50,'ml',_binary '\0',1);
+/*!40000 ALTER TABLE `medication` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `patient`
@@ -114,6 +154,16 @@ CREATE TABLE `patient` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `patient`
+--
+
+LOCK TABLES `patient` WRITE;
+/*!40000 ALTER TABLE `patient` DISABLE KEYS */;
+INSERT INTO `patient` VALUES (1,'Pepe','Garcia',150,50,NULL,NULL,NULL),(2,'Cesar','Gimeno',143,42,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `patient` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `remainder`
 --
 
@@ -130,6 +180,15 @@ CREATE TABLE `remainder` (
   CONSTRAINT `remider_of` FOREIGN KEY (`medication`) REFERENCES `medication` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `remainder`
+--
+
+LOCK TABLES `remainder` WRITE;
+/*!40000 ALTER TABLE `remainder` DISABLE KEYS */;
+/*!40000 ALTER TABLE `remainder` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `shared_with`
@@ -154,6 +213,16 @@ CREATE TABLE `shared_with` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `shared_with`
+--
+
+LOCK TABLES `shared_with` WRITE;
+/*!40000 ALTER TABLE `shared_with` DISABLE KEYS */;
+INSERT INTO `shared_with` VALUES (1,3,1,2),(2,1,2,1);
+/*!40000 ALTER TABLE `shared_with` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tutor`
 --
 
@@ -175,6 +244,16 @@ CREATE TABLE `tutor` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `tutor`
+--
+
+LOCK TABLES `tutor` WRITE;
+/*!40000 ALTER TABLE `tutor` DISABLE KEYS */;
+INSERT INTO `tutor` VALUES (1,'Mario','Garcia','MG','a@a','1',1),(2,'Luisa','Garcia','Lu','b@b','luisa',1),(3,'Antonio','Pardo','Antopato','Antopato@gmail.com','Antopato',0);
+/*!40000 ALTER TABLE `tutor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tutor_of`
 --
 
@@ -193,6 +272,16 @@ CREATE TABLE `tutor_of` (
   CONSTRAINT `tutored_by` FOREIGN KEY (`tutor`) REFERENCES `tutor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tutor_of`
+--
+
+LOCK TABLES `tutor_of` WRITE;
+/*!40000 ALTER TABLE `tutor_of` DISABLE KEYS */;
+INSERT INTO `tutor_of` VALUES (1,1,1,_binary ''),(2,2,1,_binary '\0'),(3,3,2,_binary '');
+/*!40000 ALTER TABLE `tutor_of` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -203,4 +292,4 @@ CREATE TABLE `tutor_of` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-21 12:16:00
+-- Dump completed on 2024-11-12 19:39:23

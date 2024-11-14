@@ -41,8 +41,8 @@ class ActivityStartCrisis : AppCompatActivity() {
         setContentView(binding.root)
         contextObj = this
 
-        val json = intent.getSerializableExtra("patient") as String
-        patient = gson.fromJson(json,Patient::class.java)
+        patient = intent.getSerializableExtra("patient") as Patient
+        //patient = gson.fromJson(json,Patient::class.java)
 
         chronometer = binding.chrono
 

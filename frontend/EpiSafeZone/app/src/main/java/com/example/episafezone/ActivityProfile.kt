@@ -32,9 +32,7 @@ class ActivityProfile : AppCompatActivity() {
         MedicationPetitions.initializeQueue()
         ManifestationPetitions.initializeQueue()
 
-        val patientJSON = intent.getSerializableExtra("patient") as String
-
-        patient = gson.fromJson(patientJSON,Patient::class.java)
+        patient = intent.getSerializableExtra("patient") as Patient
 
         ProfilePetitions.getProfileInfo(patient)
 

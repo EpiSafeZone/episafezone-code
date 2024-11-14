@@ -51,6 +51,10 @@ class ActivityStartCrisis : AppCompatActivity() {
         StartCrisisLogic.getProfileLogic(patient)
 
         StartCrisisLogic.startStopTimer(binding)
+
+        binding.button.setOnClickListener {
+            StartCrisisLogic.startStopTimer(binding)
+        }
     }
 
     companion object{

@@ -28,9 +28,13 @@ class ActivityProfile : AppCompatActivity() {
         setContentView(binding.root)
         contextObj=this;
 
-        val json = intent.getSerializableExtra("json") as String
-        ProfileLogic.setUpInfo(json)
-        patient = gson.fromJson(json,Patient::class.java)
+        ProfilePetitions.initializeQueue()
+        MedicationPetitions.initializeQueue()
+        ManifestationPetitions.initializeQueue()
+
+        patient = intent.getSerializableExtra("patient") as Patient
+
+        ProfilePetitions.getProfileInfo(patient)
 
         binding.addMedButt.setOnClickListener(){
             val intent = Intent(this,ActivityAddMedication::class.java)
@@ -42,18 +46,19 @@ class ActivityProfile : AppCompatActivity() {
             val intent = Intent(this,ActivityRegisterManifestation::class.java)
             startActivity(intent)
         }
-
-        ProfilePetitions.initializeQueue()
-        MedicationPetitions.initializeQueue()
-        ManifestationPetitions.initializeQueue()
     }
 
     companion object{
 
         private lateinit var contextObj: Context
         private lateinit var binding : ActivityProfileBinding
-        private lateinit var patient :Patient
         private lateinit var listManifestations: MutableList<Manifestation>
+
+        lateinit var patient :Patient
+
+        fun startProfile(json : String){
+            ProfileLogic.setUpInfo(json)
+        }
 
         fun getContext() : Context{
             return contextObj

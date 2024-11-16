@@ -21,4 +21,21 @@ object ProfilePetitions {
         orderVolleyQueue = Volley.newRequestQueue(ActivityProfile.getContext())
     }
 
+    fun getProfileInfo(patient : Patient){
+        val name = patient.id
+        println("${url}/patient/info/$name")
+        val json = JSONObject()
+        json.put("id", name)
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.GET, "${url}/patient/info/$name", json,
+            {response->
+                println(response.toString())
+                ActivityProfile.startProfile(response.toString());
+            },
+            {error->
+                println(error.message)
+            })
+        orderVolleyQueue.add(jsonRequest)
+    }
+
 }

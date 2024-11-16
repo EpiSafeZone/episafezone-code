@@ -41,8 +41,8 @@ object ManifestationLogic {
         if(success){
             Toast.makeText(context, "Manifestación registrada correctamente!", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, ActivityProfile::class.java)
+            intent.putExtra("patient", ActivityProfile.patient)
             context.startActivity(intent)
-            //TODO: Revisar que el intent necesita los datos, no hace llamada a la API.
         } else {
             Toast.makeText(context, "Error registrando la manifestación.", Toast.LENGTH_SHORT).show()
         }
@@ -78,8 +78,8 @@ object ManifestationLogic {
         if(success){
             Toast.makeText(context, "Manifestación editada correctamente!", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, ActivityProfile::class.java)
+            intent.putExtra("patient", ActivityProfile.patient)
             context.startActivity(intent)
-            //TODO: Revisar que el intent necesita los datos, no hace llamada a la API.
         } else {
             Toast.makeText(context, "Error editando la manifestación.", Toast.LENGTH_SHORT).show()
         }

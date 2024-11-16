@@ -33,8 +33,9 @@ object StartCrisisLogic {
     }
 
     fun setUpInfo(json: String) {
-        val jsonArray= JSONArray(json)
-        val manifestations = getManifestationList(jsonArray)
+        val jsonObject= JSONObject(json)
+        val manifestationsJSON = jsonObject.getJSONArray("manifestations")
+        val manifestations = getManifestationList(manifestationsJSON)
         ActivityStartCrisis.updatePosibleManifestations(manifestations)
     }
 
@@ -45,7 +46,9 @@ object StartCrisisLogic {
             val id = item.getString("id").toInt()
             val name = item.getString("name")
             val description = item.getString("description")
-            val procedure = item.getString("procedure")
+            //TODO: Descomentar la linea de abajo y añadir a la manifestacion cuando se implemente el procedimiento.
+            //val procedure = item.getString("procedure")
+            val procedure = ""
             list.add(Manifestation(id,name, description,procedure))
         }
         return list

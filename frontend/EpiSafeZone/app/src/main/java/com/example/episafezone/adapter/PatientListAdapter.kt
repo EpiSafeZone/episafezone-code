@@ -44,7 +44,7 @@ class PatientListAdapter(var context : Context, private var list : List<Patient>
         //holder.patientProfilePicture.setImageIcon( list[position].profilePicture )
 
         holder.patientName.setOnClickListener {
-            PatientsListLogic.getProfileInfo(list[position])
+            ActivityPatientsList.startProfileActivity(list[position])
         }
     }
     fun setOnClickListener(listener: OnClickListener?) {

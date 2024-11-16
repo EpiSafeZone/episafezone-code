@@ -24,6 +24,8 @@ class ActivityEditManifestation : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
+        val id = intent.getSerializableExtra("id") as Int
+
         contextObj = this
 
         val currentManifestation = ManifestAdapter.getCurrentManifestation()
@@ -49,7 +51,7 @@ class ActivityEditManifestation : AppCompatActivity() {
 
         binding.acceptButton.setOnClickListener {
             if(ManifestationLogic.checkEditFields(binding)){
-                val manifestationModified = ManifestationLogic.createEditManifestation(binding)
+                val manifestationModified = ManifestationLogic.createEditManifestation(binding, id)
                 ManifestationLogic.editManifestation(manifestationModified)
             } else {
                 Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_LONG).show()

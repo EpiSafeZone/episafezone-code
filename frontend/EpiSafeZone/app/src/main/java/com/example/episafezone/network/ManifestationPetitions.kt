@@ -26,10 +26,11 @@ object ManifestationPetitions {
         orderVolleyQueue = Volley.newRequestQueue(ActivityProfile.getContext())
     }
 
-    fun addManifestation(manifestation: Manifestation) {
+    fun addManifestation(manifestation: Manifestation, patientId: Int) {
         val json = JSONObject()
         json.put("name", manifestation.name)
         json.put("description", manifestation.description)
+        json.put("patientId", patientId)
         //TODO: Terminar el JSON con pasos a seguir cuando se implemente.
         val jsonRequest = JsonObjectRequest(
             Request.Method.POST, "$url/manifestation/create", json,

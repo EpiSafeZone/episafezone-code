@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.episafezone.businesslogic.ManifestationLogic
 import com.example.episafezone.databinding.ActivityRegisterManifestationBinding
+import com.example.episafezone.models.Patient
 
 class ActivityRegisterManifestation : AppCompatActivity() {
 
@@ -24,6 +25,8 @@ class ActivityRegisterManifestation : AppCompatActivity() {
         setContentView(binding.root)
 
         contextObj = this
+
+        var patient = intent.getSerializableExtra("patient") as Patient
 
         binding.nameTextBox.textView.setHint("Nombre")
 
@@ -48,7 +51,7 @@ class ActivityRegisterManifestation : AppCompatActivity() {
         binding.registerButton.setOnClickListener {
             if(ManifestationLogic.checkRegisterFields(binding)){
                 val manifestation = ManifestationLogic.createRegisterManifestation(binding)
-                ManifestationLogic.registerManifestation(manifestation)
+                ManifestationLogic.registerManifestation(manifestation, patient.id)
             } else {
                 Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_LONG).show()
             }

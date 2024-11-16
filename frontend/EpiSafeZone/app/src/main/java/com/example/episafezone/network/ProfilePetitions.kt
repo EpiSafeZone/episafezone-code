@@ -1,5 +1,6 @@
 package com.example.episafezone.network
 
+import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
@@ -29,7 +30,7 @@ object ProfilePetitions {
         val jsonRequest = JsonObjectRequest(
             Request.Method.GET, "${url}/patient/info/$name", json,
             {response->
-                println(response.toString())
+                Log.d("GetProfileInfoResponse",response.toString())
                 ActivityProfile.startProfile(response.toString());
             },
             {error->

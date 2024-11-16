@@ -44,6 +44,7 @@ class ActivityProfile : AppCompatActivity() {
 
         binding.addManifButt.setOnClickListener{
             val intent = Intent(this,ActivityRegisterManifestation::class.java)
+            intent.putExtra("patient",patient)
             startActivity(intent)
         }
     }

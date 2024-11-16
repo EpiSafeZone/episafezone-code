@@ -32,8 +32,8 @@ object ManifestationLogic {
                 binding.procedureTextBox.textView.text.isNotEmpty()
     }
 
-    fun registerManifestation(manifestation: Manifestation) {
-        ManifestationPetitions.addManifestation(manifestation)
+    fun registerManifestation(manifestation: Manifestation, patientId: Int) {
+        ManifestationPetitions.addManifestation(manifestation, patientId)
     }
 
     fun responseRegisterManifestation(success: Boolean){
@@ -56,8 +56,9 @@ object ManifestationLogic {
         )
     }
 
-    fun createEditManifestation(binding: ActivityEditManifestationBinding) : Manifestation {
+    fun createEditManifestation(binding: ActivityEditManifestationBinding, id: Int) : Manifestation {
         return Manifestation(
+            id,
             binding.nameTextBox.textView.text.toString(),
             binding.descriptionTextBox.textView.text.toString(),
             binding.procedureTextBox.textView.text.toString()
@@ -66,6 +67,7 @@ object ManifestationLogic {
 
     fun loadEditManifestation(context: Context,manifestation: Manifestation){
         val intent = Intent(context, ActivityEditManifestation::class.java)
+        intent.putExtra("id", manifestation.id)
         context.startActivity(intent)
     }
 

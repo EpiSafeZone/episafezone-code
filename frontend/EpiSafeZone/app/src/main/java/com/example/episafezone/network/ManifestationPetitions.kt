@@ -55,6 +55,7 @@ object ManifestationPetitions {
             { error ->
                 ManifestationLogic.responseEditManifestation(false)
             })
+        orderVolleyQueue.add(jsonRequest)
     }
 
     fun deleteManifestation(manifestation: Manifestation){
@@ -66,5 +67,6 @@ object ManifestationPetitions {
             { error ->
                 ManifestationLogic.responseDeleteManifestation(false, manifestation)
             })
+        orderVolleyQueue.add(jsonRequest)
     }
 }

@@ -7,32 +7,19 @@ import com.example.episafezone.decorator.DayDecoratorRed
 import com.example.episafezone.decorator.DayDecoratorYellow
 import com.example.episafezone.models.Crisis
 import com.example.episafezone.models.Patient
+import com.example.episafezone.network.CalendarPetitions
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import java.util.Date
+import org.json.JSONArray
+import org.json.JSONObject
 
 object CalendarLogic {
 
-    fun getCrisisList(patient : Patient, month : Int, year : Int) : MutableList<Crisis>{
-        val crisisList = mutableListOf<Crisis>()
-        var date = Date()
-        date.date=10
-        date.month=11
-        date.year=2024
+    val gson = Gson()
 
-        val date2 = Date()
-        date2.date=8
-        date2.month=11
-        date2.year=2024
-
-        val cri = Crisis(1,5,date,"23:00","Jugando a la play",false,"Convulsión",1)
-        val cri2 = Crisis(2,5,date,"12:15","En clase",false,"Tic",1)
-        val cri3 = Crisis(2,5,date2,"12:15","En clase",false,"Tic",1)
-
-        crisisList.add(cri)
-        crisisList.add(cri2)
-        crisisList.add(cri3)
-
-        return crisisList
+    fun getCrisisList(patient : Patient, month : Int, year : Int){
+        CalendarPetitions.getMonthCrisis(month,year,patient)
     }
 
     fun setUpCalendar(binding : ActivityCalendarBinding, list:List<Crisis>){
@@ -65,7 +52,12 @@ object CalendarLogic {
 
         binding.amountCrisisNumber.text = result.count().toString()
         ActivityCalendar.updateListOfCrisis(result)
-
+    }
+    fun prepareCalendarInitiation(json : JSONObject){
+        val jsonArray = JSONArray(json)
+        val listType = object : TypeToken<MutableList<Crisis>>() {}.type
+        val crisis : MutableList<Crisis> = gson.fromJson(jsonArray.toString(),listType)
+        ActivityCalendar.initiateCalendar(crisis)
     }
 
 }

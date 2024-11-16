@@ -54,6 +54,9 @@ class ActivityProfile : AppCompatActivity() {
             startActivity(intent)
         }
 
+        ProfilePetitions.initializeQueue()
+        MedicationPetitions.initializeQueue()
+        ManifestationPetitions.initializeQueue()
     }
 
     companion object{

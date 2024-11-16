@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 public class HasManifestationService implements HasManifestationServiceInterface {
+
     @Autowired
     private HasManifestationRepository hasManifestationRepo;
 

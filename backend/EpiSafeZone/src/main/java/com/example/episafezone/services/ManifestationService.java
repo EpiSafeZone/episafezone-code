@@ -1,5 +1,6 @@
 package com.example.episafezone.services;
 
+import com.example.episafezone.DTO.ManifestationsDTO.ManifestationRequestDTO;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.HasManifestation;
 import com.example.episafezone.models.Manifestation;
@@ -21,9 +22,15 @@ public class ManifestationService implements ManifestationServiceInterface{
     @Autowired
     HasManifestationService hasManifestationService;
 
+    @Autowired
+    PatientService patientService;
+
+    @Autowired
+    private HasManifestationRepository hasManifestationRepository;
+
     @Override
     public List<Manifestation> getDefaultManifestation() {
-        return List.of(this.getManifestationById(1), this.getManifestationById(2));
+        return List.of(getManifestationById(1), getManifestationById(2));
     }
 
     @Override
@@ -51,8 +58,13 @@ public class ManifestationService implements ManifestationServiceInterface{
         return manifestations;
     }
 
-    public Manifestation create(Manifestation manifestation) {
-        return manifestationRepo.save(manifestation);
+    public Manifestation create(ManifestationRequestDTO manifestationRequestDTO) {
+        Manifestation manifestation = new Manifestation(manifestationRequestDTO.getName(), manifestationRequestDTO.getDescription());
+        manifestationRepo.save(manifestation);
+        Patient patient = patientService.findById(manifestationRequestDTO.getPatientId());
+        HasManifestation hasManifestation = new HasManifestation(manifestation, patient);
+        hasManifestationRepository.save(hasManifestation);
+        return manifestation;
     }
 
     public Manifestation update(Integer id, Manifestation manifestation) {

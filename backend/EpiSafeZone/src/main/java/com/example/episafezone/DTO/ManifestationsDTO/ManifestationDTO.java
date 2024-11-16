@@ -1,4 +1,4 @@
-package com.example.episafezone.DTO;
+package com.example.episafezone.DTO.ManifestationsDTO;
 
 import com.example.episafezone.models.Manifestation;
 

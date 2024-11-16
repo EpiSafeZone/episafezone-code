@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface PatientServiceInteface {
     List<Patient> findAll();
-    Optional<Patient> findById(int id);
+    Patient findById(int id);
 
     PatientInfoDTO getPatientProfileInfo(Integer patientId);
 }

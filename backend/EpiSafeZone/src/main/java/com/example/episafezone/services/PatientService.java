@@ -1,15 +1,15 @@
 package com.example.episafezone.services;
 
 import com.example.episafezone.DTO.CrisisDTO;
-import com.example.episafezone.DTO.ManifestationDTO;
+import com.example.episafezone.DTO.ManifestationsDTO.ManifestationDTO;
 import com.example.episafezone.DTO.MedicationDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
+import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.*;
 import com.example.episafezone.repositories.*;
-import com.example.episafezone.services.SharedWithService;
-import com.example.episafezone.services.TutorOfService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,6 +25,7 @@ public class PatientService implements PatientServiceInteface {
     @Autowired
     MedicationRepository medicationRepo;
 
+    @Lazy
     @Autowired
     ManifestationService manifestationService;
 
@@ -47,8 +48,12 @@ public class PatientService implements PatientServiceInteface {
     }
 
     @Override
-    public Optional<Patient> findById(int id) {
-        return patientRepo.findById(id);
+    public Patient findById(int id) {
+        if(patientRepo.findById(id).isPresent()){
+            return patientRepo.findById(id).get();
+        }else{
+            throw new ResourceNotFoudException("No se ha encontrado el paciente con el id: " + id);
+        }
     }
 
     @Override

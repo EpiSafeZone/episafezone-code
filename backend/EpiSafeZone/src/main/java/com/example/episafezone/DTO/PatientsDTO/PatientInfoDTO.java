@@ -1,6 +1,6 @@
 package com.example.episafezone.DTO.PatientsDTO;
 
-import com.example.episafezone.DTO.ManifestationDTO;
+import com.example.episafezone.DTO.ManifestationsDTO.ManifestationDTO;
 import com.example.episafezone.DTO.MedicationDTO;
 import com.example.episafezone.models.Patient;
 

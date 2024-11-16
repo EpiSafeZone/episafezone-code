@@ -1,6 +1,6 @@
 package com.example.episafezone.controllers;
 
-import com.example.episafezone.DTO.ManifestationDTO;
+import com.example.episafezone.DTO.ManifestationsDTO.ManifestationRequestDTO;
 import com.example.episafezone.models.Manifestation;
 import com.example.episafezone.services.ManifestationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "manifestation")
 public class ManifestationController {
+
     @Autowired
     ManifestationService manifestationService;
 
@@ -27,11 +28,11 @@ public class ManifestationController {
     }
 
     @PostMapping(path="/create")
-    public @ResponseBody Manifestation createManifestation(@RequestBody Manifestation manifestation) {
+    public @ResponseBody Manifestation createManifestation(@RequestBody ManifestationRequestDTO manifestation) {
         return manifestationService.create(manifestation);
     }
 
-    @PutMapping(path = "/edit/{id}")
+    @PutMapping(path = "/update/{id}")
     public @ResponseBody Manifestation editManifestation(@PathVariable Integer id, @RequestBody Manifestation manifestation) {
         return manifestationService.update(id, manifestation);
     }

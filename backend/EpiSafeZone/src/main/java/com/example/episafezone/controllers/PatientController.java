@@ -1,9 +1,9 @@
 package com.example.episafezone.controllers;
 
 
-import com.example.episafezone.DTO.CrisisDTO;
+import com.example.episafezone.DTO.CrisisDTO.CrisisDTO;
+import com.example.episafezone.DTO.CrisisDTO.CrisisListDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
-import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
 import com.example.episafezone.models.HasManifestation;
 import com.example.episafezone.models.Patient;
 import com.example.episafezone.services.PatientService;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(path="/patient")
@@ -43,7 +42,7 @@ public class PatientController {
     }
 
     @GetMapping(path="/crisis/{id}/{year}/{month}")
-    public @ResponseBody List<CrisisDTO> getCrisisFromPatient(@PathVariable Integer id, @PathVariable Integer year, @PathVariable Integer month){
+    public @ResponseBody CrisisListDTO getCrisisFromPatient(@PathVariable Integer id, @PathVariable Integer year, @PathVariable Integer month){
         return patientService.getListOfCrisis(id, year, month);
     }
 }

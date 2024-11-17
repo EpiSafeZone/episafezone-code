@@ -48,8 +48,8 @@ public class TestProfile {
         WebElement el4 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Onofre\")"));
         el4.click();
 
-        // Wait for 1 second, if network speed is low, increase the time.
-        Thread.sleep(1000);
+        // Wait for 15 miliseconds, if network speed is low, increase the time.
+        Thread.sleep(15);
 
         // Find the elements.
         WebElement el5 = driver.findElement(AppiumBy.id("com.example.episafezone:id/medicamentsRecycler"));

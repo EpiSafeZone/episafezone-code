@@ -1,5 +1,6 @@
-package com.example.episafezone.DTO;
+package com.example.episafezone.DTO.CrisisDTO;
 
+import com.example.episafezone.DTO.ManifestationsDTO.ManifestationNameDTO;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
@@ -14,10 +15,10 @@ public class CrisisDTO implements Serializable {
     private String hour;
     private String context;
     private Boolean emergency;
-    private Integer manifestation;
+    private ManifestationNameDTO manifestation;
     private Integer patient;
 
-    public CrisisDTO(Integer id, Integer duration, Date date, String hour, String context, Boolean emergency, Integer manifestation, Integer patient) {
+    public CrisisDTO(Integer id, Integer duration, Date date, String hour, String context, Boolean emergency, ManifestationNameDTO manifestation, Integer patient) {
         this.id = id;
         this.duration = duration;
         this.date = date;
@@ -78,11 +79,11 @@ public class CrisisDTO implements Serializable {
         this.emergency = emergency;
     }
 
-    public Integer getManifestation() {
+    public ManifestationNameDTO getManifestation() {
         return manifestation;
     }
 
-    public void setManifestation(Integer manifestation) {
+    public void setManifestation(ManifestationNameDTO manifestation) {
         this.manifestation = manifestation;
     }
 

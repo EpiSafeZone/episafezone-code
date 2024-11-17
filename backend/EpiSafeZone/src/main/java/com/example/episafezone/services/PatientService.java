@@ -1,7 +1,9 @@
 package com.example.episafezone.services;
 
-import com.example.episafezone.DTO.CrisisDTO;
+import com.example.episafezone.DTO.CrisisDTO.CrisisDTO;
+import com.example.episafezone.DTO.CrisisDTO.CrisisListDTO;
 import com.example.episafezone.DTO.ManifestationsDTO.ManifestationDTO;
+import com.example.episafezone.DTO.ManifestationsDTO.ManifestationNameDTO;
 import com.example.episafezone.DTO.MedicationDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
@@ -12,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -120,26 +121,30 @@ public class PatientService implements PatientServiceInteface {
         return patientListDTOs;
     }
 
-    public List<CrisisDTO> getListOfCrisis(Integer id, Integer year, Integer month){
+    public CrisisListDTO getListOfCrisis(Integer id, Integer year, Integer month){
         List<Crisis> unfilteredList = CrisisService.getByPatient(id);
         List<Crisis> filteredList = CrisisService.getByMonth(unfilteredList, year, month);
 
-        List<CrisisDTO> crisisDTOs = new ArrayList<>();
-        for (Crisis crisis : filteredList) {
-            CrisisDTO dto = new CrisisDTO(
-                    crisis.getId(),
-                    crisis.getDuration(),
-                    crisis.getDate(),
-                    crisis.getHour(),
-                    crisis.getContext(),
-                    crisis.getEmergency(),
-                    crisis.getManifestation(),
-                    crisis.getPatient()
-            );
-            crisisDTOs.add(dto);
-        }
+        List<CrisisDTO> crisisDTOs= filteredList.stream()
+                .map(crisis -> {
+                    Manifestation manifestation = manifestationService.getManifestationById(crisis.getManifestation());
+                    ManifestationNameDTO manifestationNameDTO = manifestation != null ? new ManifestationNameDTO(manifestation) : null;
 
-        return crisisDTOs;
+                    return new CrisisDTO(
+                            crisis.getId(),
+                            crisis.getDuration(),
+                            crisis.getDate(),
+                            crisis.getHour(),
+                            crisis.getContext(),
+                            crisis.getEmergency(),
+                            manifestationNameDTO,
+                            crisis.getPatient()
+                    );
+                })
+                .collect(Collectors.toList());
+
+        CrisisListDTO CrisisListDTO = new CrisisListDTO(crisisDTOs);
+        return CrisisListDTO;
     }
 
 

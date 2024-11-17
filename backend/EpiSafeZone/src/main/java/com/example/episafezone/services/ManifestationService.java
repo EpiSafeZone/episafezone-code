@@ -1,5 +1,7 @@
 package com.example.episafezone.services;
 
+import com.example.episafezone.DTO.ManifestationsDTO.ManifestationDTO;
+import com.example.episafezone.DTO.ManifestationsDTO.ManifestationNameDTO;
 import com.example.episafezone.DTO.ManifestationsDTO.ManifestationRequestDTO;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.HasManifestation;
@@ -15,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ManifestationService implements ManifestationServiceInterface{
+public class ManifestationService implements ManifestationServiceInterface {
     @Autowired
     ManifestationRepository manifestationRepo;
 
@@ -35,10 +37,10 @@ public class ManifestationService implements ManifestationServiceInterface{
 
     @Override
     public Manifestation getManifestationById(Integer id) {
-        Optional<Manifestation> manifestation =  manifestationRepo.findById(id);
-        if(manifestation.isPresent()){
+        Optional<Manifestation> manifestation = manifestationRepo.findById(id);
+        if (manifestation.isPresent()) {
             return manifestation.get();
-        }else{
+        } else {
             throw new ResourceNotFoudException("No se ha encontrado el manifestation con el id: " + id);
         }
     }
@@ -57,6 +59,7 @@ public class ManifestationService implements ManifestationServiceInterface{
 
         return manifestations;
     }
+
 
     public Manifestation create(ManifestationRequestDTO manifestationRequestDTO) {
         Manifestation manifestation = new Manifestation(manifestationRequestDTO.getName(), manifestationRequestDTO.getDescription());

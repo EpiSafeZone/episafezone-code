@@ -48,8 +48,8 @@ public class TestProfile {
         WebElement el4 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Onofre\")"));
         el4.click();
 
-        // Wait for 5 seconds
-        Thread.sleep(5000);
+        // Wait for 1 second, if network speed is low, increase the time.
+        Thread.sleep(1000);
 
         // Find the elements.
         WebElement el5 = driver.findElement(AppiumBy.id("com.example.episafezone:id/medicamentsRecycler"));
@@ -66,8 +66,8 @@ public class TestProfile {
         System.out.println("Number of manifestations: " + numberOfChildElementsManifestation);
 
         // Assert that there is at least one child element
-        assertTrue(numberOfChildElementsMedication > 0, "Number of medications don't match.");
-        assertTrue(numberOfChildElementsManifestation > 0, "Number of manifestations don't match.");
+        assertTrue(numberOfChildElementsMedication > 0, "Medications not loaded.");
+        assertTrue(numberOfChildElementsManifestation > 0, "Manifestations not loaded.");
     }
 
     @AfterEach

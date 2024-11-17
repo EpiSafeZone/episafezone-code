@@ -12,7 +12,12 @@ class DayDecoratorRed(
 
 
     override fun shouldDecorate(day: CalendarDay): Boolean {
-        return colorMap.containsKey(day)
+        for(date in colorMap.keys){
+            if(date.day == day.day){
+                return true
+            }
+        }
+        return false
     }
 
     override fun decorate(view: DayViewFacade) {

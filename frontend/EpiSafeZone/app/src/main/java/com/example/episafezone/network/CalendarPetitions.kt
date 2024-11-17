@@ -24,12 +24,13 @@ object CalendarPetitions {
     }
 
     fun getMonthCrisis(month:Int,year:Int,patient:Patient){
-            println("${url}/patient/crisis/${patient.id}/${year}/${month-2}")
+            println("${url}/patient/crisis/${patient.id}/${year}/${month-1}")
             val json = JSONObject()
             val jsonRequest = JsonObjectRequest(
-                Request.Method.GET, "${url}/patient/crisis/${patient.id}/${year}/${month}", json,
+                Request.Method.GET, "${url}/patient/crisis/${patient.id}/${year}/${month-1}", json,
                 {response->
-                    CalendarLogic.prepareCalendarInitiation(response);
+                    println(response.toString())
+                    CalendarLogic.prepareCalendarInitiation(response.toString());
                 },
                 {error->
                     println(error.message)

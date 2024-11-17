@@ -32,11 +32,13 @@ class ActivityCalendar : AppCompatActivity() {
         binding.selectedDayText.text = actualDate
         CalendarLogic.getCrisisList(patient, dateTime.monthValue + 1, dateTime.year)
 
-
         binding.profileButt.setOnClickListener() {
             finish()
         }
+        binding.calendarView.setOnMonthChangedListener(){widget, date->
+            CalendarLogic.getCrisisList(patient, date.month + 2, dateTime.year)
 
+        }
         binding.calendarView.setOnDateChangedListener{ widget, date, selected ->
             binding.selectedDayText.text = "${date.day}/${date.month+1}/${date.year}"
             CalendarLogic.showCrisis(binding,date,list)

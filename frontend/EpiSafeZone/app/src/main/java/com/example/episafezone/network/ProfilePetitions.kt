@@ -34,7 +34,7 @@ object ProfilePetitions {
                 ActivityProfile.startProfile(response.toString());
             },
             {error->
-                println(error.message)
+                Log.d("GetProfileError",error.message.toString())
             })
         orderVolleyQueue.add(jsonRequest)
     }

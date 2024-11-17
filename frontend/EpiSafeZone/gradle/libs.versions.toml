@@ -1,26 +1,41 @@
 [versions]
-agp = "8.3.1"
+agp = "8.7.2"
+commonsLang3 = "3.13.0"
+javaClientVersion = "8.5.1"
+junitJupiterApiVersion = "5.10.3"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
+logbackClassic = "1.5.8"
 material = "1.12.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
+seleniumJava = "4.11.0"
+seleniumJavaVersion = "4.10.0"
 volley = "1.2.1"
+junitJupiter = "5.8.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+appium-java-client = { module = "io.appium:java-client", version.ref = "javaClientVersion" }
+commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commonsLang3" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junitJupiterApiVersion" }
+jupiter-junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junitJupiterApiVersion" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logbackClassic" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+selenium-java = { module = "org.seleniumhq.selenium:selenium-java", version.ref = "seleniumJava" }
+selenium-java-v4100 = { module = "org.seleniumhq.selenium:selenium-java", version.ref = "seleniumJavaVersion" }
 volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

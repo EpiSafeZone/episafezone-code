@@ -7,5 +7,6 @@ class Medication(
     var name : String,
     var dosis : Int,
     var unit : String,
-    var alarm : Boolean
+    var alarm : Boolean,
+    var patientMedicated : Int
 ):Serializable

@@ -47,6 +47,22 @@ class ActivityProfile : AppCompatActivity() {
             intent.putExtra("patient",patient)
             startActivity(intent)
         }
+
+        binding.historyButt.setOnClickListener(){
+            val intent = Intent(this,ActivityCalendar::class.java)
+            intent.putExtra("patient",patient)
+            startActivity(intent)
+        }
+
+        binding.historyButt.setOnClickListener(){
+            val intent = Intent(this,ActivityCalendar::class.java)
+            intent.putExtra("patient",patient)
+            startActivity(intent)
+        }
+
+        ProfilePetitions.initializeQueue()
+        MedicationPetitions.initializeQueue()
+        ManifestationPetitions.initializeQueue()
     }
 
     companion object{
@@ -54,7 +70,6 @@ class ActivityProfile : AppCompatActivity() {
         private lateinit var contextObj: Context
         private lateinit var binding : ActivityProfileBinding
         private lateinit var listManifestations: MutableList<Manifestation>
-
         lateinit var patient :Patient
 
         fun startProfile(json : String){

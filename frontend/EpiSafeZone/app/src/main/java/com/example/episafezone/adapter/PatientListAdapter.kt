@@ -36,7 +36,7 @@ class PatientListAdapter(var context : Context, private var list : List<Patient>
     override fun onBindViewHolder(holder: PatientListViewHolder, position: Int) {
         holder.patientName.text = list[position].name
         holder.registerCrisisButton.setOnClickListener {
-
+            ActivityPatientsList.startRegisterManifestation(list[position])
         }
         holder.startCrisisButton.setOnClickListener {
             ActivityPatientsList.loadStartCrisis(list[position])

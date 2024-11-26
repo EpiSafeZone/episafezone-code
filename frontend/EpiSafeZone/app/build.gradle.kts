@@ -49,10 +49,21 @@ android {
         viewBinding=true
         buildConfig = true
     }
+    packaging {
+        resources {
+            excludes.add("META-INF/INDEX.LIST")
+            excludes.add("META-INF/LICENSE.md")
+            excludes.add("META-INF/LICENSE-notice.md")
+        }
+    }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 dependencies {
-    implementation("com.google.code.gson:gson:2.8.8")
+    implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.github.prolificinteractive:material-calendarview:1.4.3")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -60,7 +71,17 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.volley)
+    implementation(libs.commons.lang3)
+    implementation(libs.appium.java.client)
+    implementation(libs.logback.classic)
+    implementation(libs.selenium.java.v4100)
+    testImplementation(libs.selenium.java)
     testImplementation(libs.junit)
+    testImplementation(libs.jupiter.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.junit.jupiter)
+    androidTestImplementation(libs.jupiter.junit.jupiter.api)
+    androidTestRuntimeOnly(libs.junit.jupiter.engine)
 }

@@ -9,6 +9,7 @@ jobs:
   build:
     if: github.event.pull_request.draft == false  # Only run if the PR is not in draft
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout code

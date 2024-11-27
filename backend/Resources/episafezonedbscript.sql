@@ -50,6 +50,31 @@ INSERT INTO `crisis` VALUES (1,3,'2024-10-28',NULL,NULL,NULL,1,1),(2,3,'2024-10-
 UNLOCK TABLES;
 
 --
+-- Table structure for table `device`
+--
+
+DROP TABLE IF EXISTS `device`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `device` (
+  `id` int NOT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `user` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `used_by_idx` (`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `device`
+--
+
+LOCK TABLES `device` WRITE;
+/*!40000 ALTER TABLE `device` DISABLE KEYS */;
+/*!40000 ALTER TABLE `device` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `has_manifestation`
 --
 
@@ -202,6 +227,11 @@ CREATE TABLE `shared_with` (
   `tutor_sharing` int NOT NULL,
   `tutor_receiving` int NOT NULL,
   `patient` int NOT NULL,
+  `register_crisis_permision` tinyint DEFAULT '1',
+  `profile_permision` tinyint DEFAULT '0',
+  `medicine_permision` tinyint DEFAULT '0',
+  `notify_from` time DEFAULT NULL,
+  `notify_to` time DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `shered_by_idx` (`tutor_sharing`),
   KEY `shared_to_idx` (`tutor_receiving`),
@@ -218,7 +248,7 @@ CREATE TABLE `shared_with` (
 
 LOCK TABLES `shared_with` WRITE;
 /*!40000 ALTER TABLE `shared_with` DISABLE KEYS */;
-INSERT INTO `shared_with` VALUES (1,3,1,2),(2,1,2,1);
+INSERT INTO `shared_with` VALUES (1,3,1,2,1,0,0,NULL,NULL),(2,1,2,1,1,0,0,NULL,NULL);
 /*!40000 ALTER TABLE `shared_with` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,4 +322,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-12 19:39:23
+-- Dump completed on 2024-11-26 13:25:58

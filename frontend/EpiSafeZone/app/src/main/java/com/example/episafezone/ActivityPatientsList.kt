@@ -49,6 +49,11 @@ class ActivityPatientsList : AppCompatActivity() {
             intent.putExtra("patient", patient)
             contextObj.startActivity(intent)
         }
+        fun startRegisterManifestation(patient: Patient){
+            val intent = Intent(contextObj, ActivityRegisterManifestation::class.java)
+            intent.putExtra("patient", patient)
+            contextObj.startActivity(intent)
+        }
     }
 
 }

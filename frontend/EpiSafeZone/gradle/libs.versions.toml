@@ -1,6 +1,7 @@
 [versions]
 agp = "8.7.2"
 commonsLang3 = "3.13.0"
+fragmentKtx = "1.8.5"
 javaClientVersion = "8.5.1"
 junitJupiterApiVersion = "5.10.3"
 kotlin = "1.9.0"
@@ -17,9 +18,11 @@ seleniumJava = "4.11.0"
 seleniumJavaVersion = "4.10.0"
 volley = "1.2.1"
 junitJupiter = "5.8.1"
+lifecycleRuntimeKtx = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 appium-java-client = { module = "io.appium:java-client", version.ref = "javaClientVersion" }
 commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commonsLang3" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -36,6 +39,14 @@ selenium-java = { module = "org.seleniumhq.selenium:selenium-java", version.ref 
 selenium-java-v4100 = { module = "org.seleniumhq.selenium:selenium-java", version.ref = "seleniumJavaVersion" }
 volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

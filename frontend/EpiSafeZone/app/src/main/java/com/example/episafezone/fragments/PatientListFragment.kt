@@ -1,6 +1,5 @@
 package com.example.episafezone.fragments
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,15 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.episafezone.ActivityPatientsList
-import com.example.episafezone.ActivityPatientsList.Companion
 import com.example.episafezone.ActivityProfile
 import com.example.episafezone.ActivityStartCrisis
 import com.example.episafezone.MainActivity
-import com.example.episafezone.R
 import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.businesslogic.PatientsListLogic
-import com.example.episafezone.databinding.ActivityPatientsListBinding
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.PatientsListPetitions
 
@@ -51,7 +46,7 @@ class PatientListFragment : Fragment() {
     }
 
     companion object {
-        private val context = MainActivity.contextObj
+        private val context = MainActivity.getContext()
 
         private const val ARG_PARAM1 = "param1"
         private const val ARG_PARAM2 = "param2"

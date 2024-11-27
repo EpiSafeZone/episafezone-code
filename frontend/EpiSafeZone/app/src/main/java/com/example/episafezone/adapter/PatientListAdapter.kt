@@ -5,15 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.episafezone.ActivityPatientsList
 import com.example.episafezone.R
-import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.models.Patient
 
-class PatientListAdapter(var context : Context, private var list : List<Patient>) : RecyclerView.Adapter<PatientListAdapter.PatientListViewHolder>() {
+class PatientListAdapter(var context: Context?, private var list: List<Patient>) : RecyclerView.Adapter<PatientListAdapter.PatientListViewHolder>() {
 
     class PatientListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val patientName: TextView = view.findViewById(R.id.patientName)

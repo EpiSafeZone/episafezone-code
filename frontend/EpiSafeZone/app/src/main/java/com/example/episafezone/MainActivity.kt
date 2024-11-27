@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
-import com.example.episafezone.ui.theme.EpiSafeZoneTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -18,6 +17,10 @@ class MainActivity : ComponentActivity() {
     }
 
     companion object {
-        public lateinit var contextObj: Context
+        private lateinit var contextObj: Context
+
+        fun getContext() : Context {
+            return contextObj
+        }
     }
 }

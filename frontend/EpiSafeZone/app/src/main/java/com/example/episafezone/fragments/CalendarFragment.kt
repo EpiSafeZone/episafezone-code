@@ -12,6 +12,8 @@ import com.example.episafezone.R
 import com.example.episafezone.adapter.CrisisAdapter
 import com.example.episafezone.businesslogic.CalendarLogic
 import com.example.episafezone.databinding.FragmentCalendarBinding
+import com.example.episafezone.databinding.ActivityCalendarBinding
+import com.example.episafezone.fragments.ChartFragment
 import com.example.episafezone.models.Crisis
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.CalendarPetitions
@@ -47,6 +49,20 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         binding.calendarView.setOnDateChangedListener{ widget, date, selected ->
             binding.selectedDayText.text = "${date.day}/${date.month+1}/${date.year}"
             CalendarLogic.showCrisis(binding,date,list)
+        }
+
+        binding.initChart.setOnClickListener(){
+            val list = mutableListOf<String>();
+            list.add("hola")
+            list.add("tardes")
+            list.add("tardes")
+            list.add("hola")
+            list.add("buenas")
+            list.add("hola")
+            val fragment = ChartFragment(patient,list)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.calendar_layout, fragment)
+                .commit()
         }
     }
 

@@ -1,9 +1,11 @@
 package com.example.episafezone.models;
 
+import com.example.episafezone.events.Event;
 import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
+import com.example.episafezone.services.SharedWithService;
 
 @Entity (name = "patient")
 public class Patient {
@@ -18,6 +20,11 @@ public class Patient {
     private Date birthdate;
     private Integer age;
     private String color;
+
+    @Transient
+    private List<Tutor> tutors;
+
+    private static SharedWithService sharedWithService;
 
     public Patient(String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color) {
         this.name = name;
@@ -93,6 +100,14 @@ public class Patient {
     }
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public void setTutors() {
+        this.tutors = sharedWithService.findPatientTutors(this.id);
+    }
+
+    public void triggerEvent(Event event){
+
     }
 
 

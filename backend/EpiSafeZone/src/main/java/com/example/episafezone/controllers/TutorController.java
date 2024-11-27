@@ -29,7 +29,7 @@ public class TutorController {
     }
 
     @GetMapping(path="/{id}")
-    public @ResponseBody Optional<Tutor> getAll(@PathVariable int id){
+    public @ResponseBody Tutor getAll(@PathVariable int id){
         return tutorService.findById(id);
     }
 

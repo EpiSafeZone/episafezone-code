@@ -12,6 +12,7 @@ import com.example.episafezone.ActivityStartCrisis
 import com.example.episafezone.MainActivity
 import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.businesslogic.PatientsListLogic
+import com.example.episafezone.databinding.FragmentPatientListBinding
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.PatientsListPetitions
 
@@ -20,7 +21,7 @@ class PatientListFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private var binding:PatientListFragmentBinding? = null
+    private var binding: FragmentPatientListBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

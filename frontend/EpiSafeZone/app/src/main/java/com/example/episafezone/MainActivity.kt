@@ -2,16 +2,17 @@ package com.example.episafezone
 
 import android.content.Context
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
+import com.example.episafezone.databinding.MainActivityBinding
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     lateinit var binding : MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = MainActivityBinding.inflate(layoutInflater);
+        binding = MainActivityBinding.inflate();
         setContentView(binding.root)
         contextObj = this
     }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.episafezone.ActivityPatientsList.Companion
 import com.example.episafezone.adapter.CrisisAdapter
 import com.example.episafezone.businesslogic.CalendarLogic
 import com.example.episafezone.databinding.ActivityCalendarBinding

@@ -4,8 +4,8 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.episafezone.ActivityPatientsList
 import com.example.episafezone.BuildConfig
+import com.example.episafezone.MainActivity
 import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.models.Device
 import com.example.episafezone.models.Patient
@@ -18,7 +18,7 @@ object PatientsListPetitions {
     lateinit var orderVolleyQueue: RequestQueue
 
     fun initializeQueue(){
-        orderVolleyQueue = Volley.newRequestQueue(ActivityPatientsList.getContext())
+        orderVolleyQueue = Volley.newRequestQueue(MainActivity.getContext())
     }
 
     fun getProfileInfo(patient : Patient){

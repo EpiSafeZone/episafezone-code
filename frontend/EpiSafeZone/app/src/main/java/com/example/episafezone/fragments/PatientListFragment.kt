@@ -10,25 +10,28 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityProfile
 import com.example.episafezone.ActivityStartCrisis
 import com.example.episafezone.MainActivity
+import com.example.episafezone.R
 import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.databinding.FragmentPatientListBinding
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.PatientsListPetitions
 
-class PatientListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class PatientListFragment : Fragment(R.layout.fragment_patient_list) {
 
-    private var binding: FragmentPatientListBinding? = null
+    private lateinit var binding: FragmentPatientListBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        // Inflate the layout for this fragment
+        binding = FragmentPatientListBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val listPatient : List<Patient> = PatientsListLogic.getPatientListInfo();
         binding.PatientRecyclerView.adapter = PatientListAdapter(context, listPatient)
@@ -37,29 +40,12 @@ class PatientListFragment : Fragment() {
         PatientsListPetitions.initializeQueue();
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = PatientListFragmentBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
-
     companion object {
         private val context = MainActivity.getContext()
 
-        private const val ARG_PARAM1 = "param1"
-        private const val ARG_PARAM2 = "param2"
-
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            PatientListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+            PatientListFragment().apply {}
 
         fun startProfileActivity(patient: Patient){
             val intent = Intent(context, ActivityProfile::class.java)

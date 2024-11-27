@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.episafezone.ActivityPatientsList
+import com.example.episafezone.fragments.PatientListFragment
 import com.example.episafezone.R
 import com.example.episafezone.models.Patient
 
@@ -37,12 +37,12 @@ class PatientListAdapter(var context: Context?, private var list: List<Patient>)
             ActivityPatientsList.startRegisterManifestation(list[position])
         }
         holder.startCrisisButton.setOnClickListener {
-            ActivityPatientsList.loadStartCrisis(list[position])
+            PatientListFragment.loadStartCrisis(list[position])
         }
         //holder.patientImage.setImageIcon( list[position].profilePicture )
 
         holder.patientImage.setOnClickListener {
-            ActivityPatientsList.startProfileActivity(list[position])
+            PatientListFragment.startProfileActivity(list[position])
         }
     }
 }

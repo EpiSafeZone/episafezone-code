@@ -5,7 +5,6 @@ import android.os.SystemClock
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
-import com.example.episafezone.ActivityPatientsList
 import com.example.episafezone.ActivityProfile
 import com.example.episafezone.ActivityStartCrisis
 import com.example.episafezone.R

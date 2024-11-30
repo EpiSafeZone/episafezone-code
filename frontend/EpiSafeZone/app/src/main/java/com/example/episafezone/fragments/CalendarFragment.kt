@@ -59,6 +59,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             list.add("hola")
             list.add("buenas")
             list.add("hola")
+
             val fragment = ChartFragment(patient,list)
             supportFragmentManager.beginTransaction()
                 .replace(R.id.calendar_layout, fragment)

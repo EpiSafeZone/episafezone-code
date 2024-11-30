@@ -2,6 +2,9 @@
 .gradle/
 build/
 
+#Custom
+*.DS_Store
+
 # Local configuration file (sdk path, etc)
 local.properties
 custom.properties

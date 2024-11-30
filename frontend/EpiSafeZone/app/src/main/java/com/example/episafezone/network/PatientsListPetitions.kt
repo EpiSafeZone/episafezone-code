@@ -7,6 +7,7 @@ import com.android.volley.toolbox.Volley
 import com.example.episafezone.ActivityPatientsList
 import com.example.episafezone.BuildConfig
 import com.example.episafezone.businesslogic.PatientsListLogic
+import com.example.episafezone.models.Device
 import com.example.episafezone.models.Patient
 import org.json.JSONObject
 
@@ -30,6 +31,20 @@ object PatientsListPetitions {
             {response->
                 println(response.toString())
                 PatientsListLogic.startActivityProfile(response.toString(),patient)
+            },
+            {error->
+                println(error.message)
+            })
+        orderVolleyQueue.add(jsonRequest)
+    }
+    fun saveDevice(device : Device){
+        val id = device.id
+        println("$url/device/save/$id")
+        val json = JSONObject()
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.GET, "$url/patient/info/$id", json,
+            {response->
+
             },
             {error->
                 println(error.message)

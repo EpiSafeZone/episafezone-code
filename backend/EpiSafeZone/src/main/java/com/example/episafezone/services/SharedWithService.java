@@ -3,6 +3,7 @@ package com.example.episafezone.services;
 import com.example.episafezone.models.Patient;
 import com.example.episafezone.models.SharedWith;
 import com.example.episafezone.models.Tutor;
+import com.example.episafezone.models.TutorOf;
 import com.example.episafezone.repositories.SharedWithRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ import java.util.stream.Collectors;
 public class SharedWithService implements SharedWithServiceInterface {
     @Autowired
     SharedWithRepository sharedWithRepo;
+
+    @Autowired
+    TutorOfService tutorOfService;
 
     public static TutorService tutorService;
 
@@ -39,7 +43,13 @@ public class SharedWithService implements SharedWithServiceInterface {
         List<Tutor> tutors = new ArrayList<Tutor>();
         for(SharedWith sharedWith : sharedWithRepo.findAll()){
             if(sharedWith.getPatient().equals(patientId)){
-                Tutor tutor = tutorService.findById(sharedWith.getTutorSharing());
+                Tutor tutor = tutorService.findById(sharedWith.getTutorReceiving());
+                tutors.add(tutor);
+            }
+        }
+        for(TutorOf tutorOf: tutorOfService.findAll()){
+            if(tutorOf.getPatient().equals(patientId)){
+                Tutor tutor = tutorService.findById(tutorOf.getTutor());
                 tutors.add(tutor);
             }
         }

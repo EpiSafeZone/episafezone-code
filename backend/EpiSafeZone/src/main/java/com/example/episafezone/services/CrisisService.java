@@ -15,20 +15,20 @@ public class CrisisService implements CrisisServiceInterface {
         this.repo = repo;
     }
 
-    public List<Crisis> getAll(){
+    public List<Crisis> getAll() {
         return repo.findAll();
     }
 
-    public Crisis getById(Integer id){
+    public Crisis getById(Integer id) {
         Optional<Crisis> crisisOptional = repo.findById(id);
-        if(crisisOptional.isPresent()){
+        if (crisisOptional.isPresent()) {
             return crisisOptional.get();
-        }else{
+        } else {
             throw new ResourceNotFoudException("No se ha encontrado la crisis asociada a este id" + id);
         }
     }
 
-    public List<Crisis> getByPatient(Integer id){
+    public List<Crisis> getByPatient(Integer id) {
         return repo.findByPatient(id);
     }
 
@@ -49,5 +49,9 @@ public class CrisisService implements CrisisServiceInterface {
         }
         filteredList.sort(Comparator.comparing(Crisis::getDate));
         return filteredList;
+    }
+
+    public Crisis createCrisis(Crisis crisis) {
+        return repo.save(crisis);
     }
 }

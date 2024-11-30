@@ -50,4 +50,8 @@ public class CrisisService implements CrisisServiceInterface {
         filteredList.sort(Comparator.comparing(Crisis::getDate));
         return filteredList;
     }
+
+    public Crisis createCrisis(Crisis crisis) {
+        return  null;
+    }
 }

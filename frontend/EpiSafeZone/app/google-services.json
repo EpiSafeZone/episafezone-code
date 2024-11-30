@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "976287555925",
+    "project_id": "episafezone-5cbef",
+    "storage_bucket": "episafezone-5cbef.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976287555925:android:e2ee6f58932b28928c8fdc",
+        "android_client_info": {
+          "package_name": "com.example.episafezone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoNn0GaUItW7sImEogmgmPxfeFeH-i5ms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

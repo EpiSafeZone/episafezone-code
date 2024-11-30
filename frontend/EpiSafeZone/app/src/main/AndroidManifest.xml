@@ -44,6 +44,9 @@
             android:name=".ActivityRegisterManifestation"
             android:exported="false" />
         <activity
+            android:name=".ActivityRegisterCrisis"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <service

@@ -6,6 +6,7 @@ import com.example.episafezone.DTO.CrisisDTO.CrisisListDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.models.HasManifestation;
 import com.example.episafezone.models.Patient;
+import com.example.episafezone.models.Tutor;
 import com.example.episafezone.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

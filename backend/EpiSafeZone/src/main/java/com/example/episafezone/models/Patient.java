@@ -1,11 +1,13 @@
 package com.example.episafezone.models;
 
 import com.example.episafezone.events.Event;
+import com.example.episafezone.events.TimeExcidedEvent;
 import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
 import com.example.episafezone.services.SharedWithService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity (name = "patient")
 public class Patient {
@@ -24,7 +26,8 @@ public class Patient {
     @Transient
     private List<Tutor> tutors;
 
-    private static SharedWithService sharedWithService;
+    @Transient
+    private SharedWithService sharedWithService;
 
     public Patient(String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color) {
         this.name = name;
@@ -102,11 +105,23 @@ public class Patient {
         this.color = color;
     }
 
-    public void setTutors() {
-        this.tutors = sharedWithService.findPatientTutors(this.id);
+
+    public void setSharedWithService(SharedWithService sharedWithService) {
+        this.sharedWithService = sharedWithService;
+    }
+
+    public List<Tutor> setTutors() {
+        if (sharedWithService == null) {
+            throw new IllegalStateException("SharedWithService is not initialized");
+        }
+        return sharedWithService.findPatientTutors(this.id);
     }
 
     public void triggerEvent(Event event){
+        if(event instanceof TimeExcidedEvent){
+            TimeExcidedEvent timeExcidedEvent = (TimeExcidedEvent) event;
+
+        }
 
     }
 

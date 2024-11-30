@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
+        android:text="Register Crisis"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/manifestation"
+        android:layout_width="275dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Manifestación"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="275dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Fecha"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/manifestation"
+        app:layout_constraintStart_toStartOf="@+id/manifestation"
+        app:layout_constraintTop_toBottomOf="@+id/manifestation" />
+
+    <EditText
+        android:id="@+id/duration"
+        android:layout_width="275dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Duración"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/manifestation"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/manifestation"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
+
+    <EditText
+        android:id="@+id/context"
+        android:layout_width="271dp"
+        android:layout_height="153dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Contexto"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/manifestation"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/manifestation"
+        app:layout_constraintTop_toBottomOf="@+id/duration" />
+
+    <Button
+        android:id="@+id/acceptCrisisButt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/grey"
+        android:text="Aceptar"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/cancelMedicationButt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/grey"
+        android:text="Cancelar"
+        android:textColor="#000000"
+        android:textColorHighlight="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

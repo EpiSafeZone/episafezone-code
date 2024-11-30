@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.google.gms.google-services")
 }
 
 val customProperties = Properties()
@@ -20,7 +21,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.episafezone"
+            applicationId = "com.example.episafezone"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
@@ -66,6 +67,9 @@ tasks.withType<Test> {
 dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.github.prolificinteractive:material-calendarview:1.4.3")
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
+    implementation("com.google.firebase:firebase-messaging:23.0.7")
+    implementation("com.google.firebase:firebase-analytics")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

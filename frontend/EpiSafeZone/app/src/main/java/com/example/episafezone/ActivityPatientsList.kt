@@ -3,6 +3,7 @@ package com.example.episafezone
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.adapter.PatientListAdapter
@@ -10,14 +11,22 @@ import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.businesslogic.StartCrisisLogic
 import com.example.episafezone.databinding.ActivityPatientsListBinding
+import com.example.episafezone.models.Device
 import com.example.episafezone.models.Patient
+import com.example.episafezone.models.User
 import com.example.episafezone.network.PatientsListPetitions
 import com.example.episafezone.network.StartCrisisPetitions
+import com.google.firebase.messaging.FirebaseMessaging
 import java.util.Date
 
 class ActivityPatientsList : AppCompatActivity() {
 
     private lateinit var binding: ActivityPatientsListBinding
+
+    override fun onStart() {
+        super.onStart()
+        this.registerDevice();
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +62,27 @@ class ActivityPatientsList : AppCompatActivity() {
             val intent = Intent(contextObj, ActivityRegisterManifestation::class.java)
             intent.putExtra("patient", patient)
             contextObj.startActivity(intent)
+        }
+    }
+
+    private fun registerDevice(){
+        FirebaseMessaging.getInstance().getToken()
+            .addOnCompleteListener{task->
+                if(!task.isSuccessful){
+                    println("Error en register device")
+                }else{
+                    val token = task.getResult()
+                    val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+                    val tokenSaved = preferences.getString("DEVIDE_ID","")
+                    if(token != null && (!token.equals(tokenSaved))){
+                        //TODO(Hacer inicio de sesión temporal para que user sea dinámico)
+                        val user1 = User(1);
+                        val device = Device(0,token,user1.id)
+
+                        PatientsListPetitions.saveDevice(device)
+                    }
+                }
+
         }
     }
 

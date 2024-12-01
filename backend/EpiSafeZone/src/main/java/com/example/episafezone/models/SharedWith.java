@@ -17,19 +17,17 @@ public class SharedWith {
     private Boolean registerCrisisPermision;
     private Boolean profilePermision;
     private Boolean medicinePermision;
-    private LocalTime notifyFrom;
-    private LocalTime notifyTo;
+    private Boolean masterPermision;
 
     public SharedWith(Integer tutorSharing, Integer tutorReceiving, Integer patient, Boolean registerCrisisPermision,
-                      Boolean profilePermision, Boolean medicinePermision, LocalTime notifyFrom, LocalTime notifyTo) {
+                      Boolean profilePermision, Boolean medicinePermision, Boolean masterPermision) {
         this.tutorSharing = tutorSharing;
         this.tutorReceiving = tutorReceiving;
         this.patient = patient;
         this.registerCrisisPermision = registerCrisisPermision;
         this.profilePermision = profilePermision;
         this.medicinePermision = medicinePermision;
-        this.notifyFrom = notifyFrom;
-        this.notifyTo = notifyTo;
+        this.masterPermision = masterPermision;
     }
 
     public SharedWith(){}
@@ -90,19 +88,11 @@ public class SharedWith {
         this.medicinePermision = medicinePermision;
     }
 
-    public LocalTime getNotifyFrom() {
-        return notifyFrom;
+    public Boolean getMasterPermision() {
+        return masterPermision;
     }
 
-    public void setNotifyFrom(LocalTime notifyFrom) {
-        this.notifyFrom = notifyFrom;
-    }
-
-    public LocalTime getNotifyTo() {
-        return notifyTo;
-    }
-
-    public void setNotifyTo(LocalTime notifyTo) {
-        this.notifyTo = notifyTo;
+    public void setMasterPermision(Boolean masterPermision) {
+        this.masterPermision = masterPermision;
     }
 }

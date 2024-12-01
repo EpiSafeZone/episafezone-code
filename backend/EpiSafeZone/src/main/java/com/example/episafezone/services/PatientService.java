@@ -7,6 +7,7 @@ import com.example.episafezone.DTO.ManifestationsDTO.ManifestationNameDTO;
 import com.example.episafezone.DTO.MedicationDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
+import com.example.episafezone.DTO.SharedTutorDTO;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.*;
 import com.example.episafezone.repositories.*;
@@ -64,6 +65,7 @@ public class PatientService implements PatientServiceInteface {
             Patient patient = patientOpt.get();
             List<Medication> medications = medicationRepo.findByPatientMedicated(patientId);
             List<Manifestation> manifestations = manifestationService.getManifestationFromPatient(patientId);
+            List<SharedTutorDTO> sharedTutors =
 
             List<MedicationDTO> medicationDTOList = medications.stream()
                     .map(MedicationDTO::new)

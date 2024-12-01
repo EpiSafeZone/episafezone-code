@@ -159,6 +159,37 @@ INSERT INTO `medication` VALUES (1,'ibuprofeno',400,'mg',_binary '\0',1),(2,'par
 UNLOCK TABLES;
 
 --
+-- Table structure for table `notify_hours`
+--
+
+DROP TABLE IF EXISTS `notify_hours`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `notify_hours` (
+  `id` int NOT NULL,
+  `tutor` int NOT NULL,
+  `patient` int NOT NULL,
+  `notify_from` time DEFAULT NULL,
+  `notify_to` time DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `notified_tutor_idx` (`tutor`),
+  KEY `notify_from_patient_idx` (`patient`),
+  CONSTRAINT `notified_tutor` FOREIGN KEY (`tutor`) REFERENCES `tutor` (`id`),
+  CONSTRAINT `notify_from_patient` FOREIGN KEY (`patient`) REFERENCES `patient` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notify_hours`
+--
+
+LOCK TABLES `notify_hours` WRITE;
+/*!40000 ALTER TABLE `notify_hours` DISABLE KEYS */;
+INSERT INTO `notify_hours` VALUES (1,1,1,NULL,NULL),(2,1,2,NULL,NULL),(3,2,1,NULL,NULL),(4,3,2,NULL,NULL);
+/*!40000 ALTER TABLE `notify_hours` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `patient`
 --
 
@@ -230,8 +261,7 @@ CREATE TABLE `shared_with` (
   `register_crisis_permision` tinyint DEFAULT '1',
   `profile_permision` tinyint DEFAULT '0',
   `medicine_permision` tinyint DEFAULT '0',
-  `notify_from` time DEFAULT NULL,
-  `notify_to` time DEFAULT NULL,
+  `master_permision` tinyint DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `shered_by_idx` (`tutor_sharing`),
   KEY `shared_to_idx` (`tutor_receiving`),
@@ -248,7 +278,7 @@ CREATE TABLE `shared_with` (
 
 LOCK TABLES `shared_with` WRITE;
 /*!40000 ALTER TABLE `shared_with` DISABLE KEYS */;
-INSERT INTO `shared_with` VALUES (1,3,1,2,1,0,0,NULL,NULL),(2,1,2,1,1,0,0,NULL,NULL);
+INSERT INTO `shared_with` VALUES (1,3,1,2,1,0,0,0),(2,1,2,1,1,0,0,1);
 /*!40000 ALTER TABLE `shared_with` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -322,4 +352,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-26 13:25:58
+-- Dump completed on 2024-12-01 19:22:24

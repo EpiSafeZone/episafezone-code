@@ -62,7 +62,7 @@ public class PatientService implements PatientServiceInteface {
     }
 
     @Override
-    public PatientInfoDTO getPatientProfileInfo(Integer patientId, Integer userId) {
+    public PatientInfoDTO getPatientProfileInfo(Integer patientId) {
         Optional<Patient> patientOpt = patientRepo.findById(patientId);
         if (patientOpt.isPresent()) {
             Patient patient = patientOpt.get();

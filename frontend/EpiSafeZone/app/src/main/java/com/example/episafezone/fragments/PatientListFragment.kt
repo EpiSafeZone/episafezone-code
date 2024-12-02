@@ -34,29 +34,25 @@ class PatientListFragment : Fragment(R.layout.fragment_patient_list) {
         super.onViewCreated(view, savedInstanceState)
 
         val listPatient : List<Patient> = PatientsListLogic.getPatientListInfo();
-        binding.PatientRecyclerView.adapter = PatientListAdapter(context, listPatient)
-        binding.PatientRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.PatientRecyclerView.adapter = PatientListAdapter(contextObj, listPatient)
+        binding.PatientRecyclerView.layoutManager = LinearLayoutManager(contextObj)
 
         PatientsListPetitions.initializeQueue();
     }
 
     companion object {
-        private val context = MainActivity.getContext()
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PatientListFragment().apply {}
+        private val contextObj = MainActivity.getContext()
 
         fun startProfileActivity(patient: Patient){
-            val intent = Intent(context, ActivityProfile::class.java)
+            val intent = Intent(contextObj, ActivityProfile::class.java)
             intent.putExtra("patient", patient)
-            context.startActivity(intent)
+            contextObj.startActivity(intent)
         }
 
         fun loadStartCrisis(patient : Patient){
-            val intent = Intent(context, ActivityStartCrisis::class.java)
+            val intent = Intent(contextObj, ActivityStartCrisis::class.java)
             intent.putExtra("patient", patient)
-            context.startActivity(intent)
+            contextObj.startActivity(intent)
         }
     }
 }

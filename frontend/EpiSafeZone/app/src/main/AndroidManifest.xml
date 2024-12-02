@@ -35,9 +35,6 @@
             android:name=".ActivityProfile"
             android:exported="true" />
         <activity
-            android:name=".ActivityCalendar"
-            android:exported="true" />
-        <activity
             android:name=".ActivityRegisterManifestation"
             android:exported="false" />
         <activity

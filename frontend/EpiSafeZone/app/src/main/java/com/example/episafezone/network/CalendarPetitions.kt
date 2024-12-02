@@ -4,10 +4,10 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.episafezone.ActivityCalendar
 import com.example.episafezone.BuildConfig
 import com.example.episafezone.businesslogic.CalendarLogic
 import com.example.episafezone.businesslogic.PatientsListLogic
+import com.example.episafezone.fragments.CalendarFragment
 import com.example.episafezone.models.Patient
 import org.json.JSONObject
 
@@ -19,7 +19,7 @@ object CalendarPetitions {
     lateinit var orderVolleyQueue: RequestQueue
 
     fun initializeQueue(){
-        orderVolleyQueue = Volley.newRequestQueue(ActivityCalendar.getContext())
+        orderVolleyQueue = Volley.newRequestQueue(CalendarFragment.getContext())
     }
 
     fun getMonthCrisis(month:Int,year:Int,patient:Patient){

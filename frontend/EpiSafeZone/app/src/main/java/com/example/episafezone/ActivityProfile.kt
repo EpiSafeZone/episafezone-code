@@ -48,18 +48,6 @@ class ActivityProfile : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.historyButt.setOnClickListener(){
-            val intent = Intent(this,ActivityCalendar::class.java)
-            intent.putExtra("patient",patient)
-            startActivity(intent)
-        }
-
-        binding.historyButt.setOnClickListener(){
-            val intent = Intent(this,ActivityCalendar::class.java)
-            intent.putExtra("patient",patient)
-            startActivity(intent)
-        }
-
         ProfilePetitions.initializeQueue()
         MedicationPetitions.initializeQueue()
         ManifestationPetitions.initializeQueue()

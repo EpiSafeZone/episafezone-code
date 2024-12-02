@@ -5,7 +5,10 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.episafezone.databinding.ActivityMainBinding
+import com.example.episafezone.fragments.CalendarFragment
 import com.example.episafezone.fragments.PatientListFragment
+import com.example.episafezone.models.Patient
+import java.util.Date
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +20,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         contextObj = this
 
+        // TODO: Change this when the patient is actually obtained from the recycler view.
+        val patient = Patient(1, "Onofre", "Bustos", 180, 70, Date(), 21, "blue")
+
         val patientListFragment = PatientListFragment()
 
         supportFragmentManager.beginTransaction().apply {
@@ -25,18 +31,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.home.setOnClickListener{
-
-        }
-
-        binding.profile.setOnClickListener{
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.fragmentLayout, patientListFragment)
                 commit()
             }
         }
 
-        binding.calendar.setOnClickListener{
+        binding.profile.setOnClickListener{
 
+        }
+
+        binding.calendar.setOnClickListener{
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragmentLayout, CalendarFragment(patient))
+                commit()
+            }
         }
 
         binding.chronometer.setOnClickListener{

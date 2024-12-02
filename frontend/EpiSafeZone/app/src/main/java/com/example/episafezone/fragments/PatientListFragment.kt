@@ -19,8 +19,6 @@ import com.example.episafezone.network.PatientsListPetitions
 
 class PatientListFragment : Fragment(R.layout.fragment_patient_list) {
 
-    private lateinit var binding: FragmentPatientListBinding
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +39,8 @@ class PatientListFragment : Fragment(R.layout.fragment_patient_list) {
     }
 
     companion object {
+        private lateinit var binding: FragmentPatientListBinding
+
         private val contextObj = MainActivity.getContext()
 
         fun startProfileActivity(patient: Patient){

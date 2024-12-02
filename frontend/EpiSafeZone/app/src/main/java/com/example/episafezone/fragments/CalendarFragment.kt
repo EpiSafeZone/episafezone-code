@@ -21,8 +21,6 @@ import java.time.format.DateTimeFormatter
 
 class CalendarFragment (val patient: Patient) : Fragment(R.layout.fragment_calendar) {
 
-    private lateinit var binding: FragmentCalendarBinding
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

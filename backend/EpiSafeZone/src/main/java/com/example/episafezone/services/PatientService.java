@@ -32,6 +32,9 @@ public class PatientService implements PatientServiceInteface {
     ManifestationService manifestationService;
 
     @Autowired
+    TutorService tutorService;
+
+    @Autowired
     HasManifestationService hasManifestationService;
 
     @Autowired
@@ -59,13 +62,13 @@ public class PatientService implements PatientServiceInteface {
     }
 
     @Override
-    public PatientInfoDTO getPatientProfileInfo(Integer patientId) {
+    public PatientInfoDTO getPatientProfileInfo(Integer patientId, Integer userId) {
         Optional<Patient> patientOpt = patientRepo.findById(patientId);
         if (patientOpt.isPresent()) {
             Patient patient = patientOpt.get();
             List<Medication> medications = medicationRepo.findByPatientMedicated(patientId);
             List<Manifestation> manifestations = manifestationService.getManifestationFromPatient(patientId);
-            List<SharedTutorDTO> sharedTutors =
+            List<Tutor> sharedTutors = tutorService.findTutorsShared(userId, patientId);
 
             List<MedicationDTO> medicationDTOList = medications.stream()
                     .map(MedicationDTO::new)
@@ -75,10 +78,15 @@ public class PatientService implements PatientServiceInteface {
                     .map(ManifestationDTO::new)
                     .collect(Collectors.toList());
 
+            List<SharedTutorDTO> sharedTutorDTOList = sharedTutors.stream()
+                    .map(SharedTutorDTO::new)
+                    .collect(Collectors.toList());
+
             return new PatientInfoDTO(
                     patient,
                     medicationDTOList,
-                    manifestationDTOList
+                    manifestationDTOList,
+                    sharedTutorDTOList
 
             );
         } else {

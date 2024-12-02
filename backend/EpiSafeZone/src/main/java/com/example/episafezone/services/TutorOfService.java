@@ -30,5 +30,4 @@ public class TutorOfService implements TutorOfServiceInterface{
                 .map(TutorOf::getPatient)
                 .collect(Collectors.toList());
     }
-
 }

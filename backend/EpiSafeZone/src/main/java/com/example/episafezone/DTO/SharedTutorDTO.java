@@ -1,5 +1,7 @@
 package com.example.episafezone.DTO;
 
+import com.example.episafezone.models.Tutor;
+
 import java.io.Serializable;
 
 public class SharedTutorDTO implements Serializable {
@@ -7,10 +9,10 @@ public class SharedTutorDTO implements Serializable {
     private String name;
     private String surname;
 
-    public SharedTutorDTO(Integer id, String name, String surname) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
+    public SharedTutorDTO(Tutor tutor) {
+        this.id = tutor.getId();
+        this.name = tutor.getName();
+        this.surname = tutor.getSurname();
     }
 
     public SharedTutorDTO(){}

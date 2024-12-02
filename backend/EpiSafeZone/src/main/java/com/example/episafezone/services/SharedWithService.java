@@ -45,4 +45,15 @@ public class SharedWithService implements SharedWithServiceInterface {
         }
         return tutors;
      }
+
+    public List<SharedWith> findByTutorSharing(Integer tutorId) {
+        return sharedWithRepo.findByTutorSharing(tutorId);
+    }
+
+    public List<SharedWith> findByTutorSAndPatient(Integer tutorSId, Integer patient){
+        List<SharedWith> filteredByTutorS =  findByTutorSharing(tutorSId);
+        return filteredByTutorS.stream()
+                .filter(sharedWith -> sharedWith.getPatient().equals(patient))
+                .toList();
+    }
 }

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.episafezone.ActivityProfile
 import com.example.episafezone.ActivityStartCrisis
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
@@ -44,15 +43,11 @@ class PatientListFragment : Fragment(R.layout.fragment_patient_list) {
         private val contextObj = MainActivity.getContext()
 
         fun startProfileActivity(patient: Patient){
-            val intent = Intent(contextObj, ActivityProfile::class.java)
-            intent.putExtra("patient", patient)
-            contextObj.startActivity(intent)
+            MainActivity.updatePatient(patient)
         }
 
         fun loadStartCrisis(patient : Patient){
-            val intent = Intent(contextObj, ActivityStartCrisis::class.java)
-            intent.putExtra("patient", patient)
-            contextObj.startActivity(intent)
+            MainActivity.changeToStartCrisis()
         }
     }
 }

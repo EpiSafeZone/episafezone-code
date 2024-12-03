@@ -1,11 +1,12 @@
 package com.example.episafezone.network
 
+import android.provider.ContactsContract.Profile
 import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.episafezone.ActivityProfile
+import com.example.episafezone.fragments.ProfileFragment
 import com.example.episafezone.BuildConfig
 import com.example.episafezone.models.Patient
 import org.json.JSONArray
@@ -18,7 +19,7 @@ object ProfilePetitions {
     lateinit var orderVolleyQueue: RequestQueue
 
     fun initializeQueue(){
-        orderVolleyQueue = Volley.newRequestQueue(ActivityProfile.getContext())
+        orderVolleyQueue = Volley.newRequestQueue(ProfileFragment.getContext())
     }
 
     fun getProfileInfo(patient : Patient){
@@ -30,7 +31,7 @@ object ProfilePetitions {
             Request.Method.GET, "${url}/patient/info/$name", json,
             {response->
                 Log.d("GetProfileInfoResponse",response.toString())
-                ActivityProfile.startProfile(response.toString());
+                ProfileFragment.startProfile(response.toString());
             },
             {error->
                 Log.d("GetProfileError",error.message.toString())

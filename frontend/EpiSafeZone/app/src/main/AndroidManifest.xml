@@ -32,9 +32,6 @@
             android:name=".ActivityAddMedication"
             android:exported="false" />
         <activity
-            android:name=".ActivityProfile"
-            android:exported="true" />
-        <activity
             android:name=".ActivityRegisterManifestation"
             android:exported="false" />
         <activity

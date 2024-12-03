@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.episafezone.databinding.ActivityMainBinding
 import com.example.episafezone.fragments.CalendarFragment
 import com.example.episafezone.fragments.PatientListFragment
+import com.example.episafezone.fragments.ProfileFragment
 import com.example.episafezone.models.Patient
 import java.util.Date
 
@@ -20,14 +21,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         contextObj = this
 
-        // TODO: Change this when the patient is actually obtained from the recycler view.
-        val patient = Patient(1, "Onofre", "Bustos", 180, 70, Date(), 21, "blue")
+        val load = intent.getStringExtra("load") ?: ""
 
         val patientListFragment = PatientListFragment()
 
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragmentLayout, patientListFragment)
-            commit()
+        if(load == "profile") {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragmentLayout, ProfileFragment(patient))
+                commit()
+            }
+        } else if (load == "calendar") {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragmentLayout, CalendarFragment(patient))
+                commit()
+            }
+        } else if (load == "startCrisis") {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragmentLayout, ChronometerFragment(patient))
+                commit()
+            }
+        } else {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragmentLayout, patientListFragment)
+                commit()
+            }
         }
 
         binding.home.setOnClickListener{
@@ -38,7 +55,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.profile.setOnClickListener{
-
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragmentLayout, ProfileFragment(patient))
+                commit()
+            }
         }
 
         binding.calendar.setOnClickListener{
@@ -55,9 +75,19 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private lateinit var contextObj: Context
+        // TODO: Change this when the patient is actually obtained from the recycler view.
+        private var patient = Patient(1, "Onofre", "Bustos", 180, 70, Date(), 21, "blue")
 
         fun getContext() : Context {
             return contextObj
+        }
+
+        fun updatePatient(patient: Patient) {
+            this.patient = patient
+        }
+
+        fun changeToStartCrisis() {
+            // TODO: Implement this.
         }
     }
 }

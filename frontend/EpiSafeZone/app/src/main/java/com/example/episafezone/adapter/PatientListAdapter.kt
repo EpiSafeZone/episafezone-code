@@ -48,7 +48,7 @@ class PatientListAdapter(var context: Context?, private var list: List<Patient>)
         }
 
         holder.registerCrisisButton.setOnClickListener {
-            ActivityPatientsList.startRegisterCrisis(list[position])
+            PatientListFragment.startRegisterCrisis(list[position])
         }
     }
 }

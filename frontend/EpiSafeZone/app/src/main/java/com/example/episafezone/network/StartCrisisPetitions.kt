@@ -8,7 +8,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.episafezone.BuildConfig
 import com.example.episafezone.MainActivity
-import com.example.episafezone.businesslogic.StartCrisisLogic
+import com.example.episafezone.businesslogic.ChronometerLogic
 import com.example.episafezone.models.Patient
 import org.json.JSONObject
 
@@ -28,7 +28,7 @@ object StartCrisisPetitions {
         val stringRequest = StringRequest(
             Request.Method.GET, "${url}/patient/info/$id",
             {response->
-                StartCrisisLogic.setUpInfo(response.toString())
+                ChronometerLogic.setUpInfo(response.toString())
             },
             {error->
                 Log.d("GetPatientManifestations",error.message.toString())

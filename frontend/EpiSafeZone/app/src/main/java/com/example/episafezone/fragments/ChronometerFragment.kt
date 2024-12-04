@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Chronometer
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityAddMedication
 import com.example.episafezone.ActivityRegisterManifestation
@@ -19,7 +20,7 @@ import com.example.episafezone.adapter.MedicationAdapter
 import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.businesslogic.ProfileLogic
-import com.example.episafezone.businesslogic.StartCrisisLogic
+import com.example.episafezone.businesslogic.ChronometerLogic
 import com.example.episafezone.databinding.FragmentChronometerBinding
 import com.example.episafezone.databinding.FragmentPatientListBinding
 import com.example.episafezone.databinding.FragmentProfileBinding
@@ -50,14 +51,16 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
 
         StartCrisisPetitions.initializeQueue();
 
-        StartCrisisLogic.getProfileLogic(patient)
+        ChronometerLogic.getProfileLogic(patient)
 
         if(startChrono){
-            StartCrisisLogic.startStopTimer(binding)
+            binding.button.text = "Detener"
+            binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
+            ChronometerLogic.startStopTimer(binding)
         }
 
         binding.button.setOnClickListener {
-            StartCrisisLogic.startStopTimer(binding)
+            ChronometerLogic.startStopTimer(binding)
         }
     }
 

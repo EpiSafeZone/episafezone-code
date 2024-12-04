@@ -20,7 +20,7 @@ import java.util.TimerTask
 import kotlin.concurrent.timerTask
 import kotlin.math.roundToInt
 
-object StartCrisisLogic {
+object ChronometerLogic {
 
     private val gson = Gson()
 
@@ -63,6 +63,8 @@ object StartCrisisLogic {
         timerStarted = true
         ChronometerFragment.chronometer.base = SystemClock.elapsedRealtime()
         ChronometerFragment.chronometer.start()
+        binding.button.text = "Detener"
+        binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
     }
 
     private fun stopTimer(binding: FragmentChronometerBinding) {

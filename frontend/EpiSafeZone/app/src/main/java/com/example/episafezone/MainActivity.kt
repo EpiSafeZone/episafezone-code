@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.episafezone.businesslogic.StartCrisisLogic
+import com.example.episafezone.businesslogic.ChronometerLogic
 import com.example.episafezone.databinding.ActivityMainBinding
 import com.example.episafezone.fragments.CalendarFragment
 import com.example.episafezone.fragments.ChronometerFragment

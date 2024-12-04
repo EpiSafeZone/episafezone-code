@@ -62,13 +62,13 @@ public class PatientService implements PatientServiceInteface {
     }
 
     @Override
-    public PatientInfoDTO getPatientProfileInfo(Integer patientId) {
+    public PatientInfoDTO getPatientProfileInfo(Integer patientId, Integer userId) {
         Optional<Patient> patientOpt = patientRepo.findById(patientId);
         if (patientOpt.isPresent()) {
             Patient patient = patientOpt.get();
             List<Medication> medications = medicationRepo.findByPatientMedicated(patientId);
             List<Manifestation> manifestations = manifestationService.getManifestationFromPatient(patientId);
-            List<Tutor> sharedTutors = tutorService.findTutorsShared(userId, patientId);
+            List<Tutor> sharedTutors = tutorService.findTutorsShared(patientId, userId);
 
             List<MedicationDTO> medicationDTOList = medications.stream()
                     .map(MedicationDTO::new)

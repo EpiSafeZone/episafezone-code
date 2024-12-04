@@ -1,7 +1,6 @@
 package com.example.episafezone
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
+
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,17 +13,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.businesslogic.PatientsListLogic
-import com.example.episafezone.businesslogic.ProfileLogic
-import com.example.episafezone.businesslogic.StartCrisisLogic
 import com.example.episafezone.databinding.ActivityPatientsListBinding
 import com.example.episafezone.models.Device
 import com.example.episafezone.models.Patient
 import com.example.episafezone.models.User
 import com.example.episafezone.network.PatientsListPetitions
-import com.example.episafezone.network.StartCrisisPetitions
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
-import java.util.Date
 
 class ActivityPatientsList : AppCompatActivity() {
 
@@ -76,6 +71,7 @@ class ActivityPatientsList : AppCompatActivity() {
             intent.putExtra("patient", patient)
             contextObj.startActivity(intent)
         }
+
         fun startRegisterManifestation(patient: Patient){
             val intent = Intent(contextObj, ActivityRegisterManifestation::class.java)
             intent.putExtra("patient", patient)
@@ -91,7 +87,6 @@ class ActivityPatientsList : AppCompatActivity() {
                     println("Error en register device")
                 }else{
                     val token = task.getResult()
-                    println(token+"----------------------------------------------")
                     val preferences = PreferenceManager.getDefaultSharedPreferences(this)
                     val tokenSaved = preferences.getString("DEVIDE_ID","")
                     if(token != null && (!token.equals(tokenSaved))){
@@ -102,9 +97,7 @@ class ActivityPatientsList : AppCompatActivity() {
                         PatientsListPetitions.saveDevice(device)
                     }
                 }
-
         }
-
     }
 
 

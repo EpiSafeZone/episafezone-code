@@ -32,8 +32,8 @@ public class TutorService implements TutorServiceInterface{
         }
     }
 
-    public List<Tutor> findTutorsShared(Integer tutotSId, Integer patient){
-        List<SharedWith> sharedWithList = sharedWithService.findByTutorSAndPatient(tutotSId, patient);
+    public List<Tutor> findTutorsShared(Integer tutotShId, Integer patient){
+        List<SharedWith> sharedWithList = sharedWithService.findByTutorShAndPatient(tutotShId, patient);
         List <Integer> tutorSharedIds = sharedWithList.stream()
                 .map(SharedWith::getTutorReceiving)
                 .toList();

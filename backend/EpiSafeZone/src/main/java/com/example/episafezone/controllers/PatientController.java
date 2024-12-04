@@ -33,7 +33,7 @@ public class PatientController {
         return patientService.findById(id);
     }
 
-    @GetMapping(path="/info/{id}")
+    @GetMapping(path="/info/{patientId}/{userId}")
     public @ResponseBody PatientInfoDTO getPatientInfo(@PathVariable Integer patientId, @PathVariable Integer userId) {
         return patientService.getPatientProfileInfo(patientId, userId);
     }

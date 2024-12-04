@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Switch
+import androidx.appcompat.widget.SwitchCompat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +29,17 @@ class FragmentTutorNotificationsPreferences : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+        val notificationsSwitch: SwitchCompat = requireView().findViewById(R.id.notificationsSwitch)
+        val notificationsConstraintLayout: View = requireView().findViewById(R.id.notificationsConstraintLayout)
+        val fromButton: Button = requireView().findViewById(R.id.fromButton)
+        val untilButton: Button = requireView().findViewById(R.id.untilButton)
+        notificationsSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                notificationsConstraintLayout.visibility = View.VISIBLE
+            } else {
+                notificationsConstraintLayout.visibility = View.GONE
+            }
         }
     }
 

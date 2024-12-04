@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@id/titleText" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/notificationsConstraintLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -41,19 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/notificationsSwitch">
 
         <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="24dp"
-            android:text="Hasta:"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-        <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/fromConstantText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -62,29 +50,61 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/fromHourText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="00:00"
+            app:layout_constraintBottom_toBottomOf="@+id/fromConstantText"
+            app:layout_constraintStart_toEndOf="@+id/fromConstantText"
+            app:layout_constraintTop_toTopOf="@+id/fromConstantText" />
+
         <Button
             android:id="@+id/fromButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="Seleccionar"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"
-            app:layout_constraintStart_toEndOf="@+id/textView11"
-            app:layout_constraintTop_toTopOf="@+id/textView11" />
+            app:layout_constraintBottom_toBottomOf="@+id/fromConstantText"
+            app:layout_constraintStart_toEndOf="@+id/fromHourText"
+            app:layout_constraintTop_toTopOf="@+id/fromConstantText" />
+
+        <TextView
+            android:id="@+id/untilConstantText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="24dp"
+            android:text="Hasta:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fromConstantText" />
+
+        <TextView
+            android:id="@+id/untilHourText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            app:layout_constraintBottom_toBottomOf="@+id/untilConstantText"
+            app:layout_constraintEnd_toEndOf="@+id/fromHourText"
+            app:layout_constraintStart_toStartOf="@+id/fromHourText"
+            app:layout_constraintTop_toTopOf="@+id/untilConstantText" />
 
         <Button
             android:id="@+id/untilButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Seleccionar"
-            app:layout_constraintBottom_toBottomOf="@+id/textView15"
+            app:layout_constraintBottom_toBottomOf="@+id/untilConstantText"
             app:layout_constraintEnd_toEndOf="@+id/fromButton"
             app:layout_constraintStart_toStartOf="@+id/fromButton"
-            app:layout_constraintTop_toTopOf="@+id/textView15" />
+            app:layout_constraintTop_toTopOf="@+id/untilConstantText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        android:id="@+id/divider3"
+        android:id="@+id/settingsDivider"
         android:layout_width="0dp"
         android:layout_height="3dp"
         android:layout_marginStart="32dp"
@@ -93,6 +113,6 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/notificationsConstraintLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

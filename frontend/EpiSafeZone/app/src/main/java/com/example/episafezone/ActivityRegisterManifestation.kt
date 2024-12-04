@@ -26,7 +26,7 @@ class ActivityRegisterManifestation : AppCompatActivity() {
 
         contextObj = this
 
-        var patient = intent.getSerializableExtra("patient") as Patient
+        var patient = MainActivity.getPatient()
 
         binding.nameTextBox.textView.setHint("Nombre")
 
@@ -44,7 +44,8 @@ class ActivityRegisterManifestation : AppCompatActivity() {
         }
 
         binding.cancelButton.setOnClickListener {
-            val intent = Intent(this, ActivityProfile::class.java)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("load", "profile")
             startActivity(intent)
         }
 

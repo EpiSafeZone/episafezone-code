@@ -6,11 +6,9 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.episafezone.ActivityPatientsList
-import com.example.episafezone.ActivityProfile
-import com.example.episafezone.ActivityStartCrisis
 import com.example.episafezone.BuildConfig
-import com.example.episafezone.businesslogic.StartCrisisLogic
+import com.example.episafezone.MainActivity
+import com.example.episafezone.businesslogic.ChronometerLogic
 import com.example.episafezone.models.Patient
 import org.json.JSONObject
 
@@ -22,7 +20,7 @@ object StartCrisisPetitions {
     lateinit var orderVolleyQueue: RequestQueue
 
     fun initializeQueue(){
-        orderVolleyQueue = Volley.newRequestQueue(ActivityStartCrisis.getContext())
+        orderVolleyQueue = Volley.newRequestQueue(MainActivity.getContext())
     }
 
     fun getPatientManifestations(patient: Patient) {
@@ -30,7 +28,7 @@ object StartCrisisPetitions {
         val stringRequest = StringRequest(
             Request.Method.GET, "${url}/patient/info/$id",
             {response->
-                StartCrisisLogic.setUpInfo(response.toString())
+                ChronometerLogic.setUpInfo(response.toString())
             },
             {error->
                 Log.d("GetPatientManifestations",error.message.toString())

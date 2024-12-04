@@ -40,11 +40,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures{
         viewBinding=true
@@ -80,7 +80,10 @@ dependencies {
     implementation(libs.appium.java.client)
     implementation(libs.logback.classic)
     implementation(libs.selenium.java.v4100)
+    implementation(libs.firebase.common.ktx)
     testImplementation(libs.selenium.java)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     testImplementation(libs.junit)
     testImplementation(libs.jupiter.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)

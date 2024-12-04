@@ -8,12 +8,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.episafezone.ActivityPatientsList
+import com.example.episafezone.fragments.PatientListFragment
 import com.example.episafezone.R
-import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.models.Patient
 
-class PatientListAdapter(var context : Context, private var list : List<Patient>) : RecyclerView.Adapter<PatientListAdapter.PatientListViewHolder>() {
+class PatientListAdapter(var context: Context?, private var list: List<Patient>) : RecyclerView.Adapter<PatientListAdapter.PatientListViewHolder>() {
 
     class PatientListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val patientName: TextView = view.findViewById(R.id.patientName)
@@ -36,15 +35,16 @@ class PatientListAdapter(var context : Context, private var list : List<Patient>
     override fun onBindViewHolder(holder: PatientListViewHolder, position: Int) {
         holder.patientName.text = list[position].name
         holder.registerCrisisButton.setOnClickListener {
-            ActivityPatientsList.startRegisterManifestation(list[position])
+            PatientListFragment.startRegisterManifestation()
         }
         holder.startCrisisButton.setOnClickListener {
-            ActivityPatientsList.loadStartCrisis(list[position])
+            PatientListFragment.loadStartCrisis()
         }
+        //TODO terminar imagen cuando funcione.
         //holder.patientImage.setImageIcon( list[position].profilePicture )
 
         holder.patientImage.setOnClickListener {
-            ActivityPatientsList.startProfileActivity(list[position])
+            PatientListFragment.changePatient(list[position])
         }
     }
 }

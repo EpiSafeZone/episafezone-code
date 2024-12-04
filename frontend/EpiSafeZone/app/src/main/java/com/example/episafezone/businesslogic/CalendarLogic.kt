@@ -1,8 +1,8 @@
 package com.example.episafezone.businesslogic
 
 import android.graphics.Color
-import com.example.episafezone.ActivityCalendar
-import com.example.episafezone.databinding.ActivityCalendarBinding
+import com.example.episafezone.fragments.CalendarFragment
+import com.example.episafezone.databinding.FragmentCalendarBinding
 import com.example.episafezone.decorator.DayDecoratorRed
 import com.example.episafezone.decorator.DayDecoratorYellow
 import com.example.episafezone.models.Crisis
@@ -23,7 +23,7 @@ object CalendarLogic {
         CalendarPetitions.getMonthCrisis(month,year,patient)
     }
 
-    fun setUpCalendar(binding : ActivityCalendarBinding, list:List<Crisis>){
+    fun setUpCalendar(binding : FragmentCalendarBinding, list:List<Crisis>){
         val colorMapYellow = mutableMapOf<CalendarDay, Int>()
         val colorMapRed = mutableMapOf<CalendarDay, Int>()
         for(i in 1..32){
@@ -45,7 +45,7 @@ object CalendarLogic {
         binding.calendarView.addDecorators(decorator,decorator2)
     }
 
-    fun showCrisis(binding : ActivityCalendarBinding, calendarDate : CalendarDay, list : MutableList<Crisis>){
+    fun showCrisis(binding : FragmentCalendarBinding, calendarDate : CalendarDay, list : MutableList<Crisis>){
         val result = mutableListOf<Crisis>()
         for(crisis in list){
             if(crisis.date.date == calendarDate.day){
@@ -54,7 +54,7 @@ object CalendarLogic {
         }
 
         binding.amountCrisisNumber.text = result.count().toString()
-        ActivityCalendar.updateListOfCrisis(result)
+        CalendarFragment.updateListOfCrisis(result)
     }
     fun prepareCalendarInitiation(json : String){
         val gson = Gson()
@@ -66,7 +66,7 @@ object CalendarLogic {
         }
         val listType = object : TypeToken<MutableList<Crisis>>() {}.type
         val crisis : MutableList<Crisis> = gson.fromJson(jsonArray.toString(),listType)
-        ActivityCalendar.initiateCalendar(crisis)
+        CalendarFragment.initiateCalendar(crisis)
     }
 
 }

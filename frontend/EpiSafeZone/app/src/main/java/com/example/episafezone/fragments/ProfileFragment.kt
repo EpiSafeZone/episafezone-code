@@ -1,82 +1,77 @@
-package com.example.episafezone
+package com.example.episafezone.fragments
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.episafezone.ActivityAddMedication
+import com.example.episafezone.ActivityRegisterManifestation
+import com.example.episafezone.MainActivity
+import com.example.episafezone.R
 import com.example.episafezone.adapter.ManifestAdapter
 import com.example.episafezone.adapter.MedicationAdapter
+import com.example.episafezone.adapter.PatientListAdapter
+import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.businesslogic.ProfileLogic
-import com.example.episafezone.databinding.ActivityProfileBinding
-import com.example.episafezone.models.Medication
+import com.example.episafezone.databinding.FragmentPatientListBinding
+import com.example.episafezone.databinding.FragmentProfileBinding
 import com.example.episafezone.models.Manifestation
+import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.ManifestationPetitions
 import com.example.episafezone.network.MedicationPetitions
+import com.example.episafezone.network.PatientsListPetitions
 import com.example.episafezone.network.ProfilePetitions
-import com.google.gson.Gson
 
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
-class ActivityProfile : AppCompatActivity() {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        // Inflate the layout for this fragment
+        binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
 
-    private val gson = Gson()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityProfileBinding.inflate(layoutInflater);
-        setContentView(binding.root)
-        contextObj=this;
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         ProfilePetitions.initializeQueue()
         MedicationPetitions.initializeQueue()
         ManifestationPetitions.initializeQueue()
-
-        patient = intent.getSerializableExtra("patient") as Patient
 
         ProfilePetitions.getProfileInfo(patient)
 
         binding.addMedButt.setOnClickListener(){
-            val intent = Intent(this,ActivityAddMedication::class.java)
-            intent.putExtra("patient",patient)
+            val intent = Intent(contextObj, ActivityAddMedication::class.java)
+            intent.putExtra("patient", patient)
             startActivity(intent)
         }
 
         binding.addManifButt.setOnClickListener{
-            val intent = Intent(this,ActivityRegisterManifestation::class.java)
-            intent.putExtra("patient",patient)
+            val intent = Intent(contextObj, ActivityRegisterManifestation::class.java)
+            intent.putExtra("patient", patient)
             startActivity(intent)
         }
-
-        binding.historyButt.setOnClickListener(){
-            val intent = Intent(this,ActivityCalendar::class.java)
-            intent.putExtra("patient",patient)
-            startActivity(intent)
-        }
-
-        binding.historyButt.setOnClickListener(){
-            val intent = Intent(this,ActivityCalendar::class.java)
-            intent.putExtra("patient",patient)
-            startActivity(intent)
-        }
-
-        ProfilePetitions.initializeQueue()
-        MedicationPetitions.initializeQueue()
-        ManifestationPetitions.initializeQueue()
     }
 
-    companion object{
-
-        private lateinit var contextObj: Context
-        private lateinit var binding : ActivityProfileBinding
+    companion object {
+        private lateinit var binding: FragmentProfileBinding
         private lateinit var listManifestations: MutableList<Manifestation>
-        lateinit var patient :Patient
+
+        private val contextObj = MainActivity.getContext()
+        private var patient = MainActivity.getPatient()
 
         fun startProfile(json : String){
             ProfileLogic.setUpInfo(json)
         }
 
-        fun getContext() : Context{
+        fun getContext() : Context {
             return contextObj
         }
 
@@ -101,6 +96,10 @@ class ActivityProfile : AppCompatActivity() {
             binding.patientNameText.text = "${patient.name} ${patient.surname}"
             binding.patientWeightText.text = patient.weight.toString() + " kg"
             binding.patientHeigthText.text = patient.height.toString() + " m"
+        }
+
+        fun updatePatient(patient: Patient) {
+            this.patient = patient
         }
     }
 }

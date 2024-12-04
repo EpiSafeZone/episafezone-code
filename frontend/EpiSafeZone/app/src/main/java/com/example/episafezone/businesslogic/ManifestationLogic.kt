@@ -10,11 +10,12 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.episafezone.ActivityEditManifestation
-import com.example.episafezone.ActivityProfile
 import com.example.episafezone.ActivityRegisterManifestation
+import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.databinding.ActivityEditManifestationBinding
 import com.example.episafezone.databinding.ActivityRegisterManifestationBinding
+import com.example.episafezone.fragments.ProfileFragment
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.network.ManifestationPetitions
 
@@ -40,8 +41,8 @@ object ManifestationLogic {
         val context = ActivityRegisterManifestation.getContext()
         if(success){
             Toast.makeText(context, "Manifestación registrada correctamente!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(context, ActivityProfile::class.java)
-            intent.putExtra("patient", ActivityProfile.patient)
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra("load", "profile")
             context.startActivity(intent)
         } else {
             Toast.makeText(context, "Error registrando la manifestación.", Toast.LENGTH_SHORT).show()
@@ -79,8 +80,8 @@ object ManifestationLogic {
         val context = ActivityEditManifestation.getContext()
         if(success){
             Toast.makeText(context, "Manifestación editada correctamente!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(context, ActivityProfile::class.java)
-            intent.putExtra("patient", ActivityProfile.patient)
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra("load", "profile")
             context.startActivity(intent)
         } else {
             Toast.makeText(context, "Error editando la manifestación.", Toast.LENGTH_SHORT).show()
@@ -89,10 +90,10 @@ object ManifestationLogic {
 
     private fun deleteManifestation(manifestation: Manifestation) {
         ManifestationPetitions.deleteManifestation(manifestation)
-        var oldList = ActivityProfile.getListManifestations()
+        var oldList = ProfileFragment.getListManifestations()
         oldList.remove(manifestation)
         var newList = oldList
-        ActivityProfile.updateListOfManifestations(newList)
+        ProfileFragment.updateListOfManifestations(newList)
     }
 
     fun responseDeleteManifestation(success: Boolean, manifestation: Manifestation) {
@@ -101,10 +102,10 @@ object ManifestationLogic {
             Toast.makeText(context, "Manifestación eliminada correctamente!", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(context, "Error eliminando la manifestación.", Toast.LENGTH_SHORT).show()
-            var oldList = ActivityProfile.getListManifestations()
+            var oldList = ProfileFragment.getListManifestations()
             oldList.add(manifestation)
             var newList = oldList
-            ActivityProfile.updateListOfManifestations(newList)
+            ProfileFragment.updateListOfManifestations(newList)
         }
     }
 

@@ -8,11 +8,12 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.episafezone.BuildConfig
-import com.example.episafezone.ActivityProfile
+import com.example.episafezone.MainActivity
 import com.example.episafezone.businesslogic.ManifestationLogic
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient
+import kotlinx.coroutines.MainScope
 import org.json.JSONObject
 
 object ManifestationPetitions {
@@ -23,7 +24,7 @@ object ManifestationPetitions {
     lateinit var orderVolleyQueue: RequestQueue
 
     fun initializeQueue(){
-        orderVolleyQueue = Volley.newRequestQueue(ActivityProfile.getContext())
+        orderVolleyQueue = Volley.newRequestQueue(MainActivity.getContext())
     }
 
     fun addManifestation(manifestation: Manifestation, patientId: Int) {

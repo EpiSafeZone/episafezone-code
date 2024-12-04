@@ -4,8 +4,8 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.episafezone.ActivityProfile
 import com.example.episafezone.BuildConfig
+import com.example.episafezone.MainActivity
 import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Patient
@@ -19,7 +19,7 @@ object MedicationPetitions {
     lateinit var orderVolleyQueue: RequestQueue
 
     fun initializeQueue(){
-        orderVolleyQueue = Volley.newRequestQueue(ActivityProfile.getContext())
+        orderVolleyQueue = Volley.newRequestQueue(MainActivity.getContext())
     }
 
     ////TODO("Terminar endpoint")

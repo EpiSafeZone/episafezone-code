@@ -72,7 +72,6 @@ object ChronometerLogic {
         ChronometerFragment.chronometer.stop()
         timerStarted = false
         val elapsedTime = getElapsedTime(binding)
-        // TODO: Implementar logica registrar crisis
         ChronometerFragment.startCrisisRegister(elapsedTime)
         Toast.makeText(ChronometerFragment.getContext(), "Parar timer", Toast.LENGTH_SHORT).show()
     }

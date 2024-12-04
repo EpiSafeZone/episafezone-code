@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ActivitySettings"
+            android:exported="false" />
+        <activity
             android:name=".ActivityEditMedication"
             android:exported="false" />
         <activity

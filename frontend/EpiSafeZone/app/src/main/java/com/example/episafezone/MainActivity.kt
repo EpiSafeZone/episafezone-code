@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         val load = intent.getStringExtra("load") ?: ""
 
-        val patientListFragment = PatientListFragment()
-
         if(load == "profile") {
             changeToProfile()
         } else if (load == "calendar") {

@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.time.LocalTime;
 
 @Entity(name = "shared_with")
 public class SharedWith {
@@ -17,17 +16,17 @@ public class SharedWith {
     private Boolean registerCrisisPermision;
     private Boolean profilePermision;
     private Boolean medicinePermision;
-    private Boolean masterPermision;
+    private Boolean tutorPermision;
 
     public SharedWith(Integer tutorSharing, Integer tutorReceiving, Integer patient, Boolean registerCrisisPermision,
-                      Boolean profilePermision, Boolean medicinePermision, Boolean masterPermision) {
+                      Boolean profilePermision, Boolean medicinePermision, Boolean tutorPermision) {
         this.tutorSharing = tutorSharing;
         this.tutorReceiving = tutorReceiving;
         this.patient = patient;
         this.registerCrisisPermision = registerCrisisPermision;
         this.profilePermision = profilePermision;
         this.medicinePermision = medicinePermision;
-        this.masterPermision = masterPermision;
+        this.tutorPermision = tutorPermision;
     }
 
     public SharedWith(){}
@@ -88,11 +87,11 @@ public class SharedWith {
         this.medicinePermision = medicinePermision;
     }
 
-    public Boolean getMasterPermision() {
-        return masterPermision;
+    public Boolean getTutorPermision() {
+        return tutorPermision;
     }
 
-    public void setMasterPermision(Boolean masterPermision) {
-        this.masterPermision = masterPermision;
+    public void setTutorPermision(Boolean tutorPermision) {
+        this.tutorPermision = tutorPermision;
     }
 }

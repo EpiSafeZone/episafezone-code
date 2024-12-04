@@ -7,16 +7,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Chronometer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityAddMedication
 import com.example.episafezone.ActivityRegisterManifestation
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
+import com.example.episafezone.adapter.DisplayPossibleManifestations
 import com.example.episafezone.adapter.ManifestAdapter
 import com.example.episafezone.adapter.MedicationAdapter
 import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.businesslogic.ProfileLogic
+import com.example.episafezone.businesslogic.StartCrisisLogic
+import com.example.episafezone.databinding.FragmentChronometerBinding
 import com.example.episafezone.databinding.FragmentPatientListBinding
 import com.example.episafezone.databinding.FragmentProfileBinding
 import com.example.episafezone.models.Manifestation
@@ -26,43 +30,44 @@ import com.example.episafezone.network.ManifestationPetitions
 import com.example.episafezone.network.MedicationPetitions
 import com.example.episafezone.network.PatientsListPetitions
 import com.example.episafezone.network.ProfilePetitions
+import com.example.episafezone.network.StartCrisisPetitions
 
-class ProfileFragment : Fragment(R.layout.fragment_profile) {
+class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment_chronometer) {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
+        binding = FragmentChronometerBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ProfilePetitions.initializeQueue()
-        MedicationPetitions.initializeQueue()
-        ManifestationPetitions.initializeQueue()
+        chronometer = binding.chrono
 
-        ProfilePetitions.getProfileInfo(patient)
+        StartCrisisPetitions.initializeQueue();
 
-        binding.addMedButt.setOnClickListener(){
-            val intent = Intent(contextObj, ActivityAddMedication::class.java)
-            intent.putExtra("patient", patient)
-            startActivity(intent)
+        StartCrisisLogic.getProfileLogic(patient)
+
+        if(startChrono){
+            StartCrisisLogic.startStopTimer(binding)
         }
 
-        binding.addManifButt.setOnClickListener{
-            val intent = Intent(contextObj, ActivityRegisterManifestation::class.java)
-            intent.putExtra("patient", patient)
-            startActivity(intent)
+        binding.button.setOnClickListener {
+            StartCrisisLogic.startStopTimer(binding)
         }
     }
 
     companion object {
-        private lateinit var binding: FragmentProfileBinding
-        private lateinit var listManifestations: MutableList<Manifestation>
+        lateinit var chronometer: Chronometer
+
+        private lateinit var binding: FragmentChronometerBinding
+        private lateinit var manifestations: MutableList<Manifestation>
+
+        var time = 0.0
 
         private val contextObj = MainActivity.getContext()
         private var patient = MainActivity.getPatient()
@@ -75,27 +80,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             return contextObj
         }
 
-        fun updateListOfMedications(list : MutableList<Medication>){
-            binding.medicamentsRecycler.adapter =  MedicationAdapter(list, contextObj,patient)
-            binding.medicamentsRecycler.layoutManager = LinearLayoutManager(contextObj)
+        fun getBinding() : FragmentChronometerBinding {
+            return binding
         }
 
-
-        fun getListManifestations() : MutableList<Manifestation>{
-            return listManifestations
-        }
-
-        fun updateListOfManifestations(list: MutableList<Manifestation>){
-            listManifestations = list;
-            binding.manifestRecycler.adapter = ManifestAdapter(contextObj,list);
-            binding.manifestRecycler.layoutManager = LinearLayoutManager(contextObj);
-        }
-
-        fun updatePatienInf(patient: Patient){
-            binding.patientAgeText.text=patient.age.toString()
-            binding.patientNameText.text = "${patient.name} ${patient.surname}"
-            binding.patientWeightText.text = patient.weight.toString() + " kg"
-            binding.patientHeigthText.text = patient.height.toString() + " m"
+        fun updatePosibleManifestations(list: MutableList<Manifestation>) {
+            manifestations = list
+            binding.informationScrollView.adapter = DisplayPossibleManifestations(contextObj, list)
+            binding.informationScrollView.layoutManager = LinearLayoutManager(contextObj)
         }
 
         fun updatePatient(patient: Patient) {

@@ -4,8 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.episafezone.businesslogic.StartCrisisLogic
 import com.example.episafezone.databinding.ActivityMainBinding
 import com.example.episafezone.fragments.CalendarFragment
+import com.example.episafezone.fragments.ChronometerFragment
 import com.example.episafezone.fragments.PatientListFragment
 import com.example.episafezone.fragments.ProfileFragment
 import com.example.episafezone.models.Patient
@@ -26,50 +28,57 @@ class MainActivity : AppCompatActivity() {
         val patientListFragment = PatientListFragment()
 
         if(load == "profile") {
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fragmentLayout, ProfileFragment(patient))
-                commit()
-            }
+            changeToProfile()
         } else if (load == "calendar") {
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fragmentLayout, CalendarFragment(patient))
-                commit()
-            }
-        } else if (load == "startCrisis") {
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fragmentLayout, ChronometerFragment(patient))
-                commit()
-            }
+            changeToCalendar()
+        } else if (load == "chronometer") {
+            changeToStartCrisis(false)
         } else {
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fragmentLayout, patientListFragment)
-                commit()
-            }
+            changeToPatientList()
         }
 
         binding.home.setOnClickListener{
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fragmentLayout, patientListFragment)
-                commit()
-            }
+            changeToPatientList()
         }
 
         binding.profile.setOnClickListener{
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fragmentLayout, ProfileFragment(patient))
-                commit()
-            }
+            changeToProfile()
         }
 
         binding.calendar.setOnClickListener{
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fragmentLayout, CalendarFragment(patient))
-                commit()
-            }
+            changeToCalendar()
         }
 
         binding.chronometer.setOnClickListener{
+            changeToStartCrisis(false)
+        }
+    }
 
+    fun changeToStartCrisis(startChrono: Boolean) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentLayout, ChronometerFragment(startChrono))
+            commit()
+        }
+    }
+
+    fun changeToCalendar() {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentLayout, CalendarFragment())
+            commit()
+        }
+    }
+
+    fun changeToProfile() {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentLayout, ProfileFragment())
+            commit()
+        }
+    }
+
+    fun changeToPatientList() {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentLayout, PatientListFragment())
+            commit()
         }
     }
 
@@ -84,10 +93,17 @@ class MainActivity : AppCompatActivity() {
 
         fun updatePatient(patient: Patient) {
             this.patient = patient
+            ProfileFragment.updatePatient(patient)
+            CalendarFragment.updatePatient(patient)
+            ChronometerFragment.updatePatient(patient)
+        }
+
+        fun getPatient() : Patient {
+            return patient
         }
 
         fun changeToStartCrisis() {
-            // TODO: Implement this.
+            (contextObj as MainActivity).changeToStartCrisis(true)
         }
     }
 }

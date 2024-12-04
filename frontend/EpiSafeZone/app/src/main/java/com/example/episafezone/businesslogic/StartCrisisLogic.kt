@@ -5,9 +5,9 @@ import android.os.SystemClock
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
-import com.example.episafezone.ActivityStartCrisis
+import com.example.episafezone.fragments.ChronometerFragment
 import com.example.episafezone.R
-import com.example.episafezone.databinding.ActivityStartCrisisBinding
+import com.example.episafezone.databinding.FragmentChronometerBinding
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.StartCrisisPetitions
@@ -34,7 +34,7 @@ object StartCrisisLogic {
         val jsonObject= JSONObject(json)
         val manifestationsJSON = jsonObject.getJSONArray("manifestations")
         val manifestations = getManifestationList(manifestationsJSON)
-        ActivityStartCrisis.updatePosibleManifestations(manifestations)
+        ChronometerFragment.updatePosibleManifestations(manifestations)
     }
 
     fun getManifestationList(jsonArray:JSONArray): MutableList<Manifestation> {
@@ -52,28 +52,28 @@ object StartCrisisLogic {
         return list
     }
 
-    fun startStopTimer(binding: ActivityStartCrisisBinding) {
+    fun startStopTimer(binding: FragmentChronometerBinding) {
         if(timerStarted)
             stopTimer(binding)
         else
             startTimer(binding)
     }
 
-    private fun startTimer(binding: ActivityStartCrisisBinding) {
+    private fun startTimer(binding: FragmentChronometerBinding) {
         timerStarted = true
-        ActivityStartCrisis.chronometer.base = SystemClock.elapsedRealtime()
-        ActivityStartCrisis.chronometer.start()
+        ChronometerFragment.chronometer.base = SystemClock.elapsedRealtime()
+        ChronometerFragment.chronometer.start()
     }
 
-    private fun stopTimer(binding: ActivityStartCrisisBinding) {
-        ActivityStartCrisis.chronometer.stop()
+    private fun stopTimer(binding: FragmentChronometerBinding) {
+        ChronometerFragment.chronometer.stop()
         timerStarted = false
         val elapsedTime = getElapsedTime(binding)
-        // TODO: Implementar logica registrar manifestación
-        Toast.makeText(ActivityStartCrisis.getContext(), "Parar timer", Toast.LENGTH_SHORT).show()
+        // TODO: Implementar logica registrar crisis
+        Toast.makeText(ChronometerFragment.getContext(), "Parar timer", Toast.LENGTH_SHORT).show()
     }
 
-    private fun getElapsedTime(binding: ActivityStartCrisisBinding): Long {
+    private fun getElapsedTime(binding: FragmentChronometerBinding): Long {
         val elapsedMillis = SystemClock.elapsedRealtime() - binding.chrono.base
         return elapsedMillis / 1000
     }

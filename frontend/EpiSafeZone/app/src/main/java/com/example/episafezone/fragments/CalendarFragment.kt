@@ -19,7 +19,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class CalendarFragment (val patient: Patient) : Fragment(R.layout.fragment_calendar) {
+class CalendarFragment : Fragment(R.layout.fragment_calendar) {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +55,7 @@ class CalendarFragment (val patient: Patient) : Fragment(R.layout.fragment_calen
         private lateinit var calendarDay : CalendarDay
         private lateinit var list : MutableList<Crisis>
 
+        private var patient = MainActivity.getPatient()
         private val contextObj = MainActivity.getContext()
 
         fun getContext() : Context {
@@ -70,6 +71,10 @@ class CalendarFragment (val patient: Patient) : Fragment(R.layout.fragment_calen
             this.list = list
             CalendarLogic.showCrisis(binding, calendarDay,list)
             CalendarLogic.setUpCalendar(binding, list)
+        }
+
+        fun updatePatient(patient: Patient){
+            this.patient = patient
         }
     }
 }

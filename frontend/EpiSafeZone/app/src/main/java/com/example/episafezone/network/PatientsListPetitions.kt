@@ -40,12 +40,12 @@ object PatientsListPetitions {
 
     fun saveDevice(device : Device){
         val id = device.id
-        println("$url/device/save/$id")
+        println("$url/device/create")
         val json = JSONObject()
         json.put("token",device.token)
         json.put("user",device.user)
         val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, "$url/device/save/$id", json,
+            Request.Method.GET, "$url/device/create", json,
             {response-> },
             {error->
                 println(error.message)

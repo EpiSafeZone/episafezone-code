@@ -15,6 +15,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import android.content.pm.PackageManager
 import android.os.Build
 import android.preference.PreferenceManager
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.episafezone.models.Device
@@ -87,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                     println("Error en register device")
                 }else{
                     val token = task.getResult()
+                    Log.d("Token",token.toString())
                     val preferences = PreferenceManager.getDefaultSharedPreferences(this)
                     val tokenSaved = preferences.getString("DEVIDE_ID","")
                     if(token != null && (!token.equals(tokenSaved))){

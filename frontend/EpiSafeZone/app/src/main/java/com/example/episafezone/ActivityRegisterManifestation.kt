@@ -26,7 +26,7 @@ class ActivityRegisterManifestation : AppCompatActivity() {
 
         contextObj = this
 
-        var patient = intent.getSerializableExtra("patient") as Patient
+        var patient = MainActivity.getPatient()
 
         binding.nameTextBox.textView.setHint("Nombre")
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.episafezone.ActivityRegisterManifestation
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.adapter.PatientListAdapter
@@ -41,12 +42,17 @@ class PatientListFragment : Fragment(R.layout.fragment_patient_list) {
 
         private val contextObj = MainActivity.getContext()
 
-        fun startProfileActivity(patient: Patient){
+        fun changePatient(patient: Patient){
             MainActivity.updatePatient(patient)
         }
 
-        fun loadStartCrisis(patient : Patient){
+        fun loadStartCrisis(){
             MainActivity.changeToStartCrisis()
+        }
+
+        fun startRegisterManifestation(){
+            val intent = Intent(contextObj, ActivityRegisterManifestation::class.java)
+            contextObj.startActivity(intent)
         }
     }
 }

@@ -16,8 +16,4 @@ object PatientsListLogic {
         list.add(Patient(2, "Cesar", "Gimeno", 130, 60, Date(), 21, "red"))
         return list;
     }
-
-    fun startProfile(json : String,patient:Patient){
-        PatientListFragment.startProfileActivity(patient)
-    }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.episafezone.fragments.PatientListFragment
@@ -34,15 +35,16 @@ class PatientListAdapter(var context: Context?, private var list: List<Patient>)
     override fun onBindViewHolder(holder: PatientListViewHolder, position: Int) {
         holder.patientName.text = list[position].name
         holder.registerCrisisButton.setOnClickListener {
-            ActivityPatientsList.startRegisterManifestation(list[position])
+            PatientListFragment.startRegisterManifestation()
         }
         holder.startCrisisButton.setOnClickListener {
-            PatientListFragment.loadStartCrisis(list[position])
+            PatientListFragment.loadStartCrisis()
         }
+        //TODO terminar imagen cuando funcione.
         //holder.patientImage.setImageIcon( list[position].profilePicture )
 
         holder.patientImage.setOnClickListener {
-            PatientListFragment.startProfileActivity(list[position])
+            PatientListFragment.changePatient(list[position])
         }
     }
 }

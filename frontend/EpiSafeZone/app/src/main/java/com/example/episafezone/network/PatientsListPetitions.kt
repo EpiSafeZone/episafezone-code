@@ -21,23 +21,6 @@ object PatientsListPetitions {
         orderVolleyQueue = Volley.newRequestQueue(MainActivity.getContext())
     }
 
-    fun getProfileInfo(patient : Patient){
-        val name = patient.id
-        println("$url/patient/info/$name")
-        val json = JSONObject()
-        json.put("id", name)
-        val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, "$url/patient/info/$name", json,
-            {response->
-                println(response.toString())
-                PatientsListLogic.startProfile(response.toString(),patient)
-            },
-            {error->
-                println(error.message)
-            })
-        orderVolleyQueue.add(jsonRequest)
-    }
-
     fun saveDevice(device : Device){
         val json = JSONObject()
         json.put("token",device.token)

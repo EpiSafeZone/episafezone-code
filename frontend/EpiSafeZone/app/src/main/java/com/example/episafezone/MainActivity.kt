@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity() {
             changeToPatientList()
         }
 
+        binding.settings.setOnClickListener{
+            // TODO poner llamada a la pestaña de settings
+        }
+
         binding.home.setOnClickListener{
             changeToPatientList()
         }

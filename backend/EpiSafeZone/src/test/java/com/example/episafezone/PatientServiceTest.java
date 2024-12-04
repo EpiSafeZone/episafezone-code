@@ -71,7 +71,7 @@ public class PatientServiceTest {
         when(tutorService.findById(6)).thenReturn(tutor5);
 
         //Se Comparte el paciente con dos tutores
- Sergio/backend/compartir-permisos
+ //Sergio/backend/compartir-permisos
         SharedWith sharedWith = new SharedWith(tutor.getId(),tutor3.getId(), patient.getId(), null, null, null, null);
         SharedWith sharedWith2 = new SharedWith(tutor.getId(),tutor4.getId(), patient.getId(), null, null, null, null);
 

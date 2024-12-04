@@ -37,15 +37,16 @@ object PatientsListPetitions {
             })
         orderVolleyQueue.add(jsonRequest)
     }
+
     fun saveDevice(device : Device){
         val id = device.id
         println("$url/device/save/$id")
         val json = JSONObject()
+        json.put("token",device.token)
+        json.put("user",device.user)
         val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, "$url/patient/info/$id", json,
-            {response->
-
-            },
+            Request.Method.GET, "$url/device/save/$id", json,
+            {response-> },
             {error->
                 println(error.message)
             })

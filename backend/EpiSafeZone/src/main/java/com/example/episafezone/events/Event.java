@@ -2,7 +2,7 @@ package com.example.episafezone.events;
 
 import java.time.LocalTime;
 
-public class Event {
+public abstract class Event {
     private String description;
     private LocalTime time;
 

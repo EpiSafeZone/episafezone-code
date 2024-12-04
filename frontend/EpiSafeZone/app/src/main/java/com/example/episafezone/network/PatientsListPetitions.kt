@@ -30,7 +30,7 @@ object PatientsListPetitions {
             Request.Method.GET, "$url/patient/info/$name", json,
             {response->
                 println(response.toString())
-                PatientsListLogic.startActivityProfile(response.toString(),patient)
+                PatientsListLogic.startProfile(response.toString(),patient)
             },
             {error->
                 println(error.message)

@@ -80,6 +80,7 @@ dependencies {
     implementation(libs.appium.java.client)
     implementation(libs.logback.classic)
     implementation(libs.selenium.java.v4100)
+    implementation(libs.firebase.common.ktx)
     testImplementation(libs.selenium.java)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

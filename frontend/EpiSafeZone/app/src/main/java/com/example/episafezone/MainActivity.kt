@@ -2,9 +2,7 @@ package com.example.episafezone
 
 import android.content.Context
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.episafezone.businesslogic.ChronometerLogic
 import com.example.episafezone.databinding.ActivityMainBinding
 import com.example.episafezone.fragments.CalendarFragment
 import com.example.episafezone.fragments.ChronometerFragment
@@ -12,6 +10,16 @@ import com.example.episafezone.fragments.PatientListFragment
 import com.example.episafezone.fragments.ProfileFragment
 import com.example.episafezone.models.Patient
 import java.util.Date
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
+import android.content.pm.PackageManager
+import android.os.Build
+import android.preference.PreferenceManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.example.episafezone.models.Device
+import com.example.episafezone.models.User
+import com.example.episafezone.network.PatientsListPetitions
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater);
         setContentView(binding.root)
         contextObj = this
+
+        FirebaseApp.initializeApp(this);
 
         val load = intent.getStringExtra("load") ?: ""
 
@@ -52,6 +62,42 @@ class MainActivity : AppCompatActivity() {
         binding.chronometer.setOnClickListener{
             changeToStartCrisis(false)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),
+                    1
+                )
+            }
+        }
+        this.registerDevice();
+    }
+
+    private fun registerDevice(){
+
+        FirebaseMessaging.getInstance().getToken()
+            .addOnCompleteListener{task->
+                if(!task.isSuccessful){
+                    println("Error en register device")
+                }else{
+                    val token = task.getResult()
+                    val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+                    val tokenSaved = preferences.getString("DEVIDE_ID","")
+                    if(token != null && (!token.equals(tokenSaved))){
+                        //TODO(Hacer inicio de sesión temporal para que user sea dinámico)
+                        val user1 = User(1);
+                        val device = Device(0,token,user1.id)
+
+                        PatientsListPetitions.saveDevice(device)
+                    }
+                }
+            }
     }
 
     fun changeToStartCrisis(startChrono: Boolean) {

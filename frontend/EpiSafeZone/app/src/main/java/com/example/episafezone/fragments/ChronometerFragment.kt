@@ -56,11 +56,11 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
         if(startChrono){
             binding.button.text = "Detener"
             binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
-            ChronometerLogic.startStopTimer(binding)
+            ChronometerLogic.startStopTimer(binding,patient)
         }
 
         binding.button.setOnClickListener {
-            ChronometerLogic.startStopTimer(binding)
+            ChronometerLogic.startStopTimer(binding,patient)
         }
     }
 

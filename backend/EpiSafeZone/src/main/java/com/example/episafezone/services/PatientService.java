@@ -7,6 +7,7 @@ import com.example.episafezone.DTO.ManifestationsDTO.ManifestationNameDTO;
 import com.example.episafezone.DTO.MedicationDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
+import com.example.episafezone.DTO.SharedTutorDTO;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.*;
 import com.example.episafezone.repositories.*;
@@ -29,6 +30,9 @@ public class PatientService implements PatientServiceInteface {
     @Lazy
     @Autowired
     ManifestationService manifestationService;
+
+    @Autowired
+    TutorService tutorService;
 
     @Autowired
     HasManifestationService hasManifestationService;
@@ -58,12 +62,13 @@ public class PatientService implements PatientServiceInteface {
     }
 
     @Override
-    public PatientInfoDTO getPatientProfileInfo(Integer patientId) {
+    public PatientInfoDTO getPatientProfileInfo(Integer patientId, Integer userId) {
         Optional<Patient> patientOpt = patientRepo.findById(patientId);
         if (patientOpt.isPresent()) {
             Patient patient = patientOpt.get();
             List<Medication> medications = medicationRepo.findByPatientMedicated(patientId);
             List<Manifestation> manifestations = manifestationService.getManifestationFromPatient(patientId);
+            List<Tutor> sharedTutors = tutorService.findTutorsShared(patientId, userId);
 
             List<MedicationDTO> medicationDTOList = medications.stream()
                     .map(MedicationDTO::new)
@@ -73,10 +78,15 @@ public class PatientService implements PatientServiceInteface {
                     .map(ManifestationDTO::new)
                     .collect(Collectors.toList());
 
+            List<SharedTutorDTO> sharedTutorDTOList = sharedTutors.stream()
+                    .map(SharedTutorDTO::new)
+                    .collect(Collectors.toList());
+
             return new PatientInfoDTO(
                     patient,
                     medicationDTOList,
-                    manifestationDTOList
+                    manifestationDTOList,
+                    sharedTutorDTOList
 
             );
         } else {

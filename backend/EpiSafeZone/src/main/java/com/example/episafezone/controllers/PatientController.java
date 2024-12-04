@@ -34,8 +34,8 @@ public class PatientController {
     }
 
     @GetMapping(path="/info/{id}")
-    public @ResponseBody PatientInfoDTO getPatientInfo(@PathVariable Integer id) {
-        return patientService.getPatientProfileInfo(id);
+    public @ResponseBody PatientInfoDTO getPatientInfo(@PathVariable Integer patientId, @PathVariable Integer userId) {
+        return patientService.getPatientProfileInfo(patientId, userId);
     }
         @GetMapping(path="/info/manifestations/{id}")
     public @ResponseBody List<HasManifestation> getManifestations(@PathVariable Integer id) {

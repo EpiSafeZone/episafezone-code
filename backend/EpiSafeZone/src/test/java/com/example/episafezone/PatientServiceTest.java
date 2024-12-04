@@ -71,8 +71,9 @@ public class PatientServiceTest {
         when(tutorService.findById(6)).thenReturn(tutor5);
 
         //Se Comparte el paciente con dos tutores
-        SharedWith sharedWith = new SharedWith(tutor.getId(),tutor3.getId(), patient.getId(), null, null, null, null, null);
-        SharedWith sharedWith2 = new SharedWith(tutor.getId(),tutor4.getId(), patient.getId(), null, null, null, null, null);
+ //Sergio/backend/compartir-permisos
+        SharedWith sharedWith = new SharedWith(tutor.getId(),tutor3.getId(), patient.getId(), null, null, null, null);
+        SharedWith sharedWith2 = new SharedWith(tutor.getId(),tutor4.getId(), patient.getId(), null, null, null, null);
 
         when(sharedWithRepo.findAll()).thenReturn(Arrays.asList(sharedWith, sharedWith2));
 

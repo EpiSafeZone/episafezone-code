@@ -2,6 +2,7 @@ package com.example.episafezone.DTO.PatientsDTO;
 
 import com.example.episafezone.DTO.ManifestationsDTO.ManifestationDTO;
 import com.example.episafezone.DTO.MedicationDTO;
+import com.example.episafezone.DTO.SharedTutorDTO;
 import com.example.episafezone.models.Patient;
 
 import java.io.Serializable;
@@ -20,9 +21,12 @@ public class PatientInfoDTO implements Serializable {
 
     private List<MedicationDTO> medications;
     private List<ManifestationDTO> manifestations;
+    private List<SharedTutorDTO> sharedTutors;
 
 
-    public PatientInfoDTO(Patient patient, List<MedicationDTO> medications, List<ManifestationDTO> manifestations) {
+
+    public PatientInfoDTO(Patient patient, List<MedicationDTO> medications, List<ManifestationDTO> manifestations,
+                          List<SharedTutorDTO> sharedTutors) {
         this.id = patient.getId();
         this.name = patient.getName();
         this.surname = patient.getSurname();
@@ -33,6 +37,7 @@ public class PatientInfoDTO implements Serializable {
         this.color = patient.getColor();
         this.medications = medications;
         this.manifestations = manifestations;
+        this.sharedTutors = sharedTutors;
     }
 
     public Integer getId() {
@@ -113,5 +118,13 @@ public class PatientInfoDTO implements Serializable {
 
     public void setManifestations(List<ManifestationDTO> manifestations) {
         this.manifestations = manifestations;
+    }
+
+    public List<SharedTutorDTO> getSharedTutors() {
+        return sharedTutors;
+    }
+
+    public void setSharedTutors(List<SharedTutorDTO> sharedTutors) {
+        this.sharedTutors = sharedTutors;
     }
 }

@@ -10,5 +10,5 @@ public interface PatientServiceInteface {
     List<Patient> findAll();
     Patient findById(int id);
 
-    PatientInfoDTO getPatientProfileInfo(Integer patientId);
+    PatientInfoDTO getPatientProfileInfo(Integer patientId, Integer userId);
 }

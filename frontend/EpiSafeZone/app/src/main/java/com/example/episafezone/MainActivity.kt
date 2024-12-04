@@ -1,6 +1,7 @@
 package com.example.episafezone
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.episafezone.databinding.ActivityMainBinding
@@ -47,7 +48,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.settings.setOnClickListener{
-            // TODO poner llamada a la pestaña de settings
+            val intent = Intent(this, ActivitySettings::class.java)
+            startActivity(intent)
         }
 
         binding.home.setOnClickListener{

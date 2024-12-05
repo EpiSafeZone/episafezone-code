@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import java.util.Calendar
@@ -18,6 +19,8 @@ class ActivitySettings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        // Notifications
         val notificationsSwitch: SwitchCompat = findViewById(R.id.notificationsSwitch)
         val notificationsConstraintLayout: View = findViewById(R.id.notificationsConstraintLayout)
         val fromButton: Button = findViewById(R.id.fromButton)
@@ -37,6 +40,34 @@ class ActivitySettings : AppCompatActivity() {
         }
         untilButton.setOnClickListener {
             launchTimePicker(untilHourText)
+        }
+
+        // Share Profile
+        val shareProfileSwitch: SwitchCompat = findViewById(R.id.shareProfileSwitch)
+        val shareProfileConstraintLayout: View = findViewById(R.id.shareProfileConstraintLayout)
+        val permission1CheckBox: CheckBox = findViewById(R.id.permission1CheckBox)
+        val permission2CheckBox: CheckBox = findViewById(R.id.permission2CheckBox)
+        val permission3CheckBox: CheckBox = findViewById(R.id.permission3CheckBox)
+        val permission4CheckBox: CheckBox = findViewById(R.id.permission4CheckBox)
+        val shareEmailEditText: TextView = findViewById(R.id.shareEmailEditText)
+        val shareProfileButton: Button = findViewById(R.id.shareProfileButton)
+        shareProfileSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                shareProfileConstraintLayout.visibility = View.VISIBLE
+            } else {
+                shareProfileConstraintLayout.visibility = View.GONE
+            }
+        }
+        shareProfileButton.setOnClickListener {
+            Toast.makeText(this, "¡Perfil compartido!", Toast.LENGTH_SHORT).show()
+            //TODO: Share profile
+
+            // Set everything to default
+            permission1CheckBox.isChecked = false
+            permission2CheckBox.isChecked = false
+            permission3CheckBox.isChecked = false
+            permission4CheckBox.isChecked = false
+            shareEmailEditText.text = ""
         }
 
     }

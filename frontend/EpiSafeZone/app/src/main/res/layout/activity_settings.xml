@@ -1,220 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivitySettings">
 
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Ajustes"
-        android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/notificationsSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="Limitar horario de notificaciones  "
-        app:layout_constraintHeight_min="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleText" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/notificationsConstraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:background="@color/grey"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notificationsSwitch"
-        tools:visibility="visible">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/fromConstantText"
+            android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:text="Desde:"
+            android:layout_marginTop="16dp"
+            android:text="Ajustes"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/fromHourText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="00:00"
-            app:layout_constraintBottom_toBottomOf="@+id/fromConstantText"
-            app:layout_constraintStart_toEndOf="@+id/fromConstantText"
-            app:layout_constraintTop_toTopOf="@+id/fromConstantText" />
-
-        <Button
-            android:id="@+id/fromButton"
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/notificationsSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:text="Seleccionar"
-            app:layout_constraintBottom_toBottomOf="@+id/fromConstantText"
-            app:layout_constraintStart_toEndOf="@+id/fromHourText"
-            app:layout_constraintTop_toTopOf="@+id/fromConstantText" />
-
-        <TextView
-            android:id="@+id/untilConstantText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="24dp"
-            android:text="Hasta:"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="32dp"
+            android:text="Limitar horario de notificaciones  "
+            app:layout_constraintHeight_min="48dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fromConstantText" />
+            app:layout_constraintTop_toBottomOf="@id/titleText" />
 
-        <TextView
-            android:id="@+id/untilHourText"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/notificationsConstraintLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="00:00"
-            app:layout_constraintBottom_toBottomOf="@+id/untilConstantText"
-            app:layout_constraintEnd_toEndOf="@+id/fromHourText"
-            app:layout_constraintStart_toStartOf="@+id/fromHourText"
-            app:layout_constraintTop_toTopOf="@+id/untilConstantText" />
-
-        <Button
-            android:id="@+id/untilButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Seleccionar"
-            app:layout_constraintBottom_toBottomOf="@+id/untilConstantText"
-            app:layout_constraintEnd_toEndOf="@+id/fromButton"
-            app:layout_constraintStart_toStartOf="@+id/fromButton"
-            app:layout_constraintTop_toTopOf="@+id/untilConstantText" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:id="@+id/settingsDivider"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notificationsConstraintLayout" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/shareProfileSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="Compartir perfil  "
-        app:layout_constraintHeight_min="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsDivider" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/shareProfileConstraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:background="@color/grey"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shareProfileSwitch"
-        tools:visibility="visible">
-
-        <CheckBox
-            android:id="@+id/permission1CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:text="Registrar e iniciar crisis"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <CheckBox
-            android:id="@+id/permission2CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Seguimiento"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/permission1CheckBox" />
-
-        <CheckBox
-            android:id="@+id/permission3CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Medicamentos"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/permission2CheckBox" />
-
-        <CheckBox
-            android:id="@+id/permission4CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Otorgar permiso parental"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/permission3CheckBox" />
-
-        <TextView
-            android:id="@+id/emailConstantTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Email:"
-            app:layout_constraintBottom_toBottomOf="@+id/shareEmailEditText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/shareEmailEditText" />
-
-        <EditText
-            android:id="@+id/shareEmailEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="ejemplo@mail.com"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            app:layout_constraintStart_toEndOf="@+id/emailConstantTextView"
-            app:layout_constraintTop_toBottomOf="@+id/permission4CheckBox" />
-
-        <Button
-            android:id="@+id/shareButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp"
-            android:text="Compartir"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@color/grey"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shareEmailEditText" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/notificationsSwitch"
+            tools:visibility="visible">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/fromConstantText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Desde:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fromHourText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="00:00"
+                app:layout_constraintBottom_toBottomOf="@+id/fromConstantText"
+                app:layout_constraintStart_toEndOf="@+id/fromConstantText"
+                app:layout_constraintTop_toTopOf="@+id/fromConstantText" />
+
+            <Button
+                android:id="@+id/fromButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="Seleccionar"
+                app:layout_constraintBottom_toBottomOf="@+id/fromConstantText"
+                app:layout_constraintStart_toEndOf="@+id/fromHourText"
+                app:layout_constraintTop_toTopOf="@+id/fromConstantText" />
+
+            <TextView
+                android:id="@+id/untilConstantText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="24dp"
+                android:text="Hasta:"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fromConstantText" />
+
+            <TextView
+                android:id="@+id/untilHourText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                app:layout_constraintBottom_toBottomOf="@+id/untilConstantText"
+                app:layout_constraintEnd_toEndOf="@+id/fromHourText"
+                app:layout_constraintStart_toStartOf="@+id/fromHourText"
+                app:layout_constraintTop_toTopOf="@+id/untilConstantText" />
+
+            <Button
+                android:id="@+id/untilButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccionar"
+                app:layout_constraintBottom_toBottomOf="@+id/untilConstantText"
+                app:layout_constraintEnd_toEndOf="@+id/fromButton"
+                app:layout_constraintStart_toStartOf="@+id/fromButton"
+                app:layout_constraintTop_toTopOf="@+id/untilConstantText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/settingsDivider"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notificationsConstraintLayout" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/shareProfileSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Compartir perfil  "
+            app:layout_constraintHeight_min="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settingsDivider" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/shareProfileConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@color/grey"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shareProfileSwitch"
+            tools:visibility="visible">
+
+            <CheckBox
+                android:id="@+id/permission1CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Registrar e iniciar crisis"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/permission2CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Seguimiento"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/permission1CheckBox" />
+
+            <CheckBox
+                android:id="@+id/permission3CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Medicamentos"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/permission2CheckBox" />
+
+            <CheckBox
+                android:id="@+id/permission4CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Otorgar permiso parental"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/permission3CheckBox" />
+
+            <TextView
+                android:id="@+id/emailConstantTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Email:"
+                app:layout_constraintBottom_toBottomOf="@+id/shareEmailEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/shareEmailEditText" />
+
+            <EditText
+                android:id="@+id/shareEmailEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="ejemplo@mail.com"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toEndOf="@+id/emailConstantTextView"
+                app:layout_constraintTop_toBottomOf="@+id/permission4CheckBox" />
+
+            <Button
+                android:id="@+id/shareButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                android:text="Compartir"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shareEmailEditText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

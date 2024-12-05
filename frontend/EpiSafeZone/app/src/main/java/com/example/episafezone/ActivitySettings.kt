@@ -17,13 +17,7 @@ import java.util.Calendar
 class ActivitySettings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_settings)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
         val notificationsSwitch: SwitchCompat = findViewById(R.id.notificationsSwitch)
         val notificationsConstraintLayout: View = findViewById(R.id.notificationsConstraintLayout)
         val fromButton: Button = findViewById(R.id.fromButton)

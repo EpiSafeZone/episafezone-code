@@ -58,7 +58,7 @@ public class UtilsTest {
         try(MockedStatic<SpringContext> mockedSpringContext = Mockito.mockStatic(SpringContext.class)){
             mockedSpringContext.when(() -> SpringContext.getBean(NotifyHoursRepository.class)).thenReturn(mockNotifyHoursRepository);
 
-            when(mockNotifyHoursRepository.findByPatientAndTutor(mockPatient, mockTutor)).thenReturn(mockNotifyHours);
+            when(mockNotifyHoursRepository.findByPatientAndTutor(mockPatient.getId(), mockTutor.getId())).thenReturn(mockNotifyHours);
             when(mockEvent.getTime()).thenReturn(LocalTime.of(10,0));
 
             Boolean result = Verify.VerifyHoursOfNotification(mockEvent, mockTutor, mockPatient);
@@ -76,7 +76,7 @@ public class UtilsTest {
         try(MockedStatic<SpringContext> mockedSpringContext = Mockito.mockStatic(SpringContext.class)){
             mockedSpringContext.when(() -> SpringContext.getBean(NotifyHoursRepository.class)).thenReturn(mockNotifyHoursRepository);
 
-            when(mockNotifyHoursRepository.findByPatientAndTutor(mockPatient, mockTutor)).thenReturn(mockNotifyHours);
+            when(mockNotifyHoursRepository.findByPatientAndTutor(mockPatient.getId(), mockTutor.getId())).thenReturn(mockNotifyHours);
             when(mockEvent.getTime()).thenReturn(LocalTime.of(8,0));
 
             Boolean result = Verify.VerifyHoursOfNotification(mockEvent, mockTutor, mockPatient);
@@ -95,7 +95,7 @@ public class UtilsTest {
         try(MockedStatic<SpringContext> mockedSpringContext = Mockito.mockStatic(SpringContext.class)){
             mockedSpringContext.when(() -> SpringContext.getBean(NotifyHoursRepository.class)).thenReturn(mockNotifyHoursRepository);
 
-            when(mockNotifyHoursRepository.findByPatientAndTutor(mockPatient, mockTutor)).thenReturn(null);
+            when(mockNotifyHoursRepository.findByPatientAndTutor(mockPatient.getId(), mockTutor.getId())).thenReturn(null);
 
             Boolean result = Verify.VerifyHoursOfNotification(mockEvent, mockTutor, mockPatient);
 

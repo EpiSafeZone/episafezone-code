@@ -38,7 +38,6 @@ public class PatientServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        SharedWithService.tutorService = tutorService; // Configurar manualmente la dependencia estática
     }
         @Test
     void testFindPatientTutors() {

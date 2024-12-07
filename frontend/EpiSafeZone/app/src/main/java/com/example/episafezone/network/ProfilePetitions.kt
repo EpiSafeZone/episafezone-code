@@ -5,10 +5,12 @@ import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.episafezone.fragments.ProfileFragment
 import com.example.episafezone.BuildConfig
 import com.example.episafezone.models.Patient
+import com.example.episafezone.models.User
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -23,12 +25,11 @@ object ProfilePetitions {
     }
 
     fun getProfileInfo(patient : Patient){
-        val name = patient.id
-        println("${url}/patient/info/$name")
-        val json = JSONObject()
-        json.put("id", name)
-        val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, "${url}/patient/info/$name", json,
+        val patientId = patient.id
+        val userId = User.getId()
+        println("${url}/patient/info/$patientId/$userId")
+        val stringRequest = StringRequest(
+            Request.Method.GET, "${url}/patient/info/$patientId/$userId",
             {response->
                 Log.d("GetProfileInfoResponse",response.toString())
                 ProfileFragment.startProfile(response.toString());
@@ -36,7 +37,7 @@ object ProfilePetitions {
             {error->
                 Log.d("GetProfileError",error.message.toString())
             })
-        orderVolleyQueue.add(jsonRequest)
+        orderVolleyQueue.add(stringRequest)
     }
 
 }

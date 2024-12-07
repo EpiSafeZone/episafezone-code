@@ -96,9 +96,7 @@ class MainActivity : AppCompatActivity() {
                     val preferences = PreferenceManager.getDefaultSharedPreferences(this)
                     val tokenSaved = preferences.getString("DEVIDE_ID","")
                     if(token != null && (!token.equals(tokenSaved))){
-                        //TODO(Hacer inicio de sesión temporal para que user sea dinámico)
-                        val user1 = User(1);
-                        val device = Device(0,token,user1.id)
+                        val device = Device(0,token,User.getId())
 
                         PatientsListPetitions.saveDevice(device)
                     }

@@ -21,7 +21,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-            applicationId = "com.example.episafezone"
+        applicationId = "com.example.episafezone"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
@@ -70,6 +70,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-messaging:23.0.7")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

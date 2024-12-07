@@ -11,7 +11,7 @@ public class Verify {
 
     public static Boolean VerifyHoursOfNotification(Event event, Tutor tutor, Patient patient){
         NotifyHoursRepository notifyHoursRepository = SpringContext.getBean(NotifyHoursRepository.class);
-        NotifyHours notifyHours = notifyHoursRepository.findByPatientAndTutor(patient, tutor);
+        NotifyHours notifyHours = notifyHoursRepository.findByPatientAndTutor(patient.getId(), tutor.getId());
         if(notifyHours != null){
             if(event.getTime().isAfter(notifyHours.getNotifyFrom()) && event.getTime().isBefore(notifyHours.getNotifyTo())){
                 return Boolean.TRUE;

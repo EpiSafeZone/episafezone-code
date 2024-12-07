@@ -42,29 +42,39 @@ public class NotificationService {
     public static Integer TriggerNotifications(Event event, Patient patient){
         Integer response = 0;
         DeviceRepository deviceRepository = SpringContext.getBean(DeviceRepository.class);
+
+        System.out.println("Starting TriggerNotifications for event: " + event + " and patient: " + patient);
+
+
         List<Tutor> tutors = patient.getTutors();
         for (Tutor tutor : tutors) {
+            System.out.println("Processing tutor: " + tutor.getId());
             Map<String, Boolean> permissions = Research.ResearchPermissions(patient, tutor);
+            System.out.println("Permissions for tutor " + tutor.getId() + ": " + permissions);
             if(Verify.VerifyHoursOfNotification(event, tutor, patient) != null && Verify.VerifyHoursOfNotification(event, tutor, patient)) {
                 if (event instanceof MedicationEvent) {
                     MedicationEvent medicationEvent = (MedicationEvent) event;
                     if (permissions.get("Medication")) {
+                        System.out.println("Tutor " + tutor.getId() + " has permission for medication");
                         List<Device> deviceList = deviceRepository.findDevicesByUser(tutor.getId());
+                        System.out.println("Devices for tutor " + tutor.getId() + ": " + deviceList);
                         for (Device device : deviceList) {
-                            SendNotification(medicationEvent, device.getToken());
+                            System.out.println("Sending notification to device token: " + device.getToken());
                             response += 1;
+                            SendNotification(medicationEvent, device.getToken());
                         }
                     }
                 }else{
                     CrisisEvent crisisEvent = (CrisisEvent) event;
                     List<Device> deviceList = deviceRepository.findDevicesByUser(tutor.getId());
                     for (Device device : deviceList) {
-                        SendNotification(crisisEvent, device.getToken());
                         response += 1;
+                        SendNotification(crisisEvent, device.getToken());
                     }
                 }
             }
         }
+        System.out.println("TriggerNotifications completed with response: " + response);
         return response;
     }
 }

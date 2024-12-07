@@ -67,7 +67,7 @@ public class CrisisService implements CrisisServiceInterface {
     public void applyMedication(Integer patientId) {
         PatientService patientService = SpringContext.getBean(PatientService.class);
         Patient patient = patientService.findById(patientId);
-        Event event = EventFactory.createCrisisEvent("timeExceeded");
+        Event event = EventFactory.createMedicationEvent("taken");
         patient.triggerEvent(event);
     }
 }

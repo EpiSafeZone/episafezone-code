@@ -1,5 +1,6 @@
 package com.example.episafezone.services;
 
+import com.example.episafezone.config.SpringContext;
 import com.example.episafezone.models.Patient;
 import com.example.episafezone.models.SharedWith;
 import com.example.episafezone.models.Tutor;
@@ -20,7 +21,6 @@ public class SharedWithService implements SharedWithServiceInterface {
     @Autowired
     TutorOfService tutorOfService;
 
-    public static TutorService tutorService;
 
     @Override
     public List<SharedWith> findAll() {
@@ -40,6 +40,7 @@ public class SharedWithService implements SharedWithServiceInterface {
     }
 
      public List<Tutor> findPatientTutors(Integer patientId){
+        TutorService tutorService = SpringContext.getBean(TutorService.class);
         List<Tutor> tutors = new ArrayList<Tutor>();
         for(SharedWith sharedWith : sharedWithRepo.findAll()){
             if(sharedWith.getPatient().equals(patientId)){

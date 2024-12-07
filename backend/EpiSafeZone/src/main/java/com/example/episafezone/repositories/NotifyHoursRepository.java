@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NotifyHoursRepository extends JpaRepository<NotifyHours, Integer> {
-    NotifyHours findByPatientAndTutor(Patient patient, Tutor tutor);
+    NotifyHours findByPatientAndTutor(Integer patient, Integer tutor);
 }

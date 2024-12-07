@@ -14,8 +14,6 @@ import java.util.List;
 public class Research {
 
     public static Map<String, Boolean> ResearchPermissions(Patient patient, Tutor tutor){
-
-
         TutorOfRepository tutorOfRepository = SpringContext.getBean(TutorOfRepository.class);
         SharedWithRepository sharedWithRepository = SpringContext.getBean(SharedWithRepository.class);
         Map<String, Boolean> permissions = new HashMap<>();

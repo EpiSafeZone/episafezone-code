@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface DeviceRepository extends JpaRepository<Device, Integer> {
     List<Device> findDevicesByUser(Integer userId);
+    Device findDeviceById(Integer deviceId);
 }

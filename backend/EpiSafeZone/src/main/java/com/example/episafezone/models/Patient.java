@@ -107,19 +107,10 @@ public class Patient {
     }
 
     public List<Tutor> getTutors() {
-        if (sharedWithService == null) {
-            throw new IllegalStateException("SharedWithService is not initialized");
-        }
         return sharedWithService.findPatientTutors(this.id);
     }
 
     public void triggerEvent(Event event){
-        NotificationService.TirggerNotifications(event, this);
+        NotificationService.TriggerNotifications(event, this);
     }
-
-
-
-
-
-
 }

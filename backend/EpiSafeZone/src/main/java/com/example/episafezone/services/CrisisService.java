@@ -1,7 +1,12 @@
 package com.example.episafezone.services;
 
+import com.example.episafezone.config.SpringContext;
+import com.example.episafezone.events.CrisisEvent;
+import com.example.episafezone.events.Event;
+import com.example.episafezone.events.EventFactory;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.Crisis;
+import com.example.episafezone.models.Patient;
 import com.example.episafezone.repositories.CrisisRespository;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +57,17 @@ public class CrisisService implements CrisisServiceInterface {
     }
 
     public Crisis createCrisis(Crisis crisis) {
+        PatientService patientService = SpringContext.getBean(PatientService.class);
+        Patient patient = patientService.findById(crisis.getPatient());
+        Event event = EventFactory.createCrisisEvent("registered");
+        patient.triggerEvent(event);
         return repo.save(crisis);
+    }
+
+    public void applyMedication(Integer patientId) {
+        PatientService patientService = SpringContext.getBean(PatientService.class);
+        Patient patient = patientService.findById(patientId);
+        Event event = EventFactory.createCrisisEvent("timeExceeded");
+        patient.triggerEvent(event);
     }
 }

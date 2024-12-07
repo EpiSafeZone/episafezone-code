@@ -16,17 +16,17 @@ public class SharedWith {
     private Boolean registerCrisisPermision;
     private Boolean profilePermision;
     private Boolean medicinePermision;
-    private Boolean tutorPermision;
+    private Boolean masterPermision;
 
     public SharedWith(Integer tutorSharing, Integer tutorReceiving, Integer patient, Boolean registerCrisisPermision,
-                      Boolean profilePermision, Boolean medicinePermision, Boolean tutorPermision) {
+                      Boolean profilePermision, Boolean medicinePermision, Boolean masterPermision) {
         this.tutorSharing = tutorSharing;
         this.tutorReceiving = tutorReceiving;
         this.patient = patient;
         this.registerCrisisPermision = registerCrisisPermision;
         this.profilePermision = profilePermision;
         this.medicinePermision = medicinePermision;
-        this.tutorPermision = tutorPermision;
+        this.masterPermision = this.masterPermision;
     }
 
     public SharedWith(){}
@@ -87,11 +87,11 @@ public class SharedWith {
         this.medicinePermision = medicinePermision;
     }
 
-    public Boolean getTutorPermision() {
-        return tutorPermision;
+    public Boolean getMasterPermision() {
+        return masterPermision;
     }
 
-    public void setTutorPermision(Boolean tutorPermision) {
-        this.tutorPermision = tutorPermision;
+    public void setMasterPermision(Boolean masterPermision) {
+        this.masterPermision = masterPermision;
     }
 }

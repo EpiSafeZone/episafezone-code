@@ -1,19 +1,19 @@
 package com.example.episafezone.events;
 
 public class MedicationEvent extends Event {
-    public MedicationEvent(String description){
-        super(description);
+    public MedicationEvent(String title,String description){
+        super(title,description);
     }
 
     public static class MedicationTakenEvent extends MedicationEvent{
         public MedicationTakenEvent() {
-            super("Medicacion tomada");
+            super("MEDICINA TOMADA","Medicacion tomada");
         }
     }
 
     public static class MedicationHasToBeTakenEvent extends MedicationEvent{
         public MedicationHasToBeTakenEvent() {
-            super("Acuerdese de tomarse la medicacion");
+            super("HAY QUE TOMAR LA MEDICACION","Acuerdese de tomarse la medicacion");
         }
     }
 }

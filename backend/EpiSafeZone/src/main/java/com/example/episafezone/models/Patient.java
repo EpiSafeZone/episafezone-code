@@ -1,5 +1,6 @@
 package com.example.episafezone.models;
 
+import com.example.episafezone.config.SpringContext;
 import com.example.episafezone.events.Event;
 import jakarta.persistence.*;
 import com.example.episafezone.services.NotificationService;
@@ -21,9 +22,6 @@ public class Patient {
     private Date birthdate;
     private Integer age;
     private String color;
-
-    @Transient
-    private SharedWithService sharedWithService;
 
     public Patient(String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color) {
         this.name = name;
@@ -101,25 +99,12 @@ public class Patient {
         this.color = color;
     }
 
-
-    public void setSharedWithService(SharedWithService sharedWithService) {
-        this.sharedWithService = sharedWithService;
-    }
-
     public List<Tutor> getTutors() {
-        if (sharedWithService == null) {
-            throw new IllegalStateException("SharedWithService is not initialized");
-        }
+        SharedWithService sharedWithService = SpringContext.getBean(SharedWithService.class);
         return sharedWithService.findPatientTutors(this.id);
     }
 
     public void triggerEvent(Event event){
-        NotificationService.TirggerNotifications(event, this);
+        NotificationService.TriggerNotifications(event, this);
     }
-
-
-
-
-
-
 }

@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface TutorOfRepository extends JpaRepository<TutorOf, Integer> {
     List<TutorOf> findByTutor(Integer tutorId);
+    TutorOf findByTutorAndPatient(Integer tutor, Integer patient);
 }

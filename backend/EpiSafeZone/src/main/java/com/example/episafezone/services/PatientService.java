@@ -7,7 +7,7 @@ import com.example.episafezone.DTO.ManifestationsDTO.ManifestationNameDTO;
 import com.example.episafezone.DTO.MedicationDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
-import com.example.episafezone.DTO.SharedTutorDTO;
+import com.example.episafezone.DTO.SharedDTO.SharedTutorDTO;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.*;
 import com.example.episafezone.repositories.*;

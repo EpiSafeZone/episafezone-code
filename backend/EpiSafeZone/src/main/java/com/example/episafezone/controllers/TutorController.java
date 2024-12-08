@@ -2,8 +2,9 @@ package com.example.episafezone.controllers;
 
 import com.example.episafezone.DTO.NotifyHoursDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
-import com.example.episafezone.DTO.SharePatientDTO;
-import com.example.episafezone.models.Medication;
+import com.example.episafezone.DTO.SharedDTO.IsTutorDTO;
+import com.example.episafezone.DTO.SharedDTO.SharePatientDTO;
+import com.example.episafezone.DTO.SharedDTO.SharedPermissionsDTO;
 import com.example.episafezone.models.NotifyHours;
 import com.example.episafezone.models.SharedWith;
 import com.example.episafezone.models.Tutor;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(path="/tutor")
@@ -40,6 +40,11 @@ public class TutorController {
         return patientService.getPatientList(id);
     }
 
+    @GetMapping(path="/isTutor")
+    public @ResponseBody Boolean isTutor(@RequestBody IsTutorDTO isTutorDTO){
+        return tutorService.isTutor(isTutorDTO);
+    }
+
     @PostMapping(path="share")
     public @ResponseBody SharedWith sharePatient(@RequestBody SharePatientDTO sharePatientDTO){
         return tutorService.sharePatient(sharePatientDTO);
@@ -48,5 +53,10 @@ public class TutorController {
     @PutMapping(path="editHours")
     public @ResponseBody NotifyHours editNotificationHours(@RequestBody NotifyHoursDTO notifyHoursDTO){
         return tutorService.editNotificationHours(notifyHoursDTO);
+    }
+
+    @PutMapping(path="editPermissions")
+    public @ResponseBody SharedWith editPermissions(@RequestBody SharedPermissionsDTO sharedPermissionsDTO){
+        return tutorService.editPermissions(sharedPermissionsDTO);
     }
 }

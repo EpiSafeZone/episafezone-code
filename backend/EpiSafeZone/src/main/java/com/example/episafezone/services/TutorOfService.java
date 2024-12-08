@@ -44,4 +44,14 @@ public class TutorOfService implements TutorOfServiceInterface{
         );
         return tutorOfRepo.save(tutorOf);
     }
+
+    public TutorOf deleteTutorOf(Integer tutor, Integer patient){
+        TutorOf tutorOf = tutorOfRepo.findByTutorAndPatient(tutor,patient);
+        tutorOfRepo.delete(tutorOf);
+        return tutorOf;
+    }
+
+    public TutorOf findByTutorAndPatient(Integer tutor, Integer patient){
+        return tutorOfRepo.findByTutorAndPatient(tutor, patient);
+    }
 }

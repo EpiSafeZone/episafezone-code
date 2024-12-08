@@ -1,4 +1,4 @@
-package com.example.episafezone.DTO;
+package com.example.episafezone.DTO.SharedDTO;
 
 import java.io.Serializable;
 

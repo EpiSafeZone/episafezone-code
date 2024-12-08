@@ -1,13 +1,14 @@
 package com.example.episafezone.services;
 
 import com.example.episafezone.DTO.NotifyHoursDTO;
-import com.example.episafezone.DTO.SharePatientDTO;
+import com.example.episafezone.DTO.SharedDTO.IsTutorDTO;
+import com.example.episafezone.DTO.SharedDTO.SharePatientDTO;
+import com.example.episafezone.DTO.SharedDTO.SharedPermissionsDTO;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.NotifyHours;
 import com.example.episafezone.models.SharedWith;
 import com.example.episafezone.models.Tutor;
 import com.example.episafezone.repositories.SharedWithRepository;
-import com.example.episafezone.services.SharedWithService;
 import com.example.episafezone.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -123,5 +124,37 @@ public class TutorService implements TutorServiceInterface{
 
     public NotifyHours editNotificationHours(NotifyHoursDTO notifyHoursDTO){
         return notifyHoursService.editNotifyHours(notifyHoursDTO);
+    }
+
+    public SharedWith editPermissions(SharedPermissionsDTO sharedPermissionsDTO){
+        SharedWith sharedWith = sharedWithRepo.findByTutorReceivingAndPatient(
+                sharedPermissionsDTO.getTutorReciving(),
+                sharedPermissionsDTO.getPatient()
+        );
+        Boolean isTutor = sharedWith.getTutorPermision();
+        Boolean willBeTutor = sharedPermissionsDTO.getTutorPermision();
+        if(isTutor && !willBeTutor){
+            tutorOfService.deleteTutorOf(
+                    sharedPermissionsDTO.getTutorReciving(),
+                    sharedPermissionsDTO.getPatient()
+            );
+        } else if (!isTutor && willBeTutor) {
+            tutorOfService.addTutorOf(
+                    sharedPermissionsDTO.getTutorReciving(),
+                    sharedPermissionsDTO.getPatient(),
+                    false
+            );
+        }
+        sharedWith.setRegisterCrisisPermision(sharedPermissionsDTO.getRegisterCrisisPermision());
+        sharedWith.setProfilePermision(sharedPermissionsDTO.getProfilePermision());
+        sharedWith.setMedicinePermision(sharedPermissionsDTO.getMedicinePermision());
+        sharedWith.setTutorPermision(sharedPermissionsDTO.getTutorPermision());
+        return sharedWithRepo.save(sharedWith);
+    }
+
+    public Boolean isTutor(IsTutorDTO isTutorDTO){
+        if (tutorOfService.findByTutorAndPatient(isTutorDTO.getTutor(), isTutorDTO.getPatient()) == null){
+            return false;
+        }else{return true;}
     }
 }

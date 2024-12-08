@@ -1,5 +1,6 @@
 package com.example.episafezone.services;
 
+import com.example.episafezone.DTO.SharedDTO.SharedPermissionsDTO;
 import com.example.episafezone.config.SpringContext;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.Patient;
@@ -89,5 +90,18 @@ public class SharedWithService implements SharedWithServiceInterface {
         );
 
         return sharedWithRepo.save(sharedWith);
+    }
+
+    public SharedWith editPermissions(SharedPermissionsDTO sharedPermissionsDTO){
+        SharedWith editedPermissions = sharedWithRepo.findByTutorReceivingAndPatient(
+                sharedPermissionsDTO.getTutorReciving(),
+                sharedPermissionsDTO.getPatient()
+        );
+        editedPermissions.setRegisterCrisisPermision(sharedPermissionsDTO.getRegisterCrisisPermision());
+        editedPermissions.setProfilePermision(sharedPermissionsDTO.getProfilePermision());
+        editedPermissions.setMedicinePermision(sharedPermissionsDTO.getMedicinePermision());
+        editedPermissions.setTutorPermision(sharedPermissionsDTO.getTutorPermision());
+
+        return sharedWithRepo.save(editedPermissions);
     }
 }

@@ -2,6 +2,7 @@ package com.example.episafezone.controllers;
 
 import com.example.episafezone.DTO.NotifyHoursDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
+import com.example.episafezone.DTO.SharedDTO.GetPermissionsDTO;
 import com.example.episafezone.DTO.SharedDTO.IsTutorDTO;
 import com.example.episafezone.DTO.SharedDTO.SharePatientDTO;
 import com.example.episafezone.DTO.SharedDTO.SharedPermissionsDTO;
@@ -43,6 +44,16 @@ public class TutorController {
     @GetMapping(path="/isTutor")
     public @ResponseBody Boolean isTutor(@RequestBody IsTutorDTO isTutorDTO){
         return tutorService.isTutor(isTutorDTO);
+    }
+
+    @GetMapping(path="/permissions")
+    public @ResponseBody SharedPermissionsDTO getPermissions(@RequestBody GetPermissionsDTO getPermissionsDTO){
+        return tutorService.getPermissions(getPermissionsDTO);
+    }
+
+    @GetMapping(path="/hours")
+    public @ResponseBody NotifyHoursDTO getHours(@RequestBody IsTutorDTO isTutorDTO){
+        return tutorService.getHours(isTutorDTO);
     }
 
     @PostMapping(path="share")

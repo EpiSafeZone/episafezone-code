@@ -1,6 +1,7 @@
 package com.example.episafezone.services;
 
 import com.example.episafezone.DTO.NotifyHoursDTO;
+import com.example.episafezone.DTO.SharedDTO.GetPermissionsDTO;
 import com.example.episafezone.DTO.SharedDTO.IsTutorDTO;
 import com.example.episafezone.DTO.SharedDTO.SharePatientDTO;
 import com.example.episafezone.DTO.SharedDTO.SharedPermissionsDTO;
@@ -63,6 +64,14 @@ public class TutorService implements TutorServiceInterface{
 
     public Tutor findTutorByEmail(String email){
         return tutorRepo.findByEmail(email);
+    }
+
+    public SharedPermissionsDTO getPermissions(GetPermissionsDTO getPermissionsDTO){
+        return sharedWithService.getPermissions(getPermissionsDTO);
+    }
+
+    public NotifyHoursDTO getHours(IsTutorDTO isTutorDTO){
+        return notifyHoursService.getHours(isTutorDTO);
     }
 
     public SharedWith sharePatient(SharePatientDTO sharePatientDTO) {

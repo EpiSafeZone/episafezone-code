@@ -1,6 +1,7 @@
 package com.example.episafezone.services;
 
 import com.example.episafezone.DTO.NotifyHoursDTO;
+import com.example.episafezone.DTO.SharedDTO.IsTutorDTO;
 import com.example.episafezone.models.NotifyHours;
 import com.example.episafezone.repositories.NotifyHoursRepository;
 import com.example.episafezone.repositories.TutorOfRepository;
@@ -15,6 +16,20 @@ public class NotifyHoursService implements NotifyHoursServiceInterface{
 
     public NotifyHours findByPatientAndTutor(Integer patient, Integer tutor){
         return notifyHoursRepo.findByPatientAndTutor(patient, tutor);
+    }
+
+    public NotifyHoursDTO getHours(IsTutorDTO isTutorDTO){
+        NotifyHours notifyHours = findByPatientAndTutor(
+                isTutorDTO.getPatient(),
+                isTutorDTO.getTutor()
+        );
+        NotifyHoursDTO notifyHoursDTO = new NotifyHoursDTO(
+                isTutorDTO.getPatient(),
+                isTutorDTO.getTutor(),
+                notifyHours.getNotifyFrom(),
+                notifyHours.getNotifyTo()
+        );
+        return notifyHoursDTO;
     }
 
     public NotifyHours addNotifyHours(NotifyHoursDTO notifyHoursDTO){

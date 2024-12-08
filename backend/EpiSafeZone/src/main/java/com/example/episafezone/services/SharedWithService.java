@@ -25,7 +25,7 @@ public class SharedWithService implements SharedWithServiceInterface {
     TutorOfService tutorOfService;
 
     @Autowired
-    public static TutorService tutorService;
+    public TutorService tutorService;
 
     @Override
     public List<SharedWith> findAll() {

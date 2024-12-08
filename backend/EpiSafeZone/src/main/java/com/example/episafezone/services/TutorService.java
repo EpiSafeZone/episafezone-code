@@ -12,6 +12,7 @@ import com.example.episafezone.models.Tutor;
 import com.example.episafezone.repositories.SharedWithRepository;
 import com.example.episafezone.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class TutorService implements TutorServiceInterface{
     TutorRepository tutorRepo;
 
     @Autowired
+    @Lazy
     SharedWithService sharedWithService;
 
     @Autowired

@@ -2,7 +2,7 @@ package com.example.episafezone.DTO.PatientsDTO;
 
 import com.example.episafezone.DTO.ManifestationsDTO.ManifestationDTO;
 import com.example.episafezone.DTO.MedicationDTO;
-import com.example.episafezone.DTO.SharedTutorDTO;
+import com.example.episafezone.DTO.SharedDTO.SharedTutorDTO;
 import com.example.episafezone.models.Patient;
 
 import java.io.Serializable;

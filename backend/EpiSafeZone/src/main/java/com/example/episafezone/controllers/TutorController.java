@@ -1,15 +1,15 @@
 package com.example.episafezone.controllers;
 
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
+import com.example.episafezone.DTO.SharePatientDTO;
+import com.example.episafezone.models.Medication;
+import com.example.episafezone.models.SharedWith;
 import com.example.episafezone.models.Tutor;
 import com.example.episafezone.services.PatientService;
 import com.example.episafezone.services.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,5 +36,10 @@ public class TutorController {
     @GetMapping(path="/list/{id}")
     public @ResponseBody List<PatientListDTO> getPatientList(@PathVariable Integer id){
         return patientService.getPatientList(id);
+    }
+
+    @PostMapping(path="share")
+    public @ResponseBody SharedWith sharePatient(@RequestBody SharePatientDTO sharePatientDTO){
+        return tutorService.sharePatient(sharePatientDTO);
     }
 }

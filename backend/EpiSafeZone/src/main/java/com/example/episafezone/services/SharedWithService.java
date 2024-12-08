@@ -1,6 +1,7 @@
 package com.example.episafezone.services;
 
 import com.example.episafezone.config.SpringContext;
+import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.Patient;
 import com.example.episafezone.models.SharedWith;
 import com.example.episafezone.models.Tutor;
@@ -21,6 +22,7 @@ public class SharedWithService implements SharedWithServiceInterface {
     @Autowired
     TutorOfService tutorOfService;
 
+    public static TutorService tutorService;
 
     @Override
     public List<SharedWith> findAll() {
@@ -40,7 +42,6 @@ public class SharedWithService implements SharedWithServiceInterface {
     }
 
      public List<Tutor> findPatientTutors(Integer patientId){
-        TutorService tutorService = SpringContext.getBean(TutorService.class);
         List<Tutor> tutors = new ArrayList<Tutor>();
         for(SharedWith sharedWith : sharedWithRepo.findAll()){
             if(sharedWith.getPatient().equals(patientId)){
@@ -61,10 +62,32 @@ public class SharedWithService implements SharedWithServiceInterface {
         return sharedWithRepo.findByTutorSharing(tutorId);
     }
 
-    public List<SharedWith> findByTutorShAndPatient(Integer tutorSId, Integer patient){
-        List<SharedWith> filteredByTutorS = findByTutorSharing(tutorSId);
-        return filteredByTutorS.stream()
+    public List<SharedWith> findByTutorShAndPatient(Integer tutorShId, Integer patient){
+        List<SharedWith> filteredByTutorSh = findByTutorSharing(tutorShId);
+        return filteredByTutorSh.stream()
                 .filter(sharedWith -> sharedWith.getPatient().equals(patient))
                 .toList();
+    }
+
+    public SharedWith sharePatient(
+            Integer tutorSharingId,
+            Integer tutorReceivingId,
+            Integer patientId,
+            Boolean registerCrisisPermission,
+            Boolean profilePermission,
+            Boolean medicinePermission,
+            Boolean tutorPermission) {
+
+        SharedWith sharedWith = new SharedWith(
+                tutorSharingId,
+                tutorReceivingId,
+                patientId,
+                registerCrisisPermission,
+                profilePermission,
+                medicinePermission,
+                tutorPermission
+        );
+
+        return sharedWithRepo.save(sharedWith);
     }
 }

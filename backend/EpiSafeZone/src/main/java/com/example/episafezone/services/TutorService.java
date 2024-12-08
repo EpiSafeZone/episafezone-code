@@ -3,6 +3,7 @@ package com.example.episafezone.services;
 import com.example.episafezone.DTO.NotifyHoursDTO;
 import com.example.episafezone.DTO.SharePatientDTO;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
+import com.example.episafezone.models.NotifyHours;
 import com.example.episafezone.models.SharedWith;
 import com.example.episafezone.models.Tutor;
 import com.example.episafezone.repositories.SharedWithRepository;
@@ -118,5 +119,9 @@ public class TutorService implements TutorServiceInterface{
                 sharePatientDTO.getMedicinePermission(),
                 sharePatientDTO.getTutorPermission()
         );
+    }
+
+    public NotifyHours editNotificationHours(NotifyHoursDTO notifyHoursDTO){
+        return notifyHoursService.editNotifyHours(notifyHoursDTO);
     }
 }

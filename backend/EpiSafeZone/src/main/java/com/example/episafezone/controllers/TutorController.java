@@ -1,8 +1,10 @@
 package com.example.episafezone.controllers;
 
+import com.example.episafezone.DTO.NotifyHoursDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
 import com.example.episafezone.DTO.SharePatientDTO;
 import com.example.episafezone.models.Medication;
+import com.example.episafezone.models.NotifyHours;
 import com.example.episafezone.models.SharedWith;
 import com.example.episafezone.models.Tutor;
 import com.example.episafezone.services.PatientService;
@@ -41,5 +43,10 @@ public class TutorController {
     @PostMapping(path="share")
     public @ResponseBody SharedWith sharePatient(@RequestBody SharePatientDTO sharePatientDTO){
         return tutorService.sharePatient(sharePatientDTO);
+    }
+
+    @PutMapping(path="editHours")
+    public @ResponseBody NotifyHours editNotificationHours(@RequestBody NotifyHoursDTO notifyHoursDTO){
+        return tutorService.editNotificationHours(notifyHoursDTO);
     }
 }

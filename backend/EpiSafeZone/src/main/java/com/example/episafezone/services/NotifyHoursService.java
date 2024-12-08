@@ -13,6 +13,10 @@ public class NotifyHoursService implements NotifyHoursServiceInterface{
     @Autowired
     NotifyHoursRepository notifyHoursRepo;
 
+    public NotifyHours findByPatientAndTutor(Integer patient, Integer tutor){
+        return notifyHoursRepo.findByPatientAndTutor(patient, tutor);
+    }
+
     public NotifyHours addNotifyHours(NotifyHoursDTO notifyHoursDTO){
         NotifyHours notifyHours = new NotifyHours(
                 notifyHoursDTO.getTutor(),
@@ -21,5 +25,15 @@ public class NotifyHoursService implements NotifyHoursServiceInterface{
                 notifyHoursDTO.getNotifyTo()
         );
         return notifyHoursRepo.save(notifyHours);
+    }
+
+    public NotifyHours editNotifyHours(NotifyHoursDTO notifyHoursDTO){
+        NotifyHours notifyAEditar = findByPatientAndTutor(
+                notifyHoursDTO.getPatient(),
+                notifyHoursDTO.getTutor()
+        );
+        notifyAEditar.setNotifyFrom(notifyHoursDTO.getNotifyFrom());
+        notifyAEditar.setNotifyTo(notifyHoursDTO.getNotifyTo());
+        return notifyHoursRepo.save(notifyAEditar);
     }
 }

@@ -185,6 +185,25 @@ public class PatientService implements PatientServiceInteface {
 */
     /*
     public Boolean addImage(Integer patientId, MultipartFile file){
+    public void editCounterOfMani(List<NumOfManifestationDTO> list, Integer maniId) {
+        for (NumOfManifestationDTO dto : list) {
+            if (dto.getNum().equals(maniId)) {
+                dto.setNum(dto.getNum() + 1);
+                break; // Detenemos el bucle porque ya actualizamos el contador
+            }
+        }
+    }
+
+    public Integer getNumOfApperances(Integer maniId, List<NumOfManifestationDTO> numPerManiList) {
+        if (numPerManiList == null) {
+            return -1;
+        }
+        return numPerManiList.stream()
+                .filter(dto -> manifestationService.getManifestationIdByName(dto.getName()).equals(maniId))
+                .findFirst()
+                .map(dto -> dto.getNum())
+                .orElse(-1);
+    }
 
     }
 */

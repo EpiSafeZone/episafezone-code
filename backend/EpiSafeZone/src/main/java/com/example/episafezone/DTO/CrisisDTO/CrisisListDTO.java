@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class CrisisListDTO implements Serializable {
+
     private List<CrisisDTO> Crisis;
 
     public CrisisListDTO(List<CrisisDTO> crisis) {

@@ -4,6 +4,8 @@ import com.example.episafezone.DTO.CrisisDTO.CrisisDTO;
 import com.example.episafezone.DTO.CrisisDTO.CrisisListDTO;
 import com.example.episafezone.DTO.ManifestationsDTO.ManifestationDTO;
 import com.example.episafezone.DTO.ManifestationsDTO.ManifestationNameDTO;
+import com.example.episafezone.DTO.ManifestationsDTO.NumOfManifestationDTO;
+import com.example.episafezone.DTO.ManifestationsDTO.NumPerManifestationListDTO;
 import com.example.episafezone.DTO.MedicationDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,6 +33,9 @@ public class PatientService implements PatientServiceInteface {
     @Lazy
     @Autowired
     ManifestationService manifestationService;
+
+    @Autowired
+    CrisisService crisisService;
 
     @Autowired
     TutorService tutorService;
@@ -156,6 +162,48 @@ public class PatientService implements PatientServiceInteface {
         CrisisListDTO CrisisListDTO = new CrisisListDTO(crisisDTOs);
         return CrisisListDTO;
     }
+    public void editCounterOfMani(List<NumOfManifestationDTO> list, Integer maniId) {
+        for (NumOfManifestationDTO dto : list) {
+            if (dto.getNum().equals(maniId)) {
+                dto.setNum(dto.getNum() + 1);
+                break; // Detenemos el bucle porque ya actualizamos el contador
+            }
+        }
+    }
+
+    public Integer getNumOfApperances(Integer maniId, List<NumOfManifestationDTO> numPerManiList) {
+        if (numPerManiList == null) {
+            return -1;
+        }
+        return numPerManiList.stream()
+                .filter(dto -> manifestationService.getManifestationIdByName(dto.getName()).equals(maniId))
+                .findFirst()
+                .map(dto -> dto.getNum())
+                .orElse(-1);
+    }
 
 
+    public NumPerManifestationListDTO numPerManifestation(Integer patientId){
+        List<Crisis> crisisFromPatient = crisisService.getByPatient(patientId);
+        List<NumOfManifestationDTO> numPerManiList = new ArrayList<>();
+        NumOfManifestationDTO dto;
+        for (Integer i=crisisFromPatient.size()-1; i >= 0; i--){
+            Integer maniId = crisisFromPatient.get(i).getManifestation();
+            Integer count = getNumOfApperances(maniId,numPerManiList);
+            if (count == -1) {
+                // Crear un nuevo DTO solo si no existe
+                dto = new NumOfManifestationDTO(
+                        manifestationService.getManifestationNameById(maniId),
+                        1
+                );
+                numPerManiList.add(dto);
+            } else {
+                // Actualizar el contador del DTO existente
+                editCounterOfMani(numPerManiList, maniId);
+            }
+
+        }
+        NumPerManifestationListDTO list = new NumPerManifestationListDTO(numPerManiList);
+        return list;
+    }
 }

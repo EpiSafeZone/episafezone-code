@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import java.util.Calendar
 
 class ActivitySettings : AppCompatActivity() {
@@ -70,6 +71,19 @@ class ActivitySettings : AppCompatActivity() {
             shareEmailEditText.text = ""
         }
 
+        // Manage Permissions
+        val managePermissionsSwitch: SwitchCompat = findViewById(R.id.managePermissionsSwitch)
+        val noPermissionsWarningText: TextView = findViewById(R.id.noPermissionsWarningText)
+        val managePermissionsRecyclerView: RecyclerView = findViewById(R.id.managePermissionsRecyclerView)
+        managePermissionsSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                noPermissionsWarningText.visibility = View.VISIBLE
+                managePermissionsRecyclerView.visibility = View.VISIBLE
+            } else {
+                noPermissionsWarningText.visibility = View.GONE
+                managePermissionsRecyclerView.visibility = View.GONE
+            }
+        }
     }
     private fun launchTimePicker(textView: TextView) {
         val calendar = Calendar.getInstance()

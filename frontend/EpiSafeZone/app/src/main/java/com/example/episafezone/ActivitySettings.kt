@@ -1,25 +1,25 @@
 package com.example.episafezone
 
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.episafezone.network.SettingsPetitions
 import java.util.Calendar
 
 class ActivitySettings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+        contextObj = this
+        SettingsPetitions.initializeQueue()
 
         // Notifications
         val notificationsSwitch: SwitchCompat = findViewById(R.id.notificationsSwitch)
@@ -96,5 +96,11 @@ class ActivitySettings : AppCompatActivity() {
         }, hour, minute, true) // Usa true para formato 24h, false para 12h
 
         timePicker.show()
+    }
+    companion object {
+        private lateinit var contextObj: Context
+        fun getContext(): Context {
+            return contextObj
+        }
     }
 }

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ManifestationRepository extends JpaRepository<Manifestation, Integer> {
+    Manifestation findByName(String name);
 }

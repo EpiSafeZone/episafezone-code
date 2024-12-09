@@ -3,6 +3,7 @@ package com.example.episafezone.controllers;
 
 import com.example.episafezone.DTO.CrisisDTO.CrisisDTO;
 import com.example.episafezone.DTO.CrisisDTO.CrisisListDTO;
+import com.example.episafezone.DTO.ManifestationsDTO.NumPerManifestationListDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.models.HasManifestation;
 import com.example.episafezone.models.Patient;
@@ -45,5 +46,10 @@ public class PatientController {
     @GetMapping(path="/crisis/{id}/{year}/{month}")
     public @ResponseBody CrisisListDTO getCrisisFromPatient(@PathVariable Integer id, @PathVariable Integer year, @PathVariable Integer month){
         return patientService.getListOfCrisis(id, year, month);
+    }
+
+    @GetMapping(path="/numMani/{id}")
+    public @ResponseBody NumPerManifestationListDTO getCrisisNumPerMani(@PathVariable Integer id){
+        return patientService.numPerManifestation(id);
     }
 }

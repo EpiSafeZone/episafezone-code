@@ -1,27 +1,18 @@
-package com.example.episafezone.models;
+package com.example.episafezone.DTO.SharedDTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import java.io.Serializable;
 
-@Entity(name = "shared_with")
-public class SharedWith {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Integer tutorSharing;
-    private Integer tutorReceiving;
+public class SharedPermissionsDTO implements Serializable {
+
+    private Integer tutorReciving;
     private Integer patient;
     private Boolean registerCrisisPermision;
     private Boolean profilePermision;
     private Boolean medicinePermision;
     private Boolean tutorPermision;
 
-    public SharedWith(Integer tutorSharing, Integer tutorReceiving, Integer patient, Boolean registerCrisisPermision,
-                      Boolean profilePermision, Boolean medicinePermision, Boolean tutorPermision) {
-        this.tutorSharing = tutorSharing;
-        this.tutorReceiving = tutorReceiving;
+    public SharedPermissionsDTO(Integer tutorReciving, Integer patient, Boolean registerCrisisPermision, Boolean profilePermision, Boolean medicinePermision, Boolean tutorPermision) {
+        this.tutorReciving = tutorReciving;
         this.patient = patient;
         this.registerCrisisPermision = registerCrisisPermision;
         this.profilePermision = profilePermision;
@@ -29,30 +20,14 @@ public class SharedWith {
         this.tutorPermision = tutorPermision;
     }
 
-    public SharedWith(){}
+    public SharedPermissionsDTO(){}
 
-    public Integer getId() {
-        return id;
+    public Integer getTutorReciving() {
+        return tutorReciving;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getTutorSharing() {
-        return tutorSharing;
-    }
-
-    public void setTutorSharing(Integer tutorSharing) {
-        this.tutorSharing = tutorSharing;
-    }
-
-    public Integer getTutorReceiving() {
-        return tutorReceiving;
-    }
-
-    public void setTutorReceiving(Integer tutorReceiving) {
-        this.tutorReceiving = tutorReceiving;
+    public void setTutorReciving(Integer tutorReciving) {
+        this.tutorReciving = tutorReciving;
     }
 
     public Integer getPatient() {

@@ -26,7 +26,7 @@ object SettingsPetitions {
                 Log.d("GetNoDisturbHours",response.toString())
             },
             {error->
-                Log.d("GetPatientManifestations",error.message.toString())
+                Log.d("GetNoDisturbHours",error.message.toString())
             })
         StartCrisisPetitions.orderVolleyQueue.add(stringRequest)
     }

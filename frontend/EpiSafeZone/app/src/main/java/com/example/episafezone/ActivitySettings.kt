@@ -1,29 +1,27 @@
 package com.example.episafezone
 
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
+import com.example.episafezone.network.SettingsPetitions
 import java.util.Calendar
 
 class ActivitySettings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_settings)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        contextObj = this
+        SettingsPetitions.initializeQueue()
+
+        // Notifications
         val notificationsSwitch: SwitchCompat = findViewById(R.id.notificationsSwitch)
         val notificationsConstraintLayout: View = findViewById(R.id.notificationsConstraintLayout)
         val fromButton: Button = findViewById(R.id.fromButton)
@@ -45,6 +43,47 @@ class ActivitySettings : AppCompatActivity() {
             launchTimePicker(untilHourText)
         }
 
+        // Share Profile
+        val shareProfileSwitch: SwitchCompat = findViewById(R.id.shareProfileSwitch)
+        val shareProfileConstraintLayout: View = findViewById(R.id.shareProfileConstraintLayout)
+        val permission1CheckBox: CheckBox = findViewById(R.id.permission1CheckBox)
+        val permission2CheckBox: CheckBox = findViewById(R.id.permission2CheckBox)
+        val permission3CheckBox: CheckBox = findViewById(R.id.permission3CheckBox)
+        val permission4CheckBox: CheckBox = findViewById(R.id.permission4CheckBox)
+        val shareEmailEditText: TextView = findViewById(R.id.shareEmailEditText)
+        val shareProfileButton: Button = findViewById(R.id.shareProfileButton)
+        shareProfileSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                shareProfileConstraintLayout.visibility = View.VISIBLE
+            } else {
+                shareProfileConstraintLayout.visibility = View.GONE
+            }
+        }
+        shareProfileButton.setOnClickListener {
+            Toast.makeText(this, "¡Perfil compartido!", Toast.LENGTH_SHORT).show()
+            //TODO: Share profile
+
+            // Set everything to default
+            permission1CheckBox.isChecked = false
+            permission2CheckBox.isChecked = false
+            permission3CheckBox.isChecked = false
+            permission4CheckBox.isChecked = false
+            shareEmailEditText.text = ""
+        }
+
+        // Manage Permissions
+        val managePermissionsSwitch: SwitchCompat = findViewById(R.id.managePermissionsSwitch)
+        val noPermissionsWarningText: TextView = findViewById(R.id.noPermissionsWarningText)
+        val managePermissionsRecyclerView: RecyclerView = findViewById(R.id.managePermissionsRecyclerView)
+        managePermissionsSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                noPermissionsWarningText.visibility = View.VISIBLE
+                managePermissionsRecyclerView.visibility = View.VISIBLE
+            } else {
+                noPermissionsWarningText.visibility = View.GONE
+                managePermissionsRecyclerView.visibility = View.GONE
+            }
+        }
     }
     private fun launchTimePicker(textView: TextView) {
         val calendar = Calendar.getInstance()
@@ -57,5 +96,11 @@ class ActivitySettings : AppCompatActivity() {
         }, hour, minute, true) // Usa true para formato 24h, false para 12h
 
         timePicker.show()
+    }
+    companion object {
+        private lateinit var contextObj: Context
+        fun getContext(): Context {
+            return contextObj
+        }
     }
 }

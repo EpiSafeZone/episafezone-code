@@ -53,6 +53,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="35dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/medicamentsRecycler" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="35dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/manifestRecycler"
+                    tools:ignore="MissingConstraints" />
+
                 <androidx.constraintlayout.widget.Barrier
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -104,44 +129,66 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/medicamentsRecycler"
-                    android:layout_width="0dp"
-                    android:layout_height="400dp"
+                    android:layout_width="350dp"
+                    android:layout_height="130dp"
                     android:layout_marginHorizontal="30dp"
                     android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="35dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="35dp"
-                    android:background="@android:color/darker_gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/medicamentsRecycler" />
-
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:text="Manifestaciones"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@+id/textView5"
+                    app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+                <TextView
+                    android:id="@+id/share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Compartido"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="@+id/textView5"
                     app:layout_constraintTop_toBottomOf="@+id/view2" />
 
+                <Button
+                    android:id="@+id/addShareUser"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="15dp"
+                    android:backgroundTint="@color/grey"
+                    android:text="+"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/share"
+                    app:layout_constraintStart_toEndOf="@+id/share"
+                    app:layout_constraintTop_toTopOf="@+id/share"
+                    app:layout_constraintVertical_bias="0.478" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/sharedRecycler"
+                    android:layout_width="350dp"
+                    android:layout_height="130dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.737"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/share" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/manifestRecycler"
-                    android:layout_width="0dp"
+                    android:layout_width="350dp"
+                    android:layout_height="130dp"
                     android:layout_marginHorizontal="30dp"
-                    android:layout_height="400dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="100dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -250,34 +297,5 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
-        android:background="@color/grey"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/profileButt"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/textview_border"
-            android:gravity="center"
-            android:text="Profile" />
-
-        <TextView
-            android:id="@+id/historyButt"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/textview_border"
-            android:gravity="center"
-            android:text="History" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

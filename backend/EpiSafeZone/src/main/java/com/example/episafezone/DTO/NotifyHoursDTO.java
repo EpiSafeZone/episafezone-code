@@ -1,39 +1,23 @@
-package com.example.episafezone.models;
+package com.example.episafezone.DTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import java.io.Serializable;
 import java.time.LocalTime;
 
-@Entity(name = "notify_hours")
-public class NotifyHours {
+public class NotifyHoursDTO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private Integer tutor;
     private Integer patient;
     private LocalTime notifyFrom;
     private LocalTime notifyTo;
 
-    public NotifyHours(Integer tutor, Integer patient, LocalTime notifyFrom, LocalTime notifyTo) {
+    public NotifyHoursDTO(Integer tutor, Integer patient, LocalTime notifyFrom, LocalTime notifyTo) {
         this.tutor = tutor;
         this.patient = patient;
         this.notifyFrom = notifyFrom;
         this.notifyTo = notifyTo;
     }
 
-    public NotifyHours(){}
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public NotifyHoursDTO(){}
 
     public Integer getTutor() {
         return tutor;

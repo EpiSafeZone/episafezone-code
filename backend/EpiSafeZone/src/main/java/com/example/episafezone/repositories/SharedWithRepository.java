@@ -12,4 +12,5 @@ public interface SharedWithRepository extends JpaRepository<SharedWith, Integer>
     List<SharedWith> findByTutorReceiving(Integer tutorId);
     List<SharedWith> findByTutorSharing(Integer tutorId);
     List<SharedWith> findByPatient(Integer tutorId);
+    SharedWith findByTutorReceivingAndPatient(Integer tutorReceiving, Integer patient);
 }

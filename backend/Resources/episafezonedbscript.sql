@@ -166,7 +166,7 @@ DROP TABLE IF EXISTS `notify_hours`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `notify_hours` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `tutor` int NOT NULL,
   `patient` int NOT NULL,
   `notify_from` time DEFAULT NULL,
@@ -176,7 +176,7 @@ CREATE TABLE `notify_hours` (
   KEY `notify_from_patient_idx` (`patient`),
   CONSTRAINT `notified_tutor` FOREIGN KEY (`tutor`) REFERENCES `tutor` (`id`),
   CONSTRAINT `notify_from_patient` FOREIGN KEY (`patient`) REFERENCES `patient` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +185,7 @@ CREATE TABLE `notify_hours` (
 
 LOCK TABLES `notify_hours` WRITE;
 /*!40000 ALTER TABLE `notify_hours` DISABLE KEYS */;
-INSERT INTO `notify_hours` VALUES (1,1,1,NULL,NULL),(2,1,2,NULL,NULL),(3,2,1,NULL,NULL),(4,3,2,NULL,NULL);
+INSERT INTO `notify_hours` VALUES (1,1,1,NULL,NULL),(2,1,2,'08:00:00','18:00:00'),(3,2,1,NULL,NULL),(4,3,2,NULL,NULL),(8,3,1,NULL,NULL);
 /*!40000 ALTER TABLE `notify_hours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -261,7 +261,7 @@ CREATE TABLE `shared_with` (
   `register_crisis_permision` tinyint DEFAULT '1',
   `profile_permision` tinyint DEFAULT '0',
   `medicine_permision` tinyint DEFAULT '0',
-  `master_permision` tinyint DEFAULT '0',
+  `tutor_permision` tinyint DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `shered_by_idx` (`tutor_sharing`),
   KEY `shared_to_idx` (`tutor_receiving`),
@@ -269,7 +269,7 @@ CREATE TABLE `shared_with` (
   CONSTRAINT `patient_shared` FOREIGN KEY (`patient`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `shared_to` FOREIGN KEY (`tutor_receiving`) REFERENCES `tutor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `shered_by` FOREIGN KEY (`tutor_sharing`) REFERENCES `tutor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,7 +278,7 @@ CREATE TABLE `shared_with` (
 
 LOCK TABLES `shared_with` WRITE;
 /*!40000 ALTER TABLE `shared_with` DISABLE KEYS */;
-INSERT INTO `shared_with` VALUES (1,3,1,2,1,0,0,0),(2,1,2,1,1,0,0,1);
+INSERT INTO `shared_with` VALUES (1,3,1,2,1,0,0,0),(2,1,2,1,1,0,0,1),(7,1,3,1,1,1,1,1);
 /*!40000 ALTER TABLE `shared_with` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,7 +330,7 @@ CREATE TABLE `tutor_of` (
   KEY `encharge_of_idx` (`patient`),
   CONSTRAINT `encharge_of` FOREIGN KEY (`patient`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tutored_by` FOREIGN KEY (`tutor`) REFERENCES `tutor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,7 +339,7 @@ CREATE TABLE `tutor_of` (
 
 LOCK TABLES `tutor_of` WRITE;
 /*!40000 ALTER TABLE `tutor_of` DISABLE KEYS */;
-INSERT INTO `tutor_of` VALUES (1,1,1,_binary ''),(2,2,1,_binary '\0'),(3,3,2,_binary '');
+INSERT INTO `tutor_of` VALUES (1,1,1,_binary ''),(2,2,1,_binary '\0'),(3,3,2,_binary ''),(9,3,1,_binary '\0');
 /*!40000 ALTER TABLE `tutor_of` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -352,4 +352,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-01 19:22:24
+-- Dump completed on 2024-12-08  2:06:09

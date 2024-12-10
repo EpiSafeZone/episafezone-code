@@ -15,6 +15,7 @@ import com.example.episafezone.R
 import com.example.episafezone.adapter.ManifestAdapter
 import com.example.episafezone.adapter.MedicationAdapter
 import com.example.episafezone.adapter.PatientListAdapter
+import com.example.episafezone.adapter.SharedAdapter
 import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.databinding.FragmentPatientListBinding
@@ -22,6 +23,7 @@ import com.example.episafezone.databinding.FragmentProfileBinding
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Patient
+import com.example.episafezone.models.SharedUser
 import com.example.episafezone.network.ManifestationPetitions
 import com.example.episafezone.network.MedicationPetitions
 import com.example.episafezone.network.PatientsListPetitions
@@ -89,6 +91,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             listManifestations = list;
             binding.manifestRecycler.adapter = ManifestAdapter(contextObj,list);
             binding.manifestRecycler.layoutManager = LinearLayoutManager(contextObj);
+        }
+
+        fun updateListOfShared(list: MutableList<SharedUser>){
+            binding.sharedRecycler.adapter = SharedAdapter(contextObj,list);
+            binding.sharedRecycler.layoutManager = LinearLayoutManager(contextObj);
         }
 
         fun updatePatienInf(patient: Patient){

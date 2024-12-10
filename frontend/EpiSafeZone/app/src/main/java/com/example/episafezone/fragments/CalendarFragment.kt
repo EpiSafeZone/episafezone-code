@@ -49,16 +49,6 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             binding.selectedDayText.text = "${date.day}/${date.month+1}/${date.year}"
             CalendarLogic.showCrisis(binding,date,list)
         }
-
-        binding.initChart.setOnClickListener(){
-            val list = mutableListOf<String>();
-            list.add("hola")
-            list.add("tardes")
-            list.add("tardes")
-            list.add("hola")
-            list.add("buenas")
-            list.add("hola")
-        }
     }
 
     companion object {

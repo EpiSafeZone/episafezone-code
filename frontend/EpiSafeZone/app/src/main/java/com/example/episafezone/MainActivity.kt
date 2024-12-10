@@ -19,6 +19,7 @@ import android.preference.PreferenceManager
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.episafezone.fragments.ChartFragment
 import com.example.episafezone.models.Device
 import com.example.episafezone.models.User
 import com.example.episafezone.network.PatientsListPetitions
@@ -62,6 +63,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.calendar.setOnClickListener{
             changeToCalendar()
+        }
+
+        binding.chart.setOnClickListener{
+            changeToChart()
         }
 
         binding.chronometer.setOnClickListener{
@@ -114,6 +119,13 @@ class MainActivity : AppCompatActivity() {
     fun changeToCalendar() {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragmentLayout, CalendarFragment())
+            commit()
+        }
+    }
+
+    fun changeToChart() {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentLayout, ChartFragment())
             commit()
         }
     }

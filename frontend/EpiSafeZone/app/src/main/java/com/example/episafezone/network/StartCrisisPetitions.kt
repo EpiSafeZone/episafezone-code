@@ -10,6 +10,7 @@ import com.example.episafezone.BuildConfig
 import com.example.episafezone.MainActivity
 import com.example.episafezone.businesslogic.ChronometerLogic
 import com.example.episafezone.models.Patient
+import com.example.episafezone.models.User
 import org.json.JSONObject
 
 object StartCrisisPetitions {
@@ -24,9 +25,10 @@ object StartCrisisPetitions {
     }
 
     fun getPatientManifestations(patient: Patient) {
-        val id = patient.id
+        val patientId = patient.id
+        val userId = User.getId()
         val stringRequest = StringRequest(
-            Request.Method.GET, "${url}/patient/info/$id",
+            Request.Method.GET, "${url}/patient/info/$patientId/$userId",
             {response->
                 ChronometerLogic.setUpInfo(response.toString())
             },

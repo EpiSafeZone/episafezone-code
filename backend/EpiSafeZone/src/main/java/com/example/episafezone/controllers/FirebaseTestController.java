@@ -1,10 +1,13 @@
 package com.example.episafezone.controllers;
 
+import com.example.episafezone.config.SpringContext;
 import com.example.episafezone.events.Event;
 import com.example.episafezone.events.EventFactory;
 import com.example.episafezone.models.Device;
+import com.example.episafezone.models.Patient;
 import com.example.episafezone.repositories.DeviceRepository;
 import com.example.episafezone.services.NotificationService;
+import com.example.episafezone.services.PatientService;
 import com.google.firebase.FirebaseApp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,9 +34,10 @@ public class FirebaseTestController {
     }
 
     @PostMapping(path= "notify/test")
-    public @ResponseBody String notifyTest() {
+    public @ResponseBody Integer notifyTest() {
         Event event = EventFactory.createCrisisEvent("registered");
-        Device device = deviceRepository.findDeviceById(2);
-        return notificationService.SendNotification(event, device.getToken());
+        PatientService patientService = SpringContext.getBean(PatientService.class);
+        Patient patient = patientService.findById(1);
+        return notificationService.TriggerNotifications(event, patient);
     }
 }

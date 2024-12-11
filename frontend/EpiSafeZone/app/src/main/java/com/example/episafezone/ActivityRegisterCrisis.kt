@@ -1,6 +1,7 @@
 package com.example.episafezone
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,15 @@ class ActivityRegisterCrisis : AppCompatActivity()  {
             binding.duration.setText(duration.toString())
             val date = LocalDate.now()
             binding.date.setText(date.toString())
+        }
+
+        binding.acceptCrisisButt.setOnClickListener{
+
+        }
+
+        binding.cancelCrisisButt.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("load", "profile")
         }
     }
 }

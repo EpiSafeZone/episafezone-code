@@ -7,7 +7,8 @@
     <color name="red">#FF0000</color>
     // Custom Colors
     <color name="epiBlackBackground">#383838</color>
-    <color name="epiBlackBoxes">#4b4b4b</color>
+    <color name="epiBlackBox">#4b4b4b</color>
+    <color name="epiBlackBoxMargin">#33FFFFFF</color>
     <color name="epiGreen">#DEF358</color>
     <color name="epiWhite">#DDDDD3</color>
 </resources>

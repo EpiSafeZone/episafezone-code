@@ -158,7 +158,7 @@ public class PatientService implements PatientServiceInteface {
                             crisis.getContext(),
                             crisis.getEmergency(),
                             manifestationNameDTO,
-                            crisis.getPatient()C
+                            crisis.getPatient()
                     );
                 })
                 .collect(Collectors.toList());
@@ -197,14 +197,16 @@ public class PatientService implements PatientServiceInteface {
         }
     }
 
+/*
     public Resource getImage(Integer patientId){
         return null;
     }
-
+*/
+    /*
     public Boolean addImage(Integer patientId, MultipartFile file){
 
     }
-
+*/
 
     public Integer getNumOfApperances(Integer maniId, List<NumOfManifestationDTO> numPerManiList) {
         if (numPerManiList == null) {

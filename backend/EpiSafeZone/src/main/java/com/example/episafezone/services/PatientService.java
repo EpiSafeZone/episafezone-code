@@ -158,7 +158,7 @@ public class PatientService implements PatientServiceInteface {
                             crisis.getContext(),
                             crisis.getEmergency(),
                             manifestationNameDTO,
-                            crisis.getPatient()
+                            crisis.getPatient()C
                     );
                 })
                 .collect(Collectors.toList());
@@ -195,6 +195,14 @@ public class PatientService implements PatientServiceInteface {
                 break; // Detenemos el bucle porque ya actualizamos el contador
             }
         }
+    }
+
+    public Resource getImage(Integer patientId){
+        return null;
+    }
+
+    public Boolean addImage(Integer patientId, MultipartFile file){
+
     }
 
 

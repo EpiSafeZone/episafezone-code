@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 /*
+
 public class Conversor {
     private final static String IMAGE_DIR = "src/main/resources/static/profileImages";
 

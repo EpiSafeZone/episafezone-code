@@ -77,4 +77,14 @@ public class PatientController {
     public @ResponseBody PatientCrisisListDTO getCrisisThisWeek(@PathVariable Integer id){
         return patientService.lastWeekCrisis(id);
     }
+    
+    @GetMapping(path = "/image/{patientId}")
+    public @ResponseBody Resource getImage(@PathVariable Integer patientId) {
+        return patientService.getImage(patientId);
+    }
+
+    @PostMapping(path = "/image/add/{patientId}")
+    public @ResponseEntity<?> addimage(@PathVariable Integer patientId, @RequestParam("file") MultipartFile file){
+        return
+    }
 }

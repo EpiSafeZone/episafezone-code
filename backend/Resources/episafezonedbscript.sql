@@ -45,7 +45,7 @@ CREATE TABLE `crisis` (
 
 LOCK TABLES `crisis` WRITE;
 /*!40000 ALTER TABLE `crisis` DISABLE KEYS */;
-INSERT INTO `crisis` VALUES (1,3,'2024-10-28',NULL,NULL,NULL,1,1),(2,3,'2024-10-23',NULL,NULL,NULL,2,1),(3,4,'2024-09-17',NULL,NULL,NULL,2,1),(4,4,'2024-09-05',NULL,NULL,NULL,1,1),(5,2,'2024-09-07',NULL,NULL,NULL,1,1),(6,2,'2024-09-21',NULL,NULL,NULL,1,2),(7,2,'2024-09-03',NULL,NULL,NULL,2,2),(8,5,'2024-10-26',NULL,NULL,NULL,1,2),(9,5,'2024-10-09',NULL,NULL,NULL,2,2),(10,3,'2024-12-10','20:00','Estaba en la ducha',_binary '\0',2,1),(11,5,'2024-12-09','10:00','Estaba viendo la tele',_binary '\0',1,1),(12,6,'2024-12-08','17:00','Estaba viendo la tele',_binary '',1,1);
+INSERT INTO `crisis` VALUES (1,180,'2024-10-28','17:00','Estaba jugando en el parque, hacía mucho calor',_binary '\0',1,1),(2,180,'2024-10-23','12:00','Estaba atendiendo en clase',_binary '\0',2,1),(3,240,'2024-09-17','09:00','Estaba atendiendo en clase',_binary '\0',2,1),(4,240,'2024-09-05','21:30','Estaba en la ducha',_binary '\0',1,1),(5,120,'2024-09-07','18:37','Estaba caminando por la calle, hacía mucho calor',_binary '\0',1,1),(6,120,'2024-09-21','19:21','Estaba viendo la tele',_binary '\0',1,2),(7,120,'2024-09-03','13:40','Estaba comiendo',_binary '\0',2,2),(8,300,'2024-10-26','11:22','Estaba en calse realizando un trabajo',_binary '',1,2),(9,300,'2024-10-09','21:20','Estaba en la ducha',_binary '',2,2),(10,180,'2024-12-10','20:00','Estaba en la ducha',_binary '\0',2,1),(11,300,'2024-12-09','10:00','Estaba viendo la tele',_binary '',1,1),(12,360,'2024-12-08','17:00','Estaba viendo la tele',_binary '',1,1);
 /*!40000 ALTER TABLE `crisis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ DROP TABLE IF EXISTS `device`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `device` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `token` varchar(255) DEFAULT NULL,
   `user` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -185,7 +185,7 @@ CREATE TABLE `notify_hours` (
 
 LOCK TABLES `notify_hours` WRITE;
 /*!40000 ALTER TABLE `notify_hours` DISABLE KEYS */;
-INSERT INTO `notify_hours` VALUES (1,1,1,NULL,NULL),(2,1,2,'08:00:00','18:00:00'),(3,2,1,NULL,NULL),(4,3,2,NULL,NULL),(8,3,1,NULL,NULL);
+INSERT INTO `notify_hours` VALUES (1,1,1,'00:00:00','23:59:59'),(2,1,2,'08:00:00','18:00:00'),(3,2,1,'00:00:00','23:59:59'),(4,3,2,'00:00:00','23:59:59'),(8,3,1,'00:00:00','23:59:59');
 /*!40000 ALTER TABLE `notify_hours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +215,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (1,'Pepe','Garcia',150,50,NULL,NULL,NULL),(2,'Cesar','Gimeno',143,42,NULL,NULL,NULL);
+INSERT INTO `patient` VALUES (1,'Pepe','Garcia',150,50,'2012-12-11 14:30:45.000000',12,NULL),(2,'Cesar','Gimeno',143,42,'2012-06-13 03:21:36.000000',12,NULL);
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,4 +352,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-11  9:58:17
+-- Dump completed on 2024-12-11 12:03:41

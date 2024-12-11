@@ -21,6 +21,12 @@ class ActivitySettings : AppCompatActivity() {
         contextObj = this
         SettingsPetitions.initializeQueue()
 
+        // Return back
+        val returnBackButton: Button = findViewById(R.id.returnBackButton)
+        returnBackButton.setOnClickListener {
+            finish()
+        }
+
         // Notifications
         val notificationsSwitch: SwitchCompat = findViewById(R.id.notificationsSwitch)
         val notificationsConstraintLayout: View = findViewById(R.id.notificationsConstraintLayout)

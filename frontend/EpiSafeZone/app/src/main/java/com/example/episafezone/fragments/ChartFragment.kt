@@ -11,8 +11,8 @@ import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.businesslogic.ChartLogic
 import com.example.episafezone.databinding.FragmentChartsBinding
-import com.example.episafezone.fragments.CalendarFragment.Companion
 import com.example.episafezone.models.Patient
+import com.example.episafezone.network.ChartPetitions
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -38,6 +38,7 @@ class ChartFragment() : Fragment(R.layout.fragment_charts) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ChartPetitions.initializeQueue()
         setUpPieChart()
         setUpLineChart()
     }
@@ -47,8 +48,8 @@ class ChartFragment() : Fragment(R.layout.fragment_charts) {
         _binding = null
     }
 
-    private fun setUpPieChart(){
-        val pieList = ChartLogic.getPieChart(patient);
+    fun setUpPieChart(){
+        val pieList = ChartLogic.processPieResponse()
         val count = pieList.groupingBy { it }.eachCount()
 
         val pieEntries = count.map { (key, value) ->

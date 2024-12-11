@@ -6,6 +6,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.episafezone.BuildConfig
 import com.example.episafezone.businesslogic.CalendarLogic
+import com.example.episafezone.businesslogic.ChartLogic
 import com.example.episafezone.fragments.ChartFragment
 import com.example.episafezone.models.Patient
 import org.json.JSONObject
@@ -24,22 +25,21 @@ object ChartPetitions {
         println("${url}/patient/crisis/${patient.id}")
         val json = JSONObject()
         val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, "${url}/patient/crisis/${patient.id}", json,
+            Request.Method.GET, "${url}/patient/numMani/${patient.id}", json,
             {response->
                 println(response.toString())
-                CalendarLogic.prepareCalendarInitiation(response.toString());
             },
             {error->
                 println(error.message)
             })
-        CalendarPetitions.orderVolleyQueue.add(jsonRequest)
+        orderVolleyQueue.add(jsonRequest)
     }
 
     fun getCrisisList(patient: Patient){
         println("${url}/patient/crisis/${patient.id}")
         val json = JSONObject()
         val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, "${url}/patient/crisis/${patient.id}", json,
+            Request.Method.GET, "${url}/patient/crisisWeek/${patient.id}", json,
             {response->
                 println(response.toString())
                 CalendarLogic.prepareCalendarInitiation(response.toString());
@@ -47,6 +47,6 @@ object ChartPetitions {
             {error->
                 println(error.message)
             })
-        CalendarPetitions.orderVolleyQueue.add(jsonRequest)
+        orderVolleyQueue.add(jsonRequest)
     }
 }

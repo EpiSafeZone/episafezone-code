@@ -23,6 +23,8 @@ import kotlin.math.roundToInt
 
 object ChronometerLogic {
 
+    lateinit var manifestations: MutableList<Manifestation>
+
     private val gson = Gson()
 
     private var timerStarted = false
@@ -34,7 +36,7 @@ object ChronometerLogic {
     fun setUpInfo(json: String) {
         val jsonObject= JSONObject(json)
         val manifestationsJSON = jsonObject.getJSONArray("manifestations")
-        val manifestations = getManifestationList(manifestationsJSON)
+        manifestations = getManifestationList(manifestationsJSON)
         ChronometerFragment.updatePosibleManifestations(manifestations)
     }
 

@@ -21,7 +21,7 @@ class CrisisAdapter(val context: Context,val list:MutableList<Crisis>): Recycler
     }
 
     override fun onBindViewHolder(holder: CrisisAdapter.CrisisViewHolder, position: Int) {
-        holder.manifestation.text = list[position].manifestation
+        holder.manifestation.text = list[position].manifestationName
         holder.hour.text = list[position].hour
         holder.cont.text = list[position].context
     }

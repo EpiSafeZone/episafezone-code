@@ -92,14 +92,12 @@ public class CrisisService implements CrisisServiceInterface {
 
         // Crear una lista de PatientCrisisDTO con los días de los últimos 7 días
         return IntStream.rangeClosed(0, 6)
-                .mapToObj(diasAtras -> hoy.minusDays(diasAtras)) // Obtener los últimos 7 días
-                .sorted() // Ordenar las fechas (opcional, ya que el rango está en orden ascendente)
+                .mapToObj(diasAtras -> hoy.minusDays(diasAtras)) 
+                .sorted()
                 .map(fecha -> {
-                    // Formatear la fecha en el formato YYYY-MM-DD
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                     Date fechaDate = Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                    String fechaFormateada = sdf.format(fechaDate); // Formateamos la fecha a la cadena deseada
-                    // Devolver un nuevo PatientCrisisDTO con la fecha formateada y el número de crisis
+                    String fechaFormateada = sdf.format(fechaDate);
                     return new PatientCrisisDTO(fechaFormateada, crisisPorDia.getOrDefault(fecha, 0L).intValue());
                 })
                 .collect(Collectors.toList());

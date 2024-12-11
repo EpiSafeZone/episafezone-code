@@ -45,6 +45,19 @@ public class ManifestationService implements ManifestationServiceInterface {
         }
     }
 
+    public Manifestation getManifestationByName(String name) {
+        return manifestationRepo.findByName(name);
+
+    }
+
+    public String getManifestationNameById(Integer id){
+        return getManifestationById(id).getName();
+    }
+
+    public Integer getManifestationIdByName(String name){
+        return getManifestationByName(name).getId();
+    }
+
     @Override
     public List<Manifestation> getManifestationFromPatient(Integer patientId) {
         List<HasManifestation> hasManif = hasManifestationService.patientHasManifestations(patientId);

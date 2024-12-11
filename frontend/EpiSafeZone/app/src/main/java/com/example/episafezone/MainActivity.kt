@@ -36,13 +36,13 @@ class MainActivity : AppCompatActivity() {
 
         FirebaseApp.initializeApp(this);
 
-        val load = intent.getStringExtra("load") ?: ""
+        val load = intent.getIntExtra("load", PATIENT_LIST_VIEW)
 
-        if(load == "profile") {
+        if(load == PROFILE_FRAGMENT) {
             changeToProfile()
-        } else if (load == "calendar") {
+        } else if (load == CALENDAR_VIEW) {
             changeToCalendar()
-        } else if (load == "chronometer") {
+        } else if (load == CHRONOMETER_VIEW) {
             changeToStartCrisis(false)
         } else {
             changeToPatientList()
@@ -145,6 +145,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val PROFILE_FRAGMENT = 0
+        const val CALENDAR_VIEW = 1
+        const val CHRONOMETER_VIEW = 2
+        const val PATIENT_LIST_VIEW = 3
+
         private lateinit var contextObj: Context
         // TODO: Change this when the patient is actually obtained from the recycler view.
         private var patient = Patient(1, "Onofre", "Bustos", 180, 70, Date(), 21, "blue")

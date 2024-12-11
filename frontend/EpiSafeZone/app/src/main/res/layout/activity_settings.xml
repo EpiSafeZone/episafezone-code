@@ -209,51 +209,13 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/managePermissionsSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:minHeight="48dp"
-            android:text="Gestionar permisos de otros usuarios  "
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shareProfileConstraintLayout" />
-
-        <TextView
-            android:id="@+id/noPermissionsWarningText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@color/grey"
-            android:text="No tienes permisos para gestionar los permisos de los demás usuarios"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/managePermissionsSwitch"
-            tools:visibility="visible" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/managePermissionsRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@color/grey"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/noPermissionsWarningText"
-            tools:visibility="visible" />
-
         <Space
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/managePermissionsRecyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/shareProfileConstraintLayout" />
 
         <Button
             android:id="@+id/returnBackButton"

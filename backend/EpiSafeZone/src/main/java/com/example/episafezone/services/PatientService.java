@@ -7,6 +7,8 @@ import com.example.episafezone.DTO.ManifestationsDTO.ManifestationNameDTO;
 import com.example.episafezone.DTO.ManifestationsDTO.NumOfManifestationDTO;
 import com.example.episafezone.DTO.ManifestationsDTO.NumPerManifestationListDTO;
 import com.example.episafezone.DTO.MedicationDTO;
+import com.example.episafezone.DTO.PatientsDTO.PatientCrisisDTO;
+import com.example.episafezone.DTO.PatientsDTO.PatientCrisisListDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
 import com.example.episafezone.DTO.SharedDTO.SharedTutorDTO;
@@ -164,12 +166,16 @@ public class PatientService implements PatientServiceInteface {
     }
     public void editCounterOfMani(List<NumOfManifestationDTO> list, Integer maniId) {
         for (NumOfManifestationDTO dto : list) {
-            if (dto.getNum().equals(maniId)) {
+            // Buscar la manifestación cuyo ID coincida con maniId
+            Integer id = manifestationService.getManifestationIdByName(dto.getName());
+            if (id.equals(maniId)) {
+                // Si encontramos la manifestación, incrementamos su contador
                 dto.setNum(dto.getNum() + 1);
                 break; // Detenemos el bucle porque ya actualizamos el contador
             }
         }
     }
+
 
     public Integer getNumOfApperances(Integer maniId, List<NumOfManifestationDTO> numPerManiList) {
         if (numPerManiList == null) {
@@ -204,6 +210,13 @@ public class PatientService implements PatientServiceInteface {
 
         }
         NumPerManifestationListDTO list = new NumPerManifestationListDTO(numPerManiList);
+        return list;
+    }
+
+    public PatientCrisisListDTO lastWeekCrisis(Integer patientId){
+        PatientCrisisListDTO list = new PatientCrisisListDTO(
+                crisisService.lastWeekCrisis(patientId)
+        );
         return list;
     }
 }

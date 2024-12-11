@@ -11,6 +11,7 @@ import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.businesslogic.ChartLogic
 import com.example.episafezone.databinding.FragmentChartsBinding
+import com.example.episafezone.fragments.CalendarFragment.Companion
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.ChartPetitions
 import com.github.mikephil.charting.components.XAxis

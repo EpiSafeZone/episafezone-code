@@ -1,5 +1,6 @@
 package com.example.episafezone.fragments
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.businesslogic.ChartLogic
 import com.example.episafezone.databinding.FragmentChartsBinding
+import com.example.episafezone.fragments.CalendarFragment.Companion
 import com.example.episafezone.models.Patient
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.PieData
@@ -110,6 +112,11 @@ class ChartFragment() : Fragment(R.layout.fragment_charts) {
 
     companion object{
         private var patient = MainActivity.getPatient()
+        private val contextObj = MainActivity.getContext()
+
+        fun getContext() : Context {
+            return contextObj
+        }
 
         fun updatePatient(patient: Patient){
             this.patient = patient

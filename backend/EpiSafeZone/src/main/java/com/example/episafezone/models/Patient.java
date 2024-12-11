@@ -21,16 +21,17 @@ public class Patient {
     private Integer weight;
     private Date birthdate;
     private Integer age;
-    private String color;
+    @Column(name = "color")
+    private String imageUrl;
 
-    public Patient(String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String color) {
+    public Patient(String name, String surname, Integer height, Integer weight, Date birthdate, Integer age, String imageUrl) {
         this.name = name;
         this.surname = surname;
         this.height = height;
         this.weight = weight;
         this.birthdate = birthdate;
         this.age = age;
-        this.color = color;
+        this.imageUrl = imageUrl;
     }
 
     public Patient (){}
@@ -92,11 +93,11 @@ public class Patient {
         this.age = age;
     }
 
-    public String getColor() {
-        return color;
+    public String getImageUrl() {
+        return imageUrl;
     }
-    public void setColor(String color) {
-        this.color = color;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public List<Tutor> getTutors() {

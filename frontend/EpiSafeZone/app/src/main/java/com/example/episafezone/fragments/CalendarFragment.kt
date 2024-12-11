@@ -12,6 +12,7 @@ import com.example.episafezone.R
 import com.example.episafezone.adapter.CrisisAdapter
 import com.example.episafezone.businesslogic.CalendarLogic
 import com.example.episafezone.databinding.FragmentCalendarBinding
+import com.example.episafezone.fragments.ChartFragment
 import com.example.episafezone.models.Crisis
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.CalendarPetitions

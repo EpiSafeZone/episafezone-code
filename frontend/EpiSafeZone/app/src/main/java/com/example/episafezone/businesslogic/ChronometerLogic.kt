@@ -5,6 +5,7 @@ import android.os.SystemClock
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
+import com.example.episafezone.ActivityRegisterCrisis
 import com.example.episafezone.fragments.ChronometerFragment
 import com.example.episafezone.R
 import com.example.episafezone.databinding.FragmentChronometerBinding
@@ -52,9 +53,9 @@ object ChronometerLogic {
         return list
     }
 
-    fun startStopTimer(binding: FragmentChronometerBinding) {
+    fun startStopTimer(binding: FragmentChronometerBinding, patient : Patient) {
         if(timerStarted)
-            stopTimer(binding)
+            stopTimer(binding,patient)
         else
             startTimer(binding)
     }
@@ -67,11 +68,11 @@ object ChronometerLogic {
         binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
     }
 
-    private fun stopTimer(binding: FragmentChronometerBinding) {
+    private fun stopTimer(binding: FragmentChronometerBinding,patient: Patient) {
         ChronometerFragment.chronometer.stop()
         timerStarted = false
         val elapsedTime = getElapsedTime(binding)
-        // TODO: Implementar logica registrar crisis
+        ChronometerFragment.startCrisisRegister(elapsedTime)
         Toast.makeText(ChronometerFragment.getContext(), "Parar timer", Toast.LENGTH_SHORT).show()
     }
 

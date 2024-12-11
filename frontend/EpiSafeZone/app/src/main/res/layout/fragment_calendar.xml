@@ -33,14 +33,14 @@
 
         <ImageView
             android:id="@+id/patientImage"
-            tools:srcCompat="@android:mipmap/sym_def_app_icon"
             android:layout_width="48dp"
             android:layout_height="33dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:mipmap/sym_def_app_icon" />
+            app:srcCompat="@android:mipmap/sym_def_app_icon"
+            tools:srcCompat="@android:mipmap/sym_def_app_icon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -135,4 +135,12 @@
         app:layout_constraintStart_toEndOf="@+id/crisisAmountText"
         app:layout_constraintTop_toTopOf="@+id/crisisAmountText" />
 
+    <Button
+        android:id="@+id/initChart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/selectedDayText"
+        app:layout_constraintTop_toTopOf="@+id/selectedDayText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

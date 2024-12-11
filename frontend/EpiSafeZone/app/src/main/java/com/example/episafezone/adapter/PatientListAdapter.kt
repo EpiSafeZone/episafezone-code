@@ -46,5 +46,9 @@ class PatientListAdapter(var context: Context?, private var list: List<Patient>)
         holder.patientImage.setOnClickListener {
             PatientListFragment.changePatient(list[position])
         }
+
+        holder.registerCrisisButton.setOnClickListener {
+            PatientListFragment.startRegisterCrisis(list[position])
+        }
     }
 }

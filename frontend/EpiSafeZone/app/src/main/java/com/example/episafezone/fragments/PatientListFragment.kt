@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.episafezone.ActivityRegisterCrisis
 import com.example.episafezone.ActivityRegisterManifestation
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
@@ -52,6 +53,11 @@ class PatientListFragment : Fragment(R.layout.fragment_patient_list) {
 
         fun startRegisterManifestation(){
             val intent = Intent(contextObj, ActivityRegisterManifestation::class.java)
+            contextObj.startActivity(intent)
+        }
+
+        fun startRegisterCrisis(patient: Patient){
+            val intent = Intent(contextObj, ActivityRegisterCrisis::class.java)
             contextObj.startActivity(intent)
         }
     }

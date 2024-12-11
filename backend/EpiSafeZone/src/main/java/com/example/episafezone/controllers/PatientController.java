@@ -9,11 +9,10 @@ import com.example.episafezone.models.Patient;
 import com.example.episafezone.models.Tutor;
 import com.example.episafezone.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -45,5 +44,15 @@ public class PatientController {
     @GetMapping(path="/crisis/{id}/{year}/{month}")
     public @ResponseBody CrisisListDTO getCrisisFromPatient(@PathVariable Integer id, @PathVariable Integer year, @PathVariable Integer month){
         return patientService.getListOfCrisis(id, year, month);
+    }
+
+    @GetMapping(path = "/image/{patientId}")
+    public @ResponseBody Resource getImage(@PathVariable Integer patientId) {
+        return patientService.getImage(patientId);
+    }
+
+    @PostMapping(path = "/image/add/{patientId}")
+    public @ResponseEntity<?> addimage(@PathVariable Integer patientId, @RequestParam("file") MultipartFile file){
+        return
     }
 }

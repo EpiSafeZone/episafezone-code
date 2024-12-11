@@ -64,9 +64,9 @@ public class PatientService implements PatientServiceInteface {
 
     @Override
     public Patient findById(int id) {
-        if(patientRepo.findById(id).isPresent()){
+        if (patientRepo.findById(id).isPresent()) {
             return patientRepo.findById(id).get();
-        }else{
+        } else {
             throw new ResourceNotFoudException("No se ha encontrado el paciente con el id: " + id);
         }
     }
@@ -141,11 +141,11 @@ public class PatientService implements PatientServiceInteface {
         return patientListDTOs;
     }
 
-    public CrisisListDTO getListOfCrisis(Integer id, Integer year, Integer month){
+    public CrisisListDTO getListOfCrisis(Integer id, Integer year, Integer month) {
         List<Crisis> unfilteredList = CrisisService.getByPatient(id);
         List<Crisis> filteredList = CrisisService.getByMonth(unfilteredList, year, month);
 
-        List<CrisisDTO> crisisDTOs= filteredList.stream()
+        List<CrisisDTO> crisisDTOs = filteredList.stream()
                 .map(crisis -> {
                     Manifestation manifestation = manifestationService.getManifestationById(crisis.getManifestation());
                     ManifestationNameDTO manifestationNameDTO = manifestation != null ? new ManifestationNameDTO(manifestation) : null;
@@ -185,6 +185,9 @@ public class PatientService implements PatientServiceInteface {
 */
     /*
     public Boolean addImage(Integer patientId, MultipartFile file){
+    }
+*/
+
     public void editCounterOfMani(List<NumOfManifestationDTO> list, Integer maniId) {
         for (NumOfManifestationDTO dto : list) {
             // Buscar la manifestación cuyo ID coincida con maniId
@@ -197,30 +200,17 @@ public class PatientService implements PatientServiceInteface {
         }
     }
 
-/*
-    public Resource getImage(Integer patientId){
-        return null;
-    }
-*/
-    /*
-    public Boolean addImage(Integer patientId, MultipartFile file){
-
-    }
-*/
-
-    public Integer getNumOfApperances(Integer maniId, List<NumOfManifestationDTO> numPerManiList) {
-        if (numPerManiList == null) {
-            return -1;
+        public Integer getNumOfApperances (Integer maniId, List < NumOfManifestationDTO > numPerManiList){
+            if (numPerManiList == null) {
+                return -1;
+            }
+            return numPerManiList.stream()
+                    .filter(dto -> manifestationService.getManifestationIdByName(dto.getName()).equals(maniId))
+                    .findFirst()
+                    .map(dto -> dto.getNum())
+                    .orElse(-1);
         }
-        return numPerManiList.stream()
-                .filter(dto -> manifestationService.getManifestationIdByName(dto.getName()).equals(maniId))
-                .findFirst()
-                .map(dto -> dto.getNum())
-                .orElse(-1);
-    }
 
-    }
-*/
 
     public Integer getNumOfApperances(Integer maniId, List<NumOfManifestationDTO> numPerManiList) {
         if (numPerManiList == null) {

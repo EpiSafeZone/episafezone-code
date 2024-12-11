@@ -8,13 +8,13 @@ public class PatientListDTO implements Serializable {
     private Integer id;
     private String name;
     private String surname;
-    private String color;
+    private String imageUrl;
 
     public PatientListDTO(Patient patient) {
         this.id = patient.getId();
         this.name = patient.getName();
         this.surname = patient.getSurname();
-        this.color = patient.getColor();
+        this.imageUrl = patient.getImageUrl();
     }
 
     public PatientListDTO(){}
@@ -43,11 +43,11 @@ public class PatientListDTO implements Serializable {
         this.surname = surname;
     }
 
-    public String getColor() {
-        return color;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -17,7 +17,9 @@ import com.example.episafezone.models.*;
 import com.example.episafezone.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,7 +158,7 @@ public class PatientService implements PatientServiceInteface {
                             crisis.getContext(),
                             crisis.getEmergency(),
                             manifestationNameDTO,
-                            crisis.getPatient()
+                            crisis.getPatient()C
                     );
                 })
                 .collect(Collectors.toList());
@@ -174,6 +176,14 @@ public class PatientService implements PatientServiceInteface {
                 break; // Detenemos el bucle porque ya actualizamos el contador
             }
         }
+    }
+
+    public Resource getImage(Integer patientId){
+        return null;
+    }
+
+    public Boolean addImage(Integer patientId, MultipartFile file){
+
     }
 
 

@@ -66,15 +66,19 @@ class ActivitySettings : AppCompatActivity() {
             }
         }
         shareProfileButton.setOnClickListener {
-            Toast.makeText(this, "¡Perfil compartido!", Toast.LENGTH_SHORT).show()
-            //TODO: Share profile
+            if (shareEmailEditText.text.isEmpty()) {
+                Toast.makeText(this, "Debes ingresar un email", Toast.LENGTH_SHORT).show()
+            } else {
+                //TODO: Share profile
+                Toast.makeText(this, "¡Perfil compartido!", Toast.LENGTH_SHORT).show()
 
-            // Set everything to default
-            permission1CheckBox.isChecked = false
-            permission2CheckBox.isChecked = false
-            permission3CheckBox.isChecked = false
-            permission4CheckBox.isChecked = false
-            shareEmailEditText.text = ""
+                // Set everything to default
+                permission1CheckBox.isChecked = false
+                permission2CheckBox.isChecked = false
+                permission3CheckBox.isChecked = false
+                permission4CheckBox.isChecked = false
+                shareEmailEditText.text = ""
+            }
         }
     }
     private fun launchTimePicker(textView: TextView) {

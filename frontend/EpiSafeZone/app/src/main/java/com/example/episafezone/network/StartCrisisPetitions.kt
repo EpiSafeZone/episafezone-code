@@ -9,8 +9,13 @@ import com.android.volley.toolbox.Volley
 import com.example.episafezone.BuildConfig
 import com.example.episafezone.MainActivity
 import com.example.episafezone.businesslogic.ChronometerLogic
+import com.example.episafezone.businesslogic.StartCrisisLogic
+import com.example.episafezone.models.Crisis
 import com.example.episafezone.models.Patient
+import com.example.episafezone.models.User
 import org.json.JSONObject
+import java.time.LocalDate
+import java.time.ZoneId
 
 object StartCrisisPetitions {
 
@@ -24,9 +29,10 @@ object StartCrisisPetitions {
     }
 
     fun getPatientManifestations(patient: Patient) {
-        val id = patient.id
+        val patientId = patient.id
+        val userId = User.getId()
         val stringRequest = StringRequest(
-            Request.Method.GET, "${url}/patient/info/$id",
+            Request.Method.GET, "${url}/patient/info/$patientId/$userId",
             {response->
                 ChronometerLogic.setUpInfo(response.toString())
             },
@@ -34,5 +40,28 @@ object StartCrisisPetitions {
                 Log.d("GetPatientManifestations",error.message.toString())
             })
         orderVolleyQueue.add(stringRequest)
+    }
+
+    fun registerCrisis(crisis: Crisis){
+        val localDate: LocalDate = crisis.date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+
+        val jsonObject = JSONObject()
+        jsonObject.put("duration", crisis.duration)
+        jsonObject.put("date", localDate)
+        jsonObject.put("hour", crisis.hour)
+        jsonObject.put("context", crisis.context)
+        jsonObject.put("emergency", crisis.emergency)
+        jsonObject.put("manifestation", crisis.manifestationId)
+        jsonObject.put("patient", crisis.patient)
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.POST, "${url}/crisis/create", jsonObject,
+            {response->
+                StartCrisisLogic.SuccessfullRegisterCrisis()
+            },
+            {error->
+                StartCrisisLogic.FailedRegisterCrisis()
+            })
+
+        orderVolleyQueue.add(jsonRequest)
     }
 }

@@ -1,26 +1,37 @@
 package com.example.episafezone.businesslogic
 
+import com.example.episafezone.fragments.ChartFragment
 import com.example.episafezone.models.Patient
+import com.example.episafezone.network.ChartPetitions
+import org.json.JSONObject
 
 object ChartLogic {
-    fun getPieChart(patient: Patient) : List<String>{
-        val list = mutableListOf<String>();
-        list.add("hola")
-        list.add("tardes")
-        list.add("tardes")
-        list.add("hola")
-        list.add("buenas")
-        list.add("hola")
-        return list;
+    fun getPieChart(patient: Patient){
+        ChartPetitions.getManifestationList(patient);
+    }
+
+    fun processPieResponse(): List<String>{
+        val pieList = mutableListOf<String>()
+        pieList.add("tonico-clonico")
+        pieList.add("tonico-clonico")
+        pieList.add("tonico-clonico")
+        pieList.add("tonico-clonico")
+        pieList.add("ausencias")
+        pieList.add("ausencias")
+        pieList.add("ausencias")
+        pieList.add("ausencias")
+        pieList.add("ausencias")
+        return pieList;
     }
 
     fun getLineChart(patient: Patient) : Map<String,Int>{
         val dateNumbers = mapOf(
-            "2023-12-01" to 10,
-            "2023-12-02" to 15,
-            "2023-12-03" to 8,
-            "2023-12-04" to 20,
-            "2023-12-05" to 12
+            "2024-12-06" to 2,
+            "2024-12-07" to 1,
+            "2024-12-08" to 3,
+            "2024-12-09" to 0,
+            "2024-12-10" to 0,
+            "2024-12-11" to 2
         )
         return dateNumbers;
     }

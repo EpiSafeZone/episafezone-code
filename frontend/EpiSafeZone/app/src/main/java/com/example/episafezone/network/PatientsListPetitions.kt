@@ -26,7 +26,7 @@ object PatientsListPetitions {
         json.put("token",device.token)
         json.put("user",device.user)
         val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, "$url/device/create", json,
+            Request.Method.POST, "$url/device/create", json,
             {response-> },
             {error->
                 println(error.message)

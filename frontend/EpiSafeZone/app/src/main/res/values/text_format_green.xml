@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextFormatGreen">
+        <item name="android:textColor">#DEF358</item> <!-- Color del texto -->
+        <item name="android:fontFamily">@font/inter_light</item>
+        <item name="android:textSize">14sp</item> <!-- Tamaño de texto -->
+        <item name="android:lineSpacingExtra">4dp</item> <!-- Espaciado entre líneas -->
+        <item name="android:scrollbars">vertical</item>
+    </style>
+</resources>

@@ -53,7 +53,7 @@ object CalendarLogic {
             }
         }
 
-        binding.amountCrisisNumber.text = result.count().toString()
+        binding.crisisAmountText.text = result.count().toString() +" crisis registradas";
         CalendarFragment.updateListOfCrisis(result)
     }
     fun prepareCalendarInitiation(json : String){

@@ -31,8 +31,8 @@ public class HasManifestation {
         return manifestation;
     }
 
-    public void setManifestation(Manifestation manifestation) {
-        this.manifestation = manifestation.getId();
+    public void setManifestation(Integer manifestation) {
+        this.manifestation = manifestation;
     }
 
     public Integer getPatient() {

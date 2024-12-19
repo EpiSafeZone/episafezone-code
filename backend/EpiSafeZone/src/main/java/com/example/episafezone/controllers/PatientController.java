@@ -62,31 +62,4 @@ public class PatientController {
     public @ResponseBody Resource getImage(@PathVariable Integer patientId) {
         return patientService.getImage(patientId);
     }
-    
-/*@PostMapping(path = "/image/add/{patientId}")
-    public @ResponseEntity<?> addimage(@PathVariable Integer patientId, @RequestParam("file") MultipartFile file){
-        return null;
-    }
- */
-    @GetMapping(path="/numMani/{id}")
-    public @ResponseBody NumPerManifestationListDTO getCrisisNumPerMani(@PathVariable Integer id){
-        return patientService.numPerManifestation(id);
-    }
-
-    @GetMapping(path="/crisisWeek/{id}")
-    public @ResponseBody PatientCrisisListDTO getCrisisThisWeek(@PathVariable Integer id){
-        return patientService.lastWeekCrisis(id);
-    }
-    
-   /*
-    @GetMapping(path = "/image/{patientId}")
-    public @ResponseBody Resource getImage(@PathVariable Integer patientId) {
-        return patientService.getImage(patientId);
-    }
-    */
-/*@PostMapping(path = "/image/add/{patientId}")
-    public @ResponseEntity<?> addimage(@PathVariable Integer patientId, @RequestParam("file") MultipartFile file){
-        return
-    }
- */
 }

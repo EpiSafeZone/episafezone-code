@@ -166,23 +166,11 @@ public class PatientService implements PatientServiceInteface {
         CrisisListDTO CrisisListDTO = new CrisisListDTO(crisisDTOs);
         return CrisisListDTO;
     }
-    public void editCounterOfMani(List<NumOfManifestationDTO> list, Integer maniId) {
-        for (NumOfManifestationDTO dto : list) {
-            // Buscar la manifestación cuyo ID coincida con maniId
-            Integer id = manifestationService.getManifestationIdByName(dto.getName());
-            if (id.equals(maniId)) {
-                // Si encontramos la manifestación, incrementamos su contador
-                dto.setNum(dto.getNum() + 1);
-                break; // Detenemos el bucle porque ya actualizamos el contador
-            }
-        }
-    }
 
-/*
+
     public Resource getImage(Integer patientId){
         return null;
     }
-*/
     /*
     public Boolean addImage(Integer patientId, MultipartFile file){
     }
@@ -199,18 +187,6 @@ public class PatientService implements PatientServiceInteface {
             }
         }
     }
-
-        public Integer getNumOfApperances (Integer maniId, List < NumOfManifestationDTO > numPerManiList){
-            if (numPerManiList == null) {
-                return -1;
-            }
-            return numPerManiList.stream()
-                    .filter(dto -> manifestationService.getManifestationIdByName(dto.getName()).equals(maniId))
-                    .findFirst()
-                    .map(dto -> dto.getNum())
-                    .orElse(-1);
-        }
-
 
     public Integer getNumOfApperances(Integer maniId, List<NumOfManifestationDTO> numPerManiList) {
         if (numPerManiList == null) {

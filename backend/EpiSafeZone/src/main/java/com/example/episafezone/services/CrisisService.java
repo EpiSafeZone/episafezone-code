@@ -70,7 +70,7 @@ public class CrisisService implements CrisisServiceInterface {
         PatientService patientService = SpringContext.getBean(PatientService.class);
         Patient patient = patientService.findById(crisis.getPatient());
         Event event = EventFactory.createCrisisEvent("registered");
-        patient.triggerEvent(event);
+        //patient.triggerEvent(event);
         return repo.save(crisis);
     }
 

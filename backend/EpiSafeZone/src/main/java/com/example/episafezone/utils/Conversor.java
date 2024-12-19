@@ -4,6 +4,7 @@ import com.example.episafezone.exceptions.FormatUnsupportedException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -37,7 +38,7 @@ public class Conversor {
             }else{
                 throw new FormatUnsupportedException("the resource has to be in one of this formats: .jpg, .jpeg or .png");
             }
-        } catch (Exception e){
+        } catch (IOException e){
             e.printStackTrace();
         }
         return newFileName;

@@ -18,24 +18,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <Spinner
         android:id="@+id/manifestation"
-        android:layout_width="275dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Manifestación"
+        android:hint="Seleccionar manifestación"
         android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
         android:id="@+id/date"
-        android:layout_width="275dp"
+        android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginTop="15dp"
+        android:clickable="true"
         android:ems="10"
+        android:focusable="false"
         android:hint="Fecha"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="@+id/manifestation"
@@ -44,54 +47,76 @@
 
     <EditText
         android:id="@+id/duration"
-        android:layout_width="275dp"
+        android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Duración"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/manifestation"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/manifestation"
         app:layout_constraintTop_toBottomOf="@+id/date" />
 
     <EditText
         android:id="@+id/context"
-        android:layout_width="271dp"
-        android:layout_height="153dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Contexto"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="@+id/manifestation"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/manifestation"
-        app:layout_constraintTop_toBottomOf="@+id/duration" />
+        app:layout_constraintTop_toBottomOf="@+id/time" />
 
     <Button
         android:id="@+id/acceptCrisisButt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="48dp"
         android:backgroundTint="@color/grey"
         android:text="Aceptar"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/cancelMedicationButt"
+        android:id="@+id/cancelCrisisButt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginStart="48dp"
         android:backgroundTint="@color/grey"
         android:text="Cancelar"
         android:textColor="#000000"
         android:textColorHighlight="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/seconds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="3dp"
+        android:text="segundos"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/duration"
+        app:layout_constraintStart_toEndOf="@+id/duration"
+        app:layout_constraintTop_toTopOf="@+id/duration" />
+
+    <EditText
+        android:id="@+id/time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:clickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="Hora"
+        app:layout_constraintEnd_toEndOf="@+id/manifestation"
+        app:layout_constraintStart_toStartOf="@+id/manifestation"
+        app:layout_constraintTop_toBottomOf="@+id/duration" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

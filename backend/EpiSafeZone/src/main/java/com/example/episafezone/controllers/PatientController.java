@@ -12,10 +12,13 @@ import com.example.episafezone.models.Tutor;
 import com.example.episafezone.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -60,6 +63,17 @@ public class PatientController {
     
     @GetMapping(path = "/image/{patientId}")
     public @ResponseBody Resource getImage(@PathVariable Integer patientId) {
-        return patientService.getImage(patientId);
+        try{
+            return patientService.getImage(patientId);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @PostMapping(path="/image/upload/{patientId}")
+    public ResponseEntity<Boolean> uploadImage(@PathVariable Integer patientId, MultipartFile file){
+        if(patientService.addImage(patientId, file)){return new ResponseEntity<>(HttpStatus.ACCEPTED);}
+        else{return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);}
     }
 }

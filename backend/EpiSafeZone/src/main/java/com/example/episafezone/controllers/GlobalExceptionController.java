@@ -1,5 +1,6 @@
 package com.example.episafezone.controllers;
 
+import com.example.episafezone.exceptions.FormatUnsupportedException;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.ErrorDetails;
 import jakarta.persistence.Entity;
@@ -20,5 +21,15 @@ public class GlobalExceptionController {
                 request.getDescription(false)
         );
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FormatUnsupportedException.class)
+    public ResponseEntity<?> formatUnsupportedException(FormatUnsupportedException e, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                HttpStatus.BAD_REQUEST.value(),
+                e.getMessage(),
+                request.getDescription(false)
+        );
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }

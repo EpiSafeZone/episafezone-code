@@ -7,7 +7,6 @@ import com.example.episafezone.DTO.ManifestationsDTO.ManifestationNameDTO;
 import com.example.episafezone.DTO.ManifestationsDTO.NumOfManifestationDTO;
 import com.example.episafezone.DTO.ManifestationsDTO.NumPerManifestationListDTO;
 import com.example.episafezone.DTO.MedicationDTO;
-import com.example.episafezone.DTO.PatientsDTO.PatientCrisisDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientCrisisListDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
@@ -15,12 +14,18 @@ import com.example.episafezone.DTO.SharedDTO.SharedTutorDTO;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.*;
 import com.example.episafezone.repositories.*;
+import com.example.episafezone.utils.Conversor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -168,13 +173,32 @@ public class PatientService implements PatientServiceInteface {
     }
 
 
-    public Resource getImage(Integer patientId){
-        return null;
+    public Resource getImage(Integer patientId) throws IOException {
+        String IMAGE_DIR = "src/main/resources/static/profileImages";
+        Patient patient = findById(patientId);
+        try{
+            Path file = Paths.get(IMAGE_DIR + "/" + patient.getImageUrl());
+            Resource resource = new UrlResource(file.toUri());
+            if(resource.exists() || resource.isReadable()){
+                return resource;
+            }else{
+                throw new IOException("Image can't be read");
+            }
+        }catch (MalformedURLException ex){
+            throw new IOException("Coudn't dowload the file");
+        }
     }
-    /*
+
     public Boolean addImage(Integer patientId, MultipartFile file){
+        String fileName = Conversor.handleFileUpload(file);
+        if(fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png")){
+            Patient patient = findById(patientId);
+            patient.setImageUrl(fileName);
+            patientRepo.save(patient);
+            return true;
+        }
+        return false;
     }
-*/
 
     public void editCounterOfMani(List<NumOfManifestationDTO> list, Integer maniId) {
         for (NumOfManifestationDTO dto : list) {

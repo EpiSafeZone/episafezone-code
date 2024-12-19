@@ -23,6 +23,7 @@ public class CrisisController {
 
     @PostMapping(path= "/create")
     public @ResponseBody Crisis createCrisis(@RequestBody Crisis crisis) {
+        System.out.println("Datos recibidos: " + crisis);
         return crisisService.createCrisis(crisis);
     }
 

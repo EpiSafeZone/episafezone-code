@@ -17,7 +17,9 @@ import com.example.episafezone.models.*;
 import com.example.episafezone.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,9 +64,9 @@ public class PatientService implements PatientServiceInteface {
 
     @Override
     public Patient findById(int id) {
-        if(patientRepo.findById(id).isPresent()){
+        if (patientRepo.findById(id).isPresent()) {
             return patientRepo.findById(id).get();
-        }else{
+        } else {
             throw new ResourceNotFoudException("No se ha encontrado el paciente con el id: " + id);
         }
     }
@@ -139,11 +141,11 @@ public class PatientService implements PatientServiceInteface {
         return patientListDTOs;
     }
 
-    public CrisisListDTO getListOfCrisis(Integer id, Integer year, Integer month){
+    public CrisisListDTO getListOfCrisis(Integer id, Integer year, Integer month) {
         List<Crisis> unfilteredList = CrisisService.getByPatient(id);
         List<Crisis> filteredList = CrisisService.getByMonth(unfilteredList, year, month);
 
-        List<CrisisDTO> crisisDTOs= filteredList.stream()
+        List<CrisisDTO> crisisDTOs = filteredList.stream()
                 .map(crisis -> {
                     Manifestation manifestation = manifestationService.getManifestationById(crisis.getManifestation());
                     ManifestationNameDTO manifestationNameDTO = manifestation != null ? new ManifestationNameDTO(manifestation) : null;
@@ -164,6 +166,16 @@ public class PatientService implements PatientServiceInteface {
         CrisisListDTO CrisisListDTO = new CrisisListDTO(crisisDTOs);
         return CrisisListDTO;
     }
+
+
+    public Resource getImage(Integer patientId){
+        return null;
+    }
+    /*
+    public Boolean addImage(Integer patientId, MultipartFile file){
+    }
+*/
+
     public void editCounterOfMani(List<NumOfManifestationDTO> list, Integer maniId) {
         for (NumOfManifestationDTO dto : list) {
             // Buscar la manifestación cuyo ID coincida con maniId
@@ -175,7 +187,6 @@ public class PatientService implements PatientServiceInteface {
             }
         }
     }
-
 
     public Integer getNumOfApperances(Integer maniId, List<NumOfManifestationDTO> numPerManiList) {
         if (numPerManiList == null) {

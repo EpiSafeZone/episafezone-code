@@ -17,7 +17,7 @@ public class PatientInfoDTO implements Serializable {
     private Integer weight;
     private Date birthdate;
     private Integer age;
-    private String color;
+    private String imageURl ;
 
     private List<MedicationDTO> medications;
     private List<ManifestationDTO> manifestations;
@@ -34,7 +34,7 @@ public class PatientInfoDTO implements Serializable {
         this.weight = patient.getWeight();
         this.birthdate = patient.getBirthdate();
         this.age = patient.getAge();
-        this.color = patient.getColor();
+        this.imageURl = patient.getImageUrl();
         this.medications = medications;
         this.manifestations = manifestations;
         this.sharedTutors = sharedTutors;
@@ -96,13 +96,11 @@ public class PatientInfoDTO implements Serializable {
         this.age = age;
     }
 
-    public String getColor() {
-        return color;
+    public String getImageURl() {
+        return imageURl;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
+    public void setImageURl(String imageURl) {this.imageURl = imageURl;}
 
     public List<MedicationDTO> getMedications() {
         return medications;

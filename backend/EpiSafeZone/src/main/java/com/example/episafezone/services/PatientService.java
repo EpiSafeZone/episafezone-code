@@ -7,7 +7,6 @@ import com.example.episafezone.DTO.ManifestationsDTO.ManifestationNameDTO;
 import com.example.episafezone.DTO.ManifestationsDTO.NumOfManifestationDTO;
 import com.example.episafezone.DTO.ManifestationsDTO.NumPerManifestationListDTO;
 import com.example.episafezone.DTO.MedicationDTO;
-import com.example.episafezone.DTO.PatientsDTO.PatientCrisisDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientCrisisListDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientListDTO;
@@ -15,10 +14,18 @@ import com.example.episafezone.DTO.SharedDTO.SharedTutorDTO;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.*;
 import com.example.episafezone.repositories.*;
+import com.example.episafezone.utils.Conversor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -62,9 +69,9 @@ public class PatientService implements PatientServiceInteface {
 
     @Override
     public Patient findById(int id) {
-        if(patientRepo.findById(id).isPresent()){
+        if (patientRepo.findById(id).isPresent()) {
             return patientRepo.findById(id).get();
-        }else{
+        } else {
             throw new ResourceNotFoudException("No se ha encontrado el paciente con el id: " + id);
         }
     }
@@ -139,11 +146,11 @@ public class PatientService implements PatientServiceInteface {
         return patientListDTOs;
     }
 
-    public CrisisListDTO getListOfCrisis(Integer id, Integer year, Integer month){
+    public CrisisListDTO getListOfCrisis(Integer id, Integer year, Integer month) {
         List<Crisis> unfilteredList = CrisisService.getByPatient(id);
         List<Crisis> filteredList = CrisisService.getByMonth(unfilteredList, year, month);
 
-        List<CrisisDTO> crisisDTOs= filteredList.stream()
+        List<CrisisDTO> crisisDTOs = filteredList.stream()
                 .map(crisis -> {
                     Manifestation manifestation = manifestationService.getManifestationById(crisis.getManifestation());
                     ManifestationNameDTO manifestationNameDTO = manifestation != null ? new ManifestationNameDTO(manifestation) : null;
@@ -164,6 +171,35 @@ public class PatientService implements PatientServiceInteface {
         CrisisListDTO CrisisListDTO = new CrisisListDTO(crisisDTOs);
         return CrisisListDTO;
     }
+
+
+    public Resource getImage(Integer patientId) throws IOException {
+        String IMAGE_DIR = "src/main/resources/static/profileImages";
+        Patient patient = findById(patientId);
+        try{
+            Path file = Paths.get(IMAGE_DIR + "/" + patient.getImageUrl());
+            Resource resource = new UrlResource(file.toUri());
+            if(resource.exists() || resource.isReadable()){
+                return resource;
+            }else{
+                throw new IOException("Image can't be read");
+            }
+        }catch (MalformedURLException ex){
+            throw new IOException("Coudn't dowload the file");
+        }
+    }
+
+    public Boolean addImage(Integer patientId, MultipartFile file){
+        String fileName = Conversor.handleFileUpload(file);
+        if(fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png")){
+            Patient patient = findById(patientId);
+            patient.setImageUrl(fileName);
+            patientRepo.save(patient);
+            return true;
+        }
+        return false;
+    }
+
     public void editCounterOfMani(List<NumOfManifestationDTO> list, Integer maniId) {
         for (NumOfManifestationDTO dto : list) {
             // Buscar la manifestación cuyo ID coincida con maniId
@@ -175,7 +211,6 @@ public class PatientService implements PatientServiceInteface {
             }
         }
     }
-
 
     public Integer getNumOfApperances(Integer maniId, List<NumOfManifestationDTO> numPerManiList) {
         if (numPerManiList == null) {

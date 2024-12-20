@@ -1,0 +1,16 @@
+<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.3799 22C15.8994 22 18.3158 20.9991 20.0974 19.2175C21.879 17.4359 22.8799 15.0196 22.8799 12.5C22.8799 9.98044 21.879 7.56408 20.0974 5.78249C18.3158 4.00089 15.8994 3 13.3799 3C10.8603 3 8.44396 4.00089 6.66237 5.78249C4.88077 7.56408 3.87988 9.98044 3.87988 12.5C3.87988 15.0196 4.88077 17.4359 6.66237 19.2175C8.44396 20.9991 10.8603 22 13.3799 22Z" stroke="#DEF356" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14 15C14.5304 15 15.0391 14.7893 15.4142 14.4142C15.7893 14.0391 16 13.5304 16 13C16 12.4696 15.7893 11.9609 15.4142 11.5858C15.0391 11.2107 14.5304 11 14 11C13.4696 11 12.9609 11.2107 12.5858 11.5858C12.2107 11.9609 12 12.4696 12 13C12 13.5304 12.2107 14.0391 12.5858 14.4142C12.9609 14.7893 13.4696 15 14 15Z" stroke="#DEF356" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13 1V3" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M13 25V23" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M20 24L19 22" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M12 11L7 2" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M24 19L22 18" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M2 7L4 8" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M17 13L25 13" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M1 13H3.00348" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M24 7L22 8" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M2 19L4 18" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M20 2L19 4" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M12 15L7 24" stroke="#DEF356" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+</svg>

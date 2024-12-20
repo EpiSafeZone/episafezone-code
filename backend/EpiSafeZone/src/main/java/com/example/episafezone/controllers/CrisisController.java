@@ -2,6 +2,7 @@ package com.example.episafezone.controllers;
 
 import com.example.episafezone.models.Crisis;
 import com.example.episafezone.services.CrisisService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,10 +12,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping(path="/crisis")
 public class CrisisController {
-    private final CrisisService crisisService;
-    public CrisisController(CrisisService crisisService) {
-        this.crisisService = crisisService;
-    }
+    @Autowired
+    CrisisService crisisService;
 
     @GetMapping(path="/{id}")
     public @ResponseBody Crisis getCrisis(@PathVariable Integer id) {

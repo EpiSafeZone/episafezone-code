@@ -1,5 +1,6 @@
 package com.example.episafezone.controllers;
 
+import com.example.episafezone.exceptions.AttributeMissingException;
 import com.example.episafezone.exceptions.FormatUnsupportedException;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.ErrorDetails;
@@ -31,5 +32,15 @@ public class GlobalExceptionController {
                 request.getDescription(false)
         );
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AttributeMissingException.class)
+    public ResponseEntity<?> attributeMissingException(AttributeMissingException e, WebRequest request) {
+         ErrorDetails errorDetails = new ErrorDetails(
+                 HttpStatus.BAD_REQUEST.value(),
+                 e.getMessage(),
+                 request.getDescription(false)
+         );
+         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }

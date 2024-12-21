@@ -12,9 +12,9 @@ public class HasManifestation {
 
     public Integer patient;
 
-    public HasManifestation(Manifestation manifestation, Patient patient) {
-        this.manifestation = manifestation.getId();
-        this.patient = patient.getId();
+    public HasManifestation(Integer manifestation, Integer patient) {
+        this.manifestation = manifestation;
+        this.patient = patient;
     }
     public HasManifestation() {
     }
@@ -39,7 +39,7 @@ public class HasManifestation {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient.getId();
+    public void setPatient(Integer patient) {
+        this.patient = patient;
     }
 }

@@ -38,7 +38,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         val format = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         val actualDate = dateTime.format(format)
         calendarDay = CalendarDay.from(dateTime.year,dateTime.monthValue,dateTime.dayOfMonth)
-        binding.selectedDayText.text = actualDate
+        binding.dateText.text = actualDate
         CalendarLogic.getCrisisList(patient, dateTime.monthValue + 1, dateTime.year)
 
         binding.calendarView.setOnMonthChangedListener(){widget, date->
@@ -46,7 +46,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
 
         }
         binding.calendarView.setOnDateChangedListener{ widget, date, selected ->
-            binding.selectedDayText.text = "${date.day}/${date.month+1}/${date.year}"
+            binding.dateText.text = "${date.day}/${date.month+1}/${date.year}"
             CalendarLogic.showCrisis(binding,date,list)
         }
     }

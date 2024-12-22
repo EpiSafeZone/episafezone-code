@@ -17,7 +17,7 @@
 
     <!-- Centered Circular ImageView -->
     <ImageView
-        android:id="@+id/center_image"
+        android:id="@+id/patient_profile_picture"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_gravity="center"

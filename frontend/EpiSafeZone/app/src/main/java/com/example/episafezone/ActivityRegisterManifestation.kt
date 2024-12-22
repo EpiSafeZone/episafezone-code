@@ -11,7 +11,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.episafezone.businesslogic.ManifestationLogic
 import com.example.episafezone.databinding.ActivityRegisterManifestationBinding
-import com.example.episafezone.models.Patient
 
 class ActivityRegisterManifestation : AppCompatActivity() {
 
@@ -45,7 +44,7 @@ class ActivityRegisterManifestation : AppCompatActivity() {
 
         binding.cancelButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("load", MainActivity.PROFILE_FRAGMENT)
+            intent.putExtra("load", MainActivity.PROFILE_VIEW)
             startActivity(intent)
         }
 

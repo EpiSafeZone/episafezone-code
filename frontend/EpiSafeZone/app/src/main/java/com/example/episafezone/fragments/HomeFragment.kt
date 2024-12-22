@@ -17,7 +17,7 @@ import com.example.episafezone.databinding.FragmentPatientListBinding
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.PatientsListPetitions
 
-class PatientListFragment : Fragment(R.layout.fragment_patient_list) {
+class HomeFragment : Fragment(R.layout.fragment_patient_list) {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,10 +31,6 @@ class PatientListFragment : Fragment(R.layout.fragment_patient_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listPatient : List<Patient> = PatientsListLogic.getPatientListInfo();
-        binding.PatientRecyclerView.adapter = PatientListAdapter(contextObj, listPatient)
-        binding.PatientRecyclerView.layoutManager = LinearLayoutManager(contextObj)
-
         PatientsListPetitions.initializeQueue();
     }
 
@@ -42,10 +38,6 @@ class PatientListFragment : Fragment(R.layout.fragment_patient_list) {
         private lateinit var binding: FragmentPatientListBinding
 
         private val contextObj = MainActivity.getContext()
-
-        fun changePatient(patient: Patient){
-            MainActivity.updatePatient(patient)
-        }
 
         fun loadStartCrisis(){
             MainActivity.changeToStartCrisis()

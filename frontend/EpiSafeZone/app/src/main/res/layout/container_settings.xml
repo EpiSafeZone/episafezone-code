@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="40dp"
     android:layout_height="40dp"
-    android:id="@+id/add_patient_container">
+    android:id="@+id/settings_container"
+    >
 
     <!-- Circular Background with Thin Border -->
 
@@ -20,7 +21,7 @@
 
     <include
         android:id="@+id/settings_picture"
-        layout="@layout/add_patient_picture_circular"
+        layout="@layout/settings_circular"
         android:layout_width="37.5dp"
         android:layout_height="37.5dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="40dp"
-    android:layout_height="40dp">
+    android:layout_height="40dp"
+    android:id="@+id/container_profile_picture_circular"
+    android:clickable="true"
+    android:focusable="true">
 
     <!-- Circular Background with Thin Border -->
 
@@ -20,8 +23,8 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <include
-        android:id="@+id/profile_picture"
-        layout="@layout/no_profile_picture"
+        android:id="@+id/patient_profile_picture"
+        layout="@layout/profile_picture"
         android:layout_width="37.5dp"
         android:layout_height="37.5dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -20,17 +20,4 @@ object PatientsListPetitions {
     fun initializeQueue(){
         orderVolleyQueue = Volley.newRequestQueue(MainActivity.getContext())
     }
-
-    fun saveDevice(device : Device){
-        val json = JSONObject()
-        json.put("token",device.token)
-        json.put("user",device.user)
-        val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, "$url/device/create", json,
-            {response-> },
-            {error->
-                println(error.message)
-            })
-        orderVolleyQueue.add(jsonRequest)
-    }
 }

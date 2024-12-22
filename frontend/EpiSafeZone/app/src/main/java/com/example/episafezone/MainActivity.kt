@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.episafezone.databinding.ActivityMainBinding
 import com.example.episafezone.fragments.CalendarFragment
 import com.example.episafezone.fragments.ChronometerFragment
-import com.example.episafezone.fragments.PatientListFragment
+import com.example.episafezone.fragments.HomeFragment
 import com.example.episafezone.fragments.ProfileFragment
 import com.example.episafezone.models.Patient
 import java.util.Date
@@ -19,14 +19,17 @@ import android.preference.PreferenceManager
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.episafezone.adapter.PatientListAdapter
+import com.example.episafezone.businesslogic.MainActivityLogic
+import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.fragments.ChartFragment
+import com.example.episafezone.fragments.HomeFragment.Companion
+import com.example.episafezone.fragments.decorations.MarginItemDecoration
 import com.example.episafezone.models.Device
 import com.example.episafezone.models.User
-import com.example.episafezone.network.PatientsListPetitions
 
 class MainActivity : AppCompatActivity() {
-
-    lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +37,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         contextObj = this
 
+        MainActivityLogic.InitializeQueue()
+
+        MainActivityLogic.GetPatientsList()
+
         FirebaseApp.initializeApp(this);
 
-        val load = intent.getIntExtra("load", PATIENT_LIST_VIEW)
+        val load = intent.getIntExtra("load", HOME_VIEW)
 
-        if(load == PROFILE_FRAGMENT) {
+        if(load == PROFILE_VIEW) {
             changeToProfile()
         } else if (load == CALENDAR_VIEW) {
             changeToCalendar()
@@ -48,9 +55,13 @@ class MainActivity : AppCompatActivity() {
             changeToPatientList()
         }
 
-        binding.settings.setOnClickListener{
+        binding.settings.settingsContainer.setOnClickListener{
             val intent = Intent(this, ActivitySettings::class.java)
             startActivity(intent)
+        }
+
+        binding.addChild.addPatientContainer.setOnClickListener{
+            //TODO: Add the logic to add a child
         }
 
         binding.home.setOnClickListener{
@@ -103,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                     if(token != null && (!token.equals(tokenSaved))){
                         val device = Device(0,token,User.getId())
 
-                        PatientsListPetitions.saveDevice(device)
+                        MainActivityLogic.SaveDevice(device)
                     }
                 }
             }
@@ -139,18 +150,20 @@ class MainActivity : AppCompatActivity() {
 
     fun changeToPatientList() {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragmentLayout, PatientListFragment())
+            replace(R.id.fragmentLayout, HomeFragment())
             commit()
         }
     }
 
     companion object {
-        const val PROFILE_FRAGMENT = 0
+        lateinit private var binding : ActivityMainBinding
+        private lateinit var contextObj: Context
+
+        const val PROFILE_VIEW = 0
         const val CALENDAR_VIEW = 1
         const val CHRONOMETER_VIEW = 2
-        const val PATIENT_LIST_VIEW = 3
+        const val HOME_VIEW = 3
 
-        private lateinit var contextObj: Context
         // TODO: Change this when the patient is actually obtained from the recycler view.
         private var patient = Patient(1, "Onofre", "Bustos", 180, 70, Date(), 21, "blue")
 
@@ -171,6 +184,16 @@ class MainActivity : AppCompatActivity() {
 
         fun changeToStartCrisis() {
             (contextObj as MainActivity).changeToStartCrisis(true)
+        }
+
+        fun setAdapter(listPatient : List<Patient>){
+            binding.patientListRecyclerView.adapter = PatientListAdapter(contextObj, listPatient)
+            binding.patientListRecyclerView.apply {
+                addItemDecoration(MarginItemDecoration(-20)) // Adjust the margin start value
+                setPadding(20, 0, 0, 0) // Add padding to the start to ensure the first item is fully visible
+                clipToPadding = false
+            }
+            binding.patientListRecyclerView.layoutManager = LinearLayoutManager(contextObj,LinearLayoutManager.HORIZONTAL,false)
         }
     }
 }

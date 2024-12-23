@@ -1,24 +1,30 @@
 package com.example.episafezone.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.icu.util.Calendar
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.GestureDetector
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.adapter.CrisisAdapter
 import com.example.episafezone.businesslogic.CalendarLogic
 import com.example.episafezone.databinding.FragmentCalendarBinding
-import com.example.episafezone.fragments.ChartFragment
 import com.example.episafezone.models.Crisis
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.CalendarPetitions
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.format.WeekDayFormatter
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+
 
 class CalendarFragment : Fragment(R.layout.fragment_calendar) {
 
@@ -31,6 +37,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CalendarPetitions.initializeQueue()
@@ -40,7 +47,9 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         calendarDay = CalendarDay.from(dateTime.year,dateTime.monthValue,dateTime.dayOfMonth)
         binding.dateText.text = actualDate
         CalendarLogic.getCrisisList(patient, dateTime.monthValue + 1, dateTime.year)
+        binding.calendarView.visibility = View.VISIBLE
 
+        setCalendarWeekNames()
         binding.calendarView.setOnMonthChangedListener(){widget, date->
             CalendarLogic.getCrisisList(patient, date.month + 2, dateTime.year)
 
@@ -48,6 +57,44 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         binding.calendarView.setOnDateChangedListener{ widget, date, selected ->
             binding.dateText.text = "${date.day}/${date.month+1}/${date.year}"
             CalendarLogic.showCrisis(binding,date,list)
+        }
+        binding.showDetailsButt.setOnClickListener{
+            if(binding.crisisRecycler.visibility == View.GONE){
+                binding.crisisRecycler.visibility = View.VISIBLE
+                binding.showLayout.background = ContextCompat.getDrawable(this.requireContext(),R.drawable.upper_rounded_box)
+                binding.calendarView.visibility = View.GONE
+            }else{
+                binding.crisisRecycler.visibility = View.GONE
+                binding.showLayout.background = ContextCompat.getDrawable(this.requireContext(),R.drawable.rounded_box)
+
+            }
+        }
+
+        val gestureDetector = GestureDetector(this.getContext(), object : GestureDetector.SimpleOnGestureListener() {
+            override fun onFling(
+                e1: MotionEvent?, e2: MotionEvent, velocityX: Float, velocityY: Float
+            ): Boolean {
+                if (e1 != null && e2 != null) {
+                    if (e2.y - e1.y > 100 && Math.abs(velocityY) > 10) {
+                        binding.calendarView.visibility = View.GONE
+                        println("pabajo")
+                    } else if(e1.y - e2.y > 100 && Math.abs(velocityY) > 10){
+                        binding.calendarView.visibility = View.VISIBLE
+                        println("parriba")
+                    }
+                }
+                return super.onFling(e1, e2, velocityX, velocityY)
+            }
+        })
+
+        binding.calendarView.setOnTouchListener{ v: View?, event: MotionEvent ->
+            gestureDetector.onTouchEvent(event)
+        }
+        binding.helperLayout.setOnClickListener{
+            binding.calendarView.visibility = View.VISIBLE
+            binding.crisisRecycler.visibility = View.GONE
+            binding.showLayout.background = ContextCompat.getDrawable(this.requireContext(),R.drawable.rounded_box)
+
         }
     }
 
@@ -77,5 +124,20 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         fun updatePatient(patient: Patient){
             this.patient = patient
         }
+    }
+
+    private fun setCalendarWeekNames(){
+        binding.calendarView.setWeekDayFormatter(WeekDayFormatter { dayOfWeek ->
+            when (dayOfWeek) {
+                Calendar.MONDAY -> "L"
+                Calendar.TUESDAY -> "M"
+                Calendar.WEDNESDAY -> "X"
+                Calendar.THURSDAY -> "J"
+                Calendar.FRIDAY -> "V"
+                Calendar.SATURDAY -> "S"
+                Calendar.SUNDAY -> "D"
+                else -> ""
+            }
+        })
     }
 }

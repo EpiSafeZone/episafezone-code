@@ -1,10 +1,13 @@
 package com.example.episafezone.businesslogic
 
 import android.graphics.Color
+import androidx.core.content.ContextCompat
+import com.example.episafezone.R
 import com.example.episafezone.fragments.CalendarFragment
 import com.example.episafezone.databinding.FragmentCalendarBinding
 import com.example.episafezone.decorator.DayDecoratorRed
 import com.example.episafezone.decorator.DayDecoratorYellow
+import com.example.episafezone.decorator.GeneralDayDecorator
 import com.example.episafezone.models.Crisis
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.CalendarPetitions
@@ -40,9 +43,12 @@ object CalendarLogic {
         }
         binding.calendarView.removeDecorators()
         binding.calendarView.invalidateDecorators()
+        val backgroundColor = ContextCompat.getColor(CalendarFragment.getContext(), R.color.epiBlackBackground)
+        val textColor = ContextCompat.getColor(CalendarFragment.getContext(), R.color.epiWhite)
+        val generalDecorator = GeneralDayDecorator(backgroundColor,textColor)
         val decorator = DayDecoratorRed(colorMapRed)
         val decorator2 = DayDecoratorYellow(colorMapYellow)
-        binding.calendarView.addDecorators(decorator,decorator2)
+        binding.calendarView.addDecorators(generalDecorator,decorator,decorator2)
     }
 
     fun showCrisis(binding : FragmentCalendarBinding, calendarDate : CalendarDay, list : MutableList<Crisis>){

@@ -9,5 +9,7 @@
         android:angle="0" />
 
     <!-- Bordes redondeados -->
-    <corners android:radius="20dp" />
+    <corners
+        android:bottomLeftRadius="16dp"
+        android:bottomRightRadius="16dp" />
 </shape>

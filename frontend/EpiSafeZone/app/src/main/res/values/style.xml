@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextFormatGreen">
+        <item name="android:textColor">#DEF358</item> <!-- Color del texto -->
+        <item name="android:fontFamily">@font/inter_light</item>
+        <item name="android:textSize">14sp</item> <!-- Tamaño de texto -->
+        <item name="android:lineSpacingExtra">4dp</item> <!-- Espaciado entre líneas -->
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <style name="CustomCalendarTheme" parent="Theme.AppCompat.Light">
+        <item name="mcv_dateTextAppearance">@style/CustomDateTextStyle</item>
+        <item name="mcv_weekDayTextAppearance">@style/CustomWeekDayTextStyle</item>
+        <item name="mcv_headerTextAppearance">@style/CustomMonthTextStyle</item>
+    </style>
+
+    <style name="CustomWeekDayTextStyle" parent="TextAppearance.MaterialCalendarWidget.WeekDay">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/inter_light</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="CustomDateTextStyle" parent="TextAppearance.MaterialCalendarWidget.Date">
+        <item name="android:textSize">20sp</item> <!-- Tamaño del texto -->
+        <item name="android:fontFamily">@font/inter_light</item>
+        <item name="android:textColor">@color/black</item> <!-- Color del texto -->
+    </style>
+
+    <style name="CustomMonthTextStyle" parent="TextAppearance.MaterialCalendarWidget.Header">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/inter_light</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+</resources>

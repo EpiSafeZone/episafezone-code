@@ -15,39 +15,48 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="150sp">
+            android:layout_height="115sp"
+            android:background="@drawable/squared_box"
+            >
 
             <TextView
                 android:id="@+id/crisisHourText"
+                style="@style/TextFormatGreen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="32dp"
                 android:text="TextView"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/crisisManifText"
+                style="@style/TextFormatGreen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="28dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:text="TextView"
-                android:textSize="25sp"
+                android:textColor="@color/epiWhite"
+                android:textSize="32sp"
                 app:layout_constraintBottom_toBottomOf="@+id/crisisHourText"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.47" />
 
             <TextView
                 android:id="@+id/crisisContextManif"
+                style="@style/TextFormatGreen"
                 android:layout_width="323dp"
                 android:layout_height="51dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="6dp"
                 android:text="TextView"
+                android:textColor="@color/epiWhite"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/crisisHourText"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="@+id/crisisManifText"
                 app:layout_constraintTop_toBottomOf="@+id/crisisHourText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

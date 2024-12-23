@@ -8,6 +8,6 @@
         android:endColor="#2b2b2b"
         android:angle="0" />
 
-    <!-- Bordes redondeados -->
-    <corners android:radius="20dp" />
+    <!-- Borde de la caja -->
+
 </shape>

@@ -2,27 +2,29 @@ package com.example.episafezone
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.episafezone.databinding.ActivityMainBinding
 import com.example.episafezone.fragments.CalendarFragment
+import com.example.episafezone.fragments.ChartFragment
 import com.example.episafezone.fragments.ChronometerFragment
 import com.example.episafezone.fragments.PatientListFragment
 import com.example.episafezone.fragments.ProfileFragment
-import com.example.episafezone.models.Patient
-import java.util.Date
-import com.google.firebase.FirebaseApp
-import com.google.firebase.messaging.FirebaseMessaging
-import android.content.pm.PackageManager
-import android.os.Build
-import android.preference.PreferenceManager
-import android.util.Log
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.example.episafezone.fragments.ChartFragment
 import com.example.episafezone.models.Device
+import com.example.episafezone.models.Patient
 import com.example.episafezone.models.User
 import com.example.episafezone.network.PatientsListPetitions
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
+import java.util.Date
+import java.util.Locale
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         contextObj = this
 
         FirebaseApp.initializeApp(this);
+        val locale = Locale("es") // Idioma Español
+        Locale.setDefault(locale)
 
         val load = intent.getIntExtra("load", PATIENT_LIST_VIEW)
 

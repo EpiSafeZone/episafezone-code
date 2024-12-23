@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo con color -->
+
+    <!-- Bordes redondeados -->
+    <corners android:radius="20dp" /> <!-- Radio de 20dp para bordes redondeados -->
+
+</shape>

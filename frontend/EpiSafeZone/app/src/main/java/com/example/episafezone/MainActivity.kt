@@ -99,10 +99,6 @@ class MainActivity : AppCompatActivity() {
             changeToCalendar()
         }
 
-        binding.chart.setOnClickListener{
-            changeToChart()
-        }
-
         binding.chronometer.setOnClickListener{
             changeToStartCrisis(false)
         }
@@ -148,6 +144,8 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragmentLayout, ChronometerFragment(startChrono))
             commit()
         }
+
+        currentFragment = CHRONOMETER_VIEW
     }
 
     fun changeToCalendar() {
@@ -155,13 +153,8 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragmentLayout, CalendarFragment())
             commit()
         }
-    }
 
-    fun changeToChart() {
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragmentLayout, ChartFragment())
-            commit()
-        }
+        currentFragment = CALENDAR_VIEW
     }
 
     fun changeToProfile() {
@@ -169,6 +162,8 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragmentLayout, ProfileFragment())
             commit()
         }
+
+        currentFragment = PROFILE_VIEW
     }
 
     fun changeToPatientList() {
@@ -176,26 +171,34 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragmentLayout, HomeFragment())
             commit()
         }
+
+        currentFragment = HOME_VIEW
     }
 
     companion object {
-        lateinit private var binding : ActivityMainBinding
+        private lateinit var binding : ActivityMainBinding
         private lateinit var contextObj: Context
+        private lateinit var patient : Patient
+        private lateinit var listPatient : List<Patient>
 
         const val PROFILE_VIEW = 0
         const val CALENDAR_VIEW = 1
         const val CHRONOMETER_VIEW = 2
         const val HOME_VIEW = 3
 
-        // TODO: Change this when the patient is actually obtained from the recycler view.
-        private var patient = Patient(1, "Onofre", "Bustos", 180, 70, Date(), 21, "blue")
+        private var currentFragment : Int = HOME_VIEW
+
+        private var firstTimeAdapter = true
 
         fun getContext() : Context {
             return contextObj
         }
 
         fun updatePatient(patient: Patient) {
-            this.patient = patient
+            val newListPatient = listPatient.toMutableList()
+            newListPatient.remove(patient)
+            newListPatient.add(0, patient)
+            setAdapter(newListPatient)
             ProfileFragment.updatePatient(patient)
             CalendarFragment.updatePatient(patient)
             ChronometerFragment.updatePatient(patient)
@@ -210,13 +213,31 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun setAdapter(listPatient : List<Patient>){
+            this.listPatient = listPatient
             binding.patientListRecyclerView.adapter = PatientListAdapter(contextObj, listPatient)
-            binding.patientListRecyclerView.apply {
-                addItemDecoration(MarginItemDecoration(-20)) // Adjust the margin start value
-                setPadding(20, 0, 0, 0) // Add padding to the start to ensure the first item is fully visible
-                clipToPadding = false
+            if(firstTimeAdapter) {
+                binding.patientListRecyclerView.apply {
+                    addItemDecoration(MarginItemDecoration(-20)) // Adjust the margin start value
+                    setPadding(
+                        20,
+                        0,
+                        0,
+                        0
+                    ) // Add padding to the start to ensure the first item is fully visible
+                    clipToPadding = false
+                }
+                firstTimeAdapter = false
+            } else {
+                when (currentFragment) {
+                    PROFILE_VIEW -> (contextObj as MainActivity).changeToProfile()
+                    CALENDAR_VIEW -> (contextObj as MainActivity).changeToCalendar()
+                    CHRONOMETER_VIEW -> (contextObj as MainActivity).changeToStartCrisis(false)
+                    HOME_VIEW -> (contextObj as MainActivity).changeToPatientList()
+                }
             }
             binding.patientListRecyclerView.layoutManager = LinearLayoutManager(contextObj,LinearLayoutManager.HORIZONTAL,false)
+
+            patient = listPatient[0]
         }
 
         fun changeToChart(){

@@ -1,10 +1,12 @@
 package com.example.episafezone.fragments
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
@@ -36,6 +38,7 @@ class ChartFragment() : Fragment(R.layout.fragment_charts) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ChartLogic.decorateCharts(binding)
         setUpPieChart()
         setUpLineChart()
     }
@@ -52,23 +55,23 @@ class ChartFragment() : Fragment(R.layout.fragment_charts) {
         val pieEntries = count.map { (key, value) ->
             PieEntry(value.toFloat(), key)
         }
-
-        val pieDataSet = PieDataSet(pieEntries, "Manifestaciones").apply {
+        val epiWhite = ContextCompat.getColor(ChartFragment.getContext(), R.color.epiWhite)
+        val epiGreen = ContextCompat.getColor(ChartFragment.getContext(), R.color.epiGreen)
+        val pieDataSet = PieDataSet(pieEntries, "").apply {
             colors = listOf(
-                Color.BLUE,
-                Color.RED,
-                Color.GREEN,
-                Color.MAGENTA,
-                Color.YELLOW
+                epiWhite,
+                Color.parseColor("#E7F5DE"),
+                Color.parseColor("#CAE8B8"),
+                Color.parseColor("#ADDC91"),
+                Color.parseColor("#90D06A"),
             )
             valueTextColor = Color.BLACK
-            valueTextSize = 14f
+            valueTextSize = 10f
         }
         val pieData = PieData(pieDataSet)
-        binding.pieChart.data = pieData
 
+        binding.pieChart.data = pieData
         binding.pieChart.description.isEnabled = false
-        binding.pieChart.centerText = "Frecuencia de manifestaciones"
         binding.pieChart.setEntryLabelColor(Color.BLACK)
         binding.pieChart.animateY(1000)
         binding.pieChart.invalidate()
@@ -78,7 +81,7 @@ class ChartFragment() : Fragment(R.layout.fragment_charts) {
         val lineMap = ChartLogic.getLineChart(patient)
 
         // Convertir fechas a índices
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("dd/MM", Locale.getDefault())
         val dates = lineMap.keys.toList()
         val entries = lineMap.entries.mapIndexed { index, entry ->
             Entry(index.toFloat(), entry.value.toFloat())
@@ -86,11 +89,12 @@ class ChartFragment() : Fragment(R.layout.fragment_charts) {
 
         // Configurar el dataset
         val dataSet = LineDataSet(entries, "Fechas vs Números").apply {
-            color = getColor(android.R.color.holo_blue_dark)
+            color = ContextCompat.getColor(ChartFragment.getContext(), R.color.epiGreen)
             valueTextColor = getColor(android.R.color.black)
             lineWidth = 2f
-            circleRadius = 4f
-            setDrawCircleHole(true)
+            setDrawCircles(false)
+            setDrawCircleHole(false)
+            setDrawValues(false)
         }
 
         // Formatear el eje X con las fechas
@@ -103,14 +107,18 @@ class ChartFragment() : Fragment(R.layout.fragment_charts) {
         // Configurar el gráfico
         binding.lineChart.apply {
             data = LineData(dataSet)
-            description.text = "Gráfico de Fechas"
+            description.isEnabled = false
             animateX(1000)
         }
     }
 
     companion object{
         private var patient = MainActivity.getPatient()
+        private val contextObj = MainActivity.getContext()
 
+        fun getContext() : Context {
+            return contextObj
+        }
         fun updatePatient(patient: Patient){
             this.patient = patient
         }

@@ -12,7 +12,7 @@
     <corners android:radius="20dp" />
 
     <!-- Borde de la caja -->
-    <stroke
+    <ro
         android:width="2dp"
         android:color="@color/epiBlackBoxMargin" />
 </shape>

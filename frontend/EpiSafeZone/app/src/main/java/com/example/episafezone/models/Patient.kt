@@ -9,7 +9,6 @@ class Patient(
     var surname : String,
     var height : Int,
     var weight: Int,
-    val birthdate: Date?,
     val age: Int?,
-    val color: String?,
+    val imageUrl: String?,
 ) : Serializable

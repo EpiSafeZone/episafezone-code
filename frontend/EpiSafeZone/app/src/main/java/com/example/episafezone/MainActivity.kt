@@ -39,9 +39,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.businesslogic.MainActivityLogic
-import com.example.episafezone.businesslogic.PatientsListLogic
-import com.example.episafezone.fragments.ChartFragment
-import com.example.episafezone.fragments.HomeFragment.Companion
 import com.example.episafezone.fragments.decorations.MarginItemDecoration
 import com.example.episafezone.models.Device
 import com.example.episafezone.models.User
@@ -62,6 +59,8 @@ class MainActivity : AppCompatActivity() {
             .into(binding.loadingImage)
         contextObj = this
 
+        val load = intent.getIntExtra("load", HOME_VIEW)
+
         MainActivityLogic.InitializeQueue()
 
         MainActivityLogic.GetPatientsList()
@@ -75,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         ManifestationPetitions.initializeQueue()
         ChartPetitions.initializeQueue()
 
-        loadInitialFragment(0)
+        loadInitialFragment(0,load, true)
 
         binding.settings.settingsContainer.setOnClickListener{
             val intent = Intent(this, ActivitySettings::class.java)
@@ -87,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.home.setOnClickListener{
-            changeToPatientList()
+            changeToHome()
         }
 
         binding.profile.setOnClickListener{
@@ -118,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         this.registerDevice();
     }
 
-    private fun loadInitialFragment(retryCounter: Int) {
+    private fun loadInitialFragment(retryCounter: Int, load: Int, first: Boolean) {
         Handler(Looper.getMainLooper()).postDelayed({
             if(patient == null) {
                 if(retryCounter > 4) {
@@ -126,14 +125,13 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Error al cargar los pacientes", Toast.LENGTH_SHORT).show()
                     exitProcess(1)
                 }
-                loadInitialFragment(retryCounter + 1)
-            } else{
-                val load = intent.getIntExtra("load", HOME_VIEW)
+                loadInitialFragment(retryCounter + 1, load, false)
+            } else if (first) {
                 when (load) {
                     PROFILE_VIEW -> changeToProfile()
                     CALENDAR_VIEW -> changeToCalendar()
                     CHRONOMETER_VIEW -> changeToStartCrisis(false)
-                    else -> changeToPatientList()
+                    else -> changeToHome()
                 }
             }
         }, 500)
@@ -160,6 +158,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun changeToStartCrisis(startChrono: Boolean) {
+        Log.d("FragmentChange","ChangeToStartCrisis")
         setAllUnselected()
         binding.chronometer.setImageResource(R.drawable.chrono_selected)
         supportFragmentManager.beginTransaction().apply {
@@ -171,6 +170,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun changeToCalendar() {
+        Log.d("FragmentChange","ChangeToCalendar")
         setAllUnselected()
         binding.calendar.setImageResource(R.drawable.calendar_selected)
         supportFragmentManager.beginTransaction().apply {
@@ -182,6 +182,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun changeToProfile() {
+        Log.d("FragmentChange","ChangeToProfile")
         setAllUnselected()
         binding.profile.setImageResource(R.drawable.profile_selected)
         supportFragmentManager.beginTransaction().apply {
@@ -192,7 +193,8 @@ class MainActivity : AppCompatActivity() {
         currentFragment = PROFILE_VIEW
     }
 
-    fun changeToPatientList() {
+    fun changeToHome() {
+        Log.d("FragmentChange","ChangeToHome")
         setAllUnselected()
         binding.home.setImageResource(R.drawable.home_selected)
         supportFragmentManager.beginTransaction().apply {
@@ -265,7 +267,7 @@ class MainActivity : AppCompatActivity() {
                     PROFILE_VIEW -> (contextObj as MainActivity).changeToProfile()
                     CALENDAR_VIEW -> (contextObj as MainActivity).changeToCalendar()
                     CHRONOMETER_VIEW -> (contextObj as MainActivity).changeToStartCrisis(false)
-                    HOME_VIEW -> (contextObj as MainActivity).changeToPatientList()
+                    HOME_VIEW -> (contextObj as MainActivity).changeToHome()
                 }
             }
             binding.patientListRecyclerView.layoutManager = LinearLayoutManager(contextObj,LinearLayoutManager.HORIZONTAL,false)

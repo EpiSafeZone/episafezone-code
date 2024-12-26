@@ -11,5 +11,10 @@
         android:type="linear"/>
 
     <!-- Bordes redondeados -->
-    <corners android:radius="20dp" />
+    <corners android:radius="32.5dp" />
+
+    <!-- Borde de la caja -->
+    <ro
+        android:width="2dp"
+        android:color="@color/epiBlackBoxMargin" />
 </shape>

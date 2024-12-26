@@ -28,8 +28,11 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.preference.PreferenceManager
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,6 +44,7 @@ import com.example.episafezone.fragments.HomeFragment.Companion
 import com.example.episafezone.fragments.decorations.MarginItemDecoration
 import com.example.episafezone.models.Device
 import com.example.episafezone.models.User
+import kotlin.system.exitProcess
 import java.util.Date
 import java.util.Locale
 
@@ -66,17 +70,7 @@ class MainActivity : AppCompatActivity() {
         ManifestationPetitions.initializeQueue()
         ChartPetitions.initializeQueue()
 
-        val load = intent.getIntExtra("load", HOME_VIEW)
-
-        if(load == PROFILE_VIEW) {
-            changeToProfile()
-        } else if (load == CALENDAR_VIEW) {
-            changeToCalendar()
-        } else if (load == CHRONOMETER_VIEW) {
-            changeToStartCrisis(false)
-        } else {
-            changeToPatientList()
-        }
+        loadInitialFragment(0)
 
         binding.settings.settingsContainer.setOnClickListener{
             val intent = Intent(this, ActivitySettings::class.java)
@@ -119,6 +113,27 @@ class MainActivity : AppCompatActivity() {
         this.registerDevice();
     }
 
+    private fun loadInitialFragment(retryCounter: Int) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            if(patient == null) {
+                if(retryCounter > 2) {
+                    Log.e("CargaPacientes","Error al cargar los pacientes")
+                    Toast.makeText(this, "Error al cargar los pacientes", Toast.LENGTH_SHORT).show()
+                    exitProcess(1)
+                }
+                loadInitialFragment(retryCounter + 1)
+            } else{
+                val load = intent.getIntExtra("load", HOME_VIEW)
+                when (load) {
+                    PROFILE_VIEW -> changeToProfile()
+                    CALENDAR_VIEW -> changeToCalendar()
+                    CHRONOMETER_VIEW -> changeToStartCrisis(false)
+                    else -> changeToPatientList()
+                }
+            }
+        }, 500)
+    }
+
     private fun registerDevice(){
 
         FirebaseMessaging.getInstance().getToken()
@@ -140,6 +155,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun changeToStartCrisis(startChrono: Boolean) {
+        setAllUnselected()
+        binding.chronometer.setImageResource(R.drawable.chrono_selected)
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragmentLayout, ChronometerFragment(startChrono))
             commit()
@@ -149,6 +166,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun changeToCalendar() {
+        setAllUnselected()
+        binding.calendar.setImageResource(R.drawable.calendar_selected)
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragmentLayout, CalendarFragment())
             commit()
@@ -158,6 +177,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun changeToProfile() {
+        setAllUnselected()
+        binding.profile.setImageResource(R.drawable.profile_selected)
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragmentLayout, ProfileFragment())
             commit()
@@ -167,6 +188,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun changeToPatientList() {
+        setAllUnselected()
+        binding.home.setImageResource(R.drawable.home_selected)
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragmentLayout, HomeFragment())
             commit()
@@ -175,16 +198,24 @@ class MainActivity : AppCompatActivity() {
         currentFragment = HOME_VIEW
     }
 
+    fun setAllUnselected(){
+        binding.home.setImageResource(R.drawable.home_not_selected)
+        binding.profile.setImageResource(R.drawable.profile_not_selected)
+        binding.calendar.setImageResource(R.drawable.calendar_not_selected)
+        binding.chronometer.setImageResource(R.drawable.chrono_not_selected)
+    }
+
     companion object {
         private lateinit var binding : ActivityMainBinding
         private lateinit var contextObj: Context
-        private lateinit var patient : Patient
         private lateinit var listPatient : List<Patient>
 
         const val PROFILE_VIEW = 0
         const val CALENDAR_VIEW = 1
         const val CHRONOMETER_VIEW = 2
         const val HOME_VIEW = 3
+
+        private var patient : Patient? = null
 
         private var currentFragment : Int = HOME_VIEW
 
@@ -199,13 +230,10 @@ class MainActivity : AppCompatActivity() {
             newListPatient.remove(patient)
             newListPatient.add(0, patient)
             setAdapter(newListPatient)
-            ProfileFragment.updatePatient(patient)
-            CalendarFragment.updatePatient(patient)
-            ChronometerFragment.updatePatient(patient)
         }
 
         fun getPatient() : Patient {
-            return patient
+            return patient!!
         }
 
         fun changeToStartCrisis() {

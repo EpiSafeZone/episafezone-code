@@ -17,6 +17,8 @@ import com.example.episafezone.R
 import com.example.episafezone.adapter.CrisisAdapter
 import com.example.episafezone.businesslogic.CalendarLogic
 import com.example.episafezone.databinding.FragmentCalendarBinding
+import com.example.episafezone.fragments.ChartFragment
+import com.example.episafezone.fragments.ProfileFragment.Companion
 import com.example.episafezone.models.Crisis
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.CalendarPetitions
@@ -46,6 +48,9 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         val actualDate = dateTime.format(format)
         calendarDay = CalendarDay.from(dateTime.year,dateTime.monthValue,dateTime.dayOfMonth)
         binding.dateText.text = actualDate
+
+        patient = MainActivity.getPatient()
+
         CalendarLogic.getCrisisList(patient, dateTime.monthValue + 1, dateTime.year)
         binding.calendarView.visibility = View.VISIBLE
         binding.fragmentState.visibility = View.GONE
@@ -53,8 +58,8 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         setCalendarWeekNames()
         binding.calendarView.setOnMonthChangedListener(){widget, date->
             CalendarLogic.getCrisisList(patient, date.month + 2, dateTime.year)
-
         }
+
         binding.calendarView.setOnDateChangedListener{ widget, date, selected ->
             binding.dateText.text = "${date.day}/${date.month+1}/${date.year}"
             CalendarLogic.showCrisis(binding,date,list)

@@ -39,6 +39,8 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
         chronometer = binding.chrono
         progressBar = binding.progressBar
 
+        patient = MainActivity.getPatient()
+
         StartCrisisPetitions.initializeQueue();
 
         ChronometerLogic.getProfileLogic(patient)
@@ -82,10 +84,6 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
             manifestations = list
             binding.informationScrollView.adapter = DisplayPossibleManifestations(contextObj, list)
             binding.informationScrollView.layoutManager = LinearLayoutManager(contextObj)
-        }
-
-        fun updatePatient(patient: Patient) {
-            this.patient = patient
         }
 
         fun startCrisisRegister(chrono : Long){

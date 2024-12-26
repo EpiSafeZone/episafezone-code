@@ -6,36 +6,36 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityRegisterCrisis
 import com.example.episafezone.ActivityRegisterManifestation
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
-import com.example.episafezone.adapter.PatientListAdapter
-import com.example.episafezone.businesslogic.PatientsListLogic
-import com.example.episafezone.databinding.FragmentPatientListBinding
+import com.example.episafezone.databinding.FragmentHomeBinding
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.PatientsListPetitions
 
-class HomeFragment : Fragment(R.layout.fragment_patient_list) {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentPatientListBinding.inflate(layoutInflater, container, false)
+        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        patient = MainActivity.getPatient()
+
         PatientsListPetitions.initializeQueue();
     }
 
     companion object {
-        private lateinit var binding: FragmentPatientListBinding
+        private lateinit var binding: FragmentHomeBinding
+        private lateinit var patient : Patient
 
         private val contextObj = MainActivity.getContext()
 

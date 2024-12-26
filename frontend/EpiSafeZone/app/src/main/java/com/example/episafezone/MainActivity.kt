@@ -36,6 +36,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.businesslogic.MainActivityLogic
 import com.example.episafezone.businesslogic.PatientsListLogic
@@ -55,6 +56,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater);
         setContentView(binding.root)
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.loading)
+            .into(binding.loadingImage)
         contextObj = this
 
         MainActivityLogic.InitializeQueue()
@@ -116,7 +121,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadInitialFragment(retryCounter: Int) {
         Handler(Looper.getMainLooper()).postDelayed({
             if(patient == null) {
-                if(retryCounter > 2) {
+                if(retryCounter > 4) {
                     Log.e("CargaPacientes","Error al cargar los pacientes")
                     Toast.makeText(this, "Error al cargar los pacientes", Toast.LENGTH_SHORT).show()
                     exitProcess(1)

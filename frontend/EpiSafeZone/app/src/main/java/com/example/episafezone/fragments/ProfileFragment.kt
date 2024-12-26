@@ -49,7 +49,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             startActivity(intent)
         }
 
-        binding.addManifButt.setOnClickListener{
+        binding.addManifestationLayout.setOnClickListener{
             val intent = Intent(contextObj, ActivityRegisterManifestation::class.java)
             intent.putExtra("patient", patient)
             startActivity(intent)

@@ -1,5 +1,6 @@
 package com.example.episafezone.controllers;
 
+import com.example.episafezone.exceptions.AlreadySharedWithException;
 import com.example.episafezone.exceptions.AttributeMissingException;
 import com.example.episafezone.exceptions.FormatUnsupportedException;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
@@ -42,5 +43,15 @@ public class GlobalExceptionController {
                  request.getDescription(false)
          );
          return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AlreadySharedWithException.class)
+    public ResponseEntity<?> alreadySharedWithEception(AlreadySharedWithException e, WebRequest request){
+        ErrorDetails errorDetails = new ErrorDetails(
+                HttpStatus.BAD_REQUEST.value(),
+                e.getMessage(),
+                request.getDescription(false)
+        );
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }

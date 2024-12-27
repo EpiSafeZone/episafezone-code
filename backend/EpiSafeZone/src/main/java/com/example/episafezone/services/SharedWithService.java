@@ -72,26 +72,8 @@ public class SharedWithService implements SharedWithServiceInterface {
                 .toList();
     }
 
-    public SharedWith sharePatient(
-            Integer tutorSharingId,
-            Integer tutorReceivingId,
-            Integer patientId,
-            Boolean registerCrisisPermission,
-            Boolean profilePermission,
-            Boolean medicinePermission,
-            Boolean tutorPermission) {
-
-        SharedWith sharedWith = new SharedWith(
-                tutorSharingId,
-                tutorReceivingId,
-                patientId,
-                registerCrisisPermission,
-                profilePermission,
-                medicinePermission,
-                tutorPermission
-        );
-
-        return sharedWithRepo.save(sharedWith);
+    public SharedWith sharePatient(SharedWith shared) {
+        return sharedWithRepo.save(shared);
     }
 
     public SharedWith editPermissions(SharedPermissionsDTO sharedPermissionsDTO){

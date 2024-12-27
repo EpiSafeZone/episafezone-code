@@ -5,6 +5,7 @@ import com.example.episafezone.DTO.SharedDTO.GetPermissionsDTO;
 import com.example.episafezone.DTO.SharedDTO.IsTutorDTO;
 import com.example.episafezone.DTO.SharedDTO.SharePatientDTO;
 import com.example.episafezone.DTO.SharedDTO.SharedPermissionsDTO;
+import com.example.episafezone.exceptions.AlreadySharedWithException;
 import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.NotifyHours;
 import com.example.episafezone.models.SharedWith;
@@ -15,10 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
-public class TutorService implements TutorServiceInterface{
+public class TutorService implements TutorServiceInterface {
     @Autowired
     TutorRepository tutorRepo;
 
@@ -42,16 +44,16 @@ public class TutorService implements TutorServiceInterface{
 
     @Override
     public Tutor findById(int id) {
-        if(tutorRepo.findById(id).isPresent()){
+        if (tutorRepo.findById(id).isPresent()) {
             return tutorRepo.findById(id).get();
-        }else{
+        } else {
             throw new ResourceNotFoudException("No se ha encontrdo un tutor para el id: " + id);
         }
     }
 
-    public List<Tutor> findTutorsShared(Integer tutotShId, Integer patient){
+    public List<Tutor> findTutorsShared(Integer tutotShId, Integer patient) {
         List<SharedWith> sharedWithList = sharedWithService.findByTutorShAndPatient(tutotShId, patient);
-        List <Integer> tutorSharedIds = sharedWithList.stream()
+        List<Integer> tutorSharedIds = sharedWithList.stream()
                 .map(SharedWith::getTutorReceiving)
                 .toList();
         List<Tutor> tutorsShared = tutorSharedIds.stream()
@@ -60,19 +62,19 @@ public class TutorService implements TutorServiceInterface{
         return tutorsShared;
     }
 
-    public Integer findIdByEmail(String email){
+    public Integer findIdByEmail(String email) {
         return tutorRepo.findIdByEmail(email);
     }
 
-    public Tutor findTutorByEmail(String email){
+    public Tutor findTutorByEmail(String email) {
         return tutorRepo.findByEmail(email);
     }
 
-    public SharedPermissionsDTO getPermissions(GetPermissionsDTO getPermissionsDTO){
+    public SharedPermissionsDTO getPermissions(GetPermissionsDTO getPermissionsDTO) {
         return sharedWithService.getPermissions(getPermissionsDTO);
     }
 
-    public NotifyHoursDTO getHours(IsTutorDTO isTutorDTO){
+    public NotifyHoursDTO getHours(IsTutorDTO isTutorDTO) {
         return notifyHoursService.getHours(isTutorDTO);
     }
 
@@ -84,8 +86,7 @@ public class TutorService implements TutorServiceInterface{
             throw new ResourceNotFoudException("El email no pertenece a ningún tutor");
         }
 
-        Integer tutorReceivingId = findIdByEmail(sharePatientDTO.getTutorReceivingEmail());
-
+        Integer tutorReceivingId = tutorReceiving.getId();
 
         //Comprobamos que no se le haya compartido el paciente ya al tutor que recibe.
         List<SharedWith> existingSharedWith = sharedWithService.findByTutorShAndPatient(
@@ -94,7 +95,7 @@ public class TutorService implements TutorServiceInterface{
         );
         //Si se le ha compartido devolvemos null
         if (!existingSharedWith.isEmpty()) {
-            return null;
+            throw new AlreadySharedWithException("You have already shared the patient with this tutor");
         }
 
         // Verificar si el tutor que recibe es el tutor que creo el perfil del paciente
@@ -106,7 +107,7 @@ public class TutorService implements TutorServiceInterface{
             return null;
         }
 
-        if (sharePatientDTO.getTutorPermission()){
+        if (sharePatientDTO.getTutorPermission()) {
             tutorOfService.addTutorOf(
                     tutorReceivingId,
                     sharePatientDTO.getPatientId(),
@@ -114,37 +115,34 @@ public class TutorService implements TutorServiceInterface{
             );
         }
 
-        NotifyHoursDTO notifyHoursDTO = new NotifyHoursDTO(
-                tutorReceivingId,
+        NotifyHoursDTO notifyHoursDTO = new NotifyHoursDTO(tutorReceivingId,
                 sharePatientDTO.getPatientId(),
-                null,
-                null
+                LocalTime.of(0, 0, 0),
+                LocalTime.of(23, 59, 59)
         );
         notifyHoursService.addNotifyHours(notifyHoursDTO);
 
-        return sharedWithService.sharePatient(
-                sharePatientDTO.getTutorSharingId(),
-                tutorReceivingId,
-                sharePatientDTO.getPatientId(),
-                sharePatientDTO.getRegisterCrisisPermission(),
-                sharePatientDTO.getProfilePermission(),
-                sharePatientDTO.getMedicinePermission(),
-                sharePatientDTO.getTutorPermission()
-        );
+        SharedWith sharedWith = new SharedWith(sharePatientDTO.getTutorSharingId(), tutorReceivingId,sharePatientDTO.getPatientId(),
+                sharePatientDTO.getRegisterCrisisPermission(), sharePatientDTO.getProfilePermission(), sharePatientDTO.getMedicinePermission(),
+                sharePatientDTO.getTutorPermission());
+
+        sharedWithService.sharePatient(sharedWith);
+
+        return sharedWith;
     }
 
-    public NotifyHours editNotificationHours(NotifyHoursDTO notifyHoursDTO){
+    public NotifyHours editNotificationHours(NotifyHoursDTO notifyHoursDTO) {
         return notifyHoursService.editNotifyHours(notifyHoursDTO);
     }
 
-    public SharedWith editPermissions(SharedPermissionsDTO sharedPermissionsDTO){
+    public SharedWith editPermissions(SharedPermissionsDTO sharedPermissionsDTO) {
         SharedWith sharedWith = sharedWithRepo.findByTutorReceivingAndPatient(
                 sharedPermissionsDTO.getTutorReciving(),
                 sharedPermissionsDTO.getPatient()
         );
         Boolean isTutor = sharedWith.getTutorPermision();
         Boolean willBeTutor = sharedPermissionsDTO.getTutorPermision();
-        if(isTutor && !willBeTutor){
+        if (isTutor && !willBeTutor) {
             tutorOfService.deleteTutorOf(
                     sharedPermissionsDTO.getTutorReciving(),
                     sharedPermissionsDTO.getPatient()
@@ -160,12 +158,15 @@ public class TutorService implements TutorServiceInterface{
         sharedWith.setProfilePermision(sharedPermissionsDTO.getProfilePermision());
         sharedWith.setMedicinePermision(sharedPermissionsDTO.getMedicinePermision());
         sharedWith.setTutorPermision(sharedPermissionsDTO.getTutorPermision());
-        return sharedWithRepo.save(sharedWith);
+        sharedWithRepo.save(sharedWith);
+        return sharedWith;
     }
 
-    public Boolean isTutor(IsTutorDTO isTutorDTO){
-        if (tutorOfService.findByTutorAndPatient(isTutorDTO.getTutor(), isTutorDTO.getPatient()) == null){
+    public Boolean isTutor(IsTutorDTO isTutorDTO) {
+        if (tutorOfService.findByTutorAndPatient(isTutorDTO.getTutor(), isTutorDTO.getPatient()) == null) {
             return false;
-        }else{return true;}
+        } else {
+            return true;
+        }
     }
 }

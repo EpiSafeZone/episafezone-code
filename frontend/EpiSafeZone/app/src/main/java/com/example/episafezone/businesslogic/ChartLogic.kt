@@ -5,40 +5,57 @@ import androidx.core.content.ContextCompat
 import com.example.episafezone.R
 import com.example.episafezone.databinding.FragmentChartsBinding
 import com.example.episafezone.fragments.ChartFragment
+import com.example.episafezone.models.LineChartAdapter
 import com.example.episafezone.models.Patient
+import com.example.episafezone.models.PieChartAdapter
+import com.example.episafezone.network.ChartPetitions
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import org.json.JSONArray
+import org.json.JSONObject
 
 object ChartLogic {
-    fun getPieChart(patient: Patient) : List<String>{
-        val list = mutableListOf<String>();
-        list.add("hola")
-        list.add("tardes")
-        list.add("tardes")
-        list.add("hola")
-        list.add("buenas")
-        list.add("hola")
-        list.add("hola1")
-        return list;
+    fun getPieChart(patient: Patient) {
+        ChartPetitions.getNumberOfManifestations(patient)
     }
 
-    fun getLineChart(patient: Patient) : Map<String,Int>{
-        val dateNumbers = mapOf(
-            "12/01" to 3,
-            "12/02" to 0,
-            "12/03" to 2,
-            "12/04" to 3,
-            "12/05" to 1,
-            "12/06" to 2,
-            "12/07" to 1
-        )
-        return dateNumbers;
+    fun collectDataPieChart(json : JSONObject) {
+        val list = mutableListOf<String>()
+        val gson = Gson()
+        val jsonArray = json.get("numPerManifestation") as JSONArray
+        val listType = object : TypeToken<MutableList<PieChartAdapter>>() {}.type
+        val manifestations : MutableList<PieChartAdapter> = gson.fromJson(jsonArray.toString(),listType)
+        manifestations.forEach{manif ->
+            var i = 0
+            while(i<manif.num){
+                list.add(manif.name)
+                i++
+            }
+        }
+        ChartFragment.setUpPieChart(list)
+    }
+
+    fun getLineChart(patient: Patient){
+        ChartPetitions.getNumberOfCrisis(patient)
+    }
+
+    fun collectDataLineChart(json : JSONObject) {
+        val map = HashMap<String,Int>()
+        val gson = Gson()
+        val jsonArray = json.get("lista") as JSONArray
+        val listType = object : TypeToken<MutableList<LineChartAdapter>>() {}.type
+        val correspondence : MutableList<LineChartAdapter> = gson.fromJson(jsonArray.toString(),listType)
+
+        correspondence.forEach{group->
+            val string = "${group.dia.month+1}/${group.dia.date}"
+            map[string]=group.numCrisis
+        }
+
+        ChartFragment.setUpLineChart(map)
     }
 
     fun decorateCharts(binding: FragmentChartsBinding){
         val epiWhite = ContextCompat.getColor(ChartFragment.getContext(), R.color.epiWhite)
-        val epiGreen = ContextCompat.getColor(ChartFragment.getContext(), R.color.epiGreen)
-        val epiBack = ContextCompat.getColor(ChartFragment.getContext(), R.color.epiBlackBackground)
-
-
 
         val pie = binding.pieChart
         pie.legend.textColor = epiWhite

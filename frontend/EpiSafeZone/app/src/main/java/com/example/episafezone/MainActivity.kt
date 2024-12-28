@@ -19,7 +19,11 @@ import com.example.episafezone.fragments.ProfileFragment
 import com.example.episafezone.models.Device
 import com.example.episafezone.models.Patient
 import com.example.episafezone.models.User
+import com.example.episafezone.network.ChartPetitions
+import com.example.episafezone.network.ManifestationPetitions
+import com.example.episafezone.network.MedicationPetitions
 import com.example.episafezone.network.PatientsListPetitions
+import com.example.episafezone.network.ProfilePetitions
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
 import java.util.Date
@@ -39,6 +43,11 @@ class MainActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this);
         val locale = Locale("es") // Idioma Español
         Locale.setDefault(locale)
+
+        ProfilePetitions.initializeQueue()
+        MedicationPetitions.initializeQueue()
+        ManifestationPetitions.initializeQueue()
+        ChartPetitions.initializeQueue()
 
         val load = intent.getIntExtra("load", PATIENT_LIST_VIEW)
 
@@ -175,6 +184,14 @@ class MainActivity : AppCompatActivity() {
 
         fun changeToStartCrisis() {
             (contextObj as MainActivity).changeToStartCrisis(true)
+        }
+
+        fun changeToChart(){
+            (contextObj as MainActivity).changeToChart()
+        }
+
+        fun changeToCalendar(){
+            (contextObj as MainActivity).changeToCalendar()
         }
     }
 }

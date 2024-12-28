@@ -24,6 +24,7 @@ import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Patient
 import com.example.episafezone.models.SharedUser
+import com.example.episafezone.network.ChartPetitions
 import com.example.episafezone.network.ManifestationPetitions
 import com.example.episafezone.network.MedicationPetitions
 import com.example.episafezone.network.PatientsListPetitions
@@ -42,10 +43,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        ProfilePetitions.initializeQueue()
-        MedicationPetitions.initializeQueue()
-        ManifestationPetitions.initializeQueue()
 
         ProfilePetitions.getProfileInfo(patient)
 

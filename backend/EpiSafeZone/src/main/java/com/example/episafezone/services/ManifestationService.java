@@ -75,7 +75,7 @@ public class ManifestationService implements ManifestationServiceInterface {
 
 
     public Manifestation create(ManifestationRequestDTO manifestationRequestDTO) {
-        Manifestation manifestation = new Manifestation(manifestationRequestDTO.getName(), manifestationRequestDTO.getDescription());
+        Manifestation manifestation = new Manifestation(manifestationRequestDTO.getName(), manifestationRequestDTO.getDescription(), manifestationRequestDTO.getSteps());
         manifestationRepo.save(manifestation);
         Patient patient = patientService.findById(manifestationRequestDTO.getPatientId());
         HasManifestation hasManifestation = new HasManifestation(manifestation, patient);
@@ -87,6 +87,7 @@ public class ManifestationService implements ManifestationServiceInterface {
         Manifestation toUpdate = getManifestationById(id);
         toUpdate.setName(manifestation.getName());
         toUpdate.setDescription(manifestation.getDescription());
+        toUpdate.setSteps(manifestation.getSteps());
         return toUpdate;
     }
 

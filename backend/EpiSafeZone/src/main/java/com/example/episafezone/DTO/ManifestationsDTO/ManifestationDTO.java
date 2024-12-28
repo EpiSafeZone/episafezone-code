@@ -8,11 +8,13 @@ public class ManifestationDTO implements Serializable {
     private Integer id;
     private String name;
     private String description;
+    private String steps;
 
     public ManifestationDTO(Manifestation manifestation) {
         this.id = manifestation.getId();
         this.name = manifestation.getName();
         this.description = manifestation.getDescription();
+        this.steps = manifestation.getSteps();
     }
 
     public ManifestationDTO(){}
@@ -39,5 +41,13 @@ public class ManifestationDTO implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSteps() {
+        return steps;
+    }
+
+    public void setSteps(String steps) {
+        this.steps = steps;
     }
 }

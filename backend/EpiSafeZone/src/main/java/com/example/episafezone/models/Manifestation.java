@@ -12,10 +12,14 @@ public class Manifestation {
     private Integer id;
     private String name;
     private String description;
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String steps;
 
-    public Manifestation(String name, String description) {
+    public Manifestation(String name, String description, String steps) {
         this.name = name;
         this.description = description;
+        this.steps = steps;
     }
     public Manifestation() {}
 
@@ -41,5 +45,13 @@ public class Manifestation {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSteps() {
+        return steps;
+    }
+
+    public void setSteps(String steps) {
+        this.steps = steps;
     }
 }

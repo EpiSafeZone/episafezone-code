@@ -66,28 +66,18 @@ class ActivitySettings : AppCompatActivity() {
             }
         }
         shareProfileButton.setOnClickListener {
-            Toast.makeText(this, "¡Perfil compartido!", Toast.LENGTH_SHORT).show()
-            //TODO: Share profile
-
-            // Set everything to default
-            permission1CheckBox.isChecked = false
-            permission2CheckBox.isChecked = false
-            permission3CheckBox.isChecked = false
-            permission4CheckBox.isChecked = false
-            shareEmailEditText.text = ""
-        }
-
-        // Manage Permissions
-        val managePermissionsSwitch: SwitchCompat = findViewById(R.id.managePermissionsSwitch)
-        val noPermissionsWarningText: TextView = findViewById(R.id.noPermissionsWarningText)
-        val managePermissionsRecyclerView: RecyclerView = findViewById(R.id.managePermissionsRecyclerView)
-        managePermissionsSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                noPermissionsWarningText.visibility = View.VISIBLE
-                managePermissionsRecyclerView.visibility = View.VISIBLE
+            if (shareEmailEditText.text.isEmpty()) {
+                Toast.makeText(this, "Debes ingresar un email", Toast.LENGTH_SHORT).show()
             } else {
-                noPermissionsWarningText.visibility = View.GONE
-                managePermissionsRecyclerView.visibility = View.GONE
+                //TODO: Share profile
+                Toast.makeText(this, "¡Perfil compartido!", Toast.LENGTH_SHORT).show()
+
+                // Set everything to default
+                permission1CheckBox.isChecked = false
+                permission2CheckBox.isChecked = false
+                permission3CheckBox.isChecked = false
+                permission4CheckBox.isChecked = false
+                shareEmailEditText.text = ""
             }
         }
     }

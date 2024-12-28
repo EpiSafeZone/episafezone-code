@@ -56,8 +56,8 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
         ChronometerLogic.getProfileLogic(patient)
 
         if(startChrono){
-            binding.button.text = "Detener"
-            binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
+            //binding.button.text = "Detener"
+            //binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
             ChronometerLogic.startStopTimer(binding,patient)
         }
 

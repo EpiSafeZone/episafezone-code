@@ -66,8 +66,8 @@ object ChronometerLogic {
         timerStarted = true
         ChronometerFragment.chronometer.base = SystemClock.elapsedRealtime()
         ChronometerFragment.chronometer.start()
-        binding.button.text = "Detener"
-        binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
+        //binding.button.text = "Detener"
+        //binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
     }
 
     private fun stopTimer(binding: FragmentChronometerBinding,patient: Patient) {

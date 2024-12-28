@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Chronometer
+import android.widget.ProgressBar
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityAddMedication
@@ -50,6 +51,7 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
         super.onViewCreated(view, savedInstanceState)
 
         chronometer = binding.chrono
+        progressBar = binding.progressBar
 
         StartCrisisPetitions.initializeQueue();
 
@@ -68,6 +70,7 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
 
     companion object {
         lateinit var chronometer: Chronometer
+        lateinit var progressBar: ProgressBar
 
         private lateinit var binding: FragmentChronometerBinding
         private lateinit var manifestations: MutableList<Manifestation>

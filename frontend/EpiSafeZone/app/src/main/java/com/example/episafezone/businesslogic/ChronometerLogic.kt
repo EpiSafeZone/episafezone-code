@@ -1,6 +1,7 @@
 package com.example.episafezone.businesslogic
 
 import android.content.Intent
+import android.os.Looper
 import android.os.SystemClock
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -18,6 +19,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Timer
 import java.util.TimerTask
+import android.os.Handler
 import kotlin.concurrent.timerTask
 import kotlin.math.roundToInt
 
@@ -27,6 +29,8 @@ object ChronometerLogic {
 
     private val gson = Gson()
 
+    private var updateHandler: Handler? = null // Handler para actualizar la ProgressBar
+    private var maxTimeInSeconds = 300 // 5 minutos = 300 segundos
     private var timerStarted = false
 
     fun getProfileLogic(patient: Patient) {
@@ -66,6 +70,7 @@ object ChronometerLogic {
         timerStarted = true
         ChronometerFragment.chronometer.base = SystemClock.elapsedRealtime()
         ChronometerFragment.chronometer.start()
+        startProgressBarUpdate(binding)
         //binding.button.text = "Detener"
         //binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
     }
@@ -76,6 +81,31 @@ object ChronometerLogic {
         val elapsedTime = getElapsedTime(binding)
         ChronometerFragment.startCrisisRegister(elapsedTime)
         Toast.makeText(ChronometerFragment.getContext(), "Parar timer", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun startProgressBarUpdate(binding: FragmentChronometerBinding) {
+        updateHandler =
+            android.os.Handler(Looper.getMainLooper()) // Usamos el Handler principal para actualizar la UI
+
+        updateHandler?.postDelayed(object : Runnable {
+            override fun run() {
+                if (timerStarted) {
+                    val elapsedTimeInSeconds = (SystemClock.elapsedRealtime() - ChronometerFragment.chronometer.base) / 1000
+                    val progress = if (elapsedTimeInSeconds < maxTimeInSeconds) {
+                        (elapsedTimeInSeconds * 100) / maxTimeInSeconds // Calculamos el porcentaje para la ProgressBar
+                    } else {
+                        100 // La ProgressBar está llena después de 5 minutos
+                    }
+
+                    binding.progressBar.progress = progress.toInt() // Convertimos a Int y actualizamos la ProgressBar
+
+                    // Si no se ha alcanzado el máximo (5 minutos), actualizamos nuevamente
+                    if (elapsedTimeInSeconds < maxTimeInSeconds) {
+                        updateHandler?.postDelayed(this, 1000)
+                    }
+                }
+            }
+        }, 1000) // Empezamos a actualizar después de 1 segundo
     }
 
     private fun getElapsedTime(binding: FragmentChronometerBinding): Long {

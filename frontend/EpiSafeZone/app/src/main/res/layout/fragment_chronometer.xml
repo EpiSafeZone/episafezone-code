@@ -8,44 +8,19 @@
     android:layout_height="match_parent"
     tools:context="fragments.ChronometerFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/epiBlackBackground"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/patientImage"
-            android:layout_width="48dp"
-            android:layout_height="33dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:mipmap/sym_def_app_icon"
-            tools:srcCompat="@android:mipmap/sym_def_app_icon" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutChrono"
         android:layout_width="350dp"
         android:layout_height="200dp"
-        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_box"
         android:elevation="8dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toTopOf="@id/messageTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout"
-        app:layout_constraintVertical_bias="0.1">
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- Cronómetro principal -->
         <Chronometer
@@ -98,9 +73,9 @@
             android:id="@+id/registrarLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="230dp"
-            android:layout_marginStart="2dp"
             android:fontFamily="@font/inter_light"
             android:gravity="center"
             android:text="Registrar"
@@ -153,7 +128,7 @@
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
-        android:background="@color/grey"
+        android:background="@color/epiBlackBackground"
         android:text="Some text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

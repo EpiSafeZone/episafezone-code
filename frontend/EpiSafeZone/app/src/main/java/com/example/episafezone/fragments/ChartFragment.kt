@@ -1,16 +1,23 @@
 package com.example.episafezone.fragments
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.view.GestureDetector
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.businesslogic.ChartLogic
 import com.example.episafezone.databinding.FragmentChartsBinding
+import com.example.episafezone.fragments.CalendarFragment.Companion
 import com.example.episafezone.models.Patient
+import com.example.episafezone.network.ChartPetitions
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -34,10 +41,32 @@ class ChartFragment() : Fragment(R.layout.fragment_charts) {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpPieChart()
-        setUpLineChart()
+        bindingObj = binding
+        ChartLogic.decorateCharts(binding)
+        ChartLogic.getPieChart(patient)
+        ChartLogic.getLineChart(patient)
+
+        val gestureDetectorFragments = GestureDetector(this.getContext(), object : GestureDetector.SimpleOnGestureListener() {
+
+            override fun onFling(
+                e1: MotionEvent?, e2: MotionEvent, velocityX: Float, velocityY: Float
+            ): Boolean {
+                if(e2.x - e1!!.x > 100 && Math.abs(velocityX) > 10){
+                    MainActivity.changeToCalendar()
+                }
+                return super.onFling(e1, e2, velocityX, velocityY)
+            }
+        })
+
+        binding.mainChart.setOnTouchListener{ v: View?, event: MotionEvent ->
+            gestureDetectorFragments.onTouchEvent(event)
+        }
+        binding.mainChart.setOnClickListener{
+            println("tocado")
+        }
     }
 
     override fun onDestroyView() {
@@ -45,74 +74,78 @@ class ChartFragment() : Fragment(R.layout.fragment_charts) {
         _binding = null
     }
 
-    private fun setUpPieChart(){
-        val pieList = ChartLogic.getPieChart(patient);
-        val count = pieList.groupingBy { it }.eachCount()
-
-        val pieEntries = count.map { (key, value) ->
-            PieEntry(value.toFloat(), key)
-        }
-
-        val pieDataSet = PieDataSet(pieEntries, "Manifestaciones").apply {
-            colors = listOf(
-                Color.BLUE,
-                Color.RED,
-                Color.GREEN,
-                Color.MAGENTA,
-                Color.YELLOW
-            )
-            valueTextColor = Color.BLACK
-            valueTextSize = 14f
-        }
-        val pieData = PieData(pieDataSet)
-        binding.pieChart.data = pieData
-
-        binding.pieChart.description.isEnabled = false
-        binding.pieChart.centerText = "Frecuencia de manifestaciones"
-        binding.pieChart.setEntryLabelColor(Color.BLACK)
-        binding.pieChart.animateY(1000)
-        binding.pieChart.invalidate()
-    }
-
-    private fun setUpLineChart(){
-        val lineMap = ChartLogic.getLineChart(patient)
-
-        // Convertir fechas a índices
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val dates = lineMap.keys.toList()
-        val entries = lineMap.entries.mapIndexed { index, entry ->
-            Entry(index.toFloat(), entry.value.toFloat())
-        }
-
-        // Configurar el dataset
-        val dataSet = LineDataSet(entries, "Fechas vs Números").apply {
-            color = getColor(android.R.color.holo_blue_dark)
-            valueTextColor = getColor(android.R.color.black)
-            lineWidth = 2f
-            circleRadius = 4f
-            setDrawCircleHole(true)
-        }
-
-        // Formatear el eje X con las fechas
-        binding.lineChart.xAxis.apply {
-            valueFormatter = IndexAxisValueFormatter(dates)
-            position = XAxis.XAxisPosition.BOTTOM
-            granularity = 1f
-        }
-
-        // Configurar el gráfico
-        binding.lineChart.apply {
-            data = LineData(dataSet)
-            description.text = "Gráfico de Fechas"
-            animateX(1000)
-        }
-    }
-
     companion object{
         private var patient = MainActivity.getPatient()
+        private val contextObj = MainActivity.getContext()
+        private lateinit var bindingObj : FragmentChartsBinding
 
+        fun getContext() : Context {
+            return contextObj
+        }
         fun updatePatient(patient: Patient){
             this.patient = patient
         }
+
+        fun setUpPieChart(pieList : List<String>){
+            val count = pieList.groupingBy { it }.eachCount()
+
+            val pieEntries = count.map { (key, value) ->
+                PieEntry(value.toFloat(), key)
+            }
+            val epiWhite = ContextCompat.getColor(ChartFragment.getContext(), R.color.epiWhite)
+            val epiGreen = ContextCompat.getColor(ChartFragment.getContext(), R.color.epiGreen)
+            val pieDataSet = PieDataSet(pieEntries, "").apply {
+                colors = listOf(
+                    epiWhite,
+                    Color.parseColor("#E7F5DE"),
+                    Color.parseColor("#CAE8B8"),
+                    Color.parseColor("#ADDC91"),
+                    Color.parseColor("#90D06A"),
+                )
+                valueTextColor = Color.BLACK
+                valueTextSize = 10f
+            }
+            val pieData = PieData(pieDataSet)
+
+            bindingObj.pieChart.data = pieData
+            bindingObj.pieChart.description.isEnabled = false
+            bindingObj.pieChart.setEntryLabelColor(Color.BLACK)
+            bindingObj.pieChart.animateY(1000)
+            bindingObj.pieChart.invalidate()
+        }
+
+        fun setUpLineChart(lineMap : Map<String,Int>){
+            // Convertir fechas a índices
+            val dateFormat = SimpleDateFormat("dd/MM", Locale.getDefault())
+            val dates = lineMap.keys.toList()
+            val entries = lineMap.entries.mapIndexed { index, entry ->
+                Entry(index.toFloat(), entry.value.toFloat())
+            }
+
+            // Configurar el dataset
+            val dataSet = LineDataSet(entries, "Fechas vs Números").apply {
+                color = ContextCompat.getColor(ChartFragment.getContext(), R.color.epiGreen)
+                valueTextColor = getColor(android.R.color.black)
+                lineWidth = 2f
+                setDrawCircles(false)
+                setDrawCircleHole(false)
+                setDrawValues(false)
+            }
+
+            // Formatear el eje X con las fechas
+            bindingObj.lineChart.xAxis.apply {
+                valueFormatter = IndexAxisValueFormatter(dates)
+                position = XAxis.XAxisPosition.BOTTOM
+                granularity = 1f
+            }
+
+            // Configurar el gráfico
+            bindingObj.lineChart.apply {
+                data = LineData(dataSet)
+                description.isEnabled = false
+                animateX(1000)
+            }
+        }
+
     }
 }

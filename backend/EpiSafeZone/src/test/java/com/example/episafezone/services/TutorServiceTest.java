@@ -1,7 +1,9 @@
 package com.example.episafezone.services;
 
+import com.example.episafezone.DTO.NotifyHoursDTO;
 import com.example.episafezone.DTO.SharedDTO.SharePatientDTO;
 import com.example.episafezone.DTO.SharedDTO.SharedPermissionsDTO;
+import com.example.episafezone.exceptions.ResourceNotFoudException;
 import com.example.episafezone.models.Patient;
 import com.example.episafezone.models.SharedWith;
 import com.example.episafezone.models.Tutor;
@@ -93,20 +95,19 @@ public class TutorServiceTest {
     }
 
     @Test
-    public void sharePatient_NoTutorPermission_Succes(){
+    public void sharePatient_NoTutorPermission_Success(){
         Tutor tutorSharing = new Tutor("tutor", "Sharing", "tutorsharing@gmail.com", "sharing", false);
         tutorSharing.setId(1);
-        SharePatientDTO sharePatientDTO = new SharePatientDTO(1,"tutorreciving@gmail.com", 3, true, false, false, false);
-        Tutor tutorReciving = new Tutor("tutor2", "reciving","tutorreciving@gmail.com", "reciving", true);
-        tutorReciving.setId(2);
+        SharePatientDTO sharePatientDTO = new SharePatientDTO(1,"tutorreceiving@gmail.com", 3, true, false, false, false);
+        Tutor tutorReceiving = new Tutor("tutor2", "receiving","tutorreceiving@gmail.com", "receiving", true);
+        tutorReceiving.setId(2);
         Patient patientSharing = new Patient("patient","shared", 100,50, new Date(12), 15, "imagenURL");
         patientSharing.setId(3);
         TutorOf tutorOf = new TutorOf(1,3,false);
         SharedWith resultExpected = new SharedWith(1,2,3,true, false,false, false);
 
-
-        when(tutorRepository.findByEmail("tutorreciving@gmail.com")).thenReturn(tutorReciving);
-        when(sharedWithService.findByTutorShAndPatient(tutorReciving.getId(), sharePatientDTO.getPatientId())).thenReturn(Arrays.asList());
+        when(tutorRepository.findByEmail("tutorreceiving@gmail.com")).thenReturn(tutorReceiving);
+        when(sharedWithService.findByTutorShAndPatient(tutorReceiving.getId(), sharePatientDTO.getPatientId())).thenReturn(Arrays.asList());
         when(tutorOfService.findAll()).thenReturn(Arrays.asList(tutorOf));
 
         SharedWith resultObtained = tutorService.sharePatient(sharePatientDTO);
@@ -119,8 +120,46 @@ public class TutorServiceTest {
         assertEquals(resultExpected.getMedicinePermision(), resultObtained.getMedicinePermision());
         assertEquals(resultExpected.getTutorPermision(), resultObtained.getTutorPermision());
 
+        verify(notifyHoursService).addNotifyHours(any());
+    }
 
+    @Test
+    public void SharePatientTest_WithTutorPermission_Success(){
+        Tutor tutorSharing = new Tutor("tutor", "Sharing", "tutorsharing@gmail.com", "sharing", false);
+        tutorSharing.setId(1);
+        SharePatientDTO sharePatientDTO = new SharePatientDTO(1,"tutorreceiving@gmail.com", 3, true, false, false, true);
+        Tutor tutorReceiving = new Tutor("tutor2", "receiving","tutorreceiving@gmail.com", "receiving", true);
+        tutorReceiving.setId(2);
+        Patient patientSharing = new Patient("patient","shared", 100,50, new Date(12), 15, "imagenURL");
+        patientSharing.setId(3);
+        TutorOf tutorOf = new TutorOf(1,3,false);
+        SharedWith resultExpected = new SharedWith(1,2,3,true, false,false, true);
 
+        when(tutorService.findTutorByEmail("tutorreceiving@gmail.com")).thenReturn(tutorReceiving);
+        when(sharedWithService.findByTutorShAndPatient(tutorReceiving.getId(), sharePatientDTO.getPatientId())).thenReturn(Arrays.asList());
+        when(tutorOfService.findAll()).thenReturn(Arrays.asList(tutorOf));
 
+        SharedWith resultObtained = tutorService.sharePatient(sharePatientDTO);
+
+        verify(tutorOfService).addTutorOf(2,3,false);
+
+        assertEquals(resultExpected.getTutorSharing(),resultObtained.getTutorSharing());
+        assertEquals(resultExpected.getTutorReceiving(), resultObtained.getTutorReceiving());
+        assertEquals(resultExpected.getPatient(), resultObtained.getPatient());
+        assertEquals(resultExpected.getRegisterCrisisPermision(), resultObtained.getRegisterCrisisPermision());
+        assertEquals(resultExpected.getProfilePermision(), resultObtained.getProfilePermision());
+        assertEquals(resultExpected.getMedicinePermision(), resultObtained.getMedicinePermision());
+        assertEquals(resultExpected.getTutorPermision(), resultObtained.getTutorPermision());
+
+        verify(notifyHoursService).addNotifyHours(any());
+    }
+
+    @Test
+    public void SharePatientTest_ThrowsResourceNotFoundException(){
+        SharePatientDTO sharePatientDTO = new SharePatientDTO(1,"tutorreceiving@gmail.com", 3, true, false, false, true);
+        Tutor tutorReceiving = new Tutor("tutor2", "receiving","tutorreceiving@gmail.com", "receiving", true);
+        tutorReceiving.setId(2);
+
+        assertThrows(ResourceNotFoudException.class, () -> tutorService.findIdByEmail(""));
     }
 }

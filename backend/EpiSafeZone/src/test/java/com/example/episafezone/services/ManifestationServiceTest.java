@@ -43,11 +43,11 @@ public class ManifestationServiceTest {
     @Test
     public void testGetManifestationFromPatient(){
 
-        Manifestation manifestation = new Manifestation("manifestacion1", "descripcion1");
+        Manifestation manifestation = new Manifestation("manifestacion1", "descripcion1", "step3");
         manifestation.setId(1);
-        Manifestation manifestation2 = new Manifestation("manifestacion2", "descripcion2");
+        Manifestation manifestation2 = new Manifestation("manifestacion2", "descripcion2", "step2");
         manifestation2.setId(2);
-        Manifestation manifestation3 = new Manifestation("manifestacion3", "descripcion3");
+        Manifestation manifestation3 = new Manifestation("manifestacion3", "descripcion3","step1");
         manifestation3.setId(3);
 
         Patient patient = new Patient();

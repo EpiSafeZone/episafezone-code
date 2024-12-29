@@ -3,62 +3,138 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@color/epiBlackBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fragments.ChronometerFragment">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey"
-        android:padding="10dp"
+        android:id="@+id/layoutChrono"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:background="@drawable/rounded_box"
+        android:elevation="8dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toTopOf="@id/messageTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/patientImage"
-            android:layout_width="48dp"
-            android:layout_height="33dp"
-            android:layout_marginEnd="20dp"
+        <!-- Cronómetro principal -->
+        <Chronometer
+            android:id="@+id/chrono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:fontFamily="@font/inter_light"
+            android:padding="10dp"
+            android:text="00:00"
+            android:textColor="@color/epiGreen"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="40dp"
+            android:progressDrawable="@drawable/progress_bar"
+            android:max="100"
+            android:progress="0"
+            app:layout_constraintTop_toBottomOf="@id/chrono"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Etiquetas para minutos y segundos -->
+        <TextView
+            android:id="@+id/minutesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="-16dp"
+            android:layout_marginRight="5dp"
+            android:fontFamily="@font/inter_light"
+            android:gravity="center"
+            android:text="minutos"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/secondsLabel"
+            app:layout_constraintStart_toStartOf="@id/chrono"
+            app:layout_constraintTop_toBottomOf="@id/chrono" />
+
+        <!-- Botón de inicio -->
+
+        <TextView
+            android:id="@+id/secondsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-16dp"
+            android:layout_marginEnd="0dp"
+            android:fontFamily="@font/inter_light"
+            android:gravity="center"
+            android:text="segundos"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/chrono"
+            app:layout_constraintTop_toBottomOf="@id/chrono" />
+
+        <TextView
+            android:id="@+id/registrarLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="230dp"
+            android:fontFamily="@font/inter_light"
+            android:gravity="center"
+            android:text="Registrar"
+            android:textColor="@color/epiWhite"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/chrono"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="280dp"
+            android:layout_marginTop="0dp"
+            android:background="@null"
+            android:elevation="12dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:src="@mipmap/right_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:mipmap/sym_def_app_icon"
-            tools:srcCompat="@android:mipmap/sym_def_app_icon" />
+            app:layout_constraintVertical_bias="0.16" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Chronometer
-        android:id="@+id/chrono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/grey"
-        android:paddingHorizontal="30dp"
-        android:paddingVertical="20dp"
-        android:text="00:00"
-        android:textSize="65sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.1">
-
-    </Chronometer>
 
     <TextView
         android:id="@+id/messageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:background="@color/grey"
+        android:layout_marginEnd="80dp"
+        android:background="@color/epiBlackBackground"
         android:text="Reconoce la manifestación?"
         android:textSize="20sp"
+        android:textColor="@color/epiWhite"
+        android:fontFamily="@font/inter_light"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintTop_toBottomOf="@+id/chrono" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutChrono" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/informationScrollView"
@@ -66,24 +142,13 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="40dp"
-        android:background="@color/grey"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messageTextView">
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/green"
-        android:textColor="@color/white"
-        android:text="Empezar"
         android:layout_marginBottom="50dp"
+        android:background="@color/epiBlackBackground"
+        android:text="Some text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/messageTextView"></androidx.recyclerview.widget.RecyclerView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

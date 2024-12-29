@@ -45,7 +45,7 @@ CREATE TABLE `crisis` (
 
 LOCK TABLES `crisis` WRITE;
 /*!40000 ALTER TABLE `crisis` DISABLE KEYS */;
-INSERT INTO `crisis` VALUES (1,3,'2024-10-28',NULL,NULL,NULL,1,1),(2,3,'2024-10-23',NULL,NULL,NULL,2,1),(3,4,'2024-09-17',NULL,NULL,NULL,2,1),(4,4,'2024-09-05',NULL,NULL,NULL,1,1),(5,2,'2024-09-07',NULL,NULL,NULL,1,1),(6,2,'2024-09-21',NULL,NULL,NULL,1,2),(7,2,'2024-09-03',NULL,NULL,NULL,2,2),(8,5,'2024-10-26',NULL,NULL,NULL,1,2),(9,5,'2024-10-09',NULL,NULL,NULL,2,2),(10,3,'2024-12-10','20:00','Estaba en la ducha',_binary '\0',2,1),(11,5,'2024-12-09','10:00','Estaba viendo la tele',_binary '\0',1,1),(12,6,'2024-12-08','17:00','Estaba viendo la tele',_binary '',1,1);
+INSERT INTO `crisis` VALUES (1,180,'2024-10-28','17:00','Estaba jugando en el parque, hacía mucho calor',_binary '\0',1,1),(2,180,'2024-10-23','12:00','Estaba atendiendo en clase',_binary '\0',2,1),(3,240,'2024-09-17','09:00','Estaba atendiendo en clase',_binary '\0',2,1),(4,240,'2024-09-05','21:30','Estaba en la ducha',_binary '\0',1,1),(5,120,'2024-09-07','18:37','Estaba caminando por la calle, hacía mucho calor',_binary '\0',1,1),(6,120,'2024-09-21','19:21','Estaba viendo la tele',_binary '\0',1,2),(7,120,'2024-09-03','13:40','Estaba comiendo',_binary '\0',2,2),(8,300,'2024-10-26','11:22','Estaba en calse realizando un trabajo',_binary '',1,2),(9,300,'2024-10-09','21:20','Estaba en la ducha',_binary '',2,2),(10,180,'2024-12-10','20:00','Estaba en la ducha',_binary '\0',2,1),(11,300,'2024-12-09','10:00','Estaba viendo la tele',_binary '',1,1),(12,360,'2024-12-08','17:00','Estaba viendo la tele',_binary '',1,1);
 /*!40000 ALTER TABLE `crisis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,6 +114,7 @@ CREATE TABLE `manifestation` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `description` varchar(255) NOT NULL,
+  `steps` longtext,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -124,7 +125,7 @@ CREATE TABLE `manifestation` (
 
 LOCK TABLES `manifestation` WRITE;
 /*!40000 ALTER TABLE `manifestation` DISABLE KEYS */;
-INSERT INTO `manifestation` VALUES (1,'tonico-clonica','Convulsiones'),(2,'ausencias','El paciente se que en blanco mirando un punto fijo y no responde'),(3,'nueva manifestacion','esto es una descripción'),(4,'nueva','nueva manifestacion');
+INSERT INTO `manifestation` VALUES (1,'tonico-clonica','Convulsiones','Paso 1: Sujetarle la lengua al paciente\n Paso 2: Poner al paciente de lado\n Paso 3: Llamar a urgencias'),(2,'ausencias','El paciente se que en blanco mirando un punto fijo y no responde','Paso 1: Mantener la calma, el paciente no está en peligro\n Paso 2: Supervisa el entorno y asegurate de que el paciente está en un lugar seguro\n Paso 3: No trates de despertar al paciente, este no será consciente de lo que suceda alrededor\n Paso 4: Si no despuerta en un largo tiempo (5 min o mas), llame a urgendias'),(3,'nueva manifestacion','esto es una descripción',NULL),(4,'nueva','nueva manifestacion',NULL);
 /*!40000 ALTER TABLE `manifestation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +177,7 @@ CREATE TABLE `notify_hours` (
   KEY `notify_from_patient_idx` (`patient`),
   CONSTRAINT `notified_tutor` FOREIGN KEY (`tutor`) REFERENCES `tutor` (`id`),
   CONSTRAINT `notify_from_patient` FOREIGN KEY (`patient`) REFERENCES `patient` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +186,7 @@ CREATE TABLE `notify_hours` (
 
 LOCK TABLES `notify_hours` WRITE;
 /*!40000 ALTER TABLE `notify_hours` DISABLE KEYS */;
-INSERT INTO `notify_hours` VALUES (1,1,1,'00:00:00','23:59:59'),(2,1,2,'08:00:00','18:00:00'),(3,2,1,'00:00:00','23:59:59'),(4,3,2,'00:00:00','23:59:59'),(8,3,1,'00:00:00','23:59:59');
+INSERT INTO `notify_hours` VALUES (1,1,1,'00:00:00','23:59:59'),(2,1,2,'08:00:00','18:00:00'),(3,2,1,'00:00:00','23:59:59'),(4,3,2,'00:00:00','23:59:59'),(8,3,1,'00:00:00','23:59:59'),(9,2,2,'00:00:00','23:59:59'),(10,2,2,'00:00:00','23:59:59');
 /*!40000 ALTER TABLE `notify_hours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +270,7 @@ CREATE TABLE `shared_with` (
   CONSTRAINT `patient_shared` FOREIGN KEY (`patient`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `shared_to` FOREIGN KEY (`tutor_receiving`) REFERENCES `tutor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `shered_by` FOREIGN KEY (`tutor_sharing`) REFERENCES `tutor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,4 +353,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-11  9:58:17
+-- Dump completed on 2024-12-28 18:19:58

@@ -51,8 +51,8 @@ public class TutorService implements TutorServiceInterface {
         }
     }
 
-    public List<Tutor> findTutorsShared(Integer tutotShId, Integer patient) {
-        List<SharedWith> sharedWithList = sharedWithService.findByTutorShAndPatient(tutotShId, patient);
+    public List<Tutor> findTutorsShared(Integer tutorShId, Integer patient) {
+        List<SharedWith> sharedWithList = sharedWithService.findByTutorShAndPatient(tutorShId, patient);
         List<Integer> tutorSharedIds = sharedWithList.stream()
                 .map(SharedWith::getTutorReceiving)
                 .toList();
@@ -60,10 +60,6 @@ public class TutorService implements TutorServiceInterface {
                 .map(tutorId -> tutorRepo.findById(tutorId).orElse(null))
                 .toList();
         return tutorsShared;
-    }
-
-    public Integer findIdByEmail(String email) {
-        return tutorRepo.findIdByEmail(email);
     }
 
     public Tutor findTutorByEmail(String email) {

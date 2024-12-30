@@ -20,6 +20,7 @@ import org.json.JSONObject
 import java.util.Timer
 import java.util.TimerTask
 import android.os.Handler
+import com.example.episafezone.fragments.ChronometerFragment.Companion
 import kotlin.concurrent.timerTask
 import kotlin.math.roundToInt
 
@@ -78,6 +79,8 @@ object ChronometerLogic {
         startProgressBarUpdate(binding)
         //binding.button.text = "Detener"
         //binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
+        binding.button.setImageResource(R.mipmap.pause)
+        binding.button.setPadding(11, 16, 0, 0)
     }
 
     private fun stopTimer(binding: FragmentChronometerBinding,patient: Patient) {
@@ -87,6 +90,8 @@ object ChronometerLogic {
         val elapsedTime = getElapsedTime(binding)
         ChronometerFragment.startCrisisRegister(elapsedTime)
         Toast.makeText(ChronometerFragment.getContext(), "Parar timer", Toast.LENGTH_SHORT).show()
+        binding.button.setImageResource(R.mipmap.right_arrow)
+        binding.button.setPadding(0, 10, 17, 0)
     }
 
     private fun startProgressBarUpdate(binding: FragmentChronometerBinding) {

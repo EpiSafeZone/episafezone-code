@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Chronometer
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat.getColor
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityRegisterCrisis
 import com.example.episafezone.MainActivity
@@ -50,6 +51,8 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
         if(startChrono){
             //binding.button.text = "Detener"
             //binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
+            binding.button.setImageResource(R.mipmap.pause)
+            binding.button.setPadding(0, 10, 0, 0)
             ChronometerLogic.startStopTimer(binding,patient)
         }
 

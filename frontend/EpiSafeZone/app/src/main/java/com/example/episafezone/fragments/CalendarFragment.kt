@@ -22,6 +22,7 @@ import com.example.episafezone.fragments.ProfileFragment.Companion
 import com.example.episafezone.models.Crisis
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.CalendarPetitions
+import com.example.episafezone.network.ChartPetitions
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.format.WeekDayFormatter
 import java.time.LocalDateTime
@@ -48,6 +49,8 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         val actualDate = dateTime.format(format)
         calendarDay = CalendarDay.from(dateTime.year,dateTime.monthValue,dateTime.dayOfMonth)
         binding.dateText.text = actualDate
+
+        ChartPetitions.initializeQueue()
 
         patient = MainActivity.getPatient()
 

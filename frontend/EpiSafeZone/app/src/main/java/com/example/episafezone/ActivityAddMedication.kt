@@ -3,15 +3,10 @@ package com.example.episafezone
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.example.episafezone.businesslogic.MedicationLogic
 import com.example.episafezone.databinding.ActivityAddMedicationBinding
 import com.example.episafezone.databinding.FragmentProfileBinding
-import com.example.episafezone.fragments.ProfileFragment
-import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Patient
-import com.example.episafezone.models.Reminder
-import com.example.episafezone.network.PatientsListPetitions
 
 class ActivityAddMedication : AppCompatActivity() {
 

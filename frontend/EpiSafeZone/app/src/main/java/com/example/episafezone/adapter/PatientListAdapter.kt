@@ -36,8 +36,31 @@ class PatientListAdapter(var context: Context?, private var list: List<Patient>)
         //TODO terminar imagen cuando funcione.
         //holder.patientImage.setImageIcon( list[position].profilePicture )
 
+        patientListViews.add(holder.patientContainer)
+
         holder.patientContainer.setOnClickListener {
             MainActivity.updatePatient(list[position])
+        }
+    }
+
+    companion object {
+
+        var patientListViews = mutableListOf<ConstraintLayout>()
+
+        fun ClearViewList(){
+            patientListViews.clear()
+        }
+
+        fun setAllClickAble(){
+            for (i in 0 until patientListViews.size){
+                patientListViews[i].isClickable = true
+            }
+        }
+
+        fun setAllNotClickAble(){
+            for (i in 0 until patientListViews.size){
+                patientListViews[i].isClickable = false
+            }
         }
     }
 }

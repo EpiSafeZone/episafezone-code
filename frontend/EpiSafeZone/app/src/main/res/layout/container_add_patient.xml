@@ -9,7 +9,7 @@
     android:id="@+id/add_patient_container">
 
     <include
-        android:id="@+id/settings_picture"
+        android:id="@+id/add_patient_picture"
         layout="@layout/add_patient_picture_circular"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

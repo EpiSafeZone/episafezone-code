@@ -1,17 +1,11 @@
 package com.example.episafezone.network
 
-import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.episafezone.BuildConfig
 import com.example.episafezone.MainActivity
-import com.example.episafezone.businesslogic.PatientsListLogic
-import com.example.episafezone.models.Device
-import com.example.episafezone.models.Patient
-import org.json.JSONObject
 
-object PatientsListPetitions {
+object HomePetitions {
     private const val myIP = BuildConfig.API_LINK
     private val url = "http://$myIP"
 

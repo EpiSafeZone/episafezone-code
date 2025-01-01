@@ -4,7 +4,7 @@
     <!-- Gradient for the circle -->
     <gradient
         android:startColor="#505050"
-        android:endColor="#393938"
+        android:endColor="#3e3e3e"
         android:centerColor="#484848"
         android:useLevel="false"
         android:type="linear" />

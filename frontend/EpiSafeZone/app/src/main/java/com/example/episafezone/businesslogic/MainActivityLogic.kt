@@ -1,7 +1,9 @@
 package com.example.episafezone.businesslogic
 
 import android.util.Log
+import android.widget.Toast
 import com.example.episafezone.MainActivity
+import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.models.Device
 import com.example.episafezone.models.Patient
 import com.example.episafezone.network.MainActivityPetitions
@@ -44,5 +46,101 @@ object MainActivityLogic {
             list.add(Patient(id, name, surname, height, weight, age, imageUrl))
         }
         MainActivity.setAdapter(list)
+    }
+
+    fun EliminateOnClickListenersForTimer(){
+        val mainActivity = MainActivity.getContext() as MainActivity
+        val binding = MainActivity.getBinding()
+
+        val settings = binding.settings.settingsContainer
+        val addPatient = binding.addChild.addPatientContainer
+        val patientListView = binding.patientListRecyclerView
+        val home = binding.home
+        val profile = binding.profile
+        val calendar = binding.calendar
+        val chronometer = binding.chronometer
+
+        settings.alpha = 0.5f
+        settings.setOnClickListener(){
+            Toast.makeText(mainActivity, "No puedes acceder a esta opción mientras el cronómetro está activo", Toast.LENGTH_SHORT).show()
+        }
+
+        addPatient.alpha = 0.5f
+        addPatient.setOnClickListener(){
+            Toast.makeText(mainActivity, "No puedes acceder a esta opción mientras el cronómetro está activo", Toast.LENGTH_SHORT).show()
+        }
+
+        patientListView.alpha = 0.5f
+        PatientListAdapter.setAllNotClickAble()
+        patientListView.setOnClickListener(){
+            Toast.makeText(mainActivity, "No puedes acceder a esta opción mientras el cronómetro está activo", Toast.LENGTH_SHORT).show()
+        }
+
+        home.alpha = 0.5f
+        home.setOnClickListener(){
+            Toast.makeText(mainActivity, "No puedes acceder a esta opción mientras el cronómetro está activo", Toast.LENGTH_SHORT).show()
+        }
+
+        profile.alpha = 0.5f
+        profile.setOnClickListener(){
+            Toast.makeText(mainActivity, "No puedes acceder a esta opción mientras el cronómetro está activo", Toast.LENGTH_SHORT).show()
+        }
+
+        calendar.alpha = 0.5f
+        calendar.setOnClickListener(){
+            Toast.makeText(mainActivity, "No puedes acceder a esta opción mientras el cronómetro está activo", Toast.LENGTH_SHORT).show()
+        }
+
+        chronometer.alpha = 0.5f
+        chronometer.setOnClickListener(){
+            Toast.makeText(mainActivity, "No puedes acceder a esta opción mientras el cronómetro está activo", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun EnableOnClickListenersForTimer(){
+        val mainActivity = MainActivity.getContext() as MainActivity
+        val binding = MainActivity.getBinding()
+
+        val settings = binding.settings.settingsContainer
+        val addPatient = binding.addChild.addPatientContainer
+        val patientListView = binding.patientListRecyclerView
+        val home = binding.home
+        val profile = binding.profile
+        val calendar = binding.calendar
+        val chronometer = binding.chronometer
+
+        settings.alpha = 1f
+        settings.setOnClickListener(){
+            mainActivity.goToSettings()
+        }
+
+        addPatient.alpha = 1f
+        addPatient.setOnClickListener(){
+            // TODO: Implementar la lógica para agregar un paciente
+        }
+
+        patientListView.alpha = 1f
+        PatientListAdapter.setAllClickAble()
+        patientListView.setOnClickListener(){}
+
+        home.alpha = 1f
+        home.setOnClickListener(){
+            mainActivity.changeToHome()
+        }
+
+        profile.alpha = 1f
+        profile.setOnClickListener(){
+            mainActivity.changeToProfile()
+        }
+
+        calendar.alpha = 1f
+        calendar.setOnClickListener(){
+            mainActivity.changeToCalendar()
+        }
+
+        chronometer.alpha = 1f
+        chronometer.setOnClickListener(){
+            mainActivity.changeToStartCrisis(false)
+        }
     }
 }

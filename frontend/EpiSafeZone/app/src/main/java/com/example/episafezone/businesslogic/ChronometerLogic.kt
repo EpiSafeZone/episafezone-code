@@ -33,6 +33,10 @@ object ChronometerLogic {
     private var maxTimeInSeconds = 300 // 5 minutos = 300 segundos
     private var timerStarted = false
 
+    fun getTimerStarted(): Boolean {
+        return timerStarted
+    }
+
     fun getProfileLogic(patient: Patient) {
         StartCrisisPetitions.getPatientManifestations(patient)
     }
@@ -67,6 +71,7 @@ object ChronometerLogic {
     }
 
     private fun startTimer(binding: FragmentChronometerBinding) {
+        MainActivityLogic.EliminateOnClickListenersForTimer()
         timerStarted = true
         ChronometerFragment.chronometer.base = SystemClock.elapsedRealtime()
         ChronometerFragment.chronometer.start()
@@ -76,6 +81,7 @@ object ChronometerLogic {
     }
 
     private fun stopTimer(binding: FragmentChronometerBinding,patient: Patient) {
+        MainActivityLogic.EnableOnClickListenersForTimer()
         ChronometerFragment.chronometer.stop()
         timerStarted = false
         val elapsedTime = getElapsedTime(binding)

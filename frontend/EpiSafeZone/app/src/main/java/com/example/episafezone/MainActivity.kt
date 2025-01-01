@@ -68,8 +68,7 @@ class MainActivity : AppCompatActivity() {
         loadInitialFragment(0,load, true)
 
         binding.settings.settingsContainer.setOnClickListener{
-            val intent = Intent(this, ActivitySettings::class.java)
-            startActivity(intent)
+            goToSettings()
         }
 
         binding.addChild.addPatientContainer.setOnClickListener{
@@ -147,6 +146,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
     }
+
+    fun goToSettings(){
+        val intent = Intent(this, ActivitySettings::class.java)
+        startActivity(intent)
+    }
+
 
     fun changeToStartCrisis(startChrono: Boolean) {
         Log.d("FragmentChange","ChangeToStartCrisis")
@@ -247,6 +252,7 @@ class MainActivity : AppCompatActivity() {
 
         fun setAdapter(listPatient : List<Patient>){
             this.listPatient = listPatient
+            PatientListAdapter.ClearViewList()
             binding.patientListRecyclerView.adapter = PatientListAdapter(contextObj, listPatient)
             if(firstTimeAdapter) {
                 binding.patientListRecyclerView.apply {
@@ -261,6 +267,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 firstTimeAdapter = false
             } else {
+                // Update the views to obtain the most recent data
                 when (currentFragment) {
                     PROFILE_VIEW -> (contextObj as MainActivity).changeToProfile()
                     CALENDAR_VIEW -> (contextObj as MainActivity).changeToCalendar()
@@ -279,6 +286,10 @@ class MainActivity : AppCompatActivity() {
 
         fun changeToCalendar(){
             (contextObj as MainActivity).changeToCalendar()
+        }
+
+        fun getBinding() : ActivityMainBinding {
+            return binding
         }
     }
 }

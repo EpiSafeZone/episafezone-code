@@ -11,14 +11,14 @@ import com.example.episafezone.MainActivity
 import com.example.episafezone.fragments.HomeFragment
 import com.example.episafezone.R
 import com.example.episafezone.models.Patient
+import com.example.episafezone.network.customVolleyRequests.ImageURLtoBitmapConverter
+import com.example.smarttrade.volleyRequestClasses.VolleyMultipartRequest
 
 class PatientListAdapter(var context: Context?, private var list: List<Patient>) : RecyclerView.Adapter<PatientListAdapter.PatientListViewHolder>() {
 
     class PatientListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val patientContainer: ConstraintLayout = view.findViewById(R.id.container_profile_picture_circular)
-        val patientImageContainer: ConstraintLayout = patientContainer.findViewById(R.id.patient_profile_picture)
-        //TODO: llegar hasta la imageview de verdad.
-        //val patientImage: ImageView = patientImageContainer.findViewById(R.id.patient_profile_picture)
+        val patientImage: ImageView = view.findViewById(R.id.patient_profile_picture_image_view)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatientListViewHolder {
@@ -33,8 +33,7 @@ class PatientListAdapter(var context: Context?, private var list: List<Patient>)
     }
 
     override fun onBindViewHolder(holder: PatientListViewHolder, position: Int) {
-        //TODO terminar imagen cuando funcione.
-        //holder.patientImage.setImageIcon( list[position].profilePicture )
+        ImageURLtoBitmapConverter.downloadImage(holder.patientImage, list[position])
 
         patientListViews.add(holder.patientContainer)
 

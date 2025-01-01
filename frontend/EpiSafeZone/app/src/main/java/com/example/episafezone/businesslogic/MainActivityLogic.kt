@@ -1,6 +1,8 @@
 package com.example.episafezone.businesslogic
 
+import android.graphics.Bitmap
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import com.example.episafezone.MainActivity
 import com.example.episafezone.adapter.PatientListAdapter
@@ -22,6 +24,10 @@ object MainActivityLogic {
 
     fun GetPatientsList(){
         MainActivityPetitions.getPatientsList()
+    }
+
+    fun setImage(view: ImageView, bitmap: Bitmap?){
+        view.setImageBitmap(bitmap)
     }
 
     fun ProcessPatientsList(jsonResponse: String){

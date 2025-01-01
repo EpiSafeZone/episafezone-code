@@ -1,6 +1,7 @@
 package com.example.episafezone.network.customVolleyRequests
 
 import android.graphics.Bitmap
+import android.media.Image
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -8,6 +9,7 @@ import com.android.volley.toolbox.ImageRequest
 import com.android.volley.toolbox.Volley
 import com.example.episafezone.BuildConfig
 import com.example.episafezone.MainActivity
+import com.example.episafezone.businesslogic.MainActivityLogic
 import com.example.episafezone.models.Patient
 
 /**
@@ -19,7 +21,7 @@ object  ImageURLtoBitmapConverter {
     private val url = "http://$API_IP"
 
     // TODO: añadir funciones que falten y corregir metodo comentado.
-    fun downloadImage(view : View, patient : Patient): Bitmap? {
+    fun downloadImage(view : ImageView, patient : Patient): Bitmap? {
 
         val urlC = "$url/image/${patient.id}"
         val requestQueue = Volley.newRequestQueue(MainActivity.getContext())
@@ -29,15 +31,13 @@ object  ImageURLtoBitmapConverter {
             urlC,
             { response -> bitmap = response
                 Log.i("imageBitmap", bitmap.toString())
-                //ProfileLogic.setImage(bitmap, view)
+                MainActivityLogic.setImage(view, bitmap)
             },
             143,
             143,
             ImageView.ScaleType.CENTER_CROP,
             Bitmap.Config.RGB_565,
-            { error -> Log.e("ImageLoadError", "Error listener: $error")
-                //ProfileLogic.setImage(null, view)
-        })
+            { error -> Log.e("ImageLoadError", "Error listener: $error")})
 
         requestQueue.add(imageRequest)
 

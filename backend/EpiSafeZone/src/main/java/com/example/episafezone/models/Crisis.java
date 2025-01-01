@@ -19,14 +19,14 @@ public class Crisis {
     private Integer patient;
 
 
-    public Crisis(Integer duration, Date date, String hour, String context, Boolean emergency, Manifestation manifestation, Patient patient) {
+    public Crisis(Integer duration, Date date, String hour, String context, Boolean emergency, Integer manifestation, Integer patient) {
         this.duration = duration;
         this.date = date;
         this.hour = hour;
         this.context = context;
         this.emergency = emergency;
-        this.manifestation = manifestation.getId();
-        this.patient = patient.getId();
+        this.manifestation = manifestation;
+        this.patient = patient;
     }
 
     public Crisis() {

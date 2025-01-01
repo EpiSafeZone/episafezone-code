@@ -72,39 +72,8 @@ public class SharedWithService implements SharedWithServiceInterface {
                 .toList();
     }
 
-    public SharedWith sharePatient(
-            Integer tutorSharingId,
-            Integer tutorReceivingId,
-            Integer patientId,
-            Boolean registerCrisisPermission,
-            Boolean profilePermission,
-            Boolean medicinePermission,
-            Boolean tutorPermission) {
-
-        SharedWith sharedWith = new SharedWith(
-                tutorSharingId,
-                tutorReceivingId,
-                patientId,
-                registerCrisisPermission,
-                profilePermission,
-                medicinePermission,
-                tutorPermission
-        );
-
-        return sharedWithRepo.save(sharedWith);
-    }
-
-    public SharedWith editPermissions(SharedPermissionsDTO sharedPermissionsDTO){
-        SharedWith editedPermissions = sharedWithRepo.findByTutorReceivingAndPatient(
-                sharedPermissionsDTO.getTutorReciving(),
-                sharedPermissionsDTO.getPatient()
-        );
-        editedPermissions.setRegisterCrisisPermision(sharedPermissionsDTO.getRegisterCrisisPermision());
-        editedPermissions.setProfilePermision(sharedPermissionsDTO.getProfilePermision());
-        editedPermissions.setMedicinePermision(sharedPermissionsDTO.getMedicinePermision());
-        editedPermissions.setTutorPermision(sharedPermissionsDTO.getTutorPermision());
-
-        return sharedWithRepo.save(editedPermissions);
+    public SharedWith sharePatient(SharedWith shared) {
+        return sharedWithRepo.save(shared);
     }
 
     public SharedPermissionsDTO getPermissions(GetPermissionsDTO getPermissionsDTO){
@@ -112,7 +81,7 @@ public class SharedWithService implements SharedWithServiceInterface {
                 getPermissionsDTO.getTutorReceiving(),
                 getPermissionsDTO.getPatient()
         );
-        SharedPermissionsDTO permisos = new SharedPermissionsDTO(
+        SharedPermissionsDTO permissions = new SharedPermissionsDTO(
                 getPermissionsDTO.getTutorReceiving(),
                 getPermissionsDTO.getPatient(),
                 sharedWith.getRegisterCrisisPermision(),
@@ -120,6 +89,6 @@ public class SharedWithService implements SharedWithServiceInterface {
                 sharedWith.getMedicinePermision(),
                 sharedWith.getTutorPermision()
         );
-        return permisos;
+        return permissions;
     }
 }

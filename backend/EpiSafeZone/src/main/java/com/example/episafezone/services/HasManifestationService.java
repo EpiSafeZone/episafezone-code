@@ -23,4 +23,8 @@ public class HasManifestationService implements HasManifestationServiceInterface
     public List<HasManifestation> findAll(){
         return hasManifestationRepo.findAll();
     }
+
+    public HasManifestation create(HasManifestation hasManifestation) {
+        return hasManifestationRepo.save(hasManifestation);
+    }
 }

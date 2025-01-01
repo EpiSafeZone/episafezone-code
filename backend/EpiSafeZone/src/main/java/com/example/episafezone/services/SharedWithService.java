@@ -76,25 +76,12 @@ public class SharedWithService implements SharedWithServiceInterface {
         return sharedWithRepo.save(shared);
     }
 
-    public SharedWith editPermissions(SharedPermissionsDTO sharedPermissionsDTO){
-        SharedWith editedPermissions = sharedWithRepo.findByTutorReceivingAndPatient(
-                sharedPermissionsDTO.getTutorReciving(),
-                sharedPermissionsDTO.getPatient()
-        );
-        editedPermissions.setRegisterCrisisPermision(sharedPermissionsDTO.getRegisterCrisisPermision());
-        editedPermissions.setProfilePermision(sharedPermissionsDTO.getProfilePermision());
-        editedPermissions.setMedicinePermision(sharedPermissionsDTO.getMedicinePermision());
-        editedPermissions.setTutorPermision(sharedPermissionsDTO.getTutorPermision());
-
-        return sharedWithRepo.save(editedPermissions);
-    }
-
     public SharedPermissionsDTO getPermissions(GetPermissionsDTO getPermissionsDTO){
         SharedWith sharedWith = sharedWithRepo.findByTutorReceivingAndPatient(
                 getPermissionsDTO.getTutorReceiving(),
                 getPermissionsDTO.getPatient()
         );
-        SharedPermissionsDTO permisos = new SharedPermissionsDTO(
+        SharedPermissionsDTO permissions = new SharedPermissionsDTO(
                 getPermissionsDTO.getTutorReceiving(),
                 getPermissionsDTO.getPatient(),
                 sharedWith.getRegisterCrisisPermision(),
@@ -102,6 +89,6 @@ public class SharedWithService implements SharedWithServiceInterface {
                 sharedWith.getMedicinePermision(),
                 sharedWith.getTutorPermision()
         );
-        return permisos;
+        return permissions;
     }
 }

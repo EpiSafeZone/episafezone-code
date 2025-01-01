@@ -1,5 +1,7 @@
 package com.example.episafezone.services;
 
+import com.example.episafezone.DTO.SharedDTO.GetPermissionsDTO;
+import com.example.episafezone.DTO.SharedDTO.SharedPermissionsDTO;
 import com.example.episafezone.models.SharedWith;
 import com.example.episafezone.models.Tutor;
 import com.example.episafezone.models.TutorOf;
@@ -90,13 +92,11 @@ public class SharedWithServiceTest {
         SharedWith sharedWith1 = new SharedWith(1,4,3, true, false, false, false);
         SharedWith sharedWith2 = new SharedWith(2,5,4, true, false, false, false);
 
-        when(sharedWithRepository.findByTutorReceiving(2)).thenReturn(Arrays.asList(sharedWith1, sharedWith2));
+        when(sharedWithRepository.findAll()).thenReturn(Arrays.asList(sharedWith1, sharedWith2));
         when(tutorOfService.findAll()).thenReturn(Arrays.asList(tutorOf, tutorOf2, tutorOf3));
         when(tutorService.findById(1)).thenReturn(tutor1);
         when(tutorService.findById(2)).thenReturn(tutor2);
-        when(tutorService.findById(3)).thenReturn(tutor3);
         when(tutorService.findById(4)).thenReturn(tutor4);
-        when(tutorService.findById(5)).thenReturn(tutor5);
 
         List<Tutor> result = sharedWithService.findPatientTutors(3);
 
@@ -106,5 +106,35 @@ public class SharedWithServiceTest {
         assertFalse(result.contains(tutor3));
         assertFalse(result.contains(tutor5));
         assertTrue(result.contains(tutor4));
+    }
+
+    @Test
+    public void findByTutorShAndPatientTest(){
+        SharedWith sharedWith1 = new SharedWith(1,2,3, true, false, false, false);
+        SharedWith sharedWith2 = new SharedWith(1,2,4, true, false, false, false);
+
+        when(sharedWithRepository.findByTutorSharing(1)).thenReturn(Arrays.asList(sharedWith1, sharedWith2));
+        List<SharedWith> response = sharedWithService.findByTutorShAndPatient(1,3);
+
+        assertEquals(1, response.size());
+        assertTrue(response.contains(sharedWith1));
+        assertFalse(response.contains(sharedWith2));
+    }
+
+    @Test
+    public void getPermissionsTest(){
+        GetPermissionsDTO getPermissionsDTO = new GetPermissionsDTO(2,2);
+        SharedWith sharedWith1 = new SharedWith(1,2,2, true, false, false, false);
+
+        when(sharedWithRepository.findByTutorReceivingAndPatient(2,2)).thenReturn(sharedWith1);
+
+        SharedPermissionsDTO response = sharedWithService.getPermissions(getPermissionsDTO);
+
+        assertEquals(response.getTutorReciving(), sharedWith1.getTutorReceiving());
+        assertEquals(response.getPatient(), sharedWith1.getPatient());
+        assertEquals(response.getRegisterCrisisPermision(), sharedWith1.getRegisterCrisisPermision());
+        assertEquals(response.getProfilePermision(), sharedWith1.getProfilePermision());
+        assertEquals(response.getMedicinePermision(), sharedWith1.getMedicinePermision());
+        assertEquals(response.getTutorPermision(), sharedWith1.getTutorPermision());
     }
 }

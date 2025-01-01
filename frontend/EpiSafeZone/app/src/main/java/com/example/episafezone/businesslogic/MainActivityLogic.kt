@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.episafezone.MainActivity
+import com.example.episafezone.MainActivity.Companion
 import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.models.Device
 import com.example.episafezone.models.Patient
@@ -52,6 +53,37 @@ object MainActivityLogic {
             list.add(Patient(id, name, surname, height, weight, age, imageUrl))
         }
         MainActivity.setAdapter(list)
+    }
+
+    fun SetInitialListeners() {
+        MainActivity.FirstTimeListers = false
+
+        val mainActivity = MainActivity.getContext() as MainActivity
+        val binding = MainActivity.getBinding()
+
+        binding.settings.settingsContainer.setOnClickListener{
+            mainActivity.goToSettings()
+        }
+
+        binding.addChild.addPatientContainer.setOnClickListener{
+            //TODO: Add the logic to add a child
+        }
+
+        binding.home.setOnClickListener{
+            mainActivity.changeToHome()
+        }
+
+        binding.profile.setOnClickListener{
+            mainActivity.changeToProfile()
+        }
+
+        binding.calendar.setOnClickListener{
+            mainActivity.changeToCalendar()
+        }
+
+        binding.chronometer.setOnClickListener{
+            mainActivity.changeToStartCrisis(false)
+        }
     }
 
     fun EliminateOnClickListenersForTimer(){

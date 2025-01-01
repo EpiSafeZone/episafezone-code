@@ -39,6 +39,8 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
         chronometer = binding.chrono
         progressBar = binding.progressBar
 
+        MainActivity.setBottomConstraintBlack()
+
         patient = MainActivity.getPatient()
 
         StartCrisisPetitions.initializeQueue();

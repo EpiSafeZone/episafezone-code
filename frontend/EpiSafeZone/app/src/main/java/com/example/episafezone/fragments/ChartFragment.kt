@@ -49,6 +49,8 @@ class ChartFragment() : Fragment(R.layout.fragment_charts) {
         ChartLogic.getPieChart(patient)
         ChartLogic.getLineChart(patient)
 
+        MainActivity.setBottomConstraintWhite()
+
         val gestureDetectorFragments = GestureDetector(this.getContext(), object : GestureDetector.SimpleOnGestureListener() {
 
             override fun onFling(

@@ -50,6 +50,8 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         calendarDay = CalendarDay.from(dateTime.year,dateTime.monthValue,dateTime.dayOfMonth)
         binding.dateText.text = actualDate
 
+        MainActivity.setBottomConstraintWhite()
+
         ChartPetitions.initializeQueue()
 
         patient = MainActivity.getPatient()

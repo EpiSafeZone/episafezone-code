@@ -12,6 +12,7 @@ import com.example.episafezone.ActivityRegisterManifestation
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.businesslogic.ChronometerLogic
+import com.example.episafezone.businesslogic.MainActivityLogic
 import com.example.episafezone.databinding.FragmentHomeBinding
 import com.example.episafezone.models.Patient
 import com.example.episafezone.models.User
@@ -32,6 +33,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         patient = MainActivity.getPatient()
+
+        if(MainActivity.FirstTimeListers) {
+            MainActivityLogic.SetInitialListeners()
+        }
+
+        MainActivity.setBottomConstraintBlack()
 
         binding.nombrePacienteTextView.text = User.getName()
 

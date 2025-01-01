@@ -66,30 +66,6 @@ class MainActivity : AppCompatActivity() {
         ChartPetitions.initializeQueue()
 
         loadInitialFragment(0,load, true)
-
-        binding.settings.settingsContainer.setOnClickListener{
-            goToSettings()
-        }
-
-        binding.addChild.addPatientContainer.setOnClickListener{
-            //TODO: Add the logic to add a child
-        }
-
-        binding.home.setOnClickListener{
-            changeToHome()
-        }
-
-        binding.profile.setOnClickListener{
-            changeToProfile()
-        }
-
-        binding.calendar.setOnClickListener{
-            changeToCalendar()
-        }
-
-        binding.chronometer.setOnClickListener{
-            changeToStartCrisis(false)
-        }
     }
 
     override fun onStart() {
@@ -161,7 +137,6 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragmentLayout, ChronometerFragment(startChrono))
             commit()
         }
-
         currentFragment = CHRONOMETER_VIEW
     }
 
@@ -173,7 +148,6 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragmentLayout, CalendarFragment())
             commit()
         }
-
         currentFragment = CALENDAR_VIEW
     }
 
@@ -185,7 +159,6 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragmentLayout, ProfileFragment())
             commit()
         }
-
         currentFragment = PROFILE_VIEW
     }
 
@@ -197,7 +170,6 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragmentLayout, HomeFragment())
             commit()
         }
-
         currentFragment = HOME_VIEW
     }
 
@@ -216,6 +188,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
+        var FirstTimeListers = true
+
         private lateinit var binding : ActivityMainBinding
         private lateinit var contextObj: Context
         private lateinit var listPatient : List<Patient>
@@ -248,6 +222,14 @@ class MainActivity : AppCompatActivity() {
 
         fun changeToStartCrisis() {
             (contextObj as MainActivity).changeToStartCrisis(true)
+        }
+
+        fun setBottomConstraintWhite() {
+            binding.bottomConstraintLayout.setBackgroundColor(ContextCompat.getColor(contextObj, R.color.epiWhite))
+        }
+
+        fun setBottomConstraintBlack() {
+            binding.bottomConstraintLayout.setBackgroundColor(ContextCompat.getColor(contextObj, R.color.epiBlackBackground))
         }
 
         fun setAdapter(listPatient : List<Patient>){

@@ -41,6 +41,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         ProfilePetitions.getProfileInfo(patient)
 
+        MainActivity.setBottomConstraintBlack()
+
         binding.addMedButt.setOnClickListener(){
             val intent = Intent(contextObj, ActivityAddMedication::class.java)
             intent.putExtra("patient", patient)

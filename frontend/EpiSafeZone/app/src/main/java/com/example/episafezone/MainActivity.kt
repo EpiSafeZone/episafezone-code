@@ -288,6 +288,10 @@ class MainActivity : AppCompatActivity() {
             (contextObj as MainActivity).changeToCalendar()
         }
 
+        fun changeToProfile(){
+            (contextObj as MainActivity).changeToProfile()
+        }
+
         fun getBinding() : ActivityMainBinding {
             return binding
         }

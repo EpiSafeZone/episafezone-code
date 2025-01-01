@@ -57,6 +57,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         })
+
+        binding.goToProfile.setOnClickListener{
+            MainActivity.changeToProfile()
+        }
+
+        binding.goToCalendar.setOnClickListener{
+            MainActivity.changeToCalendar()
+        }
     }
 
     companion object {

@@ -31,7 +31,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.businesslogic.MainActivityLogic
+import com.example.episafezone.fragments.ChartFragment
 import com.example.episafezone.fragments.decorations.MarginItemDecoration
+import com.example.episafezone.network.ChartPetitions
 import kotlin.system.exitProcess
 import java.util.Locale
 
@@ -192,6 +194,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         currentFragment = HOME_VIEW
+    }
+
+    fun changeToChart() {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentLayout, ChartFragment())
+            commit()
+        }
     }
 
     fun setAllUnselected(){

@@ -1,0 +1,13 @@
+<svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="28.5" cy="28.5" r="28.5" transform="rotate(-180 28.5 28.5)" fill="#383838"/>
+<path d="M25 18V22" stroke="#DEF358" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M33 18V22" stroke="#DEF358" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M36 20H22C20.8954 20 20 20.8954 20 22V36C20 37.1046 20.8954 38 22 38H29H36C37.1046 38 38 37.1046 38 36V22C38 20.8954 37.1046 20 36 20Z" stroke="#DEF358" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20 26H38" stroke="#DEF358" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M25 30H25.01" stroke="#DEF358" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M29 30H29.01" stroke="#DEF358" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M33 30H33.01" stroke="#DEF358" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M25 34H25.01" stroke="#DEF358" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M29 34H29.01" stroke="#DEF358" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M33 34H33.01" stroke="#DEF358" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+</svg>

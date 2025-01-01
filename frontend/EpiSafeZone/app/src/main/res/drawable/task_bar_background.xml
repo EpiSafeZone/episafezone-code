@@ -5,11 +5,16 @@
     <!-- Gradiente de colores -->
     <gradient
         android:startColor="#505050"
-        android:endColor="#3e3e3e"
+        android:endColor="#393938"
         android:centerColor="#484848"
         android:useLevel="false"
         android:type="linear"/>
 
     <!-- Bordes redondeados -->
-    <corners android:radius="20dp" />
+    <corners android:radius="32.5dp" />
+
+    <!-- Borde de la caja -->
+    <ro
+        android:width="2dp"
+        android:color="@color/epiBlackBoxMargin" />
 </shape>

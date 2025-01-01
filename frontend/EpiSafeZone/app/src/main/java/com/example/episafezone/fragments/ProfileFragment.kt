@@ -14,20 +14,13 @@ import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.adapter.ManifestAdapter
 import com.example.episafezone.adapter.MedicationAdapter
-import com.example.episafezone.adapter.PatientListAdapter
 import com.example.episafezone.adapter.SharedAdapter
-import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.businesslogic.ProfileLogic
-import com.example.episafezone.databinding.FragmentPatientListBinding
 import com.example.episafezone.databinding.FragmentProfileBinding
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Patient
 import com.example.episafezone.models.SharedUser
-import com.example.episafezone.network.ChartPetitions
-import com.example.episafezone.network.ManifestationPetitions
-import com.example.episafezone.network.MedicationPetitions
-import com.example.episafezone.network.PatientsListPetitions
 import com.example.episafezone.network.ProfilePetitions
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -43,6 +36,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        patient = MainActivity.getPatient()
 
         ProfilePetitions.getProfileInfo(patient)
 
@@ -100,10 +95,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             binding.patientNameText.text = "${patient.name} ${patient.surname}"
             binding.patientWeightText.text = patient.weight.toString() + " kg"
             binding.patientHeigthText.text = patient.height.toString() + " m"
-        }
-
-        fun updatePatient(patient: Patient) {
-            this.patient = patient
         }
     }
 }

@@ -9,6 +9,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.episafezone.fragments.ProfileFragment
 import com.example.episafezone.BuildConfig
+import com.example.episafezone.MainActivity
 import com.example.episafezone.models.Patient
 import com.example.episafezone.models.User
 import org.json.JSONArray
@@ -21,7 +22,7 @@ object ProfilePetitions {
     lateinit var orderVolleyQueue: RequestQueue
 
     fun initializeQueue(){
-        orderVolleyQueue = Volley.newRequestQueue(ProfileFragment.getContext())
+        orderVolleyQueue = Volley.newRequestQueue(MainActivity.getContext())
     }
 
     fun getProfileInfo(patient : Patient){

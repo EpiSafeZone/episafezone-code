@@ -11,29 +11,15 @@ import android.widget.Chronometer
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.episafezone.ActivityAddMedication
 import com.example.episafezone.ActivityRegisterCrisis
-import com.example.episafezone.ActivityRegisterManifestation
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.adapter.DisplayPossibleManifestations
-import com.example.episafezone.adapter.ManifestAdapter
-import com.example.episafezone.adapter.MedicationAdapter
-import com.example.episafezone.adapter.PatientListAdapter
-import com.example.episafezone.businesslogic.PatientsListLogic
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.businesslogic.ChronometerLogic
 import com.example.episafezone.databinding.FragmentChronometerBinding
-import com.example.episafezone.databinding.FragmentPatientListBinding
-import com.example.episafezone.databinding.FragmentProfileBinding
-import com.example.episafezone.fragments.PatientListFragment.Companion
 import com.example.episafezone.models.Manifestation
-import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Patient
-import com.example.episafezone.network.ManifestationPetitions
-import com.example.episafezone.network.MedicationPetitions
-import com.example.episafezone.network.PatientsListPetitions
-import com.example.episafezone.network.ProfilePetitions
 import com.example.episafezone.network.StartCrisisPetitions
 
 class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment_chronometer) {
@@ -52,6 +38,8 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
 
         chronometer = binding.chrono
         progressBar = binding.progressBar
+
+        patient = MainActivity.getPatient()
 
         StartCrisisPetitions.initializeQueue();
 
@@ -96,10 +84,6 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
             manifestations = list
             binding.informationScrollView.adapter = DisplayPossibleManifestations(contextObj, list)
             binding.informationScrollView.layoutManager = LinearLayoutManager(contextObj)
-        }
-
-        fun updatePatient(patient: Patient) {
-            this.patient = patient
         }
 
         fun startCrisisRegister(chrono : Long){

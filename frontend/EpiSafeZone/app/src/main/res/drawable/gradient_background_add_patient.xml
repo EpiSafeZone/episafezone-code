@@ -1,0 +1,16 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!-- Gradient for the circle -->
+    <gradient
+        android:startColor="#505050"
+        android:endColor="#3e3e3e"
+        android:centerColor="#484848"
+        android:useLevel="false"
+        android:type="linear" />
+
+    <!-- Thin Border with Gradient -->
+    <stroke
+        android:width="0.5dp"
+        android:color="@android:color/transparent" /> <!-- Transparent stroke to focus only on the gradient -->
+</shape>

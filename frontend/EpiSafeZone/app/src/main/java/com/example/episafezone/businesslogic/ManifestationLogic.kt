@@ -42,7 +42,7 @@ object ManifestationLogic {
         if(success){
             Toast.makeText(context, "Manifestación registrada correctamente!", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, MainActivity::class.java)
-            intent.putExtra("load", "profile")
+            intent.putExtra("load", MainActivity.PROFILE_VIEW)
             context.startActivity(intent)
         } else {
             Toast.makeText(context, "Error registrando la manifestación.", Toast.LENGTH_SHORT).show()

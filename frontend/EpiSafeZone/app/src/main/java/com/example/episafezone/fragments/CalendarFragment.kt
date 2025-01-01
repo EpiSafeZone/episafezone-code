@@ -60,7 +60,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
 
         setCalendarWeekNames()
         binding.calendarView.setOnMonthChangedListener(){widget, date->
-            CalendarLogic.getCrisisList(patient, date.month + 2, dateTime.year)
+            CalendarLogic.getCrisisList(patient, date.month + 2, date.year)
         }
 
         binding.calendarView.setOnDateChangedListener{ widget, date, selected ->

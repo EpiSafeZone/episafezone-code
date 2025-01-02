@@ -172,30 +172,42 @@
                 app:layout_constraintStart_toStartOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/manifestRecycler" />
 
-            <Button
-                android:id="@+id/addShareUser"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="15dp"
-                android:backgroundTint="@color/grey"
-                android:text="+"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/share"
-                app:layout_constraintStart_toEndOf="@+id/share"
-                app:layout_constraintTop_toTopOf="@+id/share"
-                app:layout_constraintVertical_bias="0.478" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/shareProfileLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/rounded_box"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/share">
 
+                <TextView
+                    android:id="@+id/shareProfileConstantText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:text="Compartir Perfil"
+                    android:textColor="@color/epiGreen"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/sharedRecycler"
                 android:layout_width="350dp"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.737"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/share" />
+                app:layout_constraintTop_toBottomOf="@+id/shareProfileLayout" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/manifestRecycler"

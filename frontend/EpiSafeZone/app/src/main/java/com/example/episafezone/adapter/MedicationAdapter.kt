@@ -24,8 +24,8 @@ class MedicationAdapter(var list : List<Medication>, var context: Context,var pa
     }
 
     override fun onBindViewHolder(holder: MedicineViewHolder, position: Int) {
-        holder.name.text = list[position].name;
-        holder.desc.text = "Descripción:  ${list[position].dosis} ${list[position].unit}"
+        holder.name.text = list[position].name.replaceFirstChar { it.uppercase() }
+        holder.desc.text = "${list[position].dosis} ${list[position].unit}"
         holder.button.setOnClickListener(){
             val intent = Intent(context,ActivityEditMedication::class.java)
             intent.putExtra("medication",list[position])

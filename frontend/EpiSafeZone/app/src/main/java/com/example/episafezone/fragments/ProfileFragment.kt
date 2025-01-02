@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityAddMedication
 import com.example.episafezone.ActivityRegisterManifestation
@@ -73,7 +74,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         fun updateListOfMedications(list : MutableList<Medication>){
             binding.medicamentsRecycler.adapter =  MedicationAdapter(list, contextObj,patient)
-            binding.medicamentsRecycler.layoutManager = LinearLayoutManager(contextObj)
+            binding.medicamentsRecycler.layoutManager = GridLayoutManager(contextObj,2)
         }
 
 

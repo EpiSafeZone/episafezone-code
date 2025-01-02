@@ -25,7 +25,7 @@ class ManifestAdapter(var context : Context, var list : List<Manifestation>) : R
     }
 
     override fun onBindViewHolder(holder: ManifestAdapter.ManifestViewHolder, position: Int) {
-        holder.name.text=list[position].name;
+        holder.name.text=list[position].name.replaceFirstChar { it.uppercase() }
         holder.editManifestationButton.setOnClickListener{
             currentManifestation = list[position]
             ManifestationLogic.loadEditManifestation(context, list[position])

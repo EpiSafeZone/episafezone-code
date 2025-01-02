@@ -8,6 +8,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/epiBlackBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,16 +17,19 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_box">
 
             <TextView
                 android:id="@+id/manifestName"
-                android:layout_width="192dp"
-                android:layout_height="43dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
                 android:text="TextView"
-                android:textSize="30sp"
+                android:textColor="@color/epiGreen"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,32 +39,12 @@
                 android:layout_height="40dp"
                 android:layout_marginEnd="30dp"
                 android:backgroundTint="@color/grey"
-                android:text="Edit"
+                android:text="Editar"
                 android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="@+id/manifestName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/manifestName" />
 
-            <TextView
-                android:id="@+id/manifestDescription"
-                android:layout_width="277dp"
-                android:layout_height="65dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Descripción: "
-                app:layout_constraintStart_toStartOf="@+id/manifestName"
-                app:layout_constraintTop_toBottomOf="@+id/manifestName" />
-
-            <ImageView
-                android:id="@+id/deleteButton"
-                android:layout_width="45dp"
-                android:layout_height="51dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/manifestDescription"
-                app:layout_constraintTop_toBottomOf="@+id/editManifestButt"
-                app:srcCompat="@android:mipmap/sym_def_app_icon"
-                tools:srcCompat="@android:mipmap/sym_def_app_icon" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

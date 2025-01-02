@@ -207,17 +207,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addManifestationLayout" />
 
-            <Button
-                android:id="@+id/addMedButt"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                android:backgroundTint="@color/grey"
-                android:text="+"
-                app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                app:layout_constraintStart_toEndOf="@+id/textView5"
-                app:layout_constraintTop_toTopOf="@+id/textView5" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/addManifestationLayout"
                 android:layout_width="0dp"

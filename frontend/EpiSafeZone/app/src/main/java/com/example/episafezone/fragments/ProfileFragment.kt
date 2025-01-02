@@ -43,13 +43,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         ProfilePetitions.getProfileInfo(patient)
 
         MainActivity.setBottomConstraintBlack()
-
-        binding.addMedButt.setOnClickListener(){
-            val intent = Intent(contextObj, ActivityAddMedication::class.java)
-            intent.putExtra("patient", patient)
-            startActivity(intent)
-        }
-
+        
         binding.addManifestationLayout.setOnClickListener{
             val intent = Intent(contextObj, ActivityRegisterManifestation::class.java)
             intent.putExtra("patient", patient)
@@ -62,7 +56,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         private lateinit var listManifestations: MutableList<Manifestation>
 
         private val contextObj = MainActivity.getContext()
-        private var patient = MainActivity.getPatient()
+        internal var patient = MainActivity.getPatient()
 
         fun startProfile(json : String){
             ProfileLogic.setUpInfo(json)

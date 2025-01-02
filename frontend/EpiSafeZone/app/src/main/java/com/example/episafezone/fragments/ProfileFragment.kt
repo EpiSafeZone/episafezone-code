@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityAddMedication
 import com.example.episafezone.ActivityRegisterManifestation
+import com.example.episafezone.ActivitySettings
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.adapter.ManifestAdapter
@@ -42,15 +45,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         ProfilePetitions.getProfileInfo(patient)
 
         MainActivity.setBottomConstraintBlack()
-
-        binding.addMedButt.setOnClickListener(){
-            val intent = Intent(contextObj, ActivityAddMedication::class.java)
+        
+        binding.addManifestationLayout.setOnClickListener{
+            val intent = Intent(contextObj, ActivityRegisterManifestation::class.java)
             intent.putExtra("patient", patient)
             startActivity(intent)
         }
-
-        binding.addManifButt.setOnClickListener{
-            val intent = Intent(contextObj, ActivityRegisterManifestation::class.java)
+        binding.shareProfileLayout.setOnClickListener{
+            Toast.makeText(contextObj, "Para compartir un perfil debes hacerlo desde ajustes", Toast.LENGTH_SHORT).show()
+            val intent = Intent(contextObj, ActivitySettings::class.java)
             intent.putExtra("patient", patient)
             startActivity(intent)
         }
@@ -61,7 +64,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         private lateinit var listManifestations: MutableList<Manifestation>
 
         private val contextObj = MainActivity.getContext()
-        private var patient = MainActivity.getPatient()
+        internal var patient = MainActivity.getPatient()
 
         fun startProfile(json : String){
             ProfileLogic.setUpInfo(json)
@@ -73,7 +76,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         fun updateListOfMedications(list : MutableList<Medication>){
             binding.medicamentsRecycler.adapter =  MedicationAdapter(list, contextObj,patient)
-            binding.medicamentsRecycler.layoutManager = LinearLayoutManager(contextObj)
+            binding.medicamentsRecycler.layoutManager = GridLayoutManager(contextObj,2)
         }
 
 
@@ -97,6 +100,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             binding.patientNameText.text = "${patient.name} ${patient.surname}"
             binding.patientWeightText.text = patient.weight.toString() + " kg"
             binding.patientHeigthText.text = patient.height.toString() + " m"
+            //TODO: update profile image when backend ready
+            //binding.patientImageView.setImageResource(patient.imageUrl)
         }
     }
 }

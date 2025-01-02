@@ -25,23 +25,16 @@ class ManifestAdapter(var context : Context, var list : List<Manifestation>) : R
     }
 
     override fun onBindViewHolder(holder: ManifestAdapter.ManifestViewHolder, position: Int) {
-        holder.name.text=list[position].name;
-        holder.description.text=list[position].description;
+        holder.name.text=list[position].name.replaceFirstChar { it.uppercase() }
         holder.editManifestationButton.setOnClickListener{
             currentManifestation = list[position]
             ManifestationLogic.loadEditManifestation(context, list[position])
-        }
-        holder.deleteManifestation.setOnClickListener {
-            currentManifestation = list[position]
-            ManifestationLogic.showCustomDialogBox(context, currentManifestation)
         }
     }
 
     class ManifestViewHolder(itemView : View):RecyclerView.ViewHolder(itemView){
         val name : TextView = itemView.findViewById(R.id.manifestName);
-        val description: TextView = itemView.findViewById(R.id.manifestDescription);
         val editManifestationButton: Button = itemView.findViewById(R.id.editManifestButt);
-        val deleteManifestation: ImageView = itemView.findViewById(R.id.deleteButton);
     }
 
     companion object {

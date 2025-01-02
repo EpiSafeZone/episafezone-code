@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.episafezone.ActivityAddMedication
 import com.example.episafezone.ActivityEditMedication
 import com.example.episafezone.R
+import com.example.episafezone.fragments.ProfileFragment
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Patient
 
@@ -24,23 +25,34 @@ class MedicationAdapter(var list : List<Medication>, var context: Context,var pa
     }
 
     override fun onBindViewHolder(holder: MedicineViewHolder, position: Int) {
-        holder.name.text = list[position].name;
-        holder.desc.text = "Descripción:  ${list[position].dosis} ${list[position].unit}"
-        holder.button.setOnClickListener(){
-            val intent = Intent(context,ActivityEditMedication::class.java)
-            intent.putExtra("medication",list[position])
-            intent.putExtra("patient", patient)
-            context.startActivity(intent);
+        if(position == 0){
+            holder.name.text = "Añadir nuevo medicamento"
+            holder.button.setOnClickListener(){
+                val intent = Intent(context, ActivityAddMedication::class.java)
+                intent.putExtra("patient", ProfileFragment.patient)
+                context.startActivity(intent)
+            }
+        }
+        else {
+            val item = list[position - 1]
+            holder.name.text = item.name.replaceFirstChar { it.uppercase() }
+            holder.desc.text = "${item.dosis} ${item.unit}"
+            holder.button.setOnClickListener() {
+                val intent = Intent(context, ActivityEditMedication::class.java)
+                intent.putExtra("medication", item)
+                intent.putExtra("patient", patient)
+                context.startActivity(intent);
+            }
         }
     }
 
     override fun getItemCount(): Int {
-        return list.count();
+        return list.count() + 1 // +1 porque el primer elemento es constante
     }
 
     class MedicineViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val name : TextView = itemView.findViewById(R.id.medicineName);
         val desc : TextView = itemView.findViewById(R.id.medicationDesc)
-        val button : Button = itemView.findViewById(R.id.editMedicineButt)
+        val button : View = itemView.findViewById(R.id.editMedicineButt)
     }
 }

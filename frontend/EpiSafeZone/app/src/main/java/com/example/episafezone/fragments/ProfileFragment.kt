@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.ActivityAddMedication
 import com.example.episafezone.ActivityRegisterManifestation
+import com.example.episafezone.ActivitySettings
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.adapter.ManifestAdapter
@@ -52,6 +53,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
         binding.shareProfileLayout.setOnClickListener{
             Toast.makeText(contextObj, "Para compartir un perfil debes hacerlo desde ajustes", Toast.LENGTH_SHORT).show()
+            val intent = Intent(contextObj, ActivitySettings::class.java)
+            intent.putExtra("patient", patient)
+            startActivity(intent)
         }
     }
 

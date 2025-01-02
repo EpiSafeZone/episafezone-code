@@ -53,6 +53,6 @@ class MedicationAdapter(var list : List<Medication>, var context: Context,var pa
     class MedicineViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val name : TextView = itemView.findViewById(R.id.medicineName);
         val desc : TextView = itemView.findViewById(R.id.medicationDesc)
-        val button : Button = itemView.findViewById(R.id.editMedicineButt)
+        val button : View = itemView.findViewById(R.id.editMedicineButt)
     }
 }

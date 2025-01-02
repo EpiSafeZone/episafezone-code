@@ -92,6 +92,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             binding.patientNameText.text = "${patient.name} ${patient.surname}"
             binding.patientWeightText.text = patient.weight.toString() + " kg"
             binding.patientHeigthText.text = patient.height.toString() + " m"
+            //TODO: update profile image when backend ready
+            //binding.patientImageView.setImageResource(patient.imageUrl)
         }
     }
 }

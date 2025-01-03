@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Chronometer
 import android.widget.ProgressBar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import com.example.episafezone.ActivityRegisterCrisis
 import com.example.episafezone.MainActivity
 import com.example.episafezone.R
 import com.example.episafezone.adapter.DisplayPossibleManifestations
+import com.example.episafezone.adapter.StepsAdapter
 import com.example.episafezone.businesslogic.ProfileLogic
 import com.example.episafezone.businesslogic.ChronometerLogic
 import com.example.episafezone.databinding.FragmentChronometerBinding
@@ -53,6 +55,12 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
             //binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
             binding.button.setImageResource(R.mipmap.pause)
             binding.button.setPadding(0, 10, 0, 0)
+            binding.registrarLabel.apply {
+                text = "Registrando..."
+                val params = layoutParams as ConstraintLayout.LayoutParams
+                params.marginEnd = 550
+                layoutParams = params
+            }
             ChronometerLogic.startStopTimer(binding,patient)
         }
 
@@ -87,9 +95,12 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
 
         fun updatePosibleManifestations(list: MutableList<Manifestation>) {
             manifestations = list
-            binding.informationScrollView.adapter = DisplayPossibleManifestations(contextObj, list)
+            binding.informationScrollView.adapter = DisplayPossibleManifestations(contextObj, list) { manifestation ->
+                ChronometerLogic.handleManifestationClick(manifestation)
+            }
             binding.informationScrollView.layoutManager = LinearLayoutManager(contextObj)
         }
+
 
         fun startCrisisRegister(chrono : Long){
             val intent = Intent(contextObj, ActivityRegisterCrisis::class.java)
@@ -97,5 +108,13 @@ class ChronometerFragment(val startChrono: Boolean) : Fragment(R.layout.fragment
             intent.putExtra("time", chrono)
             contextObj.startActivity(intent)
         }
+
+        fun updateStepsRecyclerView(steps: List<String>) {
+            val adapter = StepsAdapter(contextObj, steps)
+            binding.informationScrollView.adapter = adapter
+            binding.informationScrollView.layoutManager = LinearLayoutManager(contextObj)
+            adapter.notifyDataSetChanged()
+        }
+
     }
 }

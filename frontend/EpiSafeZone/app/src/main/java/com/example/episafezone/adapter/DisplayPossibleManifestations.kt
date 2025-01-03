@@ -5,36 +5,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.episafezone.R
 import com.example.episafezone.models.Manifestation
 
-class DisplayPossibleManifestations (var context : Context, var list : List<Manifestation>) : RecyclerView.Adapter<DisplayPossibleManifestations.DisplayPosibleManifestationsViewHolder>(){
+class DisplayPossibleManifestations(
+    private val context: Context,
+    private val list: List<Manifestation>,
+    private val onManifestationClick: (Manifestation) -> Unit
+) : RecyclerView.Adapter<DisplayPossibleManifestations.DisplayPosibleManifestationsViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisplayPosibleManifestationsViewHolder {
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.container_display_possible_manifestation, parent, false)
-        val viewHold = DisplayPosibleManifestationsViewHolder(view);
-        return viewHold
-    }
-
-    override fun getItemCount(): Int {
-        return list.count();
+        return DisplayPosibleManifestationsViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: DisplayPosibleManifestationsViewHolder, position: Int) {
-        holder.name.text = list[position].name
-        holder.description.text = list[position].description
+        val manifestation = list[position]
+        holder.name.text = manifestation.name
+        holder.description.text = manifestation.description
+
         holder.manifestationContainer.setOnClickListener {
-            //TODO: Implementar la lógica para cargar los pasos a seguir
-            Toast.makeText(context, "Se ha seleccionado una manifestacion, esta funcionalidad no está implementada aún.", Toast.LENGTH_SHORT).show()
+            onManifestationClick(manifestation)
         }
     }
 
-    class DisplayPosibleManifestationsViewHolder(itemView : View):RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById<TextView>(R.id.manifestName)
-        val description : TextView = itemView.findViewById<TextView>(R.id.manifestDescription)
-        val manifestationContainer : ConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.manifestationContainer)
+    override fun getItemCount(): Int = list.size
+
+    class DisplayPosibleManifestationsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val name: TextView = itemView.findViewById(R.id.manifestName)
+        val description: TextView = itemView.findViewById(R.id.manifestDescription)
+        val manifestationContainer: ConstraintLayout = itemView.findViewById(R.id.manifestationContainer)
     }
 }

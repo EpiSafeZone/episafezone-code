@@ -82,7 +82,12 @@ object ChronometerLogic {
         //binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
         binding.button.setImageResource(R.mipmap.pause)
         binding.button.setPadding(11, 16, 0, 0)
-        binding.registrarLabel.setText("Registrando...")
+        binding.registrarLabel.apply {
+            text = "Registrando..."
+            val params = layoutParams as androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
+            params.marginEnd = 550
+            layoutParams = params
+        }
     }
 
     private fun stopTimer(binding: FragmentChronometerBinding,patient: Patient) {

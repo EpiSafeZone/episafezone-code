@@ -1,5 +1,6 @@
 package com.example.episafezone.businesslogic
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Looper
 import android.os.SystemClock
@@ -20,6 +21,9 @@ import org.json.JSONObject
 import java.util.Timer
 import java.util.TimerTask
 import android.os.Handler
+import android.view.Gravity
+import android.widget.TextView
+import com.example.episafezone.fragments.ChronometerFragment.Companion
 import kotlin.concurrent.timerTask
 import kotlin.math.roundToInt
 
@@ -55,9 +59,7 @@ object ChronometerLogic {
             val id = item.getString("id").toInt()
             val name = item.getString("name")
             val description = item.getString("description")
-            //TODO: Descomentar la linea de abajo y añadir a la manifestacion cuando se implemente el procedimiento.
-            //val procedure = item.getString("procedure")
-            val procedure = ""
+            val procedure = item.getString("steps")
             list.add(Manifestation(id,name, description,procedure))
         }
         return list
@@ -78,6 +80,14 @@ object ChronometerLogic {
         startProgressBarUpdate(binding)
         //binding.button.text = "Detener"
         //binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))
+        binding.button.setImageResource(R.mipmap.pause)
+        binding.button.setPadding(11, 16, 0, 0)
+        binding.registrarLabel.apply {
+            text = "Registrando..."
+            val params = layoutParams as androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
+            params.marginEnd = 550
+            layoutParams = params
+        }
     }
 
     private fun stopTimer(binding: FragmentChronometerBinding,patient: Patient) {
@@ -87,6 +97,8 @@ object ChronometerLogic {
         val elapsedTime = getElapsedTime(binding)
         ChronometerFragment.startCrisisRegister(elapsedTime)
         Toast.makeText(ChronometerFragment.getContext(), "Parar timer", Toast.LENGTH_SHORT).show()
+        binding.button.setImageResource(R.mipmap.right_arrow)
+        binding.button.setPadding(0, 10, 17, 0)
     }
 
     private fun startProgressBarUpdate(binding: FragmentChronometerBinding) {
@@ -121,5 +133,22 @@ object ChronometerLogic {
 
     fun makeTimeString(min: Int, sec: Int): String {
         return String.format("%02d:%02d", min, sec)
+    }
+
+    fun handleManifestationClick(manifestation: Manifestation) {
+        val steps = manifestation.procedure.split("\n") // Asumimos que los pasos están separados por saltos de línea
+
+        // Actualizar el RecyclerView con los pasos
+        ChronometerFragment.updateStepsRecyclerView(steps)
+
+        // Cambiar el texto de messageTextView a "Pasos a seguir"
+        val context = ChronometerFragment.getContext()
+        val messageTextView = (context as? Activity)?.findViewById<TextView>(R.id.messageTextView)
+
+        // Cambiar el texto y centrarlo
+        messageTextView?.apply {
+            text = "Pasos a seguir"
+            gravity = Gravity.CENTER // Esto centra el texto dentro del TextView
+        }
     }
 }

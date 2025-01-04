@@ -24,194 +24,225 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/notificationsSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:text="Limitar horario de notificaciones  "
-            android:textColor="@color/epiGreen"
-            app:layout_constraintHeight_min="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleText" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/notificationsConstraintLayout"
+            android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@color/grey"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notificationsSwitch"
-            tools:visibility="visible">
-
-            <TextView
-                android:id="@+id/fromConstantText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:text="Desde:"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/fromHourText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="00:00"
-                app:layout_constraintBottom_toBottomOf="@+id/fromConstantText"
-                app:layout_constraintStart_toEndOf="@+id/fromConstantText"
-                app:layout_constraintTop_toTopOf="@+id/fromConstantText" />
-
-            <Button
-                android:id="@+id/fromButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:text="Seleccionar"
-                app:layout_constraintBottom_toBottomOf="@+id/fromConstantText"
-                app:layout_constraintStart_toEndOf="@+id/fromHourText"
-                app:layout_constraintTop_toTopOf="@+id/fromConstantText" />
-
-            <TextView
-                android:id="@+id/untilConstantText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="24dp"
-                android:text="Hasta:"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fromConstantText" />
-
-            <TextView
-                android:id="@+id/untilHourText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00:00"
-                app:layout_constraintBottom_toBottomOf="@+id/untilConstantText"
-                app:layout_constraintEnd_toEndOf="@+id/fromHourText"
-                app:layout_constraintStart_toStartOf="@+id/fromHourText"
-                app:layout_constraintTop_toTopOf="@+id/untilConstantText" />
-
-            <Button
-                android:id="@+id/untilButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Seleccionar"
-                app:layout_constraintBottom_toBottomOf="@+id/untilConstantText"
-                app:layout_constraintEnd_toEndOf="@+id/fromButton"
-                app:layout_constraintStart_toStartOf="@+id/fromButton"
-                app:layout_constraintTop_toTopOf="@+id/untilConstantText" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/shareProfileSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
-            android:text="Compartir perfil  "
-            android:textColor="@color/epiGreen"
-            app:layout_constraintHeight_min="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notificationsConstraintLayout" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/shareProfileConstraintLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:background="@color/grey"
-            android:visibility="gone"
+            android:background="@drawable/rounded_box"
+            android:padding="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shareProfileSwitch"
-            tools:visibility="visible">
+            app:layout_constraintTop_toBottomOf="@+id/titleText">
 
-            <CheckBox
-                android:id="@+id/permission1CheckBox"
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/notificationsSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:text="Registrar e iniciar crisis"
+                android:text="Limitar horario de notificaciones  "
+                android:textColor="@color/epiGreen"
+                app:layout_constraintHeight_min="48dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <CheckBox
-                android:id="@+id/permission2CheckBox"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/notificationsConstraintLayout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="Seguimiento"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/permission1CheckBox" />
-
-            <CheckBox
-                android:id="@+id/permission3CheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="Medicamentos"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/permission2CheckBox" />
-
-            <CheckBox
-                android:id="@+id/permission4CheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="Otorgar permiso parental"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/permission3CheckBox" />
-
-            <TextView
-                android:id="@+id/emailConstantTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Email:"
-                app:layout_constraintBottom_toBottomOf="@+id/shareEmailEditText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/shareEmailEditText" />
-
-            <EditText
-                android:id="@+id/shareEmailEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="ejemplo@mail.com"
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp"
-                app:layout_constraintStart_toEndOf="@+id/emailConstantTextView"
-                app:layout_constraintTop_toBottomOf="@+id/permission4CheckBox" />
-
-            <Button
-                android:id="@+id/shareProfileButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="24dp"
-                android:text="Compartir"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@android:color/transparent"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shareEmailEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/notificationsSwitch"
+                tools:visibility="visible">
 
+                <TextView
+                    android:id="@+id/fromConstantText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Desde:"
+                    android:textColor="@color/epiWhite"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/fromHourText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="00:00"
+                    android:textColor="@color/epiWhite"
+                    app:layout_constraintBottom_toBottomOf="@+id/fromConstantText"
+                    app:layout_constraintStart_toEndOf="@+id/fromConstantText"
+                    app:layout_constraintTop_toTopOf="@+id/fromConstantText" />
+
+                <Button
+                    android:id="@+id/fromButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:text="Seleccionar"
+                    app:layout_constraintBottom_toBottomOf="@+id/fromConstantText"
+                    app:layout_constraintStart_toEndOf="@+id/fromHourText"
+                    app:layout_constraintTop_toTopOf="@+id/fromConstantText" />
+
+                <TextView
+                    android:id="@+id/untilConstantText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="Hasta:"
+                    android:textColor="@color/epiWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fromConstantText" />
+
+                <TextView
+                    android:id="@+id/untilHourText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00"
+                    android:textColor="@color/epiWhite"
+                    app:layout_constraintBottom_toBottomOf="@+id/untilConstantText"
+                    app:layout_constraintEnd_toEndOf="@+id/fromHourText"
+                    app:layout_constraintStart_toStartOf="@+id/fromHourText"
+                    app:layout_constraintTop_toTopOf="@+id/untilConstantText" />
+
+                <Button
+                    android:id="@+id/untilButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seleccionar"
+                    app:layout_constraintBottom_toBottomOf="@+id/untilConstantText"
+                    app:layout_constraintEnd_toEndOf="@+id/fromButton"
+                    app:layout_constraintStart_toStartOf="@+id/fromButton"
+                    app:layout_constraintTop_toTopOf="@+id/untilConstantText" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/rounded_box"
+            android:padding="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/shareProfileSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Compartir perfil  "
+                android:textColor="@color/epiGreen"
+                app:layout_constraintHeight_min="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/shareProfileConstraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shareProfileSwitch"
+                tools:visibility="visible">
+
+                <CheckBox
+                    android:id="@+id/permission1CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Registrar e iniciar crisis"
+                    android:textColor="@color/epiWhite"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/permission2CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Seguimiento"
+                    android:textColor="@color/epiWhite"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/permission1CheckBox" />
+
+                <CheckBox
+                    android:id="@+id/permission3CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Medicamentos"
+                    android:textColor="@color/epiWhite"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/permission2CheckBox" />
+
+                <CheckBox
+                    android:id="@+id/permission4CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Otorgar permiso parental"
+                    android:textColor="@color/epiWhite"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/permission3CheckBox" />
+
+                <TextView
+                    android:id="@+id/emailConstantTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Email:"
+                    android:textColor="@color/epiWhite"
+                    app:layout_constraintBottom_toBottomOf="@+id/shareEmailEditText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/shareEmailEditText" />
+
+                <EditText
+                    android:id="@+id/shareEmailEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="ejemplo@mail.com"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp"
+                    android:textColor="@color/epiWhite"
+                    android:textColorHint="@color/epiWhite"
+                    app:layout_constraintStart_toEndOf="@+id/emailConstantTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/permission4CheckBox" />
+
+                <Button
+                    android:id="@+id/shareProfileButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="Compartir"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/shareEmailEditText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.SwitchCompat
@@ -224,7 +255,7 @@
             android:text="Gestionar permisos de otros usuarios  "
             android:textColor="@color/epiGreen"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shareProfileConstraintLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
         <TextView
             android:id="@+id/noPermissionsWarningText"

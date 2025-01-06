@@ -2,6 +2,8 @@ package com.example.episafezone
 
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -10,6 +12,7 @@ import androidx.appcompat.widget.SwitchCompat
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.episafezone.network.SettingsPetitions
 import java.util.Calendar
@@ -65,6 +68,29 @@ class ActivitySettings : AppCompatActivity() {
                 shareProfileConstraintLayout.visibility = View.GONE
             }
         }
+
+        //Asignar colores a los checkbox para que sean visibles
+        // Crear un array de colores para cada estado
+        val states = arrayOf(
+            intArrayOf(android.R.attr.state_checked), // Estado marcado
+            intArrayOf(-android.R.attr.state_checked) // Estado no marcado
+        )
+
+        // Crear un array de colores correspondientes a los estados
+        val colors = intArrayOf(
+            ContextCompat.getColor(this, R.color.epiBlackBackground), // epiBlackBackground cuando está marcado
+            ContextCompat.getColor(this, R.color.epiWhite)  // epiWhite cuando no está marcado
+        )
+
+        // Crear un ColorStateList que asocia los colores a los estados
+        val colorStateList = ColorStateList(states, colors)
+
+        // Asignar el ColorStateList al CheckBox
+        permission1CheckBox.buttonTintList = colorStateList
+        permission2CheckBox.buttonTintList = colorStateList
+        permission3CheckBox.buttonTintList = colorStateList
+        permission4CheckBox.buttonTintList = colorStateList
+
         shareProfileButton.setOnClickListener {
             Toast.makeText(this, "¡Perfil compartido!", Toast.LENGTH_SHORT).show()
             //TODO: Share profile

@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="Limitar horario de notificaciones  "
                 android:textColor="@color/epiGreen"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_min="48dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -87,6 +88,7 @@
                     android:layout_marginStart="32dp"
                     android:text="Seleccionar"
                     app:layout_constraintBottom_toBottomOf="@+id/fromConstantText"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/fromHourText"
                     app:layout_constraintTop_toTopOf="@+id/fromConstantText" />
 
@@ -141,10 +143,11 @@
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/shareProfileSwitch"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Compartir perfil  "
                 android:textColor="@color/epiGreen"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_min="48dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -265,6 +268,7 @@
                 android:minHeight="48dp"
                 android:text="Gestionar permisos de otros usuarios"
                 android:textColor="@color/epiGreen"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

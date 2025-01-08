@@ -1,4 +1,4 @@
-package com.example.episafezone;
+package com.example.episafezone.utils;
 
 import com.example.episafezone.config.SpringContext;
 import com.example.episafezone.events.Event;
@@ -6,8 +6,6 @@ import com.example.episafezone.models.*;
 import com.example.episafezone.repositories.NotifyHoursRepository;
 import com.example.episafezone.repositories.SharedWithRepository;
 import com.example.episafezone.repositories.TutorOfRepository;
-import com.example.episafezone.utils.Research;
-import com.example.episafezone.utils.Verify;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;

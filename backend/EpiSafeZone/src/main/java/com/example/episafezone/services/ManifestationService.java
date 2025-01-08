@@ -27,9 +27,6 @@ public class ManifestationService implements ManifestationServiceInterface {
     @Autowired
     PatientService patientService;
 
-    @Autowired
-    private HasManifestationRepository hasManifestationRepository;
-
     @Override
     public List<Manifestation> getDefaultManifestation() {
         return List.of(getManifestationById(1), getManifestationById(2));
@@ -47,7 +44,6 @@ public class ManifestationService implements ManifestationServiceInterface {
 
     public Manifestation getManifestationByName(String name) {
         return manifestationRepo.findByName(name);
-
     }
 
     public String getManifestationNameById(Integer id){
@@ -78,8 +74,8 @@ public class ManifestationService implements ManifestationServiceInterface {
         Manifestation manifestation = new Manifestation(manifestationRequestDTO.getName(), manifestationRequestDTO.getDescription(), manifestationRequestDTO.getSteps());
         manifestationRepo.save(manifestation);
         Patient patient = patientService.findById(manifestationRequestDTO.getPatientId());
-        HasManifestation hasManifestation = new HasManifestation(manifestation, patient);
-        hasManifestationRepository.save(hasManifestation);
+        HasManifestation hasManifestation = new HasManifestation(manifestation.getId(), patient.getId());
+        hasManifestationService.create(hasManifestation);
         return manifestation;
     }
 

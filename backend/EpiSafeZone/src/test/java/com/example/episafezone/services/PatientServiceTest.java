@@ -1,4 +1,4 @@
-package com.example.episafezone;
+package com.example.episafezone.services;
 
 import com.example.episafezone.config.SpringContext;
 import com.example.episafezone.models.Patient;
@@ -6,10 +6,6 @@ import com.example.episafezone.models.SharedWith;
 import com.example.episafezone.models.Tutor;
 import com.example.episafezone.models.TutorOf;
 import com.example.episafezone.repositories.SharedWithRepository;
-import com.example.episafezone.services.PatientService;
-import com.example.episafezone.services.SharedWithService;
-import com.example.episafezone.services.TutorOfService;
-import com.example.episafezone.services.TutorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -38,7 +34,8 @@ public class PatientServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-        @Test
+
+    @Test
     void testFindPatientTutors() {
             try (MockedStatic<SpringContext> mockedSpringContext = Mockito.mockStatic(SpringContext.class)) {
                 mockedSpringContext.when(() -> SpringContext.getBean(SharedWithRepository.class)).thenReturn(sharedWithRepo);

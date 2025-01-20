@@ -26,8 +26,8 @@ class ActivitySettings : AppCompatActivity() {
         SettingsPetitions.initializeQueue()
 
         // Return back
-        val returnBackButton: Button = findViewById(R.id.returnBackButton)
-        returnBackButton.setOnClickListener {
+        val returnBackImageView: ImageView = findViewById(R.id.returnBackImageView)
+        returnBackImageView.setOnClickListener {
             finish()
         }
 

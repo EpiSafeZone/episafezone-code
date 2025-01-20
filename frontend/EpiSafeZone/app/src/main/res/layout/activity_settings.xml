@@ -372,16 +372,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
-        <Button
-            android:id="@+id/returnBackButton"
+        <ImageView
+            android:id="@+id/returnBackImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:contentDescription="Atrás"
-            app:icon="@drawable/mcv_action_previous"
+            android:rotation="180"
             app:layout_constraintBottom_toBottomOf="@+id/titleText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/titleText" />
+            app:layout_constraintTop_toTopOf="@+id/titleText"
+            app:srcCompat="@drawable/green_arrow_circle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

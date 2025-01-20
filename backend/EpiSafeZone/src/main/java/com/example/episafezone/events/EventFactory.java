@@ -18,6 +18,8 @@ public class EventFactory {
                 return new CrisisEvent.TimeExceededEvent();
             case "registered":
                 return new CrisisEvent.RegistredCrisisEvent();
+            case "started":
+                return new CrisisEvent.StartedCrisis();
             default:
                 throw new IllegalArgumentException("Invalid event subtype");
         }

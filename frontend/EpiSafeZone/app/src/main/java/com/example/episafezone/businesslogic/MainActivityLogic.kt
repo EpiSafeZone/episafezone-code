@@ -32,7 +32,6 @@ object MainActivityLogic {
     }
 
     fun ProcessPatientsList(jsonResponse: String){
-        //TODO continuar este metodo.
         Log.d("PatientsListResponse", jsonResponse)
         val jsonArray = JSONArray(jsonResponse)
         val list = ArrayList<Patient>()
@@ -41,16 +40,10 @@ object MainActivityLogic {
             val id: Int = jsonObject.getInt("id")
             val name: String = jsonObject.getString("name")
             val surname: String = jsonObject.getString("surname")
-            // TODO: Descomentar lo siguiente cuando se haya implementado en el back
-            //val height: Int = jsonObject.getInt("height")
-            //val weight: Int = jsonObject.getInt("weight")
-            //val age: Int = jsonObject.getInt("age")
-            // TODO: Eliminar lo siguiente cuando se implemente lo faltante en el back
-            val height: Int = 0
-            val weight: Int = 0
-            val age: Int = 0
-            val imageUrl: String = jsonObject.getString("imageUrl")
-            list.add(Patient(id, name, surname, height, weight, age, imageUrl))
+            val height: Int = jsonObject.getInt("height")
+            val weight: Int = jsonObject.getInt("weight")
+            val age: Int = jsonObject.getInt("age")
+            list.add(Patient(id, name, surname, height, weight, age))
         }
         MainActivity.setAdapter(list)
     }

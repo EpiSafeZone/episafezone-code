@@ -37,16 +37,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleText">
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/notificationsSwitch"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/notificationsSwitchConstraintLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Limitar horario de notificaciones  "
-                android:textColor="@color/epiGreen"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_min="48dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/notificationsSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Limitar horario de notificaciones  "
+                    android:textColor="@color/epiGreen"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/notificationsSwitchImageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/green_arrow_circle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/notificationsConstraintLayout"
@@ -56,7 +75,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notificationsSwitch"
+                app:layout_constraintTop_toBottomOf="@id/notificationsSwitchConstraintLayout"
                 tools:visibility="visible">
 
                 <TextView
@@ -124,9 +143,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_box"
-                    app:backgroundTint="@color/epiGreen"
                     android:text="Seleccionar"
                     android:textColor="@color/black"
+                    app:backgroundTint="@color/epiGreen"
                     app:layout_constraintBottom_toBottomOf="@+id/untilConstantText"
                     app:layout_constraintEnd_toEndOf="@+id/fromButton"
                     app:layout_constraintStart_toStartOf="@+id/fromButton"

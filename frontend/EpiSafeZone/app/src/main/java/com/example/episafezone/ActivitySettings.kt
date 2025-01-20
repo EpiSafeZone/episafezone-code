@@ -3,15 +3,16 @@ package com.example.episafezone
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.episafezone.network.SettingsPetitions
@@ -31,18 +32,25 @@ class ActivitySettings : AppCompatActivity() {
         }
 
         // Notifications
-        val notificationsSwitch: SwitchCompat = findViewById(R.id.notificationsSwitch)
+        val notificationsSwitch: ConstraintLayout = findViewById(R.id.notificationsSwitchConstraintLayout)
         val notificationsConstraintLayout: View = findViewById(R.id.notificationsConstraintLayout)
+        val notificationsSwitchImageView: ImageView = findViewById(R.id.notificationsSwitchImageView)
         val fromButton: Button = findViewById(R.id.fromButton)
         val untilButton: Button = findViewById(R.id.untilButton)
         val fromHourText: TextView = findViewById(R.id.fromHourText)
         val untilHourText: TextView = findViewById(R.id.untilHourText)
 
-        notificationsSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+        var isNotificationsSelected = false
+
+        notificationsSwitch.setOnClickListener {
+            isNotificationsSelected = !isNotificationsSelected
+
+            if (isNotificationsSelected) {
                 notificationsConstraintLayout.visibility = View.VISIBLE
+                notificationsSwitchImageView.animate().rotation(90f).setDuration(500).start()
             } else {
                 notificationsConstraintLayout.visibility = View.GONE
+                notificationsSwitchImageView.animate().rotation(0f).setDuration(500).start()
             }
         }
         fromButton.setOnClickListener {

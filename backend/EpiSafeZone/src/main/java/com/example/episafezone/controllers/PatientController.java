@@ -6,6 +6,9 @@ import com.example.episafezone.DTO.CrisisDTO.CrisisListDTO;
 import com.example.episafezone.DTO.ManifestationsDTO.NumPerManifestationListDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientCrisisListDTO;
 import com.example.episafezone.DTO.PatientsDTO.PatientInfoDTO;
+import com.example.episafezone.events.Event;
+import com.example.episafezone.events.EventFactory;
+import com.example.episafezone.exceptions.FormatUnsupportedException;
 import com.example.episafezone.models.HasManifestation;
 import com.example.episafezone.models.Patient;
 import com.example.episafezone.models.Tutor;
@@ -68,12 +71,22 @@ public class PatientController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @PostMapping(path="/image/upload/{patientId}")
     public ResponseEntity<Boolean> uploadImage(@PathVariable Integer patientId, MultipartFile file){
         if(patientService.addImage(patientId, file)){return new ResponseEntity<>(HttpStatus.ACCEPTED);}
         else{return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);}
+    }
+
+    @PostMapping(path="/notify/{patientId}")
+    public void notifyPatient(@PathVariable Integer patientId, @RequestParam String type, @RequestParam String subtype){
+        Patient  patient = patientService.findById(patientId);
+        if(type.equalsIgnoreCase("crisis") || type.equalsIgnoreCase("medicine")){
+            Event event = EventFactory.createEvent(type, subtype);
+            patient.triggerEvent(event);
+        }else{
+            throw new FormatUnsupportedException("no type suported for notifications");
+        }
     }
 }

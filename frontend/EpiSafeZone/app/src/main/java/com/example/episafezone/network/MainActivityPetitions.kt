@@ -42,6 +42,7 @@ object MainActivityPetitions {
         val jsonRequest = StringRequest(
             Request.Method.GET, "$url/tutor/list/$userId",
             {response->
+                println(response.toString())
                 MainActivityLogic.ProcessPatientsList(response.toString())
             },
             {error->

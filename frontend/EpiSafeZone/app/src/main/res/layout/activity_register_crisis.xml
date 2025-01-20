@@ -2,80 +2,59 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/TextFormatGreen"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/epiBlackBackground">
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/TextFormat1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Fecha"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/date"
+        app:layout_constraintStart_toStartOf="@+id/date" />
 
     <TextView
         android:id="@+id/textView9"
+        style="@style/TextFormatGreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
-        android:text="Register Crisis"
+        android:text="Registrar crisis"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/manifestation"
-        android:layout_marginHorizontal="50dp"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:hint="Seleccionar manifestación"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
     <EditText
         android:id="@+id/date"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:background="@drawable/rounded_box"
         android:clickable="true"
         android:ems="10"
         android:focusable="false"
         android:hint="Fecha"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/manifestation"
-        app:layout_constraintStart_toStartOf="@+id/manifestation"
-        app:layout_constraintTop_toBottomOf="@+id/manifestation" />
-
-    <EditText
-        android:id="@+id/duration"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Duración"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/manifestation"
-        app:layout_constraintTop_toBottomOf="@+id/date" />
-
-    <EditText
-        android:id="@+id/context"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Contexto"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="@+id/manifestation"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/manifestation"
-        app:layout_constraintTop_toBottomOf="@+id/time" />
+        android:paddingStart="10dp"
+        android:textColor="@color/epiWhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/time" />
 
     <Button
         android:id="@+id/acceptCrisisButt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_width="130dp"
+        android:layout_height="61dp"
         android:layout_marginEnd="48dp"
-        android:backgroundTint="@color/grey"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="@color/epiGreen"
         android:text="Aceptar"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,40 +62,149 @@
 
     <Button
         android:id="@+id/cancelCrisisButt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="36dp"
         android:layout_marginBottom="48dp"
-        android:layout_marginStart="48dp"
-        android:backgroundTint="@color/grey"
+        android:backgroundTint="@color/epiGreen"
         android:text="Cancelar"
         android:textColor="#000000"
         android:textColorHighlight="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/seconds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="3dp"
-        android:text="segundos"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/duration"
-        app:layout_constraintStart_toEndOf="@+id/duration"
-        app:layout_constraintTop_toTopOf="@+id/duration" />
-
     <EditText
         android:id="@+id/time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        style="@style/TextFormat1"
+        android:layout_width="153dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_box"
         android:clickable="true"
         android:ems="10"
         android:focusable="false"
+        android:textSize="18dp"
         android:hint="Hora"
-        app:layout_constraintEnd_toEndOf="@+id/manifestation"
-        app:layout_constraintStart_toStartOf="@+id/manifestation"
-        app:layout_constraintTop_toBottomOf="@+id/duration" />
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="301dp"
+        android:layout_height="329dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+        <Spinner
+            android:id="@+id/manifestation"
+            style="@style/TextFormatGreen"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp"
+            android:ems="10"
+            android:hint="Seleccionar manifestación"
+            android:inputType="text"
+            android:textColor="@color/epiGreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/duration"
+            android:layout_width="103dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:ems="10"
+            android:hint="Duración"
+            android:inputType="number"
+            android:textColor="@color/epiGreen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/manifestation" />
+
+        <TextView
+            android:id="@+id/seconds"
+            style="@style/TextFormat1"
+            android:layout_width="95dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="10dp"
+            android:paddingHorizontal="3dp"
+            android:text="segundos"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/duration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/duration"
+            app:layout_constraintTop_toTopOf="@+id/duration" />
+
+        <EditText
+            android:id="@+id/context"
+            style="@style/TextFormat1"
+            android:layout_width="238dp"
+            android:layout_height="99dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="25dp"
+            android:ems="10"
+            android:hint="Contexto"
+            android:inputType="textMultiLine"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.461"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+        <TextView
+            android:id="@+id/textView14"
+            style="@style/TextFormatGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="Contexto"
+            android:textSize="19sp"
+            app:layout_constraintStart_toStartOf="@+id/context"
+            app:layout_constraintTop_toBottomOf="@+id/duration" />
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="250dp"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/duration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/manifestation" />
+
+        <Space
+            android:layout_width="250dp"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/duration" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/TextFormat1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Hora"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/time"
+        app:layout_constraintStart_toStartOf="@+id/time" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

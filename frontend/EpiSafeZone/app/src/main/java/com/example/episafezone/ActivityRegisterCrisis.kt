@@ -23,6 +23,7 @@ import com.example.episafezone.models.Manifestation
 import com.example.episafezone.network.StartCrisisPetitions
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.LocalTime
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -50,6 +51,14 @@ class ActivityRegisterCrisis : AppCompatActivity()  {
             binding.duration.setText(duration.toString())
             val date = LocalDate.now()
             binding.date.setText(date.toString())
+            val hour = LocalTime.now()
+            val min : String
+            if(hour.minute.toString().length==1){
+                min = "0"+hour.minute
+            }else{
+                min = hour.minute.toString()
+            }
+            binding.time.setText(hour.hour.toString() + ":" + min)
         }
 
         binding.date.setOnClickListener{
@@ -93,12 +102,11 @@ class ActivityRegisterCrisis : AppCompatActivity()  {
             val contextCrisis = binding.context.text.toString()
             val crisis = Crisis(duration,dateObject,hour,contextCrisis,emergency, manifestationSelected.name, manifestationSelected.id, MainActivity.getPatient().id)
             StartCrisisLogic.registerCrisis(crisis)
+            finish()
         }
 
         binding.cancelCrisisButt.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("load", MainActivity.CALENDAR_VIEW)
-            startActivity(intent)
+            finish()
         }
     }
 

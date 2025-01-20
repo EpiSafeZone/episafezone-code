@@ -40,10 +40,7 @@ object MainActivityLogic {
             val id: Int = jsonObject.getInt("id")
             val name: String = jsonObject.getString("name")
             val surname: String = jsonObject.getString("surname")
-            val height: Int = jsonObject.getInt("height")
-            val weight: Int = jsonObject.getInt("weight")
-            val age: Int = jsonObject.getInt("age")
-            list.add(Patient(id, name, surname, height, weight, age))
+            list.add(Patient(id, name, surname,0,0,0))
         }
         MainActivity.setAdapter(list)
     }

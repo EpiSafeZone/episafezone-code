@@ -61,7 +61,8 @@ class ActivitySettings : AppCompatActivity() {
         }
 
         // Share Profile
-        val shareProfileSwitch: SwitchCompat = findViewById(R.id.shareProfileSwitch)
+        val shareProfileSwitch: ConstraintLayout = findViewById(R.id.shareProfileSwitchConstraintLayout)
+        val shareProfileSwitchImageView: ImageView = findViewById(R.id.shareProfileSwitchImageView)
         val shareProfileConstraintLayout: View = findViewById(R.id.shareProfileConstraintLayout)
         val permission1CheckBox: CheckBox = findViewById(R.id.permission1CheckBox)
         val permission2CheckBox: CheckBox = findViewById(R.id.permission2CheckBox)
@@ -69,11 +70,18 @@ class ActivitySettings : AppCompatActivity() {
         val permission4CheckBox: CheckBox = findViewById(R.id.permission4CheckBox)
         val shareEmailEditText: TextView = findViewById(R.id.shareEmailEditText)
         val shareProfileButton: Button = findViewById(R.id.shareProfileButton)
-        shareProfileSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+
+        var isShareProfileSelected = false
+
+        shareProfileSwitch.setOnClickListener {
+            isShareProfileSelected = !isShareProfileSelected
+
+            if (isShareProfileSelected) {
                 shareProfileConstraintLayout.visibility = View.VISIBLE
+                shareProfileSwitchImageView.animate().rotation(90f).setDuration(500).start()
             } else {
                 shareProfileConstraintLayout.visibility = View.GONE
+                shareProfileSwitchImageView.animate().rotation(0f).setDuration(500).start()
             }
         }
 
@@ -112,16 +120,24 @@ class ActivitySettings : AppCompatActivity() {
         }
 
         // Manage Permissions
-        val managePermissionsSwitch: SwitchCompat = findViewById(R.id.managePermissionsSwitch)
+        val managePermissionsSwitch: ConstraintLayout = findViewById(R.id.managePermissionsSwitchconstraintLayout)
+        val managePermissionsImageView: ImageView = findViewById(R.id.managePermissionsImageView)
         val noPermissionsWarningText: TextView = findViewById(R.id.noPermissionsWarningText)
         val managePermissionsRecyclerView: RecyclerView = findViewById(R.id.managePermissionsRecyclerView)
-        managePermissionsSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+
+        var isManagePermissionsSelected = false
+
+        managePermissionsSwitch.setOnClickListener {
+            isManagePermissionsSelected = !isManagePermissionsSelected
+
+            if (isManagePermissionsSelected) {
                 noPermissionsWarningText.visibility = View.VISIBLE
                 managePermissionsRecyclerView.visibility = View.VISIBLE
+                managePermissionsImageView.animate().rotation(90f).setDuration(500).start()
             } else {
                 noPermissionsWarningText.visibility = View.GONE
                 managePermissionsRecyclerView.visibility = View.GONE
+                managePermissionsImageView.animate().rotation(0f).setDuration(500).start()
             }
         }
     }

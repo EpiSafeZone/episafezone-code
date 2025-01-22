@@ -1,11 +1,6 @@
 package com.example.episafezone.businesslogic
 
-import android.content.Context
-import android.provider.ContactsContract.Profile
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.episafezone.fragments.ProfileFragment
-import com.example.episafezone.adapter.ManifestAdapter
-import com.example.episafezone.adapter.MedicationAdapter
 import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Manifestation
 import com.example.episafezone.models.Patient
@@ -22,7 +17,7 @@ object ProfileLogic {
 
     fun setUpInfo(json : String){
         val user = gson.fromJson(json,Patient::class.java)
-        ProfileFragment.updatePatienInf(user)
+        ProfileFragment.updatePatientInf(user)
         val jsonObject = JSONObject(json)
         val medications = jsonObject.get("medications") as JSONArray
         val manifests = jsonObject.get("manifestations") as JSONArray

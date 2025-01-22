@@ -43,7 +43,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/patientNameText"
-                tools:src="@tools:sample/avatars" />
+                app:srcCompat="@drawable/person_profile_resource"
+                tools:src="@drawable/person_profile_resource" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/personalDetailsLayout"

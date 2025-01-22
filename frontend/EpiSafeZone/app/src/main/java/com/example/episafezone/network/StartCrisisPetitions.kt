@@ -3,6 +3,7 @@ package com.example.episafezone.network
 import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -63,5 +64,21 @@ object StartCrisisPetitions {
             })
 
         orderVolleyQueue.add(jsonRequest)
+    }
+
+    fun sendNotification(patient : Patient){
+        println("se ha llamado a la función")
+        val jsonObject = JSONObject()
+        jsonObject.put("type","crisis")
+        jsonObject.put("subtype", "started")
+        val stringRequest = StringRequest(
+            Request.Method.POST,
+            "${url}/patient/notify/${patient.id}?type=crisis&subtype=started",
+            { response -> },
+            { error -> }
+        )
+
+        orderVolleyQueue.add(stringRequest)
+
     }
 }

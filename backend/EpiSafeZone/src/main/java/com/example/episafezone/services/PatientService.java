@@ -162,7 +162,7 @@ public class PatientService implements PatientServiceInteface {
                             crisis.getHour(),
                             crisis.getContext(),
                             crisis.getEmergency(),
-                            manifestationNameDTO,
+                            manifestationNameDTO.getName(),
                             crisis.getPatient()
                     );
                 })

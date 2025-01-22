@@ -47,6 +47,7 @@ public class NotificationService {
 
 
         List<Tutor> tutors = patient.getTutors();
+        System.out.println(tutors.size());
         for (Tutor tutor : tutors) {
             System.out.println("Processing tutor: " + tutor.getId());
             Map<String, Boolean> permissions = Research.ResearchPermissions(patient, tutor);

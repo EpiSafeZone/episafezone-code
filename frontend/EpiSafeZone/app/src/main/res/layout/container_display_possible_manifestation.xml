@@ -27,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_light"
+            android:textStyle="bold"
             android:text="TextView"
             android:textColor="@color/epiWhite"
             android:textSize="25sp"
@@ -40,7 +41,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-
             android:fontFamily="@font/inter_light"
             android:text="Descripción: "
             android:textColor="@color/epiWhite"

@@ -23,6 +23,7 @@ import java.util.TimerTask
 import android.os.Handler
 import android.view.Gravity
 import android.widget.TextView
+import com.example.episafezone.MainActivity
 import com.example.episafezone.fragments.ChronometerFragment.Companion
 import kotlin.concurrent.timerTask
 import kotlin.math.roundToInt
@@ -77,6 +78,7 @@ object ChronometerLogic {
         timerStarted = true
         ChronometerFragment.chronometer.base = SystemClock.elapsedRealtime()
         ChronometerFragment.chronometer.start()
+        StartCrisisPetitions.sendNotification(MainActivity.getPatient())
         startProgressBarUpdate(binding)
         //binding.button.text = "Detener"
         //binding.button.setBackgroundColor(getColor(ChronometerFragment.getContext(), R.color.red))

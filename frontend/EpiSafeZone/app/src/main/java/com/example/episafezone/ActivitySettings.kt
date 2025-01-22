@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.episafezone.models.User
 import com.example.episafezone.network.SettingsPetitions
 import java.util.Calendar
 
@@ -109,8 +110,14 @@ class ActivitySettings : AppCompatActivity() {
 
         shareProfileButton.setOnClickListener {
             Toast.makeText(this, "¡Perfil compartido!", Toast.LENGTH_SHORT).show()
-            //TODO: Share profile
 
+            SettingsPetitions.sharePatient(User.getId(),
+                                           shareEmailEditText.text.toString(),
+                                           MainActivity.getPatient(),
+                                           permission1CheckBox.isChecked,
+                                           permission2CheckBox.isChecked,
+                                           permission3CheckBox.isChecked,
+                                           permission4CheckBox.isChecked)
             // Set everything to default
             permission1CheckBox.isChecked = false
             permission2CheckBox.isChecked = false

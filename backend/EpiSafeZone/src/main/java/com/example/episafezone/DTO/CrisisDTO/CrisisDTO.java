@@ -79,7 +79,7 @@ public class CrisisDTO implements Serializable {
         this.emergency = emergency;
     }
 
-    public String getManifestation() {
+    public String getManifestationName() {
         return manifestationName;
     }
 

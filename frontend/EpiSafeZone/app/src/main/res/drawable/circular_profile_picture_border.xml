@@ -2,18 +2,9 @@
     <!-- Outer Circle (Thin Border) -->
     <item>
         <shape android:shape="oval">
-            <solid android:color="#DEF358" />
-        </shape>
-    </item>
-
-    <!-- Inner Circle (Transparent/Background) -->
-    <item
-        android:left="0.25dp"
-        android:right="0.25dp"
-        android:top="0.25dp"
-        android:bottom="0.25dp">
-        <shape android:shape="oval">
-            <solid android:color="@android:color/transparent" />
+        <stroke
+            android:width="3dp"
+            android:color="@color/epiGreen"/>
         </shape>
     </item>
 </layer-list>

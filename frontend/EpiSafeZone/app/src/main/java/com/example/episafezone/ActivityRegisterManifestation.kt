@@ -43,9 +43,7 @@ class ActivityRegisterManifestation : AppCompatActivity() {
         }
 
         binding.cancelButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("load", MainActivity.PROFILE_VIEW)
-            startActivity(intent)
+            finish()
         }
 
         binding.registerButton.setOnClickListener {

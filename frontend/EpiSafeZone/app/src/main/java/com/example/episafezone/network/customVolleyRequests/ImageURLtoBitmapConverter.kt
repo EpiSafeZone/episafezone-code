@@ -23,7 +23,7 @@ object  ImageURLtoBitmapConverter {
     // TODO: añadir funciones que falten y corregir metodo comentado.
     fun downloadImage(view : ImageView, patient : Patient): Bitmap? {
 
-        val urlC = "$url/image/${patient.id}"
+        val urlC = "$url/patient/image/${patient.id}"
         val requestQueue = Volley.newRequestQueue(MainActivity.getContext())
         var bitmap: Bitmap? = null
 

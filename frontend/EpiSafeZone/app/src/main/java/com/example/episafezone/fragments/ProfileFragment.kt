@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.episafezone.ActivityAddMedication
 import com.example.episafezone.ActivityRegisterManifestation
 import com.example.episafezone.ActivitySettings
 import com.example.episafezone.MainActivity
@@ -25,6 +24,7 @@ import com.example.episafezone.models.Medication
 import com.example.episafezone.models.Patient
 import com.example.episafezone.models.SharedUser
 import com.example.episafezone.network.ProfilePetitions
+import com.example.episafezone.network.customVolleyRequests.ImageURLtoBitmapConverter
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
@@ -95,13 +95,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             binding.sharedRecycler.layoutManager = LinearLayoutManager(contextObj);
         }
 
-        fun updatePatienInf(patient: Patient){
+        fun updatePatientInf(patient: Patient){
             binding.patientAgeText.text=patient.age.toString()
             binding.patientNameText.text = "${patient.name} ${patient.surname}"
             binding.patientWeightText.text = patient.weight.toString() + " kg"
             binding.patientHeigthText.text = patient.height.toString() + " m"
-            //TODO: update profile image when backend ready
-            //binding.patientImageView.setImageResource(patient.imageUrl)
+            ImageURLtoBitmapConverter.downloadImage(binding.patientImageView, patient) //Update profile image
         }
     }
 }

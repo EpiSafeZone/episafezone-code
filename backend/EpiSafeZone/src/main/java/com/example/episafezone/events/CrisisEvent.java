@@ -17,4 +17,10 @@ public class CrisisEvent extends Event{
             super("HA OCURRIDO UNA CRISIS","Se ha registrado una crisis");
         }
     }
+
+    public static class StartedCrisis extends CrisisEvent {
+        public StartedCrisis(){
+            super("SE HA INICIADO UNA CRISIS", "Se ha iniciado una crisis");
+        }
+    }
 }

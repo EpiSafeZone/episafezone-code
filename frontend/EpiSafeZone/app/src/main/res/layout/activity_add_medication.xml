@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/grey"
+    android:background="@color/epiBlackBackground"
     tools:context=".ActivityAddMedication">
 
     <TextView
@@ -14,55 +14,83 @@
         android:layout_height="122dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
+        android:fontFamily="@font/inter_light"
         android:text="Registrar medicamento"
-        android:textSize="50sp"
+        android:textColor="@color/epiWhite"
+        android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/medicationNameInput"
-        android:layout_width="275dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Nombre"
-        android:inputType="text"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_box"
+        android:elevation="8dp"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.417"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-    <EditText
-        android:id="@+id/medicationAmountInput"
-        android:layout_width="275dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Cantidad"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/medicationNameInput"
-        app:layout_constraintTop_toBottomOf="@+id/medicationNameInput" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12">
 
-    <EditText
-        android:id="@+id/medicationUnitInput"
-        android:layout_width="275dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Unidad"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/medicationAmountInput"
-        app:layout_constraintTop_toBottomOf="@+id/medicationAmountInput" />
+        <EditText
+            android:id="@+id/medicationNameInput"
+            android:layout_width="275dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:ems="10"
+            android:hint="Nombre"
+            android:inputType="text"
+            android:textColor="@color/epiWhite"
+            android:textColorHint="@color/epiWhite"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/medicationAmountInput"
+            android:layout_width="275dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Cantidad"
+            android:inputType="text"
+            android:textColor="@color/epiWhite"
+            android:textColorHint="@color/epiWhite"
+            app:layout_constraintStart_toStartOf="@+id/medicationNameInput"
+            app:layout_constraintTop_toBottomOf="@+id/medicationNameInput" />
+
+        <EditText
+            android:id="@+id/medicationUnitInput"
+            android:layout_width="275dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Unidad"
+            android:inputType="text"
+            android:textColor="@color/epiWhite"
+            android:textColorHint="@color/epiWhite"
+            app:layout_constraintStart_toStartOf="@+id/medicationAmountInput"
+            app:layout_constraintTop_toBottomOf="@+id/medicationAmountInput" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="80dp"
         android:layout_height="28dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
         android:text="Alarma"
+        android:textColor="@color/epiWhite"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/medicationUnitInput" />
+        app:layout_constraintStart_toStartOf="@+id/layout1"
+        app:layout_constraintTop_toBottomOf="@+id/layout1" />
 
     <CheckBox
         android:id="@+id/alarmCheckBox"
@@ -72,27 +100,48 @@
         app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toTopOf="@+id/textView13" />
 
-    <EditText
-        android:id="@+id/alarmHoursInput"
-        android:layout_width="275dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Horas"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/medicationUnitInput"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_box"
+        android:elevation="8dp"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/errorText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/layout1"
+        app:layout_constraintTop_toBottomOf="@+id/textView13">
 
-    <EditText
-        android:id="@+id/alarmsTakesInput"
-        android:layout_width="275dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Tomas por día"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/alarmHoursInput"
-        app:layout_constraintTop_toBottomOf="@+id/alarmHoursInput" />
+        <EditText
+            android:id="@+id/alarmHoursInput"
+            android:layout_width="275dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="0dp"
+            android:ems="10"
+            android:hint="Horas"
+            android:inputType="text"
+            android:textColor="@color/epiWhite"
+            android:textColorHint="@color/epiWhite"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/alarmsTakesInput"
+            android:layout_width="275dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Tomas por día"
+            android:inputType="text"
+            android:textColor="@color/epiWhite"
+            android:textColorHint="@color/epiWhite"
+            app:layout_constraintStart_toStartOf="@+id/alarmHoursInput"
+            app:layout_constraintTop_toBottomOf="@+id/alarmHoursInput" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/acceptMedicationButt"
@@ -104,7 +153,7 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alarmsTakesInput" />
+        app:layout_constraintTop_toBottomOf="@+id/errorText" />
 
     <Button
         android:id="@+id/cancelMedicationButt"
@@ -117,17 +166,49 @@
         android:textColorHighlight="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alarmsTakesInput" />
+        app:layout_constraintTop_toBottomOf="@+id/errorText" />
 
     <TextView
         android:id="@+id/errorText"
         android:layout_width="292dp"
         android:layout_height="31dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
         android:gravity="center"
         android:text=""
         android:textColor="#F44336"
         app:layout_constraintBottom_toTopOf="@+id/acceptMedicationButt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alarmsTakesInput" />
+        app:layout_constraintEnd_toEndOf="@+id/layout2"
+        app:layout_constraintStart_toStartOf="@+id/layout2"
+        app:layout_constraintTop_toBottomOf="@+id/layout2" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter_light"
+        android:text="Medicamento"
+        android:textColor="@color/epiGreen"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout1"
+        app:layout_constraintStart_toStartOf="@+id/layout1"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:layout_constraintVertical_bias="0.736" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/inter_light"
+        android:text="Horario"
+        android:textColor="@color/epiGreen"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout2"
+        app:layout_constraintStart_toStartOf="@+id/layout2"
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

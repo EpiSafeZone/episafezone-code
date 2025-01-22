@@ -5,26 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/epiBlackBackground"
+    android:paddingBottom="20dp"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/manifestationContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:background="@drawable/rounded_box"
+        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="10dp">
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/manifestName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_light"
             android:text="TextView"
             android:textColor="@color/epiWhite"
-            android:fontFamily="@font/inter_light"
             android:textSize="25sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,9 +40,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+
+            android:fontFamily="@font/inter_light"
             android:text="Descripción: "
             android:textColor="@color/epiWhite"
-            android:fontFamily="@font/inter_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/manifestName"

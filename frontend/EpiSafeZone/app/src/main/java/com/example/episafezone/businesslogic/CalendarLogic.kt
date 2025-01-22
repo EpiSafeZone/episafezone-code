@@ -67,8 +67,8 @@ object CalendarLogic {
         val jsonObject = gson.fromJson(json, JsonObject::class.java)
         val jsonArray = jsonObject.getAsJsonArray("crisis")
         for(crisis in jsonArray){
-            val manif = crisis.asJsonObject.get("manifestation").asJsonObject
-            crisis.asJsonObject.addProperty("manifestation",manif.get("name").asString)
+            val manif = crisis.asJsonObject.get("manifestationName").asString
+            crisis.asJsonObject.addProperty("manifestationName",manif)
         }
         val listType = object : TypeToken<MutableList<Crisis>>() {}.type
         val crisis : MutableList<Crisis> = gson.fromJson(jsonArray.toString(),listType)

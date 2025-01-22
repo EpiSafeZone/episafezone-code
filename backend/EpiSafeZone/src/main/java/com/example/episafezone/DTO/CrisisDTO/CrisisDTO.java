@@ -15,17 +15,17 @@ public class CrisisDTO implements Serializable {
     private String hour;
     private String context;
     private Boolean emergency;
-    private ManifestationNameDTO manifestation;
+    private String manifestationName;
     private Integer patient;
 
-    public CrisisDTO(Integer id, Integer duration, Date date, String hour, String context, Boolean emergency, ManifestationNameDTO manifestation, Integer patient) {
+    public CrisisDTO(Integer id, Integer duration, Date date, String hour, String context, Boolean emergency, String manifestationName, Integer patient) {
         this.id = id;
         this.duration = duration;
         this.date = date;
         this.hour = hour;
         this.context = context;
         this.emergency = emergency;
-        this.manifestation = manifestation;
+        this.manifestationName = manifestationName;
         this.patient = patient;
     }
 
@@ -79,12 +79,12 @@ public class CrisisDTO implements Serializable {
         this.emergency = emergency;
     }
 
-    public ManifestationNameDTO getManifestation() {
-        return manifestation;
+    public String getManifestation() {
+        return manifestationName;
     }
 
-    public void setManifestation(ManifestationNameDTO manifestation) {
-        this.manifestation = manifestation;
+    public void setManifestation(String manifestation) {
+        this.manifestationName = manifestation;
     }
 
     public Integer getPatient() {

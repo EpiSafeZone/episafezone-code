@@ -190,7 +190,7 @@
                 <TextView
                     android:id="@+id/shareProfileConstantText"
                     android:layout_width="wrap_content"
-                    android:layout_height="19dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="32dp"
@@ -214,8 +214,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/sharedRecycler"
-                android:layout_width="350dp"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -225,8 +225,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/manifestRecycler"
-                android:layout_width="350dp"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -248,7 +248,7 @@
                 <TextView
                     android:id="@+id/addManifestationConstantText"
                     android:layout_width="wrap_content"
-                    android:layout_height="19dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="32dp"

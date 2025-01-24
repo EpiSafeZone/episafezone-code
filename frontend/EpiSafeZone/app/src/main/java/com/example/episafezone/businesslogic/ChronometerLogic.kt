@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Looper
 import android.os.SystemClock
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import com.example.episafezone.ActivityRegisterCrisis
@@ -98,7 +97,6 @@ object ChronometerLogic {
         timerStarted = false
         val elapsedTime = getElapsedTime(binding)
         ChronometerFragment.startCrisisRegister(elapsedTime)
-        Toast.makeText(ChronometerFragment.getContext(), "Parar timer", Toast.LENGTH_SHORT).show()
         binding.button.setImageResource(R.mipmap.right_arrow)
         binding.button.setPadding(0, 10, 17, 0)
     }

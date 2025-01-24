@@ -13,6 +13,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.TreeMap
 
 object ChartLogic {
     fun getPieChart(patient: Patient) {
@@ -40,7 +41,7 @@ object ChartLogic {
     }
 
     fun collectDataLineChart(json : JSONObject) {
-        val map = HashMap<String,Int>()
+        val map = TreeMap<String,Int>()
         val gson = Gson()
         val jsonArray = json.get("lista") as JSONArray
         val listType = object : TypeToken<MutableList<LineChartAdapter>>() {}.type

@@ -27,3 +27,7 @@ jobs:
       - name: Build Spring Boot project with Gradle
         working-directory: backend/EpiSafeZone
         run: ./gradlew build
+
+      - name: Build and run tests with Gradle
+        working-directory: backend/EpiSafeZone
+        run: ./gradlew clean test

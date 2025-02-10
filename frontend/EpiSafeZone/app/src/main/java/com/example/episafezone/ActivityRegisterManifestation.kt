@@ -50,6 +50,7 @@ class ActivityRegisterManifestation : AppCompatActivity() {
             if(ManifestationLogic.checkRegisterFields(binding)){
                 val manifestation = ManifestationLogic.createRegisterManifestation(binding)
                 ManifestationLogic.registerManifestation(manifestation, patient.id)
+                finish()
             } else {
                 Toast.makeText(this, "Por favor, rellene todos los campos", Toast.LENGTH_LONG).show()
             }

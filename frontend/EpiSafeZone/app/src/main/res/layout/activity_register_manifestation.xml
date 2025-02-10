@@ -5,12 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/epiBlackBackground"
     tools:context=".ActivityRegisterManifestation">
 
     <TextView
         android:id="@+id/registrarManifestacion"
+        style="@style/TextFormatGreen"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
         android:text="Registrar \nManifestación"
         android:textSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,75 +21,94 @@
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1"
-        android:layout_marginHorizontal="40dp"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/nameConstrainstLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.05"
-        android:layout_marginHorizontal="40dp"
-        app:layout_constraintTop_toBottomOf="@+id/registrarManifestacion">
-
-        <include layout="@layout/custom_text_box"
-            android:id="@+id/name_text_box"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/descriptionConstrainstLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.05"
-        android:layout_marginHorizontal="40dp"
-        app:layout_constraintTop_toBottomOf="@+id/nameConstrainstLayout">
-
-        <include layout="@layout/custom_text_box"
-            android:id="@+id/description_text_box"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/procedureConstrainstLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.15"
-        android:layout_marginHorizontal="40dp"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionConstrainstLayout">
-
-        <include layout="@layout/custom_text_box"
-            android:id="@+id/procedure_text_box"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintVertical_bias="0.1" />
 
     <Button
         android:id="@+id/register_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
+        android:backgroundTint="@color/epiGreen"
         android:text="Registrar"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/procedureConstrainstLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
     <Button
         android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:backgroundTint="@color/epiGreen"
         android:text="Cancelar"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/procedureConstrainstLayout" />
+        app:layout_constraintTop_toTopOf="@+id/register_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="361dp"
+        android:layout_height="318dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/rounded_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registrarManifestacion">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/procedureConstrainstLayout"
+            android:layout_width="274dp"
+            android:layout_height="111dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionConstrainstLayout">
+
+            <include
+                android:id="@+id/procedure_text_box"
+                layout="@layout/custom_text_box_steps" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/descriptionConstrainstLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameConstrainstLayout">
+
+            <include
+                android:id="@+id/description_text_box"
+                layout="@layout/custom_text_box_type"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nameConstrainstLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="20dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                android:id="@+id/name_text_box"
+                layout="@layout/custom_text_box" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

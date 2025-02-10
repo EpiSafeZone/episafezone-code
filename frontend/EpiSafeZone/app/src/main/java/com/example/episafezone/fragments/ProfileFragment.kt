@@ -99,7 +99,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             binding.patientAgeText.text=patient.age.toString()
             binding.patientNameText.text = "${patient.name} ${patient.surname}"
             binding.patientWeightText.text = patient.weight.toString() + " kg"
-            binding.patientHeigthText.text = patient.height.toString() + " m"
+            binding.patientHeigthText.text = patient.height.toString() + " cm"
             ImageURLtoBitmapConverter.downloadImage(binding.patientImageView, patient) //Update profile image
         }
     }
